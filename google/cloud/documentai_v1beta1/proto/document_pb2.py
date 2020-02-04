@@ -2120,9 +2120,9 @@ Document = _reflection.GeneratedProtocolMessageType(
             dict(
                 DESCRIPTOR=_DOCUMENT_SHARDINFO,
                 __module__="google.cloud.documentai_v1beta1.proto.document_pb2",
-                __doc__="""For a large document, sharding may be performed to produce
-    several document shards. Each document shard contains this field to
-    detail which shard it is.
+                __doc__="""For a large document, sharding may be performed to produce several
+    document shards. Each document shard contains this field to detail which
+    shard it is.
     
     
     Attributes:
