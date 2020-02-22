@@ -2352,8 +2352,8 @@ Document = _reflection.GeneratedProtocolMessageType(
                     dict(
                         DESCRIPTOR=_DOCUMENT_PAGE_VISUALELEMENT,
                         __module__="google.cloud.documentai_v1beta1.proto.document_pb2",
-                        __doc__="""Detected non-text visual elements e.g. checkbox, signature
-      etc. on the page.
+                        __doc__="""Detected non-text visual elements e.g. checkbox, signature etc. on the
+      page.
       
       
       Attributes:
