@@ -2620,10 +2620,10 @@ Document = _reflection.GeneratedProtocolMessageType(
         ),
         DESCRIPTOR=_DOCUMENT,
         __module__="google.cloud.documentai_v1beta1.proto.document_pb2",
-        __doc__="""Document represents the canonical document resource in
-  Document Understanding AI. It is an interchange format that provides
-  insights into documents and allows for collaboration between users and
-  Document Understanding AI to iterate and optimize for quality.
+        __doc__="""Document represents the canonical document resource in Document
+  Understanding AI. It is an interchange format that provides insights
+  into documents and allows for collaboration between users and Document
+  Understanding AI to iterate and optimize for quality.
   
   
   Attributes:
