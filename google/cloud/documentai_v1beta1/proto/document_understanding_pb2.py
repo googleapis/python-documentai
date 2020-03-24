@@ -1467,7 +1467,6 @@ GcsSource = _reflection.GeneratedProtocolMessageType(
         __module__="google.cloud.documentai_v1beta1.proto.document_understanding_pb2",
         __doc__="""The Google Cloud Storage location where the input file
   will be read from.
-  
   """,
         # @@protoc_insertion_point(class_scope:google.cloud.documentai.v1beta1.GcsSource)
     ),
