@@ -27,8 +27,8 @@ BLACK_VERSION = "black==19.3b0"
 BLACK_PATHS = ["docs", "google", "tests", "noxfile.py", "setup.py"]
 
 DEFAULT_PYTHON_VERSION = "3.7"
-SYSTEM_TEST_PYTHON_VERSIONS = ["2.7", "3.7"]
-UNIT_TEST_PYTHON_VERSIONS = ["2.7", "3.5", "3.6", "3.7", "3.8"]
+SYSTEM_TEST_PYTHON_VERSIONS = ["3.7"]
+UNIT_TEST_PYTHON_VERSIONS = ["3.6", "3.7", "3.8"]
 
 
 @nox.session(python=DEFAULT_PYTHON_VERSION)
@@ -129,7 +129,7 @@ def cover(session):
     test runs (not system test runs), and then erases coverage data.
     """
     session.install("coverage", "pytest-cov")
-    session.run("coverage", "report", "--show-missing", "--fail-under=73")
+    session.run("coverage", "report", "--show-missing", "--fail-under=100")
 
     session.run("coverage", "erase")
 
