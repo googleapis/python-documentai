@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.1](https://www.github.com/googleapis/python-documentai/compare/v0.2.0...v0.2.1) (2020-06-20)
+
+
+### Bug Fixes
+
+* **python:** change autodoc_default_flags to autodoc_default_options ([#27](https://www.github.com/googleapis/python-documentai/issues/27)) ([4eefc0a](https://www.github.com/googleapis/python-documentai/commit/4eefc0abf9a36cff8639c16c49d09487433b325b))
+
 ## [0.2.0](https://www.github.com/googleapis/python-documentai/compare/v0.1.0...v0.2.0) (2020-05-28)
 
 
