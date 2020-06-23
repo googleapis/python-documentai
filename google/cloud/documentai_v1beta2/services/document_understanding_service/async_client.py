@@ -98,7 +98,7 @@ class DocumentUnderstandingServiceAsyncClient:
         """
 
         self._client = DocumentUnderstandingServiceClient(
-            credentials=credentials, transport=transport, client_options=client_options
+            credentials=credentials, transport=transport, client_options=client_options,
         )
 
     async def batch_process_documents(
@@ -174,7 +174,7 @@ class DocumentUnderstandingServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation_async.from_gapic(
@@ -237,7 +237,7 @@ class DocumentUnderstandingServiceAsyncClient:
         )
 
         # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
@@ -245,7 +245,9 @@ class DocumentUnderstandingServiceAsyncClient:
 
 try:
     _client_info = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution("google-cloud-documentai").version
+        gapic_version=pkg_resources.get_distribution(
+            "google-cloud-documentai",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     _client_info = gapic_v1.client_info.ClientInfo()

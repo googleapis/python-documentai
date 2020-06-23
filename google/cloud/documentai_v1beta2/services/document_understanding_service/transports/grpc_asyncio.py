@@ -163,7 +163,7 @@ class DocumentUnderstandingServiceGrpcAsyncIOTransport(
         # have one.
         if not hasattr(self, "_grpc_channel"):
             self._grpc_channel = self.create_channel(
-                self._host, credentials=self._credentials
+                self._host, credentials=self._credentials,
             )
 
         # Return the channel from cache.
@@ -187,7 +187,7 @@ class DocumentUnderstandingServiceGrpcAsyncIOTransport(
 
     @property
     def batch_process_documents(
-        self
+        self,
     ) -> Callable[
         [document_understanding.BatchProcessDocumentsRequest],
         Awaitable[operations.Operation],
@@ -217,7 +217,7 @@ class DocumentUnderstandingServiceGrpcAsyncIOTransport(
 
     @property
     def process_document(
-        self
+        self,
     ) -> Callable[
         [document_understanding.ProcessDocumentRequest], Awaitable[document.Document]
     ]:

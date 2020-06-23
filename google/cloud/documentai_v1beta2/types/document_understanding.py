@@ -63,7 +63,7 @@ class BatchProcessDocumentsRequest(proto.Message):
     """
 
     requests = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="ProcessDocumentRequest"
+        proto.MESSAGE, number=1, message="ProcessDocumentRequest",
     )
     parent = proto.Field(proto.STRING, number=2)
 
@@ -114,20 +114,20 @@ class ProcessDocumentRequest(proto.Message):
     """
 
     parent = proto.Field(proto.STRING, number=9)
-    input_config = proto.Field(proto.MESSAGE, number=1, message="InputConfig")
-    output_config = proto.Field(proto.MESSAGE, number=2, message="OutputConfig")
+    input_config = proto.Field(proto.MESSAGE, number=1, message="InputConfig",)
+    output_config = proto.Field(proto.MESSAGE, number=2, message="OutputConfig",)
     document_type = proto.Field(proto.STRING, number=3)
     table_extraction_params = proto.Field(
-        proto.MESSAGE, number=4, message="TableExtractionParams"
+        proto.MESSAGE, number=4, message="TableExtractionParams",
     )
     form_extraction_params = proto.Field(
-        proto.MESSAGE, number=5, message="FormExtractionParams"
+        proto.MESSAGE, number=5, message="FormExtractionParams",
     )
     entity_extraction_params = proto.Field(
-        proto.MESSAGE, number=6, message="EntityExtractionParams"
+        proto.MESSAGE, number=6, message="EntityExtractionParams",
     )
-    ocr_params = proto.Field(proto.MESSAGE, number=7, message="OcrParams")
-    automl_params = proto.Field(proto.MESSAGE, number=8, message="AutoMlParams")
+    ocr_params = proto.Field(proto.MESSAGE, number=7, message="OcrParams",)
+    automl_params = proto.Field(proto.MESSAGE, number=8, message="AutoMlParams",)
 
 
 class BatchProcessDocumentsResponse(proto.Message):
@@ -140,7 +140,7 @@ class BatchProcessDocumentsResponse(proto.Message):
     """
 
     responses = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="ProcessDocumentResponse"
+        proto.MESSAGE, number=1, message="ProcessDocumentResponse",
     )
 
 
@@ -158,8 +158,8 @@ class ProcessDocumentResponse(proto.Message):
             objects.
     """
 
-    input_config = proto.Field(proto.MESSAGE, number=1, message="InputConfig")
-    output_config = proto.Field(proto.MESSAGE, number=2, message="OutputConfig")
+    input_config = proto.Field(proto.MESSAGE, number=1, message="InputConfig",)
+    output_config = proto.Field(proto.MESSAGE, number=2, message="OutputConfig",)
 
 
 class OcrParams(proto.Message):
@@ -204,7 +204,7 @@ class TableExtractionParams(proto.Message):
 
     enabled = proto.Field(proto.BOOL, number=1)
     table_bound_hints = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="TableBoundHint"
+        proto.MESSAGE, number=2, message="TableBoundHint",
     )
     header_hints = proto.RepeatedField(proto.STRING, number=3)
     model_version = proto.Field(proto.STRING, number=4)
@@ -227,7 +227,7 @@ class TableBoundHint(proto.Message):
     """
 
     page_number = proto.Field(proto.INT32, number=1)
-    bounding_box = proto.Field(proto.MESSAGE, number=2, message=geometry.BoundingPoly)
+    bounding_box = proto.Field(proto.MESSAGE, number=2, message=geometry.BoundingPoly,)
 
 
 class FormExtractionParams(proto.Message):
@@ -262,7 +262,7 @@ class FormExtractionParams(proto.Message):
 
     enabled = proto.Field(proto.BOOL, number=1)
     key_value_pair_hints = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="KeyValuePairHint"
+        proto.MESSAGE, number=2, message="KeyValuePairHint",
     )
     model_version = proto.Field(proto.STRING, number=3)
 
@@ -338,7 +338,7 @@ class InputConfig(proto.Message):
             [Document][google.cloud.documentai.v1beta2.Document] format.
     """
 
-    gcs_source = proto.Field(proto.MESSAGE, number=1, message="GcsSource")
+    gcs_source = proto.Field(proto.MESSAGE, number=1, message="GcsSource",)
     contents = proto.Field(proto.BYTES, number=3)
     mime_type = proto.Field(proto.STRING, number=2)
 
@@ -370,7 +370,7 @@ class OutputConfig(proto.Message):
             pages-101-to-150.json pages-151-to-157.json
     """
 
-    gcs_destination = proto.Field(proto.MESSAGE, number=1, message="GcsDestination")
+    gcs_destination = proto.Field(proto.MESSAGE, number=1, message="GcsDestination",)
     pages_per_shard = proto.Field(proto.INT32, number=2)
 
 
@@ -423,10 +423,10 @@ class OperationMetadata(proto.Message):
         CANCELLED = 5
         FAILED = 6
 
-    state = proto.Field(proto.ENUM, number=1, enum=State)
+    state = proto.Field(proto.ENUM, number=1, enum=State,)
     state_message = proto.Field(proto.STRING, number=2)
-    create_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp)
-    update_time = proto.Field(proto.MESSAGE, number=4, message=timestamp.Timestamp)
+    create_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp,)
+    update_time = proto.Field(proto.MESSAGE, number=4, message=timestamp.Timestamp,)
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

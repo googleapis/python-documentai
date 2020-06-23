@@ -58,7 +58,7 @@ class DocumentUnderstandingServiceClientMeta(type):
     ] = DocumentUnderstandingServiceGrpcAsyncIOTransport
 
     def get_transport_class(
-        cls, label: str = None
+        cls, label: str = None,
     ) -> Type[DocumentUnderstandingServiceTransport]:
         """Return an appropriate transport class.
 
@@ -295,7 +295,7 @@ class DocumentUnderstandingServiceClient(
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -358,7 +358,7 @@ class DocumentUnderstandingServiceClient(
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata)
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
@@ -366,7 +366,9 @@ class DocumentUnderstandingServiceClient(
 
 try:
     _client_info = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution("google-cloud-documentai").version
+        gapic_version=pkg_resources.get_distribution(
+            "google-cloud-documentai",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     _client_info = gapic_v1.client_info.ClientInfo()
