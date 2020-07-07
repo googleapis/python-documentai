@@ -207,17 +207,24 @@ class DocumentUnderstandingServiceClient(
         # instance provides an extensibility point for unusual situations.
         if isinstance(transport, DocumentUnderstandingServiceTransport):
             # transport is a DocumentUnderstandingServiceTransport instance.
-            if credentials:
+            if credentials or client_options.credentials_file:
                 raise ValueError(
                     "When providing a transport instance, "
                     "provide its credentials directly."
+                )
+            if client_options.scopes:
+                raise ValueError(
+                    "When providing a transport instance, "
+                    "provide its scopes directly."
                 )
             self._transport = transport
         else:
             Transport = type(self).get_transport_class(transport)
             self._transport = Transport(
                 credentials=credentials,
+                credentials_file=client_options.credentials_file,
                 host=client_options.api_endpoint,
+                scopes=client_options.scopes,
                 api_mtls_endpoint=client_options.api_endpoint,
                 client_cert_source=client_options.client_cert_source,
             )
