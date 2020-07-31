@@ -163,7 +163,15 @@ class DocumentUnderstandingServiceAsyncClient:
         # and friendly error handling.
         rpc = gapic_v1.method_async.wrap_method(
             self._client._transport.batch_process_documents,
-            default_timeout=None,
+            default_retry=retries.Retry(
+                initial=0.1,
+                maximum=60.0,
+                multiplier=1.3,
+                predicate=retries.if_exception_type(
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded
+                ),
+            ),
+            default_timeout=120.0,
             client_info=_client_info,
         )
 
@@ -226,7 +234,15 @@ class DocumentUnderstandingServiceAsyncClient:
         # and friendly error handling.
         rpc = gapic_v1.method_async.wrap_method(
             self._client._transport.process_document,
-            default_timeout=None,
+            default_retry=retries.Retry(
+                initial=0.1,
+                maximum=60.0,
+                multiplier=1.3,
+                predicate=retries.if_exception_type(
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded
+                ),
+            ),
+            default_timeout=120.0,
             client_info=_client_info,
         )
 

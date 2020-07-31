@@ -22,6 +22,7 @@ import grpc
 from grpc.experimental import aio
 import math
 import pytest
+from proto.marshal.rules.dates import DurationRule, TimestampRule
 
 from google import auth
 from google.api_core import client_options
@@ -481,6 +482,7 @@ def test_batch_process_documents_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
+
         assert args[0].requests == [
             document_understanding.ProcessDocumentRequest(parent="parent_value")
         ]
@@ -530,6 +532,7 @@ async def test_batch_process_documents_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
+
         assert args[0].requests == [
             document_understanding.ProcessDocumentRequest(parent="parent_value")
         ]
@@ -567,10 +570,7 @@ def test_process_document(transport: str = "grpc"):
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = document.Document(
-            uri="uri_value",
-            content=b"content_blob",
-            mime_type="mime_type_value",
-            text="text_value",
+            mime_type="mime_type_value", text="text_value", uri="uri_value"
         )
 
         response = client.process_document(request)
@@ -583,10 +583,6 @@ def test_process_document(transport: str = "grpc"):
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, document.Document)
-
-    assert response.uri == "uri_value"
-
-    assert response.content == b"content_blob"
 
     assert response.mime_type == "mime_type_value"
 
@@ -609,12 +605,7 @@ async def test_process_document_async(transport: str = "grpc_asyncio"):
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
-            document.Document(
-                uri="uri_value",
-                content=b"content_blob",
-                mime_type="mime_type_value",
-                text="text_value",
-            )
+            document.Document(mime_type="mime_type_value", text="text_value")
         )
 
         response = await client.process_document(request)
@@ -627,10 +618,6 @@ async def test_process_document_async(transport: str = "grpc_asyncio"):
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, document.Document)
-
-    assert response.uri == "uri_value"
-
-    assert response.content == b"content_blob"
 
     assert response.mime_type == "mime_type_value"
 

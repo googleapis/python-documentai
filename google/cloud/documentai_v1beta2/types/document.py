@@ -129,7 +129,7 @@ class Document(proto.Message):
                 assignment.
         """
 
-        automl_model = proto.Field(proto.STRING, number=2)
+        automl_model = proto.Field(proto.STRING, number=2, oneof="source")
 
         name = proto.Field(proto.STRING, number=1)
 
@@ -797,9 +797,9 @@ class Document(proto.Message):
             proto.MESSAGE, number=1, message="Document.PageAnchor.PageRef"
         )
 
-    uri = proto.Field(proto.STRING, number=1)
+    uri = proto.Field(proto.STRING, number=1, oneof="source")
 
-    content = proto.Field(proto.BYTES, number=2)
+    content = proto.Field(proto.BYTES, number=2, oneof="source")
 
     mime_type = proto.Field(proto.STRING, number=3)
 

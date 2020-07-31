@@ -356,9 +356,11 @@ class InputConfig(proto.Message):
             [Document][google.cloud.documentai.v1beta2.Document] format.
     """
 
-    gcs_source = proto.Field(proto.MESSAGE, number=1, message="GcsSource")
+    gcs_source = proto.Field(
+        proto.MESSAGE, number=1, oneof="source", message="GcsSource"
+    )
 
-    contents = proto.Field(proto.BYTES, number=3)
+    contents = proto.Field(proto.BYTES, number=3, oneof="source")
 
     mime_type = proto.Field(proto.STRING, number=2)
 
@@ -390,7 +392,9 @@ class OutputConfig(proto.Message):
             pages-101-to-150.json pages-151-to-157.json
     """
 
-    gcs_destination = proto.Field(proto.MESSAGE, number=1, message="GcsDestination")
+    gcs_destination = proto.Field(
+        proto.MESSAGE, number=1, oneof="destination", message="GcsDestination"
+    )
 
     pages_per_shard = proto.Field(proto.INT32, number=2)
 
