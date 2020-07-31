@@ -290,19 +290,7 @@ class DocumentUnderstandingServiceClient(
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.batch_process_documents,
-            default_retry=retries.Retry(
-                initial=0.1,
-                maximum=60.0,
-                multiplier=1.3,
-                predicate=retries.if_exception_type(
-                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded
-                ),
-            ),
-            default_timeout=120.0,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[self._transport.batch_process_documents]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -361,19 +349,7 @@ class DocumentUnderstandingServiceClient(
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
-        rpc = gapic_v1.method.wrap_method(
-            self._transport.process_document,
-            default_retry=retries.Retry(
-                initial=0.1,
-                maximum=60.0,
-                multiplier=1.3,
-                predicate=retries.if_exception_type(
-                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded
-                ),
-            ),
-            default_timeout=120.0,
-            client_info=_client_info,
-        )
+        rpc = self._transport._wrapped_methods[self._transport.process_document]
 
         # Certain fields should be provided within the metadata header;
         # add these here.

@@ -17,15 +17,25 @@
 
 import abc
 import typing
+import pkg_resources
 
 from google import auth
 from google.api_core import exceptions  # type: ignore
+from google.api_core import gapic_v1  # type: ignore
 from google.api_core import operations_v1  # type: ignore
 from google.auth import credentials  # type: ignore
 
 from google.cloud.documentai_v1beta2.types import document
 from google.cloud.documentai_v1beta2.types import document_understanding
 from google.longrunning import operations_pb2 as operations  # type: ignore
+
+
+try:
+    _client_info = gapic_v1.client_info.ClientInfo(
+        gapic_version=pkg_resources.get_distribution("google-cloud-documentai").version
+    )
+except pkg_resources.DistributionNotFound:
+    _client_info = gapic_v1.client_info.ClientInfo()
 
 
 class DocumentUnderstandingServiceTransport(abc.ABC):
@@ -83,6 +93,40 @@ class DocumentUnderstandingServiceTransport(abc.ABC):
 
         # Save the credentials.
         self._credentials = credentials
+
+        # Lifted into its own function so it can be stubbed out during tests.
+        self._prep_wrapped_messages()
+
+    def _prep_wrapped_messages(self):
+        # Precompute the wrapped methods.
+        self._wrapped_methods = {
+            self.batch_process_documents: gapic_v1.method.wrap_method(
+                self.batch_process_documents,
+                default_retry=retries.Retry(
+                    initial=0.1,
+                    maximum=60.0,
+                    multiplier=1.3,
+                    predicate=retries.if_exception_type(
+                        exceptions.DeadlineExceeded, exceptions.ServiceUnavailable
+                    ),
+                ),
+                default_timeout=120.0,
+                client_info=_client_info,
+            ),
+            self.process_document: gapic_v1.method.wrap_method(
+                self.process_document,
+                default_retry=retries.Retry(
+                    initial=0.1,
+                    maximum=60.0,
+                    multiplier=1.3,
+                    predicate=retries.if_exception_type(
+                        exceptions.DeadlineExceeded, exceptions.ServiceUnavailable
+                    ),
+                ),
+                default_timeout=120.0,
+                client_info=_client_info,
+            ),
+        }
 
     @property
     def operations_client(self) -> operations_v1.OperationsClient:
