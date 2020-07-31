@@ -37,6 +37,7 @@ class Vertex(proto.Message):
     """
 
     x = proto.Field(proto.INT32, number=1)
+
     y = proto.Field(proto.INT32, number=2)
 
 
@@ -53,6 +54,7 @@ class NormalizedVertex(proto.Message):
     """
 
     x = proto.Field(proto.FLOAT, number=1)
+
     y = proto.Field(proto.FLOAT, number=2)
 
 
@@ -67,6 +69,7 @@ class BoundingPoly(proto.Message):
     """
 
     vertices = proto.RepeatedField(proto.MESSAGE, number=1, message=Vertex)
+
     normalized_vertices = proto.RepeatedField(
         proto.MESSAGE, number=2, message=NormalizedVertex
     )

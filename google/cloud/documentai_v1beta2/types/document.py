@@ -99,7 +99,9 @@ class Document(proto.Message):
         """
 
         shard_index = proto.Field(proto.INT64, number=1)
+
         shard_count = proto.Field(proto.INT64, number=2)
+
         text_offset = proto.Field(proto.INT64, number=3)
 
     class Label(proto.Message):
@@ -128,7 +130,9 @@ class Document(proto.Message):
         """
 
         automl_model = proto.Field(proto.STRING, number=2)
+
         name = proto.Field(proto.STRING, number=1)
+
         confidence = proto.Field(proto.FLOAT, number=3)
 
     class Style(proto.Message):
@@ -168,16 +172,23 @@ class Document(proto.Message):
             """
 
             size = proto.Field(proto.FLOAT, number=1)
+
             unit = proto.Field(proto.STRING, number=2)
 
         text_anchor = proto.Field(
             proto.MESSAGE, number=1, message="Document.TextAnchor"
         )
+
         color = proto.Field(proto.MESSAGE, number=2, message=gt_color.Color)
+
         background_color = proto.Field(proto.MESSAGE, number=3, message=gt_color.Color)
+
         font_weight = proto.Field(proto.STRING, number=4)
+
         text_style = proto.Field(proto.STRING, number=5)
+
         text_decoration = proto.Field(proto.STRING, number=6)
+
         font_size = proto.Field(
             proto.MESSAGE, number=7, message="Document.Style.FontSize"
         )
@@ -241,7 +252,9 @@ class Document(proto.Message):
             """
 
             width = proto.Field(proto.FLOAT, number=1)
+
             height = proto.Field(proto.FLOAT, number=2)
+
             unit = proto.Field(proto.STRING, number=3)
 
         class Layout(proto.Message):
@@ -279,13 +292,17 @@ class Document(proto.Message):
             text_anchor = proto.Field(
                 proto.MESSAGE, number=1, message="Document.TextAnchor"
             )
+
             confidence = proto.Field(proto.FLOAT, number=2)
+
             bounding_poly = proto.Field(
                 proto.MESSAGE, number=3, message=geometry.BoundingPoly
             )
+
             orientation = proto.Field(
                 proto.ENUM, number=4, enum="Document.Page.Layout.Orientation"
             )
+
             id = proto.Field(proto.STRING, number=5)
 
         class Block(proto.Message):
@@ -305,6 +322,7 @@ class Document(proto.Message):
             layout = proto.Field(
                 proto.MESSAGE, number=1, message="Document.Page.Layout"
             )
+
             detected_languages = proto.RepeatedField(
                 proto.MESSAGE, number=2, message="Document.Page.DetectedLanguage"
             )
@@ -326,6 +344,7 @@ class Document(proto.Message):
             layout = proto.Field(
                 proto.MESSAGE, number=1, message="Document.Page.Layout"
             )
+
             detected_languages = proto.RepeatedField(
                 proto.MESSAGE, number=2, message="Document.Page.DetectedLanguage"
             )
@@ -348,6 +367,7 @@ class Document(proto.Message):
             layout = proto.Field(
                 proto.MESSAGE, number=1, message="Document.Page.Layout"
             )
+
             detected_languages = proto.RepeatedField(
                 proto.MESSAGE, number=2, message="Document.Page.DetectedLanguage"
             )
@@ -391,9 +411,11 @@ class Document(proto.Message):
             layout = proto.Field(
                 proto.MESSAGE, number=1, message="Document.Page.Layout"
             )
+
             detected_break = proto.Field(
                 proto.MESSAGE, number=2, message="Document.Page.Token.DetectedBreak"
             )
+
             detected_languages = proto.RepeatedField(
                 proto.MESSAGE, number=3, message="Document.Page.DetectedLanguage"
             )
@@ -418,7 +440,9 @@ class Document(proto.Message):
             layout = proto.Field(
                 proto.MESSAGE, number=1, message="Document.Page.Layout"
             )
+
             type = proto.Field(proto.STRING, number=2)
+
             detected_languages = proto.RepeatedField(
                 proto.MESSAGE, number=3, message="Document.Page.DetectedLanguage"
             )
@@ -472,8 +496,11 @@ class Document(proto.Message):
                 layout = proto.Field(
                     proto.MESSAGE, number=1, message="Document.Page.Layout"
                 )
+
                 row_span = proto.Field(proto.INT32, number=2)
+
                 col_span = proto.Field(proto.INT32, number=3)
+
                 detected_languages = proto.RepeatedField(
                     proto.MESSAGE, number=4, message="Document.Page.DetectedLanguage"
                 )
@@ -481,12 +508,15 @@ class Document(proto.Message):
             layout = proto.Field(
                 proto.MESSAGE, number=1, message="Document.Page.Layout"
             )
+
             header_rows = proto.RepeatedField(
                 proto.MESSAGE, number=2, message="Document.Page.Table.TableRow"
             )
+
             body_rows = proto.RepeatedField(
                 proto.MESSAGE, number=3, message="Document.Page.Table.TableRow"
             )
+
             detected_languages = proto.RepeatedField(
                 proto.MESSAGE, number=4, message="Document.Page.DetectedLanguage"
             )
@@ -530,17 +560,23 @@ class Document(proto.Message):
             field_name = proto.Field(
                 proto.MESSAGE, number=1, message="Document.Page.Layout"
             )
+
             field_value = proto.Field(
                 proto.MESSAGE, number=2, message="Document.Page.Layout"
             )
+
             name_detected_languages = proto.RepeatedField(
                 proto.MESSAGE, number=3, message="Document.Page.DetectedLanguage"
             )
+
             value_detected_languages = proto.RepeatedField(
                 proto.MESSAGE, number=4, message="Document.Page.DetectedLanguage"
             )
+
             value_type = proto.Field(proto.STRING, number=5)
+
             corrected_key_text = proto.Field(proto.STRING, number=6)
+
             corrected_value_text = proto.Field(proto.STRING, number=7)
 
         class DetectedLanguage(proto.Message):
@@ -556,34 +592,45 @@ class Document(proto.Message):
             """
 
             language_code = proto.Field(proto.STRING, number=1)
+
             confidence = proto.Field(proto.FLOAT, number=2)
 
         page_number = proto.Field(proto.INT32, number=1)
+
         dimension = proto.Field(
             proto.MESSAGE, number=2, message="Document.Page.Dimension"
         )
+
         layout = proto.Field(proto.MESSAGE, number=3, message="Document.Page.Layout")
+
         detected_languages = proto.RepeatedField(
             proto.MESSAGE, number=4, message="Document.Page.DetectedLanguage"
         )
+
         blocks = proto.RepeatedField(
             proto.MESSAGE, number=5, message="Document.Page.Block"
         )
+
         paragraphs = proto.RepeatedField(
             proto.MESSAGE, number=6, message="Document.Page.Paragraph"
         )
+
         lines = proto.RepeatedField(
             proto.MESSAGE, number=7, message="Document.Page.Line"
         )
+
         tokens = proto.RepeatedField(
             proto.MESSAGE, number=8, message="Document.Page.Token"
         )
+
         visual_elements = proto.RepeatedField(
             proto.MESSAGE, number=9, message="Document.Page.VisualElement"
         )
+
         tables = proto.RepeatedField(
             proto.MESSAGE, number=10, message="Document.Page.Table"
         )
+
         form_fields = proto.RepeatedField(
             proto.MESSAGE, number=11, message="Document.Page.FormField"
         )
@@ -622,14 +669,21 @@ class Document(proto.Message):
         text_anchor = proto.Field(
             proto.MESSAGE, number=1, message="Document.TextAnchor"
         )
+
         type = proto.Field(proto.STRING, number=2)
+
         mention_text = proto.Field(proto.STRING, number=3)
+
         mention_id = proto.Field(proto.STRING, number=4)
+
         confidence = proto.Field(proto.FLOAT, number=5)
+
         page_anchor = proto.Field(
             proto.MESSAGE, number=6, message="Document.PageAnchor"
         )
+
         id = proto.Field(proto.STRING, number=7)
+
         bounding_poly_for_demo_frontend = proto.Field(
             proto.MESSAGE, number=8, message=geometry.BoundingPoly
         )
@@ -648,7 +702,9 @@ class Document(proto.Message):
         """
 
         subject_id = proto.Field(proto.STRING, number=1)
+
         object_id = proto.Field(proto.STRING, number=2)
+
         relation = proto.Field(proto.STRING, number=3)
 
     class TextAnchor(proto.Message):
@@ -680,6 +736,7 @@ class Document(proto.Message):
             """
 
             start_index = proto.Field(proto.INT64, number=1)
+
             end_index = proto.Field(proto.INT64, number=2)
 
         text_segments = proto.RepeatedField(
@@ -729,9 +786,11 @@ class Document(proto.Message):
                 FORM_FIELD = 7
 
             page = proto.Field(proto.INT64, number=1)
+
             layout_type = proto.Field(
                 proto.ENUM, number=2, enum="Document.PageAnchor.PageRef.LayoutType"
             )
+
             layout_id = proto.Field(proto.STRING, number=3)
 
         page_refs = proto.RepeatedField(
@@ -739,17 +798,27 @@ class Document(proto.Message):
         )
 
     uri = proto.Field(proto.STRING, number=1)
+
     content = proto.Field(proto.BYTES, number=2)
+
     mime_type = proto.Field(proto.STRING, number=3)
+
     text = proto.Field(proto.STRING, number=4)
+
     text_styles = proto.RepeatedField(proto.MESSAGE, number=5, message=Style)
+
     pages = proto.RepeatedField(proto.MESSAGE, number=6, message=Page)
+
     entities = proto.RepeatedField(proto.MESSAGE, number=7, message=Entity)
+
     entity_relations = proto.RepeatedField(
         proto.MESSAGE, number=8, message=EntityRelation
     )
+
     shard_info = proto.Field(proto.MESSAGE, number=9, message=ShardInfo)
+
     labels = proto.RepeatedField(proto.MESSAGE, number=11, message=Label)
+
     error = proto.Field(proto.MESSAGE, number=10, message=status.Status)
 
 

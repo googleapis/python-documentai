@@ -273,7 +273,7 @@ def test_document_understanding_service_client_client_options(
 def test_document_understanding_service_client_client_options_scopes(
     client_class, transport_class, transport_name
 ):
-    # Check the case api_endpoint is provided.
+    # Check the case scopes are provided.
     options = client_options.ClientOptions(scopes=["1", "2"])
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
@@ -281,9 +281,9 @@ def test_document_understanding_service_client_client_options_scopes(
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
-            host="localhost:7469",
+            host=client.DEFAULT_ENDPOINT,
             scopes=["1", "2"],
-            api_mtls_endpoint="localhost:7469",
+            api_mtls_endpoint=client.DEFAULT_ENDPOINT,
             client_cert_source=None,
         )
 
@@ -306,7 +306,7 @@ def test_document_understanding_service_client_client_options_scopes(
 def test_document_understanding_service_client_client_options_credentials_file(
     client_class, transport_class, transport_name
 ):
-    # Check the case api_endpoint is provided.
+    # Check the case credentials file is provided.
     options = client_options.ClientOptions(credentials_file="credentials.json")
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
@@ -314,9 +314,9 @@ def test_document_understanding_service_client_client_options_credentials_file(
         patched.assert_called_once_with(
             credentials=None,
             credentials_file="credentials.json",
-            host="localhost:7469",
+            host=client.DEFAULT_ENDPOINT,
             scopes=None,
-            api_mtls_endpoint="localhost:7469",
+            api_mtls_endpoint=client.DEFAULT_ENDPOINT,
             client_cert_source=None,
         )
 
@@ -583,9 +583,13 @@ def test_process_document(transport: str = "grpc"):
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, document.Document)
+
     assert response.uri == "uri_value"
+
     assert response.content == b"content_blob"
+
     assert response.mime_type == "mime_type_value"
+
     assert response.text == "text_value"
 
 
@@ -623,9 +627,13 @@ async def test_process_document_async(transport: str = "grpc_asyncio"):
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, document.Document)
+
     assert response.uri == "uri_value"
+
     assert response.content == b"content_blob"
+
     assert response.mime_type == "mime_type_value"
+
     assert response.text == "text_value"
 
 
