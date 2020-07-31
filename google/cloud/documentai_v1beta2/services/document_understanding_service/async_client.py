@@ -21,12 +21,12 @@ import re
 from typing import Dict, Sequence, Tuple, Type, Union
 import pkg_resources
 
-import google.api_core.client_options as ClientOptions # type: ignore
-from google.api_core import exceptions                 # type: ignore
-from google.api_core import gapic_v1                   # type: ignore
-from google.api_core import retry as retries           # type: ignore
-from google.auth import credentials                    # type: ignore
-from google.oauth2 import service_account              # type: ignore
+import google.api_core.client_options as ClientOptions  # type: ignore
+from google.api_core import exceptions  # type: ignore
+from google.api_core import gapic_v1  # type: ignore
+from google.api_core import retry as retries  # type: ignore
+from google.auth import credentials  # type: ignore
+from google.oauth2 import service_account  # type: ignore
 
 from google.api_core import operation
 from google.api_core import operation_async
@@ -50,16 +50,23 @@ class DocumentUnderstandingServiceAsyncClient:
     DEFAULT_ENDPOINT = DocumentUnderstandingServiceClient.DEFAULT_ENDPOINT
     DEFAULT_MTLS_ENDPOINT = DocumentUnderstandingServiceClient.DEFAULT_MTLS_ENDPOINT
 
-    from_service_account_file = DocumentUnderstandingServiceClient.from_service_account_file
+    from_service_account_file = (
+        DocumentUnderstandingServiceClient.from_service_account_file
+    )
     from_service_account_json = from_service_account_file
 
-    get_transport_class = functools.partial(type(DocumentUnderstandingServiceClient).get_transport_class, type(DocumentUnderstandingServiceClient))
+    get_transport_class = functools.partial(
+        type(DocumentUnderstandingServiceClient).get_transport_class,
+        type(DocumentUnderstandingServiceClient),
+    )
 
-    def __init__(self, *,
-            credentials: credentials.Credentials = None,
-            transport: Union[str, DocumentUnderstandingServiceTransport] = 'grpc_asyncio',
-            client_options: ClientOptions = None,
-            ) -> None:
+    def __init__(
+        self,
+        *,
+        credentials: credentials.Credentials = None,
+        transport: Union[str, DocumentUnderstandingServiceTransport] = "grpc_asyncio",
+        client_options: ClientOptions = None,
+    ) -> None:
         """Instantiate the document understanding service client.
 
         Args:
@@ -91,19 +98,18 @@ class DocumentUnderstandingServiceAsyncClient:
         """
 
         self._client = DocumentUnderstandingServiceClient(
-            credentials=credentials,
-            transport=transport,
-            client_options=client_options,
+            credentials=credentials, transport=transport, client_options=client_options,
         )
 
-    async def batch_process_documents(self,
-            request: document_understanding.BatchProcessDocumentsRequest = None,
-            *,
-            requests: Sequence[document_understanding.ProcessDocumentRequest] = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> operation_async.AsyncOperation:
+    async def batch_process_documents(
+        self,
+        request: document_understanding.BatchProcessDocumentsRequest = None,
+        *,
+        requests: Sequence[document_understanding.ProcessDocumentRequest] = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> operation_async.AsyncOperation:
         r"""LRO endpoint to batch process many documents. The output is
         written to Cloud Storage as JSON in the [Document] format.
 
@@ -140,8 +146,10 @@ class DocumentUnderstandingServiceAsyncClient:
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         if request is not None and any([requests]):
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
         request = document_understanding.BatchProcessDocumentsRequest(request)
 
@@ -162,18 +170,11 @@ class DocumentUnderstandingServiceAsyncClient:
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('parent', request.parent),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("parent", request.parent),)),
         )
 
         # Send the request.
-        response = await rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation_async.from_gapic(
@@ -186,13 +187,14 @@ class DocumentUnderstandingServiceAsyncClient:
         # Done; return the response.
         return response
 
-    async def process_document(self,
-            request: document_understanding.ProcessDocumentRequest = None,
-            *,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> document.Document:
+    async def process_document(
+        self,
+        request: document_understanding.ProcessDocumentRequest = None,
+        *,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> document.Document:
         r"""Processes a single document.
 
         Args:
@@ -231,36 +233,24 @@ class DocumentUnderstandingServiceAsyncClient:
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('parent', request.parent),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("parent", request.parent),)),
         )
 
         # Send the request.
-        response = await rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
 
 
-
-
-
 try:
     _client_info = gapic_v1.client_info.ClientInfo(
         gapic_version=pkg_resources.get_distribution(
-            'google-cloud-documentai',
+            "google-cloud-documentai",
         ).version,
     )
 except pkg_resources.DistributionNotFound:
     _client_info = gapic_v1.client_info.ClientInfo()
 
 
-__all__ = (
-    'DocumentUnderstandingServiceAsyncClient',
-)
+__all__ = ("DocumentUnderstandingServiceAsyncClient",)

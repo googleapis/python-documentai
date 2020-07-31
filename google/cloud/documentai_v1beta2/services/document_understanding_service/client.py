@@ -21,14 +21,14 @@ import re
 from typing import Callable, Dict, Sequence, Tuple, Type, Union
 import pkg_resources
 
-import google.api_core.client_options as ClientOptions # type: ignore
-from google.api_core import exceptions                 # type: ignore
-from google.api_core import gapic_v1                   # type: ignore
-from google.api_core import retry as retries           # type: ignore
-from google.auth import credentials                    # type: ignore
-from google.auth.transport import mtls                 # type: ignore
+import google.api_core.client_options as ClientOptions  # type: ignore
+from google.api_core import exceptions  # type: ignore
+from google.api_core import gapic_v1  # type: ignore
+from google.api_core import retry as retries  # type: ignore
+from google.auth import credentials  # type: ignore
+from google.auth.transport import mtls  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
-from google.oauth2 import service_account              # type: ignore
+from google.oauth2 import service_account  # type: ignore
 
 from google.api_core import operation
 from google.api_core import operation_async
@@ -48,13 +48,18 @@ class DocumentUnderstandingServiceClientMeta(type):
     support objects (e.g. transport) without polluting the client instance
     objects.
     """
-    _transport_registry = OrderedDict()  # type: Dict[str, Type[DocumentUnderstandingServiceTransport]]
-    _transport_registry['grpc'] = DocumentUnderstandingServiceGrpcTransport
-    _transport_registry['grpc_asyncio'] = DocumentUnderstandingServiceGrpcAsyncIOTransport
 
-    def get_transport_class(cls,
-            label: str = None,
-        ) -> Type[DocumentUnderstandingServiceTransport]:
+    _transport_registry = (
+        OrderedDict()
+    )  # type: Dict[str, Type[DocumentUnderstandingServiceTransport]]
+    _transport_registry["grpc"] = DocumentUnderstandingServiceGrpcTransport
+    _transport_registry[
+        "grpc_asyncio"
+    ] = DocumentUnderstandingServiceGrpcAsyncIOTransport
+
+    def get_transport_class(
+        cls, label: str = None,
+    ) -> Type[DocumentUnderstandingServiceTransport]:
         """Return an appropriate transport class.
 
         Args:
@@ -73,7 +78,9 @@ class DocumentUnderstandingServiceClientMeta(type):
         return next(iter(cls._transport_registry.values()))
 
 
-class DocumentUnderstandingServiceClient(metaclass=DocumentUnderstandingServiceClientMeta):
+class DocumentUnderstandingServiceClient(
+    metaclass=DocumentUnderstandingServiceClientMeta
+):
     """Service to parse structured information from unstructured or
     semi-structured documents using state-of-the-art Google AI such
     as natural language, computer vision, and translation.
@@ -108,7 +115,7 @@ class DocumentUnderstandingServiceClient(metaclass=DocumentUnderstandingServiceC
 
         return api_endpoint.replace(".googleapis.com", ".mtls.googleapis.com")
 
-    DEFAULT_ENDPOINT = 'us-documentai.googleapis.com'
+    DEFAULT_ENDPOINT = "us-documentai.googleapis.com"
     DEFAULT_MTLS_ENDPOINT = _get_default_mtls_endpoint.__func__(  # type: ignore
         DEFAULT_ENDPOINT
     )
@@ -127,18 +134,19 @@ class DocumentUnderstandingServiceClient(metaclass=DocumentUnderstandingServiceC
         Returns:
             {@api.name}: The constructed client.
         """
-        credentials = service_account.Credentials.from_service_account_file(
-            filename)
-        kwargs['credentials'] = credentials
+        credentials = service_account.Credentials.from_service_account_file(filename)
+        kwargs["credentials"] = credentials
         return cls(*args, **kwargs)
 
     from_service_account_json = from_service_account_file
 
-    def __init__(self, *,
-            credentials: credentials.Credentials = None,
-            transport: Union[str, DocumentUnderstandingServiceTransport] = None,
-            client_options: ClientOptions = None,
-            ) -> None:
+    def __init__(
+        self,
+        *,
+        credentials: credentials.Credentials = None,
+        transport: Union[str, DocumentUnderstandingServiceTransport] = None,
+        client_options: ClientOptions = None,
+    ) -> None:
         """Instantiate the document understanding service client.
 
         Args:
@@ -185,7 +193,9 @@ class DocumentUnderstandingServiceClient(metaclass=DocumentUnderstandingServiceC
                     or mtls.has_default_client_cert_source()
                 )
                 client_options.api_endpoint = (
-                    self.DEFAULT_MTLS_ENDPOINT if has_client_cert_source else self.DEFAULT_ENDPOINT
+                    self.DEFAULT_MTLS_ENDPOINT
+                    if has_client_cert_source
+                    else self.DEFAULT_ENDPOINT
                 )
             else:
                 raise MutualTLSChannelError(
@@ -198,8 +208,10 @@ class DocumentUnderstandingServiceClient(metaclass=DocumentUnderstandingServiceC
         if isinstance(transport, DocumentUnderstandingServiceTransport):
             # transport is a DocumentUnderstandingServiceTransport instance.
             if credentials:
-                raise ValueError('When providing a transport instance, '
-                                 'provide its credentials directly.')
+                raise ValueError(
+                    "When providing a transport instance, "
+                    "provide its credentials directly."
+                )
             self._transport = transport
         else:
             Transport = type(self).get_transport_class(transport)
@@ -210,14 +222,15 @@ class DocumentUnderstandingServiceClient(metaclass=DocumentUnderstandingServiceC
                 client_cert_source=client_options.client_cert_source,
             )
 
-    def batch_process_documents(self,
-            request: document_understanding.BatchProcessDocumentsRequest = None,
-            *,
-            requests: Sequence[document_understanding.ProcessDocumentRequest] = None,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> operation.Operation:
+    def batch_process_documents(
+        self,
+        request: document_understanding.BatchProcessDocumentsRequest = None,
+        *,
+        requests: Sequence[document_understanding.ProcessDocumentRequest] = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> operation.Operation:
         r"""LRO endpoint to batch process many documents. The output is
         written to Cloud Storage as JSON in the [Document] format.
 
@@ -254,8 +267,10 @@ class DocumentUnderstandingServiceClient(metaclass=DocumentUnderstandingServiceC
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         if request is not None and any([requests]):
-            raise ValueError('If the `request` argument is set, then none of '
-                             'the individual field arguments should be set.')
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
 
         request = document_understanding.BatchProcessDocumentsRequest(request)
 
@@ -276,18 +291,11 @@ class DocumentUnderstandingServiceClient(metaclass=DocumentUnderstandingServiceC
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('parent', request.parent),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("parent", request.parent),)),
         )
 
         # Send the request.
-        response = rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Wrap the response in an operation future.
         response = operation.from_gapic(
@@ -300,13 +308,14 @@ class DocumentUnderstandingServiceClient(metaclass=DocumentUnderstandingServiceC
         # Done; return the response.
         return response
 
-    def process_document(self,
-            request: document_understanding.ProcessDocumentRequest = None,
-            *,
-            retry: retries.Retry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> document.Document:
+    def process_document(
+        self,
+        request: document_understanding.ProcessDocumentRequest = None,
+        *,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> document.Document:
         r"""Processes a single document.
 
         Args:
@@ -345,36 +354,24 @@ class DocumentUnderstandingServiceClient(metaclass=DocumentUnderstandingServiceC
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((
-                ('parent', request.parent),
-            )),
+            gapic_v1.routing_header.to_grpc_metadata((("parent", request.parent),)),
         )
 
         # Send the request.
-        response = rpc(
-            request,
-            retry=retry,
-            timeout=timeout,
-            metadata=metadata,
-        )
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
 
         # Done; return the response.
         return response
 
 
-
-
-
 try:
     _client_info = gapic_v1.client_info.ClientInfo(
         gapic_version=pkg_resources.get_distribution(
-            'google-cloud-documentai',
+            "google-cloud-documentai",
         ).version,
     )
 except pkg_resources.DistributionNotFound:
     _client_info = gapic_v1.client_info.ClientInfo()
 
 
-__all__ = (
-    'DocumentUnderstandingServiceClient',
-)
+__all__ = ("DocumentUnderstandingServiceClient",)

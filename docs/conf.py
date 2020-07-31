@@ -1,20 +1,4 @@
 # -*- coding: utf-8 -*-
-
-# Copyright 2020 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
 #
 # google-cloud-documentai documentation build configuration file
 #
@@ -36,7 +20,7 @@ import shlex
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath(".."))
 
-__version__ = "0.1.0"
+__version__ = ""
 
 # -- General configuration ------------------------------------------------
 
@@ -54,23 +38,21 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.todo",
     "sphinx.ext.viewcode",
+    "recommonmark",
 ]
 
 # autodoc/autosummary flags
 autoclass_content = "both"
-autodoc_default_flags = ["members"]
+autodoc_default_options = {"members": True}
 autosummary_generate = True
 
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
 
-# Allow markdown includes (so releases.md can include CHANGLEOG.md)
-# http://www.sphinx-doc.org/en/master/markdown.html
-source_parsers = {".md": "recommonmark.parser.CommonMarkParser"}
-
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
+# source_suffix = ['.rst', '.md']
 source_suffix = [".rst", ".md"]
 
 # The encoding of source files.
@@ -81,8 +63,8 @@ master_doc = "index"
 
 # General information about the project.
 project = u"google-cloud-documentai"
-copyright = u"2020, Google, LLC"
-author = u"Google APIs"         # TODO: autogenerate this bit
+copyright = u"2019, Google"
+author = u"Google APIs"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -148,9 +130,9 @@ html_theme = "alabaster"
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-    "description": "Google Cloud Client Libraries for Python",
+    "description": "Google Cloud Client Libraries for google-cloud-documentai",
     "github_user": "googleapis",
-    "github_repo": "google-cloud-python",
+    "github_repo": "python-documentai",
     "github_banner": True,
     "font_family": "'Roboto', Georgia, sans",
     "head_font_family": "'Roboto', Georgia, serif",
@@ -179,7 +161,7 @@ html_theme_options = {
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-# html_static_path = []
+html_static_path = ["_static"]
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
@@ -260,13 +242,13 @@ suppress_warnings = [
 
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
-    # 'papersize': 'letterpaper',
+    #'papersize': 'letterpaper',
     # The font size ('10pt', '11pt' or '12pt').
-    # 'pointsize': '10pt',
+    #'pointsize': '10pt',
     # Additional stuff for the LaTeX preamble.
-    # 'preamble': '',
+    #'preamble': '',
     # Latex figure (float) alignment
-    # 'figure_align': 'htbp',
+    #'figure_align': 'htbp',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
@@ -311,7 +293,7 @@ man_pages = [
     (
         master_doc,
         "google-cloud-documentai",
-        u"Google Cloud Documentai Documentation",
+        u"google-cloud-documentai Documentation",
         [author],
         1,
     )
@@ -333,7 +315,7 @@ texinfo_documents = [
         u"google-cloud-documentai Documentation",
         author,
         "google-cloud-documentai",
-        "GAPIC library for Google Cloud Documentai API",
+        "google-cloud-documentai Library",
         "APIs",
     )
 ]
@@ -354,12 +336,9 @@ texinfo_documents = [
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {
     "python": ("http://python.readthedocs.org/en/latest/", None),
-    "gax": ("https://gax-python.readthedocs.org/en/latest/", None),
     "google-auth": ("https://google-auth.readthedocs.io/en/stable", None),
-    "google-gax": ("https://gax-python.readthedocs.io/en/latest/", None),
-    "google.api_core": ("https://googleapis.dev/python/google-api-core/latest/", None),
+    "google.api_core": ("https://googleapis.dev/python/google-api-core/latest/", None,),
     "grpc": ("https://grpc.io/grpc/python/", None),
-    "requests": ("http://requests.kennethreitz.org/en/stable/", None),
 }
 
 

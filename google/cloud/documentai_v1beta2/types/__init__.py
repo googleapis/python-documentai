@@ -15,30 +15,51 @@
 # limitations under the License.
 #
 
-from .geometry import (Vertex, NormalizedVertex, BoundingPoly, )
-from .document import (Document, )
-from .document_understanding import (BatchProcessDocumentsRequest, ProcessDocumentRequest, BatchProcessDocumentsResponse, ProcessDocumentResponse, OcrParams, TableExtractionParams, TableBoundHint, FormExtractionParams, KeyValuePairHint, EntityExtractionParams, AutoMlParams, InputConfig, OutputConfig, GcsSource, GcsDestination, OperationMetadata, )
+from .geometry import (
+    Vertex,
+    NormalizedVertex,
+    BoundingPoly,
+)
+from .document import Document
+from .document_understanding import (
+    BatchProcessDocumentsRequest,
+    ProcessDocumentRequest,
+    BatchProcessDocumentsResponse,
+    ProcessDocumentResponse,
+    OcrParams,
+    TableExtractionParams,
+    TableBoundHint,
+    FormExtractionParams,
+    KeyValuePairHint,
+    EntityExtractionParams,
+    AutoMlParams,
+    InputConfig,
+    OutputConfig,
+    GcsSource,
+    GcsDestination,
+    OperationMetadata,
+)
 
 
 __all__ = (
-    'Vertex',
-    'NormalizedVertex',
-    'BoundingPoly',
-    'Document',
-    'BatchProcessDocumentsRequest',
-    'ProcessDocumentRequest',
-    'BatchProcessDocumentsResponse',
-    'ProcessDocumentResponse',
-    'OcrParams',
-    'TableExtractionParams',
-    'TableBoundHint',
-    'FormExtractionParams',
-    'KeyValuePairHint',
-    'EntityExtractionParams',
-    'AutoMlParams',
-    'InputConfig',
-    'OutputConfig',
-    'GcsSource',
-    'GcsDestination',
-    'OperationMetadata',
+    "Vertex",
+    "NormalizedVertex",
+    "BoundingPoly",
+    "Document",
+    "BatchProcessDocumentsRequest",
+    "ProcessDocumentRequest",
+    "BatchProcessDocumentsResponse",
+    "ProcessDocumentResponse",
+    "OcrParams",
+    "TableExtractionParams",
+    "TableBoundHint",
+    "FormExtractionParams",
+    "KeyValuePairHint",
+    "EntityExtractionParams",
+    "AutoMlParams",
+    "InputConfig",
+    "OutputConfig",
+    "GcsSource",
+    "GcsDestination",
+    "OperationMetadata",
 )

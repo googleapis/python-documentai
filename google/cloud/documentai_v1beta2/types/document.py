@@ -24,10 +24,7 @@ from google.type import color_pb2 as gt_color  # type: ignore
 
 
 __protobuf__ = proto.module(
-    package='google.cloud.documentai.v1beta2',
-    manifest={
-        'Document',
-    },
+    package="google.cloud.documentai.v1beta2", manifest={"Document",},
 )
 
 
@@ -84,6 +81,7 @@ class Document(proto.Message):
             Any error that occurred while processing this
             document.
     """
+
     class ShardInfo(proto.Message):
         r"""For a large document, sharding may be performed to produce
         several document shards. Each document shard contains this field
@@ -157,6 +155,7 @@ class Document(proto.Message):
             font_size (~.document.Document.Style.FontSize):
                 Font size.
         """
+
         class FontSize(proto.Message):
             r"""Font size with unit.
 
@@ -171,20 +170,16 @@ class Document(proto.Message):
             size = proto.Field(proto.FLOAT, number=1)
             unit = proto.Field(proto.STRING, number=2)
 
-        text_anchor = proto.Field(proto.MESSAGE, number=1,
-            message='Document.TextAnchor',
+        text_anchor = proto.Field(
+            proto.MESSAGE, number=1, message="Document.TextAnchor",
         )
-        color = proto.Field(proto.MESSAGE, number=2,
-            message=gt_color.Color,
-        )
-        background_color = proto.Field(proto.MESSAGE, number=3,
-            message=gt_color.Color,
-        )
+        color = proto.Field(proto.MESSAGE, number=2, message=gt_color.Color,)
+        background_color = proto.Field(proto.MESSAGE, number=3, message=gt_color.Color,)
         font_weight = proto.Field(proto.STRING, number=4)
         text_style = proto.Field(proto.STRING, number=5)
         text_decoration = proto.Field(proto.STRING, number=6)
-        font_size = proto.Field(proto.MESSAGE, number=7,
-            message='Document.Style.FontSize',
+        font_size = proto.Field(
+            proto.MESSAGE, number=7, message="Document.Style.FontSize",
         )
 
     class Page(proto.Message):
@@ -232,6 +227,7 @@ class Document(proto.Message):
                 A list of visually detected form fields on
                 the page.
         """
+
         class Dimension(proto.Message):
             r"""Dimension for the page.
 
@@ -271,6 +267,7 @@ class Document(proto.Message):
                     Optional. This is the identifier used by referencing
                     [PageAnchor][google.cloud.documentai.v1beta2.Document.PageAnchor]s.
             """
+
             class Orientation(proto.Enum):
                 r"""Detected human reading orientation."""
                 ORIENTATION_UNSPECIFIED = 0
@@ -279,15 +276,15 @@ class Document(proto.Message):
                 PAGE_DOWN = 3
                 PAGE_LEFT = 4
 
-            text_anchor = proto.Field(proto.MESSAGE, number=1,
-                message='Document.TextAnchor',
+            text_anchor = proto.Field(
+                proto.MESSAGE, number=1, message="Document.TextAnchor",
             )
             confidence = proto.Field(proto.FLOAT, number=2)
-            bounding_poly = proto.Field(proto.MESSAGE, number=3,
-                message=geometry.BoundingPoly,
+            bounding_poly = proto.Field(
+                proto.MESSAGE, number=3, message=geometry.BoundingPoly,
             )
-            orientation = proto.Field(proto.ENUM, number=4,
-                enum='Document.Page.Layout.Orientation',
+            orientation = proto.Field(
+                proto.ENUM, number=4, enum="Document.Page.Layout.Orientation",
             )
             id = proto.Field(proto.STRING, number=5)
 
@@ -305,11 +302,11 @@ class Document(proto.Message):
                     confidence.
             """
 
-            layout = proto.Field(proto.MESSAGE, number=1,
-                message='Document.Page.Layout',
+            layout = proto.Field(
+                proto.MESSAGE, number=1, message="Document.Page.Layout",
             )
-            detected_languages = proto.RepeatedField(proto.MESSAGE, number=2,
-                message='Document.Page.DetectedLanguage',
+            detected_languages = proto.RepeatedField(
+                proto.MESSAGE, number=2, message="Document.Page.DetectedLanguage",
             )
 
         class Paragraph(proto.Message):
@@ -326,11 +323,11 @@ class Document(proto.Message):
                     confidence.
             """
 
-            layout = proto.Field(proto.MESSAGE, number=1,
-                message='Document.Page.Layout',
+            layout = proto.Field(
+                proto.MESSAGE, number=1, message="Document.Page.Layout",
             )
-            detected_languages = proto.RepeatedField(proto.MESSAGE, number=2,
-                message='Document.Page.DetectedLanguage',
+            detected_languages = proto.RepeatedField(
+                proto.MESSAGE, number=2, message="Document.Page.DetectedLanguage",
             )
 
         class Line(proto.Message):
@@ -348,11 +345,11 @@ class Document(proto.Message):
                     confidence.
             """
 
-            layout = proto.Field(proto.MESSAGE, number=1,
-                message='Document.Page.Layout',
+            layout = proto.Field(
+                proto.MESSAGE, number=1, message="Document.Page.Layout",
             )
-            detected_languages = proto.RepeatedField(proto.MESSAGE, number=2,
-                message='Document.Page.DetectedLanguage',
+            detected_languages = proto.RepeatedField(
+                proto.MESSAGE, number=2, message="Document.Page.DetectedLanguage",
             )
 
         class Token(proto.Message):
@@ -370,6 +367,7 @@ class Document(proto.Message):
                     A list of detected languages together with
                     confidence.
             """
+
             class DetectedBreak(proto.Message):
                 r"""Detected break at the end of a
                 [Token][google.cloud.documentai.v1beta2.Document.Page.Token].
@@ -378,6 +376,7 @@ class Document(proto.Message):
                     type (~.document.Document.Page.Token.DetectedBreak.Type):
                         Detected break type.
                 """
+
                 class Type(proto.Enum):
                     r"""Enum to denote the type of break found."""
                     TYPE_UNSPECIFIED = 0
@@ -385,18 +384,18 @@ class Document(proto.Message):
                     WIDE_SPACE = 2
                     HYPHEN = 3
 
-                type = proto.Field(proto.ENUM, number=1,
-                    enum='Document.Page.Token.DetectedBreak.Type',
+                type = proto.Field(
+                    proto.ENUM, number=1, enum="Document.Page.Token.DetectedBreak.Type",
                 )
 
-            layout = proto.Field(proto.MESSAGE, number=1,
-                message='Document.Page.Layout',
+            layout = proto.Field(
+                proto.MESSAGE, number=1, message="Document.Page.Layout",
             )
-            detected_break = proto.Field(proto.MESSAGE, number=2,
-                message='Document.Page.Token.DetectedBreak',
+            detected_break = proto.Field(
+                proto.MESSAGE, number=2, message="Document.Page.Token.DetectedBreak",
             )
-            detected_languages = proto.RepeatedField(proto.MESSAGE, number=3,
-                message='Document.Page.DetectedLanguage',
+            detected_languages = proto.RepeatedField(
+                proto.MESSAGE, number=3, message="Document.Page.DetectedLanguage",
             )
 
         class VisualElement(proto.Message):
@@ -416,12 +415,12 @@ class Document(proto.Message):
                     confidence.
             """
 
-            layout = proto.Field(proto.MESSAGE, number=1,
-                message='Document.Page.Layout',
+            layout = proto.Field(
+                proto.MESSAGE, number=1, message="Document.Page.Layout",
             )
             type = proto.Field(proto.STRING, number=2)
-            detected_languages = proto.RepeatedField(proto.MESSAGE, number=3,
-                message='Document.Page.DetectedLanguage',
+            detected_languages = proto.RepeatedField(
+                proto.MESSAGE, number=3, message="Document.Page.DetectedLanguage",
             )
 
         class Table(proto.Message):
@@ -440,6 +439,7 @@ class Document(proto.Message):
                     A list of detected languages together with
                     confidence.
             """
+
             class TableRow(proto.Message):
                 r"""A row of table cells.
 
@@ -448,8 +448,8 @@ class Document(proto.Message):
                         Cells that make up this row.
                 """
 
-                cells = proto.RepeatedField(proto.MESSAGE, number=1,
-                    message='Document.Page.Table.TableCell',
+                cells = proto.RepeatedField(
+                    proto.MESSAGE, number=1, message="Document.Page.Table.TableCell",
                 )
 
             class TableCell(proto.Message):
@@ -469,26 +469,26 @@ class Document(proto.Message):
                         confidence.
                 """
 
-                layout = proto.Field(proto.MESSAGE, number=1,
-                    message='Document.Page.Layout',
+                layout = proto.Field(
+                    proto.MESSAGE, number=1, message="Document.Page.Layout",
                 )
                 row_span = proto.Field(proto.INT32, number=2)
                 col_span = proto.Field(proto.INT32, number=3)
-                detected_languages = proto.RepeatedField(proto.MESSAGE, number=4,
-                    message='Document.Page.DetectedLanguage',
+                detected_languages = proto.RepeatedField(
+                    proto.MESSAGE, number=4, message="Document.Page.DetectedLanguage",
                 )
 
-            layout = proto.Field(proto.MESSAGE, number=1,
-                message='Document.Page.Layout',
+            layout = proto.Field(
+                proto.MESSAGE, number=1, message="Document.Page.Layout",
             )
-            header_rows = proto.RepeatedField(proto.MESSAGE, number=2,
-                message='Document.Page.Table.TableRow',
+            header_rows = proto.RepeatedField(
+                proto.MESSAGE, number=2, message="Document.Page.Table.TableRow",
             )
-            body_rows = proto.RepeatedField(proto.MESSAGE, number=3,
-                message='Document.Page.Table.TableRow',
+            body_rows = proto.RepeatedField(
+                proto.MESSAGE, number=3, message="Document.Page.Table.TableRow",
             )
-            detected_languages = proto.RepeatedField(proto.MESSAGE, number=4,
-                message='Document.Page.DetectedLanguage',
+            detected_languages = proto.RepeatedField(
+                proto.MESSAGE, number=4, message="Document.Page.DetectedLanguage",
             )
 
         class FormField(proto.Message):
@@ -527,17 +527,17 @@ class Document(proto.Message):
                     export value text.
             """
 
-            field_name = proto.Field(proto.MESSAGE, number=1,
-                message='Document.Page.Layout',
+            field_name = proto.Field(
+                proto.MESSAGE, number=1, message="Document.Page.Layout",
             )
-            field_value = proto.Field(proto.MESSAGE, number=2,
-                message='Document.Page.Layout',
+            field_value = proto.Field(
+                proto.MESSAGE, number=2, message="Document.Page.Layout",
             )
-            name_detected_languages = proto.RepeatedField(proto.MESSAGE, number=3,
-                message='Document.Page.DetectedLanguage',
+            name_detected_languages = proto.RepeatedField(
+                proto.MESSAGE, number=3, message="Document.Page.DetectedLanguage",
             )
-            value_detected_languages = proto.RepeatedField(proto.MESSAGE, number=4,
-                message='Document.Page.DetectedLanguage',
+            value_detected_languages = proto.RepeatedField(
+                proto.MESSAGE, number=4, message="Document.Page.DetectedLanguage",
             )
             value_type = proto.Field(proto.STRING, number=5)
             corrected_key_text = proto.Field(proto.STRING, number=6)
@@ -559,35 +559,33 @@ class Document(proto.Message):
             confidence = proto.Field(proto.FLOAT, number=2)
 
         page_number = proto.Field(proto.INT32, number=1)
-        dimension = proto.Field(proto.MESSAGE, number=2,
-            message='Document.Page.Dimension',
+        dimension = proto.Field(
+            proto.MESSAGE, number=2, message="Document.Page.Dimension",
         )
-        layout = proto.Field(proto.MESSAGE, number=3,
-            message='Document.Page.Layout',
+        layout = proto.Field(proto.MESSAGE, number=3, message="Document.Page.Layout",)
+        detected_languages = proto.RepeatedField(
+            proto.MESSAGE, number=4, message="Document.Page.DetectedLanguage",
         )
-        detected_languages = proto.RepeatedField(proto.MESSAGE, number=4,
-            message='Document.Page.DetectedLanguage',
+        blocks = proto.RepeatedField(
+            proto.MESSAGE, number=5, message="Document.Page.Block",
         )
-        blocks = proto.RepeatedField(proto.MESSAGE, number=5,
-            message='Document.Page.Block',
+        paragraphs = proto.RepeatedField(
+            proto.MESSAGE, number=6, message="Document.Page.Paragraph",
         )
-        paragraphs = proto.RepeatedField(proto.MESSAGE, number=6,
-            message='Document.Page.Paragraph',
+        lines = proto.RepeatedField(
+            proto.MESSAGE, number=7, message="Document.Page.Line",
         )
-        lines = proto.RepeatedField(proto.MESSAGE, number=7,
-            message='Document.Page.Line',
+        tokens = proto.RepeatedField(
+            proto.MESSAGE, number=8, message="Document.Page.Token",
         )
-        tokens = proto.RepeatedField(proto.MESSAGE, number=8,
-            message='Document.Page.Token',
+        visual_elements = proto.RepeatedField(
+            proto.MESSAGE, number=9, message="Document.Page.VisualElement",
         )
-        visual_elements = proto.RepeatedField(proto.MESSAGE, number=9,
-            message='Document.Page.VisualElement',
+        tables = proto.RepeatedField(
+            proto.MESSAGE, number=10, message="Document.Page.Table",
         )
-        tables = proto.RepeatedField(proto.MESSAGE, number=10,
-            message='Document.Page.Table',
-        )
-        form_fields = proto.RepeatedField(proto.MESSAGE, number=11,
-            message='Document.Page.FormField',
+        form_fields = proto.RepeatedField(
+            proto.MESSAGE, number=11, message="Document.Page.FormField",
         )
 
     class Entity(proto.Message):
@@ -621,19 +619,19 @@ class Document(proto.Message):
                 ybo@ and lukasr@.
         """
 
-        text_anchor = proto.Field(proto.MESSAGE, number=1,
-            message='Document.TextAnchor',
+        text_anchor = proto.Field(
+            proto.MESSAGE, number=1, message="Document.TextAnchor",
         )
         type = proto.Field(proto.STRING, number=2)
         mention_text = proto.Field(proto.STRING, number=3)
         mention_id = proto.Field(proto.STRING, number=4)
         confidence = proto.Field(proto.FLOAT, number=5)
-        page_anchor = proto.Field(proto.MESSAGE, number=6,
-            message='Document.PageAnchor',
+        page_anchor = proto.Field(
+            proto.MESSAGE, number=6, message="Document.PageAnchor",
         )
         id = proto.Field(proto.STRING, number=7)
-        bounding_poly_for_demo_frontend = proto.Field(proto.MESSAGE, number=8,
-            message=geometry.BoundingPoly,
+        bounding_poly_for_demo_frontend = proto.Field(
+            proto.MESSAGE, number=8, message=geometry.BoundingPoly,
         )
 
     class EntityRelation(proto.Message):
@@ -662,6 +660,7 @@ class Document(proto.Message):
                 The text segments from the
                 [Document.text][google.cloud.documentai.v1beta2.Document.text].
         """
+
         class TextSegment(proto.Message):
             r"""A text segment in the
             [Document.text][google.cloud.documentai.v1beta2.Document.text]. The
@@ -683,8 +682,8 @@ class Document(proto.Message):
             start_index = proto.Field(proto.INT64, number=1)
             end_index = proto.Field(proto.INT64, number=2)
 
-        text_segments = proto.RepeatedField(proto.MESSAGE, number=1,
-            message='Document.TextAnchor.TextSegment',
+        text_segments = proto.RepeatedField(
+            proto.MESSAGE, number=1, message="Document.TextAnchor.TextSegment",
         )
 
     class PageAnchor(proto.Message):
@@ -696,6 +695,7 @@ class Document(proto.Message):
                 One or more references to visual page
                 elements
         """
+
         class PageRef(proto.Message):
             r"""Represents a weak reference to a page element within a
             document.
@@ -716,6 +716,7 @@ class Document(proto.Message):
                     [LayoutRef.type][] is specified this id must also be
                     specified.
             """
+
             class LayoutType(proto.Enum):
                 r"""The type of layout that is being referenced."""
                 LAYOUT_TYPE_UNSPECIFIED = 0
@@ -728,40 +729,28 @@ class Document(proto.Message):
                 FORM_FIELD = 7
 
             page = proto.Field(proto.INT64, number=1)
-            layout_type = proto.Field(proto.ENUM, number=2,
-                enum='Document.PageAnchor.PageRef.LayoutType',
+            layout_type = proto.Field(
+                proto.ENUM, number=2, enum="Document.PageAnchor.PageRef.LayoutType",
             )
             layout_id = proto.Field(proto.STRING, number=3)
 
-        page_refs = proto.RepeatedField(proto.MESSAGE, number=1,
-            message='Document.PageAnchor.PageRef',
+        page_refs = proto.RepeatedField(
+            proto.MESSAGE, number=1, message="Document.PageAnchor.PageRef",
         )
 
     uri = proto.Field(proto.STRING, number=1)
     content = proto.Field(proto.BYTES, number=2)
     mime_type = proto.Field(proto.STRING, number=3)
     text = proto.Field(proto.STRING, number=4)
-    text_styles = proto.RepeatedField(proto.MESSAGE, number=5,
-        message=Style,
+    text_styles = proto.RepeatedField(proto.MESSAGE, number=5, message=Style,)
+    pages = proto.RepeatedField(proto.MESSAGE, number=6, message=Page,)
+    entities = proto.RepeatedField(proto.MESSAGE, number=7, message=Entity,)
+    entity_relations = proto.RepeatedField(
+        proto.MESSAGE, number=8, message=EntityRelation,
     )
-    pages = proto.RepeatedField(proto.MESSAGE, number=6,
-        message=Page,
-    )
-    entities = proto.RepeatedField(proto.MESSAGE, number=7,
-        message=Entity,
-    )
-    entity_relations = proto.RepeatedField(proto.MESSAGE, number=8,
-        message=EntityRelation,
-    )
-    shard_info = proto.Field(proto.MESSAGE, number=9,
-        message=ShardInfo,
-    )
-    labels = proto.RepeatedField(proto.MESSAGE, number=11,
-        message=Label,
-    )
-    error = proto.Field(proto.MESSAGE, number=10,
-        message=status.Status,
-    )
+    shard_info = proto.Field(proto.MESSAGE, number=9, message=ShardInfo,)
+    labels = proto.RepeatedField(proto.MESSAGE, number=11, message=Label,)
+    error = proto.Field(proto.MESSAGE, number=10, message=status.Status,)
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))
