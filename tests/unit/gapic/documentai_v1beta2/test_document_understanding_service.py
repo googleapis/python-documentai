@@ -25,6 +25,7 @@ import pytest
 
 from google import auth
 from google.api_core import client_options
+from google.api_core import exceptions
 from google.api_core import future
 from google.api_core import grpc_helpers
 from google.api_core import grpc_helpers_async
@@ -151,10 +152,12 @@ def test_document_understanding_service_client_client_options(
         patched.return_value = None
         client = client_class(client_options=options)
         patched.assert_called_once_with(
+            credentials=None,
+            credentials_file=None,
+            host="squid.clam.whelk",
+            scopes=None,
             api_mtls_endpoint="squid.clam.whelk",
             client_cert_source=None,
-            credentials=None,
-            host="squid.clam.whelk",
         )
 
     # Check the case api_endpoint is not provided and GOOGLE_API_USE_MTLS is
@@ -164,10 +167,12 @@ def test_document_understanding_service_client_client_options(
         patched.return_value = None
         client = client_class()
         patched.assert_called_once_with(
+            credentials=None,
+            credentials_file=None,
+            host=client.DEFAULT_ENDPOINT,
+            scopes=None,
             api_mtls_endpoint=client.DEFAULT_ENDPOINT,
             client_cert_source=None,
-            credentials=None,
-            host=client.DEFAULT_ENDPOINT,
         )
 
     # Check the case api_endpoint is not provided and GOOGLE_API_USE_MTLS is
@@ -177,10 +182,12 @@ def test_document_understanding_service_client_client_options(
         patched.return_value = None
         client = client_class()
         patched.assert_called_once_with(
+            credentials=None,
+            credentials_file=None,
+            host=client.DEFAULT_MTLS_ENDPOINT,
+            scopes=None,
             api_mtls_endpoint=client.DEFAULT_MTLS_ENDPOINT,
             client_cert_source=None,
-            credentials=None,
-            host=client.DEFAULT_MTLS_ENDPOINT,
         )
 
     # Check the case api_endpoint is not provided, GOOGLE_API_USE_MTLS is
@@ -193,10 +200,12 @@ def test_document_understanding_service_client_client_options(
         patched.return_value = None
         client = client_class(client_options=options)
         patched.assert_called_once_with(
+            credentials=None,
+            credentials_file=None,
+            host=client.DEFAULT_MTLS_ENDPOINT,
+            scopes=None,
             api_mtls_endpoint=client.DEFAULT_MTLS_ENDPOINT,
             client_cert_source=client_cert_source_callback,
-            credentials=None,
-            host=client.DEFAULT_MTLS_ENDPOINT,
         )
 
     # Check the case api_endpoint is not provided, GOOGLE_API_USE_MTLS is
@@ -210,10 +219,12 @@ def test_document_understanding_service_client_client_options(
             patched.return_value = None
             client = client_class()
             patched.assert_called_once_with(
+                credentials=None,
+                credentials_file=None,
+                host=client.DEFAULT_MTLS_ENDPOINT,
+                scopes=None,
                 api_mtls_endpoint=client.DEFAULT_MTLS_ENDPOINT,
                 client_cert_source=None,
-                credentials=None,
-                host=client.DEFAULT_MTLS_ENDPOINT,
             )
 
     # Check the case api_endpoint is not provided, GOOGLE_API_USE_MTLS is
@@ -227,10 +238,12 @@ def test_document_understanding_service_client_client_options(
             patched.return_value = None
             client = client_class()
             patched.assert_called_once_with(
+                credentials=None,
+                credentials_file=None,
+                host=client.DEFAULT_ENDPOINT,
+                scopes=None,
                 api_mtls_endpoint=client.DEFAULT_ENDPOINT,
                 client_cert_source=None,
-                credentials=None,
-                host=client.DEFAULT_ENDPOINT,
             )
 
     # Check the case api_endpoint is not provided and GOOGLE_API_USE_MTLS has
@@ -242,6 +255,72 @@ def test_document_understanding_service_client_client_options(
     del os.environ["GOOGLE_API_USE_MTLS"]
 
 
+@pytest.mark.parametrize(
+    "client_class,transport_class,transport_name",
+    [
+        (
+            DocumentUnderstandingServiceClient,
+            transports.DocumentUnderstandingServiceGrpcTransport,
+            "grpc",
+        ),
+        (
+            DocumentUnderstandingServiceAsyncClient,
+            transports.DocumentUnderstandingServiceGrpcAsyncIOTransport,
+            "grpc_asyncio",
+        ),
+    ],
+)
+def test_document_understanding_service_client_client_options_scopes(
+    client_class, transport_class, transport_name
+):
+    # Check the case api_endpoint is provided.
+    options = client_options.ClientOptions(scopes=["1", "2"])
+    with mock.patch.object(transport_class, "__init__") as patched:
+        patched.return_value = None
+        client = client_class(client_options=options)
+        patched.assert_called_once_with(
+            credentials=None,
+            credentials_file=None,
+            host="localhost:7469",
+            scopes=["1", "2"],
+            api_mtls_endpoint="localhost:7469",
+            client_cert_source=None,
+        )
+
+
+@pytest.mark.parametrize(
+    "client_class,transport_class,transport_name",
+    [
+        (
+            DocumentUnderstandingServiceClient,
+            transports.DocumentUnderstandingServiceGrpcTransport,
+            "grpc",
+        ),
+        (
+            DocumentUnderstandingServiceAsyncClient,
+            transports.DocumentUnderstandingServiceGrpcAsyncIOTransport,
+            "grpc_asyncio",
+        ),
+    ],
+)
+def test_document_understanding_service_client_client_options_credentials_file(
+    client_class, transport_class, transport_name
+):
+    # Check the case api_endpoint is provided.
+    options = client_options.ClientOptions(credentials_file="credentials.json")
+    with mock.patch.object(transport_class, "__init__") as patched:
+        patched.return_value = None
+        client = client_class(client_options=options)
+        patched.assert_called_once_with(
+            credentials=None,
+            credentials_file="credentials.json",
+            host="localhost:7469",
+            scopes=None,
+            api_mtls_endpoint="localhost:7469",
+            client_cert_source=None,
+        )
+
+
 def test_document_understanding_service_client_client_options_from_dict():
     with mock.patch(
         "google.cloud.documentai_v1beta2.services.document_understanding_service.transports.DocumentUnderstandingServiceGrpcTransport.__init__"
@@ -251,10 +330,12 @@ def test_document_understanding_service_client_client_options_from_dict():
             client_options={"api_endpoint": "squid.clam.whelk"}
         )
         grpc_transport.assert_called_once_with(
+            credentials=None,
+            credentials_file=None,
+            host="squid.clam.whelk",
+            scopes=None,
             api_mtls_endpoint="squid.clam.whelk",
             client_cert_source=None,
-            credentials=None,
-            host="squid.clam.whelk",
         )
 
 
@@ -615,6 +696,24 @@ def test_credentials_transport_error():
             credentials=credentials.AnonymousCredentials(), transport=transport
         )
 
+    # It is an error to provide a credentials file and a transport instance.
+    transport = transports.DocumentUnderstandingServiceGrpcTransport(
+        credentials=credentials.AnonymousCredentials()
+    )
+    with pytest.raises(ValueError):
+        client = DocumentUnderstandingServiceClient(
+            client_options={"credentials_file": "credentials.json"}, transport=transport
+        )
+
+    # It is an error to provide scopes and a transport instance.
+    transport = transports.DocumentUnderstandingServiceGrpcTransport(
+        credentials=credentials.AnonymousCredentials()
+    )
+    with pytest.raises(ValueError):
+        client = DocumentUnderstandingServiceClient(
+            client_options={"scopes": ["1", "2"]}, transport=transport
+        )
+
 
 def test_transport_instance():
     # A client may be instantiated with a custom transport instance.
@@ -650,6 +749,15 @@ def test_transport_grpc_default():
     )
 
 
+def test_document_understanding_service_base_transport_error():
+    # Passing both a credentials object and credentials_file should raise an error
+    with pytest.raises(exceptions.DuplicateCredentialArgs):
+        transport = transports.DocumentUnderstandingServiceTransport(
+            credentials=credentials.AnonymousCredentials(),
+            credentials_file="credentials.json",
+        )
+
+
 def test_document_understanding_service_base_transport():
     # Instantiate the base transport.
     transport = transports.DocumentUnderstandingServiceTransport(
@@ -667,6 +775,19 @@ def test_document_understanding_service_base_transport():
     # also raise NotImplementedError
     with pytest.raises(NotImplementedError):
         transport.operations_client
+
+
+def test_document_understanding_service_base_transport_with_credentials_file():
+    # Instantiate the base transport with a credentials file
+    with mock.patch.object(auth, "load_credentials_from_file") as load_creds:
+        load_creds.return_value = (credentials.AnonymousCredentials(), None)
+        transport = transports.DocumentUnderstandingServiceTransport(
+            credentials_file="credentials.json"
+        )
+        load_creds.assert_called_once_with(
+            "credentials.json",
+            scopes=("https://www.googleapis.com/auth/cloud-platform",),
+        )
 
 
 def test_document_understanding_service_auth_adc():
@@ -771,8 +892,9 @@ def test_document_understanding_service_grpc_transport_channel_mtls_with_client_
     grpc_create_channel.assert_called_once_with(
         "mtls.squid.clam.whelk:443",
         credentials=mock_cred,
-        ssl_credentials=mock_ssl_cred,
+        credentials_file=None,
         scopes=("https://www.googleapis.com/auth/cloud-platform",),
+        ssl_credentials=mock_ssl_cred,
     )
     assert transport.grpc_channel == mock_grpc_channel
 
@@ -804,8 +926,9 @@ def test_document_understanding_service_grpc_asyncio_transport_channel_mtls_with
     grpc_create_channel.assert_called_once_with(
         "mtls.squid.clam.whelk:443",
         credentials=mock_cred,
-        ssl_credentials=mock_ssl_cred,
+        credentials_file=None,
         scopes=("https://www.googleapis.com/auth/cloud-platform",),
+        ssl_credentials=mock_ssl_cred,
     )
     assert transport.grpc_channel == mock_grpc_channel
 
@@ -839,8 +962,9 @@ def test_document_understanding_service_grpc_transport_channel_mtls_with_adc(
         grpc_create_channel.assert_called_once_with(
             "mtls.squid.clam.whelk:443",
             credentials=mock_cred,
-            ssl_credentials=mock_ssl_cred,
+            credentials_file=None,
             scopes=("https://www.googleapis.com/auth/cloud-platform",),
+            ssl_credentials=mock_ssl_cred,
         )
         assert transport.grpc_channel == mock_grpc_channel
 
@@ -874,8 +998,9 @@ def test_document_understanding_service_grpc_asyncio_transport_channel_mtls_with
         grpc_create_channel.assert_called_once_with(
             "mtls.squid.clam.whelk:443",
             credentials=mock_cred,
-            ssl_credentials=mock_ssl_cred,
+            credentials_file=None,
             scopes=("https://www.googleapis.com/auth/cloud-platform",),
+            ssl_credentials=mock_ssl_cred,
         )
         assert transport.grpc_channel == mock_grpc_channel
 
