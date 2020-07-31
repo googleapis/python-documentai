@@ -24,15 +24,13 @@ from .grpc_asyncio import DocumentUnderstandingServiceGrpcAsyncIOTransport
 
 
 # Compile a registry of transports.
-_transport_registry = (
-    OrderedDict()
-)  # type: Dict[str, Type[DocumentUnderstandingServiceTransport]]
-_transport_registry["grpc"] = DocumentUnderstandingServiceGrpcTransport
-_transport_registry["grpc_asyncio"] = DocumentUnderstandingServiceGrpcAsyncIOTransport
+_transport_registry = OrderedDict()  # type: Dict[str, Type[DocumentUnderstandingServiceTransport]]
+_transport_registry['grpc'] = DocumentUnderstandingServiceGrpcTransport
+_transport_registry['grpc_asyncio'] = DocumentUnderstandingServiceGrpcAsyncIOTransport
 
 
 __all__ = (
-    "DocumentUnderstandingServiceTransport",
-    "DocumentUnderstandingServiceGrpcTransport",
-    "DocumentUnderstandingServiceGrpcAsyncIOTransport",
+    'DocumentUnderstandingServiceTransport',
+    'DocumentUnderstandingServiceGrpcTransport',
+    'DocumentUnderstandingServiceGrpcAsyncIOTransport',
 )

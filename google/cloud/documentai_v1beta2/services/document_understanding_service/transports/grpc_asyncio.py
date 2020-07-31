@@ -17,12 +17,12 @@
 
 from typing import Awaitable, Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import grpc_helpers_async  # type: ignore
-from google.api_core import operations_v1  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.api_core import grpc_helpers_async         # type: ignore
+from google.api_core import operations_v1              # type: ignore
+from google.auth import credentials                    # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
-import grpc  # type: ignore
+import grpc                        # type: ignore
 from grpc.experimental import aio  # type: ignore
 
 from google.cloud.documentai_v1beta2.types import document
@@ -33,9 +33,7 @@ from .base import DocumentUnderstandingServiceTransport
 from .grpc import DocumentUnderstandingServiceGrpcTransport
 
 
-class DocumentUnderstandingServiceGrpcAsyncIOTransport(
-    DocumentUnderstandingServiceTransport
-):
+class DocumentUnderstandingServiceGrpcAsyncIOTransport(DocumentUnderstandingServiceTransport):
     """gRPC AsyncIO backend transport for DocumentUnderstandingService.
 
     Service to parse structured information from unstructured or
@@ -54,13 +52,11 @@ class DocumentUnderstandingServiceGrpcAsyncIOTransport(
     _stubs: Dict[str, Callable] = {}
 
     @classmethod
-    def create_channel(
-        cls,
-        host: str = "us-documentai.googleapis.com",
-        credentials: credentials.Credentials = None,
-        scopes: Optional[Sequence[str]] = None,
-        **kwargs
-    ) -> aio.Channel:
+    def create_channel(cls,
+                       host: str = 'us-documentai.googleapis.com',
+                       credentials: credentials.Credentials = None,
+                       scopes: Optional[Sequence[str]] = None,
+                       **kwargs) -> aio.Channel:
         """Create and return a gRPC AsyncIO channel object.
         Args:
             address (Optional[str]): The host for the channel to use.
@@ -79,18 +75,18 @@ class DocumentUnderstandingServiceGrpcAsyncIOTransport(
         """
         scopes = scopes or cls.AUTH_SCOPES
         return grpc_helpers_async.create_channel(
-            host, credentials=credentials, scopes=scopes, **kwargs
+            host,
+            credentials=credentials,
+            scopes=scopes,
+            **kwargs
         )
 
-    def __init__(
-        self,
-        *,
-        host: str = "us-documentai.googleapis.com",
-        credentials: credentials.Credentials = None,
-        channel: aio.Channel = None,
-        api_mtls_endpoint: str = None,
-        client_cert_source: Callable[[], Tuple[bytes, bytes]] = None
-    ) -> None:
+    def __init__(self, *,
+            host: str = 'us-documentai.googleapis.com',
+            credentials: credentials.Credentials = None,
+            channel: aio.Channel = None,
+            api_mtls_endpoint: str = None,
+            client_cert_source: Callable[[], Tuple[bytes, bytes]] = None) -> None:
         """Instantiate the transport.
 
         Args:
@@ -124,11 +120,7 @@ class DocumentUnderstandingServiceGrpcAsyncIOTransport(
             # If a channel was explicitly provided, set it.
             self._grpc_channel = channel
         elif api_mtls_endpoint:
-            host = (
-                api_mtls_endpoint
-                if ":" in api_mtls_endpoint
-                else api_mtls_endpoint + ":443"
-            )
+            host = api_mtls_endpoint if ":" in api_mtls_endpoint else api_mtls_endpoint + ":443"
 
             # Create SSL credentials with client_cert_source or application
             # default SSL credentials.
@@ -161,9 +153,10 @@ class DocumentUnderstandingServiceGrpcAsyncIOTransport(
         """
         # Sanity check: Only create a new channel if we do not already
         # have one.
-        if not hasattr(self, "_grpc_channel"):
+        if not hasattr(self, '_grpc_channel'):
             self._grpc_channel = self.create_channel(
-                self._host, credentials=self._credentials,
+                self._host,
+                credentials=self._credentials,
             )
 
         # Return the channel from cache.
@@ -177,21 +170,18 @@ class DocumentUnderstandingServiceGrpcAsyncIOTransport(
         client.
         """
         # Sanity check: Only create a new client if we do not already have one.
-        if "operations_client" not in self.__dict__:
-            self.__dict__["operations_client"] = operations_v1.OperationsAsyncClient(
+        if 'operations_client' not in self.__dict__:
+            self.__dict__['operations_client'] = operations_v1.OperationsAsyncClient(
                 self.grpc_channel
             )
 
         # Return the client from cache.
-        return self.__dict__["operations_client"]
+        return self.__dict__['operations_client']
 
     @property
-    def batch_process_documents(
-        self,
-    ) -> Callable[
-        [document_understanding.BatchProcessDocumentsRequest],
-        Awaitable[operations.Operation],
-    ]:
+    def batch_process_documents(self) -> Callable[
+            [document_understanding.BatchProcessDocumentsRequest],
+            Awaitable[operations.Operation]]:
         r"""Return a callable for the batch process documents method over gRPC.
 
         LRO endpoint to batch process many documents. The output is
@@ -207,20 +197,18 @@ class DocumentUnderstandingServiceGrpcAsyncIOTransport(
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "batch_process_documents" not in self._stubs:
-            self._stubs["batch_process_documents"] = self.grpc_channel.unary_unary(
-                "/google.cloud.documentai.v1beta2.DocumentUnderstandingService/BatchProcessDocuments",
+        if 'batch_process_documents' not in self._stubs:
+            self._stubs['batch_process_documents'] = self.grpc_channel.unary_unary(
+                '/google.cloud.documentai.v1beta2.DocumentUnderstandingService/BatchProcessDocuments',
                 request_serializer=document_understanding.BatchProcessDocumentsRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
-        return self._stubs["batch_process_documents"]
+        return self._stubs['batch_process_documents']
 
     @property
-    def process_document(
-        self,
-    ) -> Callable[
-        [document_understanding.ProcessDocumentRequest], Awaitable[document.Document]
-    ]:
+    def process_document(self) -> Callable[
+            [document_understanding.ProcessDocumentRequest],
+            Awaitable[document.Document]]:
         r"""Return a callable for the process document method over gRPC.
 
         Processes a single document.
@@ -235,13 +223,15 @@ class DocumentUnderstandingServiceGrpcAsyncIOTransport(
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "process_document" not in self._stubs:
-            self._stubs["process_document"] = self.grpc_channel.unary_unary(
-                "/google.cloud.documentai.v1beta2.DocumentUnderstandingService/ProcessDocument",
+        if 'process_document' not in self._stubs:
+            self._stubs['process_document'] = self.grpc_channel.unary_unary(
+                '/google.cloud.documentai.v1beta2.DocumentUnderstandingService/ProcessDocument',
                 request_serializer=document_understanding.ProcessDocumentRequest.serialize,
                 response_deserializer=document.Document.deserialize,
             )
-        return self._stubs["process_document"]
+        return self._stubs['process_document']
 
 
-__all__ = ("DocumentUnderstandingServiceGrpcAsyncIOTransport",)
+__all__ = (
+    'DocumentUnderstandingServiceGrpcAsyncIOTransport',
+)

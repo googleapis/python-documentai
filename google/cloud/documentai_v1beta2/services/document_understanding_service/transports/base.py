@@ -30,15 +30,16 @@ from google.longrunning import operations_pb2 as operations  # type: ignore
 class DocumentUnderstandingServiceTransport(abc.ABC):
     """Abstract transport class for DocumentUnderstandingService."""
 
-    AUTH_SCOPES = ("https://www.googleapis.com/auth/cloud-platform",)
+    AUTH_SCOPES = (
+        'https://www.googleapis.com/auth/cloud-platform',
+    )
 
     def __init__(
-        self,
-        *,
-        host: str = "us-documentai.googleapis.com",
-        credentials: credentials.Credentials = None,
-        **kwargs,
-    ) -> None:
+            self, *,
+            host: str = 'us-documentai.googleapis.com',
+            credentials: credentials.Credentials = None,
+            **kwargs,
+            ) -> None:
         """Instantiate the transport.
 
         Args:
@@ -50,8 +51,8 @@ class DocumentUnderstandingServiceTransport(abc.ABC):
                 credentials from the environment.
         """
         # Save the hostname. Default to port 443 (HTTPS) if none is specified.
-        if ":" not in host:
-            host += ":443"
+        if ':' not in host:
+            host += ':443'
         self._host = host
 
         # If no credentials are provided, then determine the appropriate
@@ -68,22 +69,24 @@ class DocumentUnderstandingServiceTransport(abc.ABC):
         raise NotImplementedError()
 
     @property
-    def batch_process_documents(
-        self,
-    ) -> typing.Callable[
-        [document_understanding.BatchProcessDocumentsRequest],
-        typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
-    ]:
+    def batch_process_documents(self) -> typing.Callable[
+            [document_understanding.BatchProcessDocumentsRequest],
+            typing.Union[
+                operations.Operation,
+                typing.Awaitable[operations.Operation]
+            ]]:
         raise NotImplementedError()
 
     @property
-    def process_document(
-        self,
-    ) -> typing.Callable[
-        [document_understanding.ProcessDocumentRequest],
-        typing.Union[document.Document, typing.Awaitable[document.Document]],
-    ]:
+    def process_document(self) -> typing.Callable[
+            [document_understanding.ProcessDocumentRequest],
+            typing.Union[
+                document.Document,
+                typing.Awaitable[document.Document]
+            ]]:
         raise NotImplementedError()
 
 
-__all__ = ("DocumentUnderstandingServiceTransport",)
+__all__ = (
+    'DocumentUnderstandingServiceTransport',
+)
