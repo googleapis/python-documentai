@@ -227,6 +227,7 @@ class DocumentUnderstandingServiceClient(
                 scopes=client_options.scopes,
                 api_mtls_endpoint=client_options.api_endpoint,
                 client_cert_source=client_options.client_cert_source,
+                quota_project_id=client_options.quota_project_id,
             )
 
     def batch_process_documents(
@@ -296,7 +297,7 @@ class DocumentUnderstandingServiceClient(
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded
                 ),
             ),
             default_timeout=120.0,
@@ -367,7 +368,7 @@ class DocumentUnderstandingServiceClient(
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded
                 ),
             ),
             default_timeout=120.0,

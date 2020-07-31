@@ -42,6 +42,7 @@ class documentaiCallTransformer(cst.CSTTransformer):
     METHOD_TO_PARAMS: Dict[str, Tuple[str]] = {
     'batch_process_documents': ('requests', 'parent', ),
     'process_document': ('input_config', 'parent', 'output_config', 'document_type', 'table_extraction_params', 'form_extraction_params', 'entity_extraction_params', 'ocr_params', 'automl_params', ),
+
     }
 
     def leave_Call(self, original: cst.Call, updated: cst.Call) -> cst.CSTNode:

@@ -40,6 +40,7 @@ class DocumentUnderstandingServiceTransport(abc.ABC):
         credentials: credentials.Credentials = None,
         credentials_file: typing.Optional[str] = None,
         scopes: typing.Optional[typing.Sequence[str]] = AUTH_SCOPES,
+        quota_project_id: typing.Optional[str] = None,
         **kwargs,
     ) -> None:
         """Instantiate the transport.
@@ -55,6 +56,8 @@ class DocumentUnderstandingServiceTransport(abc.ABC):
                 be loaded with :func:`google.auth.load_credentials_from_file`.
                 This argument is mutually exclusive with credentials.
             scope (Optional[Sequence[str]]): A list of scopes.
+            quota_project_id (Optional[str]): An optional project to use for billing
+                and quota.
         """
         # Save the hostname. Default to port 443 (HTTPS) if none is specified.
         if ":" not in host:
@@ -70,10 +73,13 @@ class DocumentUnderstandingServiceTransport(abc.ABC):
 
         if credentials_file is not None:
             credentials, _ = auth.load_credentials_from_file(
-                credentials_file, scopes=scopes
+                credentials_file, scopes=scopes, quota_project_id=quota_project_id
             )
+
         elif credentials is None:
-            credentials, _ = auth.default(scopes=scopes)
+            credentials, _ = auth.default(
+                scopes=scopes, quota_project_id=quota_project_id
+            )
 
         # Save the credentials.
         self._credentials = credentials
