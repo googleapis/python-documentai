@@ -383,14 +383,17 @@ def test_document_understanding_service_client_client_options_from_dict():
         )
 
 
-def test_batch_process_documents(transport: str = "grpc"):
+def test_batch_process_documents(
+    transport: str = "grpc",
+    request_type=document_understanding.BatchProcessDocumentsRequest,
+):
     client = DocumentUnderstandingServiceClient(
         credentials=credentials.AnonymousCredentials(), transport=transport
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = document_understanding.BatchProcessDocumentsRequest()
+    request = request_type()
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -405,10 +408,14 @@ def test_batch_process_documents(transport: str = "grpc"):
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == request
+        assert args[0] == document_understanding.BatchProcessDocumentsRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
+
+
+def test_batch_process_documents_from_dict():
+    test_batch_process_documents(request_type=dict)
 
 
 @pytest.mark.asyncio
@@ -598,14 +605,16 @@ async def test_batch_process_documents_flattened_error_async():
         )
 
 
-def test_process_document(transport: str = "grpc"):
+def test_process_document(
+    transport: str = "grpc", request_type=document_understanding.ProcessDocumentRequest
+):
     client = DocumentUnderstandingServiceClient(
         credentials=credentials.AnonymousCredentials(), transport=transport
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = document_understanding.ProcessDocumentRequest()
+    request = request_type()
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -622,7 +631,7 @@ def test_process_document(transport: str = "grpc"):
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == request
+        assert args[0] == document_understanding.ProcessDocumentRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, document.Document)
@@ -630,6 +639,10 @@ def test_process_document(transport: str = "grpc"):
     assert response.mime_type == "mime_type_value"
 
     assert response.text == "text_value"
+
+
+def test_process_document_from_dict():
+    test_process_document(request_type=dict)
 
 
 @pytest.mark.asyncio

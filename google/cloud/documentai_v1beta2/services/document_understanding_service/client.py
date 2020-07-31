@@ -274,19 +274,25 @@ class DocumentUnderstandingServiceClient(
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([requests]):
+        has_flattened_params = any([requests])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = document_understanding.BatchProcessDocumentsRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a document_understanding.BatchProcessDocumentsRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, document_understanding.BatchProcessDocumentsRequest):
+            request = document_understanding.BatchProcessDocumentsRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if requests is not None:
-            request.requests = requests
+            if requests is not None:
+                request.requests = requests
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
@@ -345,7 +351,12 @@ class DocumentUnderstandingServiceClient(
         """
         # Create or coerce a protobuf request object.
 
-        request = document_understanding.ProcessDocumentRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a document_understanding.ProcessDocumentRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, document_understanding.ProcessDocumentRequest):
+            request = document_understanding.ProcessDocumentRequest(request)
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.

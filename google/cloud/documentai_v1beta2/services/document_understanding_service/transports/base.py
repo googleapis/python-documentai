@@ -22,6 +22,7 @@ import pkg_resources
 from google import auth
 from google.api_core import exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
+from google.api_core import retry as retries  # type: ignore
 from google.api_core import operations_v1  # type: ignore
 from google.auth import credentials  # type: ignore
 
