@@ -69,7 +69,7 @@ class DocumentUnderstandingServiceTransport(abc.ABC):
 
     @property
     def batch_process_documents(
-        self
+        self,
     ) -> typing.Callable[
         [document_understanding.BatchProcessDocumentsRequest],
         typing.Union[operations.Operation, typing.Awaitable[operations.Operation]],
@@ -78,7 +78,7 @@ class DocumentUnderstandingServiceTransport(abc.ABC):
 
     @property
     def process_document(
-        self
+        self,
     ) -> typing.Callable[
         [document_understanding.ProcessDocumentRequest],
         typing.Union[document.Document, typing.Awaitable[document.Document]],

@@ -260,7 +260,7 @@ def test_document_understanding_service_client_client_options_from_dict():
 
 def test_batch_process_documents(transport: str = "grpc"):
     client = DocumentUnderstandingServiceClient(
-        credentials=credentials.AnonymousCredentials(), transport=transport
+        credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -289,7 +289,7 @@ def test_batch_process_documents(transport: str = "grpc"):
 @pytest.mark.asyncio
 async def test_batch_process_documents_async(transport: str = "grpc_asyncio"):
     client = DocumentUnderstandingServiceAsyncClient(
-        credentials=credentials.AnonymousCredentials(), transport=transport
+        credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -319,7 +319,7 @@ async def test_batch_process_documents_async(transport: str = "grpc_asyncio"):
 
 def test_batch_process_documents_field_headers():
     client = DocumentUnderstandingServiceClient(
-        credentials=credentials.AnonymousCredentials()
+        credentials=credentials.AnonymousCredentials(),
     )
 
     # Any value that is part of the HTTP/1.1 URI should be sent as
@@ -342,13 +342,13 @@ def test_batch_process_documents_field_headers():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "parent=parent/value") in kw["metadata"]
+    assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
 
 
 @pytest.mark.asyncio
 async def test_batch_process_documents_field_headers_async():
     client = DocumentUnderstandingServiceAsyncClient(
-        credentials=credentials.AnonymousCredentials()
+        credentials=credentials.AnonymousCredentials(),
     )
 
     # Any value that is part of the HTTP/1.1 URI should be sent as
@@ -373,12 +373,12 @@ async def test_batch_process_documents_field_headers_async():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "parent=parent/value") in kw["metadata"]
+    assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
 
 
 def test_batch_process_documents_flattened():
     client = DocumentUnderstandingServiceClient(
-        credentials=credentials.AnonymousCredentials()
+        credentials=credentials.AnonymousCredentials(),
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -393,7 +393,7 @@ def test_batch_process_documents_flattened():
         client.batch_process_documents(
             requests=[
                 document_understanding.ProcessDocumentRequest(parent="parent_value")
-            ]
+            ],
         )
 
         # Establish that the underlying call was made with the expected
@@ -407,7 +407,7 @@ def test_batch_process_documents_flattened():
 
 def test_batch_process_documents_flattened_error():
     client = DocumentUnderstandingServiceClient(
-        credentials=credentials.AnonymousCredentials()
+        credentials=credentials.AnonymousCredentials(),
     )
 
     # Attempting to call a method with both a request object and flattened
@@ -424,7 +424,7 @@ def test_batch_process_documents_flattened_error():
 @pytest.mark.asyncio
 async def test_batch_process_documents_flattened_async():
     client = DocumentUnderstandingServiceAsyncClient(
-        credentials=credentials.AnonymousCredentials()
+        credentials=credentials.AnonymousCredentials(),
     )
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -442,7 +442,7 @@ async def test_batch_process_documents_flattened_async():
         response = await client.batch_process_documents(
             requests=[
                 document_understanding.ProcessDocumentRequest(parent="parent_value")
-            ]
+            ],
         )
 
         # Establish that the underlying call was made with the expected
@@ -457,7 +457,7 @@ async def test_batch_process_documents_flattened_async():
 @pytest.mark.asyncio
 async def test_batch_process_documents_flattened_error_async():
     client = DocumentUnderstandingServiceAsyncClient(
-        credentials=credentials.AnonymousCredentials()
+        credentials=credentials.AnonymousCredentials(),
     )
 
     # Attempting to call a method with both a request object and flattened
@@ -473,7 +473,7 @@ async def test_batch_process_documents_flattened_error_async():
 
 def test_process_document(transport: str = "grpc"):
     client = DocumentUnderstandingServiceClient(
-        credentials=credentials.AnonymousCredentials(), transport=transport
+        credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -511,7 +511,7 @@ def test_process_document(transport: str = "grpc"):
 @pytest.mark.asyncio
 async def test_process_document_async(transport: str = "grpc_asyncio"):
     client = DocumentUnderstandingServiceAsyncClient(
-        credentials=credentials.AnonymousCredentials(), transport=transport
+        credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
@@ -550,7 +550,7 @@ async def test_process_document_async(transport: str = "grpc_asyncio"):
 
 def test_process_document_field_headers():
     client = DocumentUnderstandingServiceClient(
-        credentials=credentials.AnonymousCredentials()
+        credentials=credentials.AnonymousCredentials(),
     )
 
     # Any value that is part of the HTTP/1.1 URI should be sent as
@@ -573,13 +573,13 @@ def test_process_document_field_headers():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "parent=parent/value") in kw["metadata"]
+    assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
 
 
 @pytest.mark.asyncio
 async def test_process_document_field_headers_async():
     client = DocumentUnderstandingServiceAsyncClient(
-        credentials=credentials.AnonymousCredentials()
+        credentials=credentials.AnonymousCredentials(),
     )
 
     # Any value that is part of the HTTP/1.1 URI should be sent as
@@ -602,24 +602,24 @@ async def test_process_document_field_headers_async():
 
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
-    assert ("x-goog-request-params", "parent=parent/value") in kw["metadata"]
+    assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
 
 
 def test_credentials_transport_error():
     # It is an error to provide credentials and a transport instance.
     transport = transports.DocumentUnderstandingServiceGrpcTransport(
-        credentials=credentials.AnonymousCredentials()
+        credentials=credentials.AnonymousCredentials(),
     )
     with pytest.raises(ValueError):
         client = DocumentUnderstandingServiceClient(
-            credentials=credentials.AnonymousCredentials(), transport=transport
+            credentials=credentials.AnonymousCredentials(), transport=transport,
         )
 
 
 def test_transport_instance():
     # A client may be instantiated with a custom transport instance.
     transport = transports.DocumentUnderstandingServiceGrpcTransport(
-        credentials=credentials.AnonymousCredentials()
+        credentials=credentials.AnonymousCredentials(),
     )
     client = DocumentUnderstandingServiceClient(transport=transport)
     assert client._transport is transport
@@ -628,13 +628,13 @@ def test_transport_instance():
 def test_transport_get_channel():
     # A client may be instantiated with a custom transport instance.
     transport = transports.DocumentUnderstandingServiceGrpcTransport(
-        credentials=credentials.AnonymousCredentials()
+        credentials=credentials.AnonymousCredentials(),
     )
     channel = transport.grpc_channel
     assert channel
 
     transport = transports.DocumentUnderstandingServiceGrpcAsyncIOTransport(
-        credentials=credentials.AnonymousCredentials()
+        credentials=credentials.AnonymousCredentials(),
     )
     channel = transport.grpc_channel
     assert channel
@@ -643,22 +643,25 @@ def test_transport_get_channel():
 def test_transport_grpc_default():
     # A client should use the gRPC transport by default.
     client = DocumentUnderstandingServiceClient(
-        credentials=credentials.AnonymousCredentials()
+        credentials=credentials.AnonymousCredentials(),
     )
     assert isinstance(
-        client._transport, transports.DocumentUnderstandingServiceGrpcTransport
+        client._transport, transports.DocumentUnderstandingServiceGrpcTransport,
     )
 
 
 def test_document_understanding_service_base_transport():
     # Instantiate the base transport.
     transport = transports.DocumentUnderstandingServiceTransport(
-        credentials=credentials.AnonymousCredentials()
+        credentials=credentials.AnonymousCredentials(),
     )
 
     # Every method on the transport should just blindly
     # raise NotImplementedError.
-    methods = ("batch_process_documents", "process_document")
+    methods = (
+        "batch_process_documents",
+        "process_document",
+    )
     for method in methods:
         with pytest.raises(NotImplementedError):
             getattr(transport, method)(request=object())
@@ -882,12 +885,12 @@ def test_document_understanding_service_grpc_asyncio_transport_channel_mtls_with
 
 def test_document_understanding_service_grpc_lro_client():
     client = DocumentUnderstandingServiceClient(
-        credentials=credentials.AnonymousCredentials(), transport="grpc"
+        credentials=credentials.AnonymousCredentials(), transport="grpc",
     )
     transport = client._transport
 
     # Ensure that we have a api-core operations client.
-    assert isinstance(transport.operations_client, operations_v1.OperationsClient)
+    assert isinstance(transport.operations_client, operations_v1.OperationsClient,)
 
     # Ensure that subsequent calls to the property send the exact same object.
     assert transport.operations_client is transport.operations_client
@@ -895,12 +898,12 @@ def test_document_understanding_service_grpc_lro_client():
 
 def test_document_understanding_service_grpc_lro_async_client():
     client = DocumentUnderstandingServiceAsyncClient(
-        credentials=credentials.AnonymousCredentials(), transport="grpc_asyncio"
+        credentials=credentials.AnonymousCredentials(), transport="grpc_asyncio",
     )
     transport = client._client._transport
 
     # Ensure that we have a api-core operations client.
-    assert isinstance(transport.operations_client, operations_v1.OperationsAsyncClient)
+    assert isinstance(transport.operations_client, operations_v1.OperationsAsyncClient,)
 
     # Ensure that subsequent calls to the property send the exact same object.
     assert transport.operations_client is transport.operations_client

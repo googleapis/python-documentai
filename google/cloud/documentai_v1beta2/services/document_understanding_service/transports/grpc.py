@@ -163,7 +163,7 @@ class DocumentUnderstandingServiceGrpcTransport(DocumentUnderstandingServiceTran
         # have one.
         if not hasattr(self, "_grpc_channel"):
             self._grpc_channel = self.create_channel(
-                self._host, credentials=self._credentials
+                self._host, credentials=self._credentials,
             )
 
         # Return the channel from cache.
@@ -187,7 +187,7 @@ class DocumentUnderstandingServiceGrpcTransport(DocumentUnderstandingServiceTran
 
     @property
     def batch_process_documents(
-        self
+        self,
     ) -> Callable[
         [document_understanding.BatchProcessDocumentsRequest], operations.Operation
     ]:
@@ -216,7 +216,7 @@ class DocumentUnderstandingServiceGrpcTransport(DocumentUnderstandingServiceTran
 
     @property
     def process_document(
-        self
+        self,
     ) -> Callable[[document_understanding.ProcessDocumentRequest], document.Document]:
         r"""Return a callable for the process document method over gRPC.
 
