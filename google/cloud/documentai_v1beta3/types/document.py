@@ -18,13 +18,18 @@
 import proto  # type: ignore
 
 
-from google.cloud.documentai_v1beta2.types import geometry
+from google.cloud.documentai_v1beta3.types import geometry
+from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 from google.rpc import status_pb2 as status  # type: ignore
 from google.type import color_pb2 as gt_color  # type: ignore
+from google.type import date_pb2 as date  # type: ignore
+from google.type import datetime_pb2 as datetime  # type: ignore
+from google.type import money_pb2 as money  # type: ignore
+from google.type import postal_address_pb2 as postal_address  # type: ignore
 
 
 __protobuf__ = proto.module(
-    package="google.cloud.documentai.v1beta2", manifest={"Document",},
+    package="google.cloud.documentai.v1beta3", manifest={"Document",},
 )
 
 
@@ -57,29 +62,38 @@ class Document(proto.Message):
             document.
         text_styles (Sequence[~.document.Document.Style]):
             Styles for the
-            [Document.text][google.cloud.documentai.v1beta2.Document.text].
+            [Document.text][google.cloud.documentai.v1beta3.Document.text].
         pages (Sequence[~.document.Document.Page]):
             Visual page layout for the
-            [Document][google.cloud.documentai.v1beta2.Document].
+            [Document][google.cloud.documentai.v1beta3.Document].
         entities (Sequence[~.document.Document.Entity]):
             A list of entities detected on
-            [Document.text][google.cloud.documentai.v1beta2.Document.text].
+            [Document.text][google.cloud.documentai.v1beta3.Document.text].
             For document shards, entities in this list may cross shard
             boundaries.
         entity_relations (Sequence[~.document.Document.EntityRelation]):
             Relationship among
-            [Document.entities][google.cloud.documentai.v1beta2.Document.entities].
+            [Document.entities][google.cloud.documentai.v1beta3.Document.entities].
+        translations (Sequence[~.document.Document.Translation]):
+            A list of translations on
+            [Document.text][google.cloud.documentai.v1beta3.Document.text].
+            For document shards, translations in this list may cross
+            shard boundaries.
+        text_changes (Sequence[~.document.Document.TextChange]):
+            A list of text corrections made to [Document.text]. This is
+            usually used for annotating corrections to OCR mistakes.
+            Text changes for a given revision may not overlap with each
+            other.
         shard_info (~.document.Document.ShardInfo):
             Information about the sharding if this
             document is sharded part of a larger document.
             If the document is not sharded, this message is
             not specified.
-        labels (Sequence[~.document.Document.Label]):
-            [Label][google.cloud.documentai.v1beta2.Document.Label]s for
-            this document.
         error (~.status.Status):
             Any error that occurred while processing this
             document.
+        revisions (Sequence[~.document.Document.Revision]):
+            Revision history of this document.
     """
 
     class ShardInfo(proto.Message):
@@ -94,7 +108,7 @@ class Document(proto.Message):
                 Total number of shards.
             text_offset (int):
                 The index of the first character in
-                [Document.text][google.cloud.documentai.v1beta2.Document.text]
+                [Document.text][google.cloud.documentai.v1beta3.Document.text]
                 in the overall document global text.
         """
 
@@ -104,37 +118,6 @@ class Document(proto.Message):
 
         text_offset = proto.Field(proto.INT64, number=3)
 
-    class Label(proto.Message):
-        r"""Label attaches schema information and/or other metadata to segments
-        within a [Document][google.cloud.documentai.v1beta2.Document].
-        Multiple [Label][google.cloud.documentai.v1beta2.Document.Label]s on
-        a single field can denote either different labels, different
-        instances of the same label created at different times, or some
-        combination of both.
-
-        Attributes:
-            automl_model (str):
-                Label is generated AutoML model. This field stores the full
-                resource name of the AutoML model.
-
-                Format:
-                ``projects/{project-id}/locations/{location-id}/models/{model-id}``
-            name (str):
-                Name of the label.
-                When the label is generated from AutoML Text
-                Classification model, this field represents the
-                name of the category.
-            confidence (float):
-                Confidence score between 0 and 1 for label
-                assignment.
-        """
-
-        automl_model = proto.Field(proto.STRING, number=2, oneof="source")
-
-        name = proto.Field(proto.STRING, number=1)
-
-        confidence = proto.Field(proto.FLOAT, number=3)
-
     class Style(proto.Message):
         r"""Annotation for common text style attributes. This adheres to
         CSS conventions as much as possible.
@@ -142,7 +125,7 @@ class Document(proto.Message):
         Attributes:
             text_anchor (~.document.Document.TextAnchor):
                 Text anchor indexing into the
-                [Document.text][google.cloud.documentai.v1beta2.Document.text].
+                [Document.text][google.cloud.documentai.v1beta3.Document.text].
             color (~.gt_color.Color):
                 Text color.
             background_color (~.gt_color.Color):
@@ -194,20 +177,29 @@ class Document(proto.Message):
         )
 
     class Page(proto.Message):
-        r"""A page in a [Document][google.cloud.documentai.v1beta2.Document].
+        r"""A page in a [Document][google.cloud.documentai.v1beta3.Document].
 
         Attributes:
             page_number (int):
                 1-based index for current
-                [Page][google.cloud.documentai.v1beta2.Document.Page] in a
-                parent [Document][google.cloud.documentai.v1beta2.Document].
+                [Page][google.cloud.documentai.v1beta3.Document.Page] in a
+                parent [Document][google.cloud.documentai.v1beta3.Document].
                 Useful when a page is taken out of a
-                [Document][google.cloud.documentai.v1beta2.Document] for
+                [Document][google.cloud.documentai.v1beta3.Document] for
                 individual processing.
+            image (~.document.Document.Page.Image):
+                Rendered image for this page. This image is
+                preprocessed to remove any skew, rotation, and
+                distortions such that the annotation bounding
+                boxes can be upright and axis-aligned.
+            transforms (Sequence[~.document.Document.Page.Matrix]):
+                Transformation matrices that were applied to the original
+                document image to produce
+                [Page.image][google.cloud.documentai.v1beta3.Document.Page.image].
             dimension (~.document.Document.Page.Dimension):
                 Physical dimension of the page.
             layout (~.document.Document.Page.Layout):
-                [Layout][google.cloud.documentai.v1beta2.Document.Page.Layout]
+                [Layout][google.cloud.documentai.v1beta3.Document.Page.Layout]
                 for the page.
             detected_languages (Sequence[~.document.Document.Page.DetectedLanguage]):
                 A list of detected languages together with
@@ -257,28 +249,74 @@ class Document(proto.Message):
 
             unit = proto.Field(proto.STRING, number=3)
 
+        class Image(proto.Message):
+            r"""Rendered image contents for this page.
+
+            Attributes:
+                content (bytes):
+                    Raw byte content of the image.
+                mime_type (str):
+                    Encoding mime type for the image.
+                width (int):
+                    Width of the image in pixels.
+                height (int):
+                    Height of the image in pixels.
+            """
+
+            content = proto.Field(proto.BYTES, number=1)
+
+            mime_type = proto.Field(proto.STRING, number=2)
+
+            width = proto.Field(proto.INT32, number=3)
+
+            height = proto.Field(proto.INT32, number=4)
+
+        class Matrix(proto.Message):
+            r"""Representation for transformation matrix, intended to be
+            compatible and used with OpenCV format for image manipulation.
+
+            Attributes:
+                rows (int):
+                    Number of rows in the matrix.
+                cols (int):
+                    Number of columns in the matrix.
+                type_ (int):
+                    This encodes information about what data type the matrix
+                    uses. For example, 0 (CV_8U) is an unsigned 8-bit image. For
+                    the full list of OpenCV primitive data types, please refer
+                    to
+                    https://docs.opencv.org/4.3.0/d1/d1b/group__core__hal__interface.html
+                data (bytes):
+                    The matrix data.
+            """
+
+            rows = proto.Field(proto.INT32, number=1)
+
+            cols = proto.Field(proto.INT32, number=2)
+
+            type_ = proto.Field(proto.INT32, number=3)
+
+            data = proto.Field(proto.BYTES, number=4)
+
         class Layout(proto.Message):
             r"""Visual element describing a layout unit on a page.
 
             Attributes:
                 text_anchor (~.document.Document.TextAnchor):
                     Text anchor indexing into the
-                    [Document.text][google.cloud.documentai.v1beta2.Document.text].
+                    [Document.text][google.cloud.documentai.v1beta3.Document.text].
                 confidence (float):
                     Confidence of the current
-                    [Layout][google.cloud.documentai.v1beta2.Document.Page.Layout]
+                    [Layout][google.cloud.documentai.v1beta3.Document.Page.Layout]
                     within context of the object this layout is for. e.g.
                     confidence can be for a single token, a table, a visual
                     element, etc. depending on context. Range [0, 1].
                 bounding_poly (~.geometry.BoundingPoly):
                     The bounding polygon for the
-                    [Layout][google.cloud.documentai.v1beta2.Document.Page.Layout].
+                    [Layout][google.cloud.documentai.v1beta3.Document.Page.Layout].
                 orientation (~.document.Document.Page.Layout.Orientation):
                     Detected orientation for the
-                    [Layout][google.cloud.documentai.v1beta2.Document.Page.Layout].
-                id (str):
-                    Optional. This is the identifier used by referencing
-                    [PageAnchor][google.cloud.documentai.v1beta2.Document.PageAnchor]s.
+                    [Layout][google.cloud.documentai.v1beta3.Document.Page.Layout].
             """
 
             class Orientation(proto.Enum):
@@ -303,20 +341,20 @@ class Document(proto.Message):
                 proto.ENUM, number=4, enum="Document.Page.Layout.Orientation",
             )
 
-            id = proto.Field(proto.STRING, number=5)
-
         class Block(proto.Message):
             r"""A block has a set of lines (collected into paragraphs) that
             have a common line-spacing and orientation.
 
             Attributes:
                 layout (~.document.Document.Page.Layout):
-                    [Layout][google.cloud.documentai.v1beta2.Document.Page.Layout]
+                    [Layout][google.cloud.documentai.v1beta3.Document.Page.Layout]
                     for
-                    [Block][google.cloud.documentai.v1beta2.Document.Page.Block].
+                    [Block][google.cloud.documentai.v1beta3.Document.Page.Block].
                 detected_languages (Sequence[~.document.Document.Page.DetectedLanguage]):
                     A list of detected languages together with
                     confidence.
+                provenance (~.document.Document.Provenance):
+                    The history of this annotation.
             """
 
             layout = proto.Field(
@@ -325,6 +363,10 @@ class Document(proto.Message):
 
             detected_languages = proto.RepeatedField(
                 proto.MESSAGE, number=2, message="Document.Page.DetectedLanguage",
+            )
+
+            provenance = proto.Field(
+                proto.MESSAGE, number=3, message="Document.Provenance",
             )
 
         class Paragraph(proto.Message):
@@ -333,12 +375,14 @@ class Document(proto.Message):
 
             Attributes:
                 layout (~.document.Document.Page.Layout):
-                    [Layout][google.cloud.documentai.v1beta2.Document.Page.Layout]
+                    [Layout][google.cloud.documentai.v1beta3.Document.Page.Layout]
                     for
-                    [Paragraph][google.cloud.documentai.v1beta2.Document.Page.Paragraph].
+                    [Paragraph][google.cloud.documentai.v1beta3.Document.Page.Paragraph].
                 detected_languages (Sequence[~.document.Document.Page.DetectedLanguage]):
                     A list of detected languages together with
                     confidence.
+                provenance (~.document.Document.Provenance):
+                    The  history of this annotation.
             """
 
             layout = proto.Field(
@@ -347,6 +391,10 @@ class Document(proto.Message):
 
             detected_languages = proto.RepeatedField(
                 proto.MESSAGE, number=2, message="Document.Page.DetectedLanguage",
+            )
+
+            provenance = proto.Field(
+                proto.MESSAGE, number=3, message="Document.Provenance",
             )
 
         class Line(proto.Message):
@@ -356,12 +404,14 @@ class Document(proto.Message):
 
             Attributes:
                 layout (~.document.Document.Page.Layout):
-                    [Layout][google.cloud.documentai.v1beta2.Document.Page.Layout]
+                    [Layout][google.cloud.documentai.v1beta3.Document.Page.Layout]
                     for
-                    [Line][google.cloud.documentai.v1beta2.Document.Page.Line].
+                    [Line][google.cloud.documentai.v1beta3.Document.Page.Line].
                 detected_languages (Sequence[~.document.Document.Page.DetectedLanguage]):
                     A list of detected languages together with
                     confidence.
+                provenance (~.document.Document.Provenance):
+                    The  history of this annotation.
             """
 
             layout = proto.Field(
@@ -372,25 +422,31 @@ class Document(proto.Message):
                 proto.MESSAGE, number=2, message="Document.Page.DetectedLanguage",
             )
 
+            provenance = proto.Field(
+                proto.MESSAGE, number=3, message="Document.Provenance",
+            )
+
         class Token(proto.Message):
             r"""A detected token.
 
             Attributes:
                 layout (~.document.Document.Page.Layout):
-                    [Layout][google.cloud.documentai.v1beta2.Document.Page.Layout]
+                    [Layout][google.cloud.documentai.v1beta3.Document.Page.Layout]
                     for
-                    [Token][google.cloud.documentai.v1beta2.Document.Page.Token].
+                    [Token][google.cloud.documentai.v1beta3.Document.Page.Token].
                 detected_break (~.document.Document.Page.Token.DetectedBreak):
                     Detected break at the end of a
-                    [Token][google.cloud.documentai.v1beta2.Document.Page.Token].
+                    [Token][google.cloud.documentai.v1beta3.Document.Page.Token].
                 detected_languages (Sequence[~.document.Document.Page.DetectedLanguage]):
                     A list of detected languages together with
                     confidence.
+                provenance (~.document.Document.Provenance):
+                    The  history of this annotation.
             """
 
             class DetectedBreak(proto.Message):
                 r"""Detected break at the end of a
-                [Token][google.cloud.documentai.v1beta2.Document.Page.Token].
+                [Token][google.cloud.documentai.v1beta3.Document.Page.Token].
 
                 Attributes:
                     type_ (~.document.Document.Page.Token.DetectedBreak.Type):
@@ -420,18 +476,22 @@ class Document(proto.Message):
                 proto.MESSAGE, number=3, message="Document.Page.DetectedLanguage",
             )
 
+            provenance = proto.Field(
+                proto.MESSAGE, number=4, message="Document.Provenance",
+            )
+
         class VisualElement(proto.Message):
             r"""Detected non-text visual elements e.g. checkbox, signature
             etc. on the page.
 
             Attributes:
                 layout (~.document.Document.Page.Layout):
-                    [Layout][google.cloud.documentai.v1beta2.Document.Page.Layout]
+                    [Layout][google.cloud.documentai.v1beta3.Document.Page.Layout]
                     for
-                    [VisualElement][google.cloud.documentai.v1beta2.Document.Page.VisualElement].
+                    [VisualElement][google.cloud.documentai.v1beta3.Document.Page.VisualElement].
                 type_ (str):
                     Type of the
-                    [VisualElement][google.cloud.documentai.v1beta2.Document.Page.VisualElement].
+                    [VisualElement][google.cloud.documentai.v1beta3.Document.Page.VisualElement].
                 detected_languages (Sequence[~.document.Document.Page.DetectedLanguage]):
                     A list of detected languages together with
                     confidence.
@@ -452,9 +512,9 @@ class Document(proto.Message):
 
             Attributes:
                 layout (~.document.Document.Page.Layout):
-                    [Layout][google.cloud.documentai.v1beta2.Document.Page.Layout]
+                    [Layout][google.cloud.documentai.v1beta3.Document.Page.Layout]
                     for
-                    [Table][google.cloud.documentai.v1beta2.Document.Page.Table].
+                    [Table][google.cloud.documentai.v1beta3.Document.Page.Table].
                 header_rows (Sequence[~.document.Document.Page.Table.TableRow]):
                     Header rows of the table.
                 body_rows (Sequence[~.document.Document.Page.Table.TableRow]):
@@ -481,9 +541,9 @@ class Document(proto.Message):
 
                 Attributes:
                     layout (~.document.Document.Page.Layout):
-                        [Layout][google.cloud.documentai.v1beta2.Document.Page.Layout]
+                        [Layout][google.cloud.documentai.v1beta3.Document.Page.Layout]
                         for
-                        [TableCell][google.cloud.documentai.v1beta2.Document.Page.Table.TableCell].
+                        [TableCell][google.cloud.documentai.v1beta3.Document.Page.Table.TableCell].
                     row_span (int):
                         How many rows this cell spans.
                     col_span (int):
@@ -526,15 +586,15 @@ class Document(proto.Message):
 
             Attributes:
                 field_name (~.document.Document.Page.Layout):
-                    [Layout][google.cloud.documentai.v1beta2.Document.Page.Layout]
+                    [Layout][google.cloud.documentai.v1beta3.Document.Page.Layout]
                     for the
-                    [FormField][google.cloud.documentai.v1beta2.Document.Page.FormField]
+                    [FormField][google.cloud.documentai.v1beta3.Document.Page.FormField]
                     name. e.g. ``Address``, ``Email``, ``Grand total``,
                     ``Phone number``, etc.
                 field_value (~.document.Document.Page.Layout):
-                    [Layout][google.cloud.documentai.v1beta2.Document.Page.Layout]
+                    [Layout][google.cloud.documentai.v1beta3.Document.Page.Layout]
                     for the
-                    [FormField][google.cloud.documentai.v1beta2.Document.Page.FormField]
+                    [FormField][google.cloud.documentai.v1beta3.Document.Page.FormField]
                     value.
                 name_detected_languages (Sequence[~.document.Document.Page.DetectedLanguage]):
                     A list of detected languages for name
@@ -549,12 +609,6 @@ class Document(proto.Message):
                     -  blank (this indicates the field_value is normal text)
                     -  "unfilled_checkbox"
                     -  "filled_checkbox".
-                corrected_key_text (str):
-                    An internal field, created for Labeling UI to
-                    export key text.
-                corrected_value_text (str):
-                    An internal field, created for Labeling UI to
-                    export value text.
             """
 
             field_name = proto.Field(
@@ -575,10 +629,6 @@ class Document(proto.Message):
 
             value_type = proto.Field(proto.STRING, number=5)
 
-            corrected_key_text = proto.Field(proto.STRING, number=6)
-
-            corrected_value_text = proto.Field(proto.STRING, number=7)
-
         class DetectedLanguage(proto.Message):
             r"""Detected language for a structural component.
 
@@ -596,6 +646,12 @@ class Document(proto.Message):
             confidence = proto.Field(proto.FLOAT, number=2)
 
         page_number = proto.Field(proto.INT32, number=1)
+
+        image = proto.Field(proto.MESSAGE, number=13, message="Document.Page.Image",)
+
+        transforms = proto.RepeatedField(
+            proto.MESSAGE, number=14, message="Document.Page.Matrix",
+        )
 
         dimension = proto.Field(
             proto.MESSAGE, number=2, message="Document.Page.Dimension",
@@ -642,7 +698,7 @@ class Document(proto.Message):
         Attributes:
             text_anchor (~.document.Document.TextAnchor):
                 Provenance of the entity. Text anchor indexing into the
-                [Document.text][google.cloud.documentai.v1beta2.Document.text].
+                [Document.text][google.cloud.documentai.v1beta3.Document.text].
             type_ (str):
                 Entity type from a schema e.g. ``Address``.
             mention_text (str):
@@ -657,14 +713,85 @@ class Document(proto.Message):
                 entity wrt. the location on the page where it
                 was found.
             id (str):
-                Optional. Canonical id. This will be a unique
-                value in the entity list for this document.
-            bounding_poly_for_demo_frontend (~.geometry.BoundingPoly):
-                Optional. Temporary field to store the
-                bounding poly for short-term POCs. Used by the
-                frontend only. Do not use before you talk to
-                ybo@ and lukasr@.
+                Canonical id. This will be a unique value in
+                the entity list for this document.
+            normalized_value (~.document.Document.Entity.NormalizedValue):
+                Optional. Normalized entity value. Absent if
+                the extracted value could not be converted or
+                the type (e.g. address) is not supported for
+                certain parsers. This field is also only
+                populated for certain supported document types.
+            properties (Sequence[~.document.Document.Entity]):
+                Optional. Entities can be nested to form a
+                hierarchical data structure representing the
+                content in the document.
+            provenance (~.document.Document.Provenance):
+                Optional. The history of this annotation.
+            redacted (bool):
+                Optional. Whether the entity will be redacted
+                for de-identification purposes.
         """
+
+        class NormalizedValue(proto.Message):
+            r"""Parsed and normalized entity value.
+
+            Attributes:
+                money_value (~.money.Money):
+                    Money value. See also:
+                    https:
+                    github.com/googleapis/googleapis/blob/master/google/type/money.proto
+                date_value (~.date.Date):
+                    Date value. Includes year, month, day. See
+                    also:
+                    https:
+                    github.com/googleapis/googleapis/blob/master/google/type/date.proto
+                datetime_value (~.datetime.DateTime):
+                    DateTime value. Includes date, time, and
+                    timezone. See also:
+                    https:
+                    github.com/googleapis/googleapis/blob/master/google/type/datetime.proto
+                address_value (~.postal_address.PostalAddress):
+                    Postal address. See also:
+
+                    https:
+                    github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto
+                text (str):
+                    Required. Normalized entity value stored as a string. This
+                    field is populated for supported document type (e.g.
+                    Invoice). For some entity types, one of respective
+                    'structured_value' fields may also be populated.
+
+                    -  Money/Currency type (``money_value``) is in the ISO 4217
+                       text format.
+                    -  Date type (``date_value``) is in the ISO 8601 text
+                       format.
+                    -  Datetime type (``datetime_value``) is in the ISO 8601
+                       text format.
+            """
+
+            money_value = proto.Field(
+                proto.MESSAGE, number=2, oneof="structured_value", message=money.Money,
+            )
+
+            date_value = proto.Field(
+                proto.MESSAGE, number=3, oneof="structured_value", message=date.Date,
+            )
+
+            datetime_value = proto.Field(
+                proto.MESSAGE,
+                number=4,
+                oneof="structured_value",
+                message=datetime.DateTime,
+            )
+
+            address_value = proto.Field(
+                proto.MESSAGE,
+                number=5,
+                oneof="structured_value",
+                message=postal_address.PostalAddress,
+            )
+
+            text = proto.Field(proto.STRING, number=1)
 
         text_anchor = proto.Field(
             proto.MESSAGE, number=1, message="Document.TextAnchor",
@@ -684,13 +811,23 @@ class Document(proto.Message):
 
         id = proto.Field(proto.STRING, number=7)
 
-        bounding_poly_for_demo_frontend = proto.Field(
-            proto.MESSAGE, number=8, message=geometry.BoundingPoly,
+        normalized_value = proto.Field(
+            proto.MESSAGE, number=9, message="Document.Entity.NormalizedValue",
         )
+
+        properties = proto.RepeatedField(
+            proto.MESSAGE, number=10, message="Document.Entity",
+        )
+
+        provenance = proto.Field(
+            proto.MESSAGE, number=11, message="Document.Provenance",
+        )
+
+        redacted = proto.Field(proto.BOOL, number=12)
 
     class EntityRelation(proto.Message):
         r"""Relationship between
-        [Entities][google.cloud.documentai.v1beta2.Document.Entity].
+        [Entities][google.cloud.documentai.v1beta3.Document.Entity].
 
         Attributes:
             subject_id (str):
@@ -707,32 +844,67 @@ class Document(proto.Message):
 
         relation = proto.Field(proto.STRING, number=3)
 
+    class Translation(proto.Message):
+        r"""A translation of the text segment.
+
+        Attributes:
+            text_anchor (~.document.Document.TextAnchor):
+                Provenance of the translation. Text anchor indexing into the
+                [Document.text][google.cloud.documentai.v1beta3.Document.text].
+                There can only be a single ``TextAnchor.text_segments``
+                element. If the start and end index of the text segment are
+                the same, the text change is inserted before that index.
+            language_code (str):
+                The BCP-47 language code, such as "en-US" or "sr-Latn". For
+                more information, see
+                http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+            translated_text (str):
+                Text translated into the target language.
+            provenance (Sequence[~.document.Document.Provenance]):
+                The history of this annotation.
+        """
+
+        text_anchor = proto.Field(
+            proto.MESSAGE, number=1, message="Document.TextAnchor",
+        )
+
+        language_code = proto.Field(proto.STRING, number=2)
+
+        translated_text = proto.Field(proto.STRING, number=3)
+
+        provenance = proto.RepeatedField(
+            proto.MESSAGE, number=4, message="Document.Provenance",
+        )
+
     class TextAnchor(proto.Message):
         r"""Text reference indexing into the
-        [Document.text][google.cloud.documentai.v1beta2.Document.text].
+        [Document.text][google.cloud.documentai.v1beta3.Document.text].
 
         Attributes:
             text_segments (Sequence[~.document.Document.TextAnchor.TextSegment]):
                 The text segments from the
-                [Document.text][google.cloud.documentai.v1beta2.Document.text].
+                [Document.text][google.cloud.documentai.v1beta3.Document.text].
+            content (str):
+                Contains the content of the text span so that users do not
+                have to look it up in the text_segments.
         """
 
         class TextSegment(proto.Message):
             r"""A text segment in the
-            [Document.text][google.cloud.documentai.v1beta2.Document.text]. The
+            [Document.text][google.cloud.documentai.v1beta3.Document.text]. The
             indices may be out of bounds which indicate that the text extends
             into another document shard for large sharded documents. See
-            [ShardInfo.text_offset][google.cloud.documentai.v1beta2.Document.ShardInfo.text_offset]
+            [ShardInfo.text_offset][google.cloud.documentai.v1beta3.Document.ShardInfo.text_offset]
 
             Attributes:
                 start_index (int):
-                    [TextSegment][google.cloud.documentai.v1beta2.Document.TextAnchor.TextSegment]
+                    [TextSegment][google.cloud.documentai.v1beta3.Document.TextAnchor.TextSegment]
                     start UTF-8 char index in the
-                    [Document.text][google.cloud.documentai.v1beta2.Document.text].
+                    [Document.text][google.cloud.documentai.v1beta3.Document.text].
                 end_index (int):
-                    [TextSegment][google.cloud.documentai.v1beta2.Document.TextAnchor.TextSegment]
+                    [TextSegment][google.cloud.documentai.v1beta3.Document.TextAnchor.TextSegment]
                     half open end UTF-8 char index in the
-                    [Document.text][google.cloud.documentai.v1beta2.Document.text].
+                    [Document.text][google.cloud.documentai.v1beta3.Document.text].
             """
 
             start_index = proto.Field(proto.INT64, number=1)
@@ -743,9 +915,13 @@ class Document(proto.Message):
             proto.MESSAGE, number=1, message="Document.TextAnchor.TextSegment",
         )
 
+        content = proto.Field(proto.STRING, number=2)
+
     class PageAnchor(proto.Message):
-        r"""Referencing elements in
-        [Document.pages][google.cloud.documentai.v1beta2.Document.pages].
+        r"""Referencing the visual context of the entity in the
+        [Document.pages][google.cloud.documentai.v1beta3.Document.pages].
+        Page anchors can be cross-page, consist of multiple bounding
+        polygons and optionally reference specific layout element types.
 
         Attributes:
             page_refs (Sequence[~.document.Document.PageAnchor.PageRef]):
@@ -760,18 +936,18 @@ class Document(proto.Message):
             Attributes:
                 page (int):
                     Required. Index into the
-                    [Document.pages][google.cloud.documentai.v1beta2.Document.pages]
+                    [Document.pages][google.cloud.documentai.v1beta3.Document.pages]
                     element
                 layout_type (~.document.Document.PageAnchor.PageRef.LayoutType):
                     Optional. The type of the layout element that
-                    is being referenced.  If not specified the whole
-                    page is assumed to be referenced.
+                    is being referenced if any.
                 layout_id (str):
-                    Optional. The
-                    [Page.Layout.id][google.cloud.documentai.v1beta2.Document.Page.Layout.id]
-                    on the page that this element references. If
-                    [LayoutRef.type][] is specified this id must also be
-                    specified.
+                    Optional. Deprecated. Use
+                    [PageRef.bounding_poly][google.cloud.documentai.v1beta3.Document.PageAnchor.PageRef.bounding_poly]
+                    instead.
+                bounding_poly (~.geometry.BoundingPoly):
+                    Optional. Identifies the bounding polygon of
+                    a layout element on the page.
             """
 
             class LayoutType(proto.Enum):
@@ -793,8 +969,151 @@ class Document(proto.Message):
 
             layout_id = proto.Field(proto.STRING, number=3)
 
+            bounding_poly = proto.Field(
+                proto.MESSAGE, number=4, message=geometry.BoundingPoly,
+            )
+
         page_refs = proto.RepeatedField(
             proto.MESSAGE, number=1, message="Document.PageAnchor.PageRef",
+        )
+
+    class Provenance(proto.Message):
+        r"""Structure to identify provenance relationships between
+        annotations in different revisions.
+
+        Attributes:
+            revision (int):
+                The index of the revision that produced this
+                element.
+            id (int):
+                The Id of this operation.  Needs to be unique
+                within the scope of the revision.
+            parents (Sequence[~.document.Document.Provenance.Parent]):
+                References to the original elements that are
+                replaced.
+            type_ (~.document.Document.Provenance.OperationType):
+                The type of provenance operation.
+        """
+
+        class OperationType(proto.Enum):
+            r"""If a processor or agent does an explicit operation on
+            existing elements.
+            """
+            OPERATION_TYPE_UNSPECIFIED = 0
+            ADD = 1
+            REMOVE = 2
+            REPLACE = 3
+            EVAL_REQUESTED = 4
+            EVAL_APPROVED = 5
+
+        class Parent(proto.Message):
+            r"""Structure for referencing parent provenances.  When an
+            element replaces one of more other elements parent references
+            identify the elements that are replaced.
+
+            Attributes:
+                revision (int):
+                    The index of the [Document.revisions] identifying the parent
+                    revision.
+                id (int):
+                    The id of the parent provenance.
+            """
+
+            revision = proto.Field(proto.INT32, number=1)
+
+            id = proto.Field(proto.INT32, number=2)
+
+        revision = proto.Field(proto.INT32, number=1)
+
+        id = proto.Field(proto.INT32, number=2)
+
+        parents = proto.RepeatedField(
+            proto.MESSAGE, number=3, message="Document.Provenance.Parent",
+        )
+
+        type_ = proto.Field(
+            proto.ENUM, number=4, enum="Document.Provenance.OperationType",
+        )
+
+    class Revision(proto.Message):
+        r"""Contains past or forward revisions of this document.
+
+        Attributes:
+            agent (str):
+                If the change was made by a person specify
+                the name or id of that person.
+            processor (str):
+                If the annotation was made by processor
+                identify the processor by its resource name.
+            id (str):
+                Id of the revision.  Unique within the
+                context of the document.
+            parent (Sequence[int]):
+                The revisions that this revision is based on. This can
+                include one or more parent (when documents are merged.) This
+                field represents the index into the ``revisions`` field.
+            create_time (~.timestamp.Timestamp):
+                The time that the revision was created.
+            human_review (~.document.Document.Revision.HumanReview):
+                Human Review information of this revision.
+        """
+
+        class HumanReview(proto.Message):
+            r"""Human Review information of the document.
+
+            Attributes:
+                state (str):
+                    Human review state. e.g. ``requested``, ``succeeded``,
+                    ``rejected``.
+                state_message (str):
+                    A message providing more details about the current state of
+                    processing. For example, the rejection reason when the state
+                    is ``rejected``.
+            """
+
+            state = proto.Field(proto.STRING, number=1)
+
+            state_message = proto.Field(proto.STRING, number=2)
+
+        agent = proto.Field(proto.STRING, number=4, oneof="source")
+
+        processor = proto.Field(proto.STRING, number=5, oneof="source")
+
+        id = proto.Field(proto.STRING, number=1)
+
+        parent = proto.RepeatedField(proto.INT32, number=2)
+
+        create_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp,)
+
+        human_review = proto.Field(
+            proto.MESSAGE, number=6, message="Document.Revision.HumanReview",
+        )
+
+    class TextChange(proto.Message):
+        r"""This message is used for text changes aka. OCR corrections.
+
+        Attributes:
+            text_anchor (~.document.Document.TextAnchor):
+                Provenance of the correction. Text anchor indexing into the
+                [Document.text][google.cloud.documentai.v1beta3.Document.text].
+                There can only be a single ``TextAnchor.text_segments``
+                element. If the start and end index of the text segment are
+                the same, the text change is inserted before that index.
+            changed_text (str):
+                The text that replaces the text identified in the
+                ``text_anchor``.
+            provenance (Sequence[~.document.Document.Provenance]):
+                The history of this annotation.
+        """
+
+        text_anchor = proto.Field(
+            proto.MESSAGE, number=1, message="Document.TextAnchor",
+        )
+
+        changed_text = proto.Field(proto.STRING, number=2)
+
+        provenance = proto.RepeatedField(
+            proto.MESSAGE, number=3, message="Document.Provenance",
         )
 
     uri = proto.Field(proto.STRING, number=1, oneof="source")
@@ -815,11 +1134,15 @@ class Document(proto.Message):
         proto.MESSAGE, number=8, message=EntityRelation,
     )
 
+    translations = proto.RepeatedField(proto.MESSAGE, number=12, message=Translation,)
+
+    text_changes = proto.RepeatedField(proto.MESSAGE, number=14, message=TextChange,)
+
     shard_info = proto.Field(proto.MESSAGE, number=9, message=ShardInfo,)
 
-    labels = proto.RepeatedField(proto.MESSAGE, number=11, message=Label,)
-
     error = proto.Field(proto.MESSAGE, number=10, message=status.Status,)
+
+    revisions = proto.RepeatedField(proto.MESSAGE, number=13, message=Revision,)
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

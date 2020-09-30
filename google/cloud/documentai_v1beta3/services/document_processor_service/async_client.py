@@ -30,45 +30,44 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.api_core import operation  # type: ignore
 from google.api_core import operation_async  # type: ignore
-from google.cloud.documentai_v1beta2.types import document
-from google.cloud.documentai_v1beta2.types import document_understanding
-from google.rpc import status_pb2 as status  # type: ignore
+from google.cloud.documentai_v1beta3.types import document
+from google.cloud.documentai_v1beta3.types import document_processor_service
 
-from .transports.base import DocumentUnderstandingServiceTransport, DEFAULT_CLIENT_INFO
-from .transports.grpc_asyncio import DocumentUnderstandingServiceGrpcAsyncIOTransport
-from .client import DocumentUnderstandingServiceClient
+from .transports.base import DocumentProcessorServiceTransport, DEFAULT_CLIENT_INFO
+from .transports.grpc_asyncio import DocumentProcessorServiceGrpcAsyncIOTransport
+from .client import DocumentProcessorServiceClient
 
 
-class DocumentUnderstandingServiceAsyncClient:
-    """Service to parse structured information from unstructured or
-    semi-structured documents using state-of-the-art Google AI such
-    as natural language, computer vision, and translation.
+class DocumentProcessorServiceAsyncClient:
+    """Service to call Cloud DocumentAI to process documents
+    according to the processor's definition. Processors are built
+    using state-of-the-art Google AI such as natural language,
+    computer vision, and translation to extract structured
+    information from unstructured or semi-structured documents.
     """
 
-    _client: DocumentUnderstandingServiceClient
+    _client: DocumentProcessorServiceClient
 
-    DEFAULT_ENDPOINT = DocumentUnderstandingServiceClient.DEFAULT_ENDPOINT
-    DEFAULT_MTLS_ENDPOINT = DocumentUnderstandingServiceClient.DEFAULT_MTLS_ENDPOINT
+    DEFAULT_ENDPOINT = DocumentProcessorServiceClient.DEFAULT_ENDPOINT
+    DEFAULT_MTLS_ENDPOINT = DocumentProcessorServiceClient.DEFAULT_MTLS_ENDPOINT
 
-    from_service_account_file = (
-        DocumentUnderstandingServiceClient.from_service_account_file
-    )
+    from_service_account_file = DocumentProcessorServiceClient.from_service_account_file
     from_service_account_json = from_service_account_file
 
     get_transport_class = functools.partial(
-        type(DocumentUnderstandingServiceClient).get_transport_class,
-        type(DocumentUnderstandingServiceClient),
+        type(DocumentProcessorServiceClient).get_transport_class,
+        type(DocumentProcessorServiceClient),
     )
 
     def __init__(
         self,
         *,
         credentials: credentials.Credentials = None,
-        transport: Union[str, DocumentUnderstandingServiceTransport] = "grpc_asyncio",
+        transport: Union[str, DocumentProcessorServiceTransport] = "grpc_asyncio",
         client_options: ClientOptions = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
-        """Instantiate the document understanding service client.
+        """Instantiate the document processor service client.
 
         Args:
             credentials (Optional[google.auth.credentials.Credentials]): The
@@ -76,7 +75,7 @@ class DocumentUnderstandingServiceAsyncClient:
                 credentials identify the application to the service; if none
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
-            transport (Union[str, ~.DocumentUnderstandingServiceTransport]): The
+            transport (Union[str, ~.DocumentProcessorServiceTransport]): The
                 transport to use. If set to None, a transport is chosen
                 automatically.
             client_options (ClientOptions): Custom options for the client. It
@@ -101,34 +100,32 @@ class DocumentUnderstandingServiceAsyncClient:
                 creation failed for any reason.
         """
 
-        self._client = DocumentUnderstandingServiceClient(
+        self._client = DocumentProcessorServiceClient(
             credentials=credentials,
             transport=transport,
             client_options=client_options,
             client_info=client_info,
         )
 
-    async def batch_process_documents(
+    async def process_document(
         self,
-        request: document_understanding.BatchProcessDocumentsRequest = None,
+        request: document_processor_service.ProcessRequest = None,
         *,
-        requests: Sequence[document_understanding.ProcessDocumentRequest] = None,
+        name: str = None,
         retry: retries.Retry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
-    ) -> operation_async.AsyncOperation:
-        r"""LRO endpoint to batch process many documents. The output is
-        written to Cloud Storage as JSON in the [Document] format.
+    ) -> document_processor_service.ProcessResponse:
+        r"""Processes a single document.
 
         Args:
-            request (:class:`~.document_understanding.BatchProcessDocumentsRequest`):
-                The request object. Request to batch process documents
-                as an asynchronous operation. The output is written to
-                Cloud Storage as JSON in the [Document] format.
-            requests (:class:`Sequence[~.document_understanding.ProcessDocumentRequest]`):
-                Required. Individual requests for
-                each document.
-                This corresponds to the ``requests`` field
+            request (:class:`~.document_processor_service.ProcessRequest`):
+                The request object. Request message for the process
+                document method.
+            name (:class:`str`):
+                Required. The processor resource
+                name.
+                This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
 
@@ -139,103 +136,27 @@ class DocumentUnderstandingServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation_async.AsyncOperation:
-                An object representing a long-running operation.
-
-                The result type for the operation will be
-                :class:``~.document_understanding.BatchProcessDocumentsResponse``:
-                Response to an batch document processing request. This
-                is returned in the LRO Operation after the operation is
-                complete.
+            ~.document_processor_service.ProcessResponse:
+                Response message for the process
+                document method.
 
         """
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([requests]):
+        if request is not None and any([name]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = document_understanding.BatchProcessDocumentsRequest(request)
+        request = document_processor_service.ProcessRequest(request)
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
 
-        if requests is not None:
-            request.requests = requests
-
-        # Wrap the RPC method; this adds retry and timeout information,
-        # and friendly error handling.
-        rpc = gapic_v1.method_async.wrap_method(
-            self._client._transport.batch_process_documents,
-            default_retry=retries.Retry(
-                initial=0.1,
-                maximum=60.0,
-                multiplier=1.3,
-                predicate=retries.if_exception_type(
-                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
-                ),
-            ),
-            default_timeout=120.0,
-            client_info=DEFAULT_CLIENT_INFO,
-        )
-
-        # Certain fields should be provided within the metadata header;
-        # add these here.
-        metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((("parent", request.parent),)),
-        )
-
-        # Send the request.
-        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
-
-        # Wrap the response in an operation future.
-        response = operation_async.from_gapic(
-            response,
-            self._client._transport.operations_client,
-            document_understanding.BatchProcessDocumentsResponse,
-            metadata_type=document_understanding.OperationMetadata,
-        )
-
-        # Done; return the response.
-        return response
-
-    async def process_document(
-        self,
-        request: document_understanding.ProcessDocumentRequest = None,
-        *,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> document.Document:
-        r"""Processes a single document.
-
-        Args:
-            request (:class:`~.document_understanding.ProcessDocumentRequest`):
-                The request object. Request to process one document.
-
-            retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                should be retried.
-            timeout (float): The timeout for this request.
-            metadata (Sequence[Tuple[str, str]]): Strings which should be
-                sent along with the request as metadata.
-
-        Returns:
-            ~.document.Document:
-                Document represents the canonical
-                document resource in Document
-                Understanding AI. It is an interchange
-                format that provides insights into
-                documents and allows for collaboration
-                between users and Document Understanding
-                AI to iterate and optimize for quality.
-
-        """
-        # Create or coerce a protobuf request object.
-
-        request = document_understanding.ProcessDocumentRequest(request)
+        if name is not None:
+            request.name = name
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
@@ -256,11 +177,196 @@ class DocumentUnderstandingServiceAsyncClient:
         # Certain fields should be provided within the metadata header;
         # add these here.
         metadata = tuple(metadata) + (
-            gapic_v1.routing_header.to_grpc_metadata((("parent", request.parent),)),
+            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
         )
 
         # Send the request.
         response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+
+        # Done; return the response.
+        return response
+
+    async def batch_process_documents(
+        self,
+        request: document_processor_service.BatchProcessRequest = None,
+        *,
+        name: str = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> operation_async.AsyncOperation:
+        r"""LRO endpoint to batch process many documents. The output is
+        written to Cloud Storage as JSON in the [Document] format.
+
+        Args:
+            request (:class:`~.document_processor_service.BatchProcessRequest`):
+                The request object. Request message for batch process
+                document method.
+            name (:class:`str`):
+                Required. The processor resource
+                name.
+                This corresponds to the ``name`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            ~.operation_async.AsyncOperation:
+                An object representing a long-running operation.
+
+                The result type for the operation will be
+                :class:``~.document_processor_service.BatchProcessResponse``:
+                Response message for batch process document method.
+
+        """
+        # Create or coerce a protobuf request object.
+        # Sanity check: If we got a request object, we should *not* have
+        # gotten any keyword arguments that map to the request.
+        if request is not None and any([name]):
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
+
+        request = document_processor_service.BatchProcessRequest(request)
+
+        # If we have keyword arguments corresponding to fields on the
+        # request, apply these.
+
+        if name is not None:
+            request.name = name
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.batch_process_documents,
+            default_retry=retries.Retry(
+                initial=0.1,
+                maximum=60.0,
+                multiplier=1.3,
+                predicate=retries.if_exception_type(
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
+                ),
+            ),
+            default_timeout=120.0,
+            client_info=DEFAULT_CLIENT_INFO,
+        )
+
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata((("name", request.name),)),
+        )
+
+        # Send the request.
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+
+        # Wrap the response in an operation future.
+        response = operation_async.from_gapic(
+            response,
+            self._client._transport.operations_client,
+            document_processor_service.BatchProcessResponse,
+            metadata_type=document_processor_service.BatchProcessMetadata,
+        )
+
+        # Done; return the response.
+        return response
+
+    async def review_document(
+        self,
+        request: document_processor_service.ReviewDocumentRequest = None,
+        *,
+        human_review_config: str = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> operation_async.AsyncOperation:
+        r"""Send a document for Human Review. The input document
+        should be processed by the specified processor.
+
+        Args:
+            request (:class:`~.document_processor_service.ReviewDocumentRequest`):
+                The request object. Request message for review document
+                method.
+            human_review_config (:class:`str`):
+                Required. The resource name of the
+                HumanReviewConfig that the document will
+                be reviewed with.
+                This corresponds to the ``human_review_config`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            ~.operation_async.AsyncOperation:
+                An object representing a long-running operation.
+
+                The result type for the operation will be
+                :class:``~.document_processor_service.ReviewDocumentResponse``:
+                Response message for review document method.
+
+        """
+        # Create or coerce a protobuf request object.
+        # Sanity check: If we got a request object, we should *not* have
+        # gotten any keyword arguments that map to the request.
+        if request is not None and any([human_review_config]):
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
+
+        request = document_processor_service.ReviewDocumentRequest(request)
+
+        # If we have keyword arguments corresponding to fields on the
+        # request, apply these.
+
+        if human_review_config is not None:
+            request.human_review_config = human_review_config
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.review_document,
+            default_retry=retries.Retry(
+                initial=0.1,
+                maximum=60.0,
+                multiplier=1.3,
+                predicate=retries.if_exception_type(
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
+                ),
+            ),
+            default_timeout=120.0,
+            client_info=DEFAULT_CLIENT_INFO,
+        )
+
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (("human_review_config", request.human_review_config),)
+            ),
+        )
+
+        # Send the request.
+        response = await rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+
+        # Wrap the response in an operation future.
+        response = operation_async.from_gapic(
+            response,
+            self._client._transport.operations_client,
+            document_processor_service.ReviewDocumentResponse,
+            metadata_type=document_processor_service.ReviewDocumentOperationMetadata,
+        )
 
         # Done; return the response.
         return response
@@ -276,4 +382,4 @@ except pkg_resources.DistributionNotFound:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
 
 
-__all__ = ("DocumentUnderstandingServiceAsyncClient",)
+__all__ = ("DocumentProcessorServiceAsyncClient",)

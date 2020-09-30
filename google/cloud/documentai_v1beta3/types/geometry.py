@@ -19,7 +19,7 @@ import proto  # type: ignore
 
 
 __protobuf__ = proto.module(
-    package="google.cloud.documentai.v1beta2",
+    package="google.cloud.documentai.v1beta3",
     manifest={"Vertex", "NormalizedVertex", "BoundingPoly",},
 )
 

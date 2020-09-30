@@ -28,22 +28,21 @@ from google.auth.transport.grpc import SslCredentials  # type: ignore
 import grpc  # type: ignore
 from grpc.experimental import aio  # type: ignore
 
-from google.cloud.documentai_v1beta2.types import document
-from google.cloud.documentai_v1beta2.types import document_understanding
+from google.cloud.documentai_v1beta3.types import document_processor_service
 from google.longrunning import operations_pb2 as operations  # type: ignore
 
-from .base import DocumentUnderstandingServiceTransport, DEFAULT_CLIENT_INFO
-from .grpc import DocumentUnderstandingServiceGrpcTransport
+from .base import DocumentProcessorServiceTransport, DEFAULT_CLIENT_INFO
+from .grpc import DocumentProcessorServiceGrpcTransport
 
 
-class DocumentUnderstandingServiceGrpcAsyncIOTransport(
-    DocumentUnderstandingServiceTransport
-):
-    """gRPC AsyncIO backend transport for DocumentUnderstandingService.
+class DocumentProcessorServiceGrpcAsyncIOTransport(DocumentProcessorServiceTransport):
+    """gRPC AsyncIO backend transport for DocumentProcessorService.
 
-    Service to parse structured information from unstructured or
-    semi-structured documents using state-of-the-art Google AI such
-    as natural language, computer vision, and translation.
+    Service to call Cloud DocumentAI to process documents
+    according to the processor's definition. Processors are built
+    using state-of-the-art Google AI such as natural language,
+    computer vision, and translation to extract structured
+    information from unstructured or semi-structured documents.
 
     This class defines the same methods as the primary client, so the
     primary client can load the underlying transport implementation
@@ -253,10 +252,39 @@ class DocumentUnderstandingServiceGrpcAsyncIOTransport(
         return self.__dict__["operations_client"]
 
     @property
+    def process_document(
+        self,
+    ) -> Callable[
+        [document_processor_service.ProcessRequest],
+        Awaitable[document_processor_service.ProcessResponse],
+    ]:
+        r"""Return a callable for the process document method over gRPC.
+
+        Processes a single document.
+
+        Returns:
+            Callable[[~.ProcessRequest],
+                    Awaitable[~.ProcessResponse]]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "process_document" not in self._stubs:
+            self._stubs["process_document"] = self.grpc_channel.unary_unary(
+                "/google.cloud.documentai.v1beta3.DocumentProcessorService/ProcessDocument",
+                request_serializer=document_processor_service.ProcessRequest.serialize,
+                response_deserializer=document_processor_service.ProcessResponse.deserialize,
+            )
+        return self._stubs["process_document"]
+
+    @property
     def batch_process_documents(
         self,
     ) -> Callable[
-        [document_understanding.BatchProcessDocumentsRequest],
+        [document_processor_service.BatchProcessRequest],
         Awaitable[operations.Operation],
     ]:
         r"""Return a callable for the batch process documents method over gRPC.
@@ -265,7 +293,7 @@ class DocumentUnderstandingServiceGrpcAsyncIOTransport(
         written to Cloud Storage as JSON in the [Document] format.
 
         Returns:
-            Callable[[~.BatchProcessDocumentsRequest],
+            Callable[[~.BatchProcessRequest],
                     Awaitable[~.Operation]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
@@ -276,25 +304,27 @@ class DocumentUnderstandingServiceGrpcAsyncIOTransport(
         # to pass in the functions for each.
         if "batch_process_documents" not in self._stubs:
             self._stubs["batch_process_documents"] = self.grpc_channel.unary_unary(
-                "/google.cloud.documentai.v1beta2.DocumentUnderstandingService/BatchProcessDocuments",
-                request_serializer=document_understanding.BatchProcessDocumentsRequest.serialize,
+                "/google.cloud.documentai.v1beta3.DocumentProcessorService/BatchProcessDocuments",
+                request_serializer=document_processor_service.BatchProcessRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
         return self._stubs["batch_process_documents"]
 
     @property
-    def process_document(
+    def review_document(
         self,
     ) -> Callable[
-        [document_understanding.ProcessDocumentRequest], Awaitable[document.Document]
+        [document_processor_service.ReviewDocumentRequest],
+        Awaitable[operations.Operation],
     ]:
-        r"""Return a callable for the process document method over gRPC.
+        r"""Return a callable for the review document method over gRPC.
 
-        Processes a single document.
+        Send a document for Human Review. The input document
+        should be processed by the specified processor.
 
         Returns:
-            Callable[[~.ProcessDocumentRequest],
-                    Awaitable[~.Document]]:
+            Callable[[~.ReviewDocumentRequest],
+                    Awaitable[~.Operation]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -302,13 +332,13 @@ class DocumentUnderstandingServiceGrpcAsyncIOTransport(
         # the request.
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
-        if "process_document" not in self._stubs:
-            self._stubs["process_document"] = self.grpc_channel.unary_unary(
-                "/google.cloud.documentai.v1beta2.DocumentUnderstandingService/ProcessDocument",
-                request_serializer=document_understanding.ProcessDocumentRequest.serialize,
-                response_deserializer=document.Document.deserialize,
+        if "review_document" not in self._stubs:
+            self._stubs["review_document"] = self.grpc_channel.unary_unary(
+                "/google.cloud.documentai.v1beta3.DocumentProcessorService/ReviewDocument",
+                request_serializer=document_processor_service.ReviewDocumentRequest.serialize,
+                response_deserializer=operations.Operation.FromString,
             )
-        return self._stubs["process_document"]
+        return self._stubs["review_document"]
 
 
-__all__ = ("DocumentUnderstandingServiceGrpcAsyncIOTransport",)
+__all__ = ("DocumentProcessorServiceGrpcAsyncIOTransport",)
