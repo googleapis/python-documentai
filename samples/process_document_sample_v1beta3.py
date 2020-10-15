@@ -56,24 +56,29 @@ def process_document_sample(project_id: str, location: str, processor_id: str, f
 
     result = client.process_document(request=request)
 
+    def _get_text(el):
+        """Doc AI identifies form fields by their offsets
+        in document text. This function converts offsets
+        to text snippets.
+        """
+        response = ''
+        # If a text segment spans several lines, it will
+        # be stored in different text segments.
+        for segment in el.text_anchor.text_segments:
+            start_index = int(segment.start_index) if segment.start_index in el.text_anchor.text_segments else 0
+            end_index = int(segment.end_index)
+            response += document.text[start_index:end_index]
+        return response
+
     print('Document processing complete.')
 
     document = result.document
-    text = document.text
 
     page_1 = document.pages[0]
     paragraphs = page_1.paragraphs
 
     for paragraph in paragraphs:
-        paragraph_text = get_text(paragraph.layout.text_anchor, text)
+        paragraph_text = _get_text(paragraph.layout)
         print(f'Paragraph text: {paragraph_text}')
-
-
-def get_text(text_anchor: dict, text: str):
-    # First shard in document doesn't have startIndex property
-    start_index = text_anchor.text_segments[0].start_index if text_anchor.text_segments[0].start_index is not None else 0
-    end_index = text_anchor.text_segments[0].end_index
-
-    return text[start_index:end_index]
 
 # [END documentai_process_document_sample]
