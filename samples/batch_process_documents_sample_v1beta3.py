@@ -15,16 +15,17 @@
 
 # [START documentai_batch_process_document]
 import re
-from uuid import uuid4
 import json
 from google.cloud import documentai_v1beta3 as documentai
 from google.cloud import storage
-project_id = 'python-docs-samples-tests'
-location = 'us'
-processor_id = '90484cfdedb024f6'
-input_uri = 'gs://cloud-samples-data/documentai/invoice.pdf'
-gcs_output_bucket_uri = 'gs://document-ai-python'
-gcs_output_uri_prefix = uuid4()
+
+# TODO(developer): Uncomment these variables before running the sample.
+# project_id= 'YOUR_PROJECT_ID'
+# location = 'YOUR_PROJECT_LOCATION' # Format is 'us' or 'eu'
+# processor_id = 'YOUR_PROCESSOR_ID' # Create processor in Cloud Console
+# input_uri = "YOUR_INPUT_URI"
+# gcs_output_bucket_uri = "YOUR_OUTPUT_BUCKET_URI"
+# gcs_output_uri_prefix = "YOUR_OUTPUT_URI_PREFIX"
 
 
 def batch_process_documents(

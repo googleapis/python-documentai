@@ -15,12 +15,6 @@
 
 from google.cloud import documentai_v1beta3 as documentai
 
-project_id = 'YOUR_PROJECT_ID'
-location = 'us'
-processor_id = '90484cfdedb024f6'
-gcs_input_uri = 'gs://cloud-samples-data/documentai/invoice.pdf'
-gcs_output_uri = 'output-bucket'
-
 # [START documentai_process_document]
 
 # TODO(developer): Uncomment these variables before running the sample.
