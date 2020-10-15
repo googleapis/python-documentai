@@ -25,10 +25,7 @@ from google.cloud import documentai_v1beta3 as documentai
 
 
 def quickstart(project_id: str, location: str, processor_id: str, file_path: str):
-    client_options = {
-        'api_endpoint': 'us-documentai.googleapis.com'
-    }
-    client = documentai.DocumentProcessorServiceClient(client_options=client_options)
+    client = documentai.DocumentProcessorServiceClient()
 
     # The full resource name of the processor, e.g.:
     # projects/project-id/locations/location/processor/processor-id
