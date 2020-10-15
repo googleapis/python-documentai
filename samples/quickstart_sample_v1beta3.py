@@ -20,7 +20,7 @@ location = 'us'
 processor_id = '90484cfdedb024f6'
 file_path = '/Users/erschmid/SampleMedia/invoice.pdf'
 
-# [START documentai_quickstart_sample]
+# [START documentai_quickstart]
 
 # TODO(developer): Uncomment these variables before running the sample.
 # project_id= 'YOUR_PROJECT_ID';
@@ -58,21 +58,27 @@ def quickstart(project_id: str, location: str, processor_id: str, file_path: str
     result = client.process_document(request=request)
 
     document = result.document
-    text = document.text
+
+    def _get_text(el):
+        """Doc AI identifies form fields by their offsets
+        in document text. This function converts offsets
+        to text snippets.
+        """
+        response = ''
+        # If a text segment spans several lines, it will
+        # be stored in different text segments.
+        for segment in el.text_anchor.text_segments:
+            start_index = int(segment.start_index) if segment.start_index in el.text_anchor.text_segments else 0
+            end_index = int(segment.end_index)
+            response += document.text[start_index:end_index]
+        return response
 
     page_1 = document.pages[0]
     paragraphs = page_1.paragraphs
 
     for paragraph in paragraphs:
-        paragraph_text = get_text(paragraph.layout.text_anchor, text)
+        print(paragraph)
+        paragraph_text = _get_text(paragraph.layout)
         print(f'Paragraph text: {paragraph_text}')
 
-
-def get_text(text_anchor: dict, text: str):
-    # First shard in document doesn't have startIndex property
-    start_index = text_anchor.text_segments[0].start_index if text_anchor.text_segments[0].start_index is not None else 0
-    end_index = text_anchor.text_segments[0].end_index
-
-    return text[start_index:end_index]
-
-# [END documentai_quickstart_sample]
+# [END documentai_quickstart]
