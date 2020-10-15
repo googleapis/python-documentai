@@ -14,12 +14,10 @@
 #
 
 from uuid import uuid4
-import pytest
 import sys
 import os
-from google.cloud import storage
 
-from samples import quickstart_sample_v1beta3
+from samples.snippets import quickstart_sample_v1beta3
 
 
 location = "us"
@@ -28,26 +26,8 @@ processor_id = '90484cfdedb024f6'
 bucket_name = 'python_docs_samples_test_%s' % uuid4()
 gcs_input_uri = 'gs://cloud-samples-data/documentai/invoice.pdf'
 gcs_output_uri_prefix = uuid4()
-file_name = 'samples/resources/invoice.pdf'
+file_name = 'samples/snippets/resources/invoice.pdf'
 file_path = os.path.join(os.getcwd(), file_name)
-
-
-@pytest.fixture(scope="module")
-def setup():
-    storage_client = storage.Client()
-    storage_client.bucket(bucket_name)
-
-
-@pytest.fixture(scope="module")
-def tear_down():
-    storage_client = storage.Client()
-    bucket = storage_client.bucket(bucket_name)
-    blobs = bucket.list_blobs(prefix=gcs_output_uri_prefix)
-
-    for blob in blobs:
-        blob.delete()
-
-        bucket.delete()
 
 
 def test_quickstart(capsys):

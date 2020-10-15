@@ -18,7 +18,7 @@ import pytest
 import sys
 from google.cloud import storage
 
-from samples import batch_process_documents_sample_v1beta3
+from samples.snippets import batch_process_documents_sample_v1beta3
 
 project_id = 'python-docs-samples-tests'
 location = 'us'
@@ -29,21 +29,14 @@ gcs_output_uri_prefix = uuid4()
 
 
 @pytest.fixture(scope="module")
-def setup():
+def test_bucket():
     storage_client = storage.Client()
-    storage_client.create_bucket(gcs_output_uri)
+    bucket = storage_client.bucket(gcs_output_uri)
+    yield bucket
 
-
-@pytest.fixture(scope="module")
-def tear_down():
-    storage_client = storage.Client()
-    bucket = storage_client.bucket(gcs_output_uri, prefix=gcs_output_uri_prefix)
-    blobs = storage_client.list_blobs(bucket)
-
+    blobs = list(bucket.list_blobs())
     for blob in blobs:
         blob.delete()
-
-    bucket.delete()
 
 
 def test_batch_process_documents(capsys):
