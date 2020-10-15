@@ -16,11 +16,9 @@
 from uuid import uuid4
 import pytest
 import sys
-import os
 from google.cloud import storage
 
 from samples import batch_process_documents_sample_v1beta3
-from google.cloud import documentai_v1beta3 as documentai
 
 project_id = 'python-docs-samples-tests'
 location = 'us'
@@ -31,28 +29,30 @@ gcs_output_uri_prefix = uuid4()
 
 name = "projects/1012616486416/locations/us/processors/90484cfdedb024f6"
 
+
 @pytest.fixture(scope="module")
 def setup():
-	storage_client = storage.Client()
-	storage_client.create_bucket(gcs_output_uri)
+    storage_client = storage.Client()
+    storage_client.create_bucket(gcs_output_uri)
+
 
 @pytest.fixture(scope="module")
 def tear_down():
-	storage_client = storage.Client()
-	bucket = storage_client.bucket(gcs_output_uri, prefix=gcs_output_uri_prefix)
-	blobs = storage_client.list_blobs(bucket)
-	# blobs = bucket.list_blobs(prefix=gcs_output_uri_prefix)
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(gcs_output_uri, prefix=gcs_output_uri_prefix)
+    blobs = storage_client.list_blobs(bucket)
 
-	for blob in blobs:
-		blob.delete()
+    for blob in blobs:
+        blob.delete()
 
-	bucket.delete()
+    bucket.delete()
+
 
 def test_batch_process_documents(capsys):
-	batch_process_documents_sample_v1beta3.batch_process_documents(project_id=project_id, location=location, processor_id=processor_id, gcs_input_uri=gcs_input_uri, gcs_output_uri=gcs_output_uri, gcs_output_uri_prefix=gcs_output_uri_prefix)
-	out, err = capsys.readouterr()
-	sys.stdout.write(out)
-	sys.stderr.write(err)
+    batch_process_documents_sample_v1beta3.batch_process_documents(project_id=project_id, location=location, processor_id=processor_id, gcs_input_uri=gcs_input_uri, gcs_output_uri=gcs_output_uri, gcs_output_uri_prefix=gcs_output_uri_prefix)
+    out, err = capsys.readouterr()
+    sys.stdout.write(out)
+    sys.stderr.write(err)
 
-	assert "Extracted" in out
-	assert "Paragraph" in out
+    assert "Extracted" in out
+    assert "Paragraph" in out

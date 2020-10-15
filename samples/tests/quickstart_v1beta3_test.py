@@ -15,29 +15,18 @@
 
 from uuid import uuid4
 import pytest
-import sys, os
+import sys
+import os
 from google.cloud import storage
-import google.api_core as api_core
 
 from samples import quickstart_sample_v1beta3
-
-from google.cloud.documentai_v1beta3.services.document_processor_service import (
-    DocumentProcessorServiceClient,
-)
-from google.cloud.documentai_v1beta3.services.document_processor_service import (
-    transports,
-)
-from google.cloud.documentai_v1beta3.types import document
-from google.cloud.documentai_v1beta3.types import document_processor_service
-from google.cloud.documentai_v1beta3.types import geometry
-from google.cloud.documentai_v1beta3.types import ProcessRequest
 
 
 location = "us"
 project_id = '1012616486416'
 processor_id = '90484cfdedb024f6'
-bucket_name = 'python_docs_samples_test_%s' %uuid4()
-gcs_input_uri ='gs://cloud-samples-data/documentai/invoice.pdf'
+bucket_name = 'python_docs_samples_test_%s' % uuid4()
+gcs_input_uri = 'gs://cloud-samples-data/documentai/invoice.pdf'
 gcs_output_uri = 'output-bucket'
 gcs_output_uri_prefix = uuid4()
 file_name = 'samples/resources/invoice.pdf'
@@ -45,24 +34,27 @@ file_path = os.path.join(os.getcwd(), file_name)
 
 name = "projects/1012616486416/locations/us/processors/90484cfdedb024f6"
 
+
 @pytest.fixture(scope="module")
 def setup():
-	storage_client = storage.Client()
-	storage_client.bucket(bucket_name)
+    storage_client = storage.Client()
+    storage_client.bucket(bucket_name)
+
 
 @pytest.fixture(scope="module")
 def tear_down():
-	storage_client = storage.Client()
-	bucket = storage_client.bucket(bucket_name)
-	blobs = bucket.list_blobs(prefix=gcs_output_uri_prefix)
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(bucket_name)
+    blobs = bucket.list_blobs(prefix=gcs_output_uri_prefix)
 
-	for blob in blobs:
-		blob.delete()
+    for blob in blobs:
+        blob.delete()
 
-	bucket.delete()
+        bucket.delete()
+
 
 def test_quickstart(capsys):
-    result = quickstart_sample_v1beta3.quickstart(project_id=project_id, location=location, processor_id=processor_id, file_path=file_path)
+    quickstart_sample_v1beta3.quickstart(project_id=project_id, location=location, processor_id=processor_id, file_path=file_path)
     out, err = capsys.readouterr()
     sys.stdout.write(out)
     sys.stderr.write(err)
