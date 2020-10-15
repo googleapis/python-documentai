@@ -35,7 +35,6 @@ def batch_process_documents(
         gcs_input_uri,
         gcs_output_uri,
         gcs_output_uri_prefix):
-    """Parse a form"""
 
     client = documentai.DocumentProcessorServiceClient()
 

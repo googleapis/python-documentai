@@ -27,8 +27,6 @@ gcs_input_uri = 'gs://cloud-samples-data/documentai/invoice.pdf'
 gcs_output_uri = 'gs://document-ai-python'
 gcs_output_uri_prefix = uuid4()
 
-name = "projects/1012616486416/locations/us/processors/90484cfdedb024f6"
-
 
 @pytest.fixture(scope="module")
 def setup():

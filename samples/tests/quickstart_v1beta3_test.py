@@ -27,12 +27,9 @@ project_id = '1012616486416'
 processor_id = '90484cfdedb024f6'
 bucket_name = 'python_docs_samples_test_%s' % uuid4()
 gcs_input_uri = 'gs://cloud-samples-data/documentai/invoice.pdf'
-gcs_output_uri = 'output-bucket'
 gcs_output_uri_prefix = uuid4()
 file_name = 'samples/resources/invoice.pdf'
 file_path = os.path.join(os.getcwd(), file_name)
-
-name = "projects/1012616486416/locations/us/processors/90484cfdedb024f6"
 
 
 @pytest.fixture(scope="module")
