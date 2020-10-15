@@ -14,7 +14,6 @@
 #
 
 from uuid import uuid4
-import sys
 import os
 
 from samples.snippets import process_document_sample_v1beta3
@@ -33,8 +32,6 @@ file_path = os.path.join(os.getcwd(), file_name)
 
 def test_process_documents(capsys):
     process_document_sample_v1beta3.process_document_sample(project_id=project_id, location=location, processor_id=processor_id, file_path=file_path)
-    out, err = capsys.readouterr()
-    sys.stdout.write(out)
-    sys.stderr.write(err)
+    out, _ = capsys.readouterr()
 
     assert "Paragraph" in out

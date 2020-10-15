@@ -15,7 +15,6 @@
 
 from uuid import uuid4
 import pytest
-import sys
 from google.cloud import storage
 
 from samples.snippets import batch_process_documents_sample_v1beta3
@@ -34,16 +33,17 @@ def test_bucket():
     bucket = storage_client.bucket(gcs_output_uri)
     yield bucket
 
-    blobs = list(bucket.list_blobs())
-    for blob in blobs:
-        blob.delete()
+    try:
+        blobs = list(bucket.list_blobs())
+        for blob in blobs:
+            blob.delete()
+    except Exception:
+        pass
 
 
-def test_batch_process_documents(capsys):
+def test_batch_process_documents(capsys, test_bucket):
     batch_process_documents_sample_v1beta3.batch_process_documents(project_id=project_id, location=location, processor_id=processor_id, gcs_input_uri=gcs_input_uri, gcs_output_uri=gcs_output_uri, gcs_output_uri_prefix=gcs_output_uri_prefix)
-    out, err = capsys.readouterr()
-    sys.stdout.write(out)
-    sys.stderr.write(err)
+    out, _ = capsys.readouterr()
 
     assert "Extracted" in out
     assert "Paragraph" in out

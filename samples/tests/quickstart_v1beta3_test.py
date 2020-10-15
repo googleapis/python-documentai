@@ -14,7 +14,6 @@
 #
 
 from uuid import uuid4
-import sys
 import os
 
 from samples.snippets import quickstart_sample_v1beta3
@@ -32,8 +31,6 @@ file_path = os.path.join(os.getcwd(), file_name)
 
 def test_quickstart(capsys):
     quickstart_sample_v1beta3.quickstart(project_id=project_id, location=location, processor_id=processor_id, file_path=file_path)
-    out, err = capsys.readouterr()
-    sys.stdout.write(out)
-    sys.stderr.write(err)
+    out, _ = capsys.readouterr()
 
     assert "Paragraph" in out
