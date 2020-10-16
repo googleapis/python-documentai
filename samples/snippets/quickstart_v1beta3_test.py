@@ -13,20 +13,14 @@
 # limitations under the License.
 #
 
-from uuid import uuid4
 import os
 
 from samples.snippets import quickstart_sample_v1beta3
 
-
 location = "us"
 project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
 processor_id = '90484cfdedb024f6'
-bucket_name = 'python_docs_samples_test_%s' % uuid4()
-gcs_input_uri = 'gs://cloud-samples-data/documentai/invoice.pdf'
-gcs_output_uri_prefix = uuid4()
-file_name = 'samples/snippets/resources/invoice.pdf'
-file_path = file_name
+file_path = 'samples/snippets/resources/invoice.pdf'
 
 
 def test_quickstart(capsys):
