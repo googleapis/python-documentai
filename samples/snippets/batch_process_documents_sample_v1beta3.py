@@ -73,8 +73,8 @@ def batch_process_documents(
     blob_list = list(bucket.list_blobs(prefix=prefix))
     print('Output files:')
 
-    def _get_text(el):
-        """Doc AI identifies form fields by their offsets
+    def get_text(el):
+        """Document AI identifies form fields by their offsets
         in document text. This function converts offsets
         to text snippets.
         """
@@ -95,12 +95,12 @@ def batch_process_documents(
 
         for page in document['pages']:
             for form_field in page['formFields']:
-                field_name = _get_text(form_field['fieldName'])
-                field_value = _get_text(form_field['fieldValue'])
+                field_name = get_text(form_field['fieldName'])
+                field_value = get_text(form_field['fieldValue'])
                 print('Extracted key value pair:')
                 print(f'\t{field_name}, {field_value}')
             for paragraph in document['pages']:
-                paragraph_text = _get_text(paragraph['layout'])
+                paragraph_text = get_text(paragraph['layout'])
                 print(f'Paragraph text:\n{paragraph_text}')
 
 # [END documentai_batch_process_document]

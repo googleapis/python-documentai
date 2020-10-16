@@ -49,8 +49,8 @@ def process_document_sample(project_id: str, location: str, processor_id: str, f
 
     result = client.process_document(request=request)
 
-    def _get_text(el):
-        """Doc AI identifies form fields by their offsets
+    def get_text(el):
+        """Document AI identifies form fields by their offsets
         in document text. This function converts offsets
         to text snippets.
         """
@@ -71,7 +71,7 @@ def process_document_sample(project_id: str, location: str, processor_id: str, f
     paragraphs = page_1.paragraphs
 
     for paragraph in paragraphs:
-        paragraph_text = _get_text(paragraph.layout)
+        paragraph_text = get_text(paragraph.layout)
         print(f'Paragraph text: {paragraph_text}')
 
 # [END documentai_process_document]
