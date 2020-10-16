@@ -20,7 +20,7 @@ from samples.snippets import process_document_sample_v1beta3
 
 
 location = "us"
-project_id = '1012616486416'
+project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
 processor_id = '90484cfdedb024f6'
 bucket_name = 'python_docs_samples_test_%s' % uuid4()
 gcs_input_uri = 'gs://cloud-samples-data/documentai/invoice.pdf'

@@ -15,12 +15,14 @@
 
 from uuid import uuid4
 import pytest
+import os
 from google.cloud import storage
 
 from samples.snippets import batch_process_documents_sample_v1beta3
 
 project_id = 'python-docs-samples-tests'
 location = 'us'
+project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
 processor_id = '90484cfdedb024f6'
 gcs_input_uri = 'gs://cloud-samples-data/documentai/invoice.pdf'
 gcs_output_uri = 'gs://document-ai-python'
