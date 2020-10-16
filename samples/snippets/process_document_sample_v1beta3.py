@@ -25,6 +25,7 @@ from google.cloud import documentai_v1beta3 as documentai
 
 
 def process_document_sample(project_id: str, location: str, processor_id: str, file_path: str):
+    # Instantiates a client
     client = documentai.DocumentProcessorServiceClient()
 
     # The full resource name of the processor, e.g.:
@@ -47,9 +48,12 @@ def process_document_sample(project_id: str, location: str, processor_id: str, f
         'document': document
     }
 
+    # Recognizes text entities in the PDF document
     result = client.process_document(request=request)
+
     document = result.document
 
+    # Extract shards from the text field
     def get_text(doc_element):
         """
         Document AI identifies form fields by their offsets
@@ -67,8 +71,12 @@ def process_document_sample(project_id: str, location: str, processor_id: str, f
 
     print('Document processing complete.')
 
+    # For a full list of Document object attributes, please reference this page: https://googleapis.dev/python/documentai/latest/_modules/google/cloud/documentai_v1beta3/types/document.html#Document
+
     document_pages = document.pages
 
+    # Read the text recognition output from the processor
+    print('The document contains the following paragraphs:')
     for page in document_pages:
         paragraphs = page.paragraphs
         for paragraph in paragraphs:

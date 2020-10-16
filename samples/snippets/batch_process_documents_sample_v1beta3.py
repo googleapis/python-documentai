@@ -73,6 +73,7 @@ def batch_process_documents(
     blob_list = list(bucket.list_blobs(prefix=prefix))
     print('Output files:')
 
+    # Extract shards from the text field
     def get_text(doc_element):
         """
         Document AI identifies form fields by their offsets
@@ -94,6 +95,9 @@ def batch_process_documents(
 
         print(f'Fetched file {i + 1}')
 
+        # For a full list of Document object attributes, please reference this page: https://googleapis.dev/python/documentai/latest/_modules/google/cloud/documentai_v1beta3/types/document.html#Document
+
+        # Read the text recognition output from the processor
         for page in document['pages']:
             for form_field in page['formFields']:
                 field_name = get_text(form_field['fieldName'])

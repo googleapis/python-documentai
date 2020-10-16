@@ -67,6 +67,10 @@ def quickstart(project_id: str, location: str, processor_id: str, file_path: str
 
     document_pages = document.pages
 
+    # For a full list of Document object attributes, please reference this page: https://googleapis.dev/python/documentai/latest/_modules/google/cloud/documentai_v1beta3/types/document.html#Document
+
+    # Read the text recognition output from the processor
+    print('The document contains the following paragraphs:')
     for page in document_pages:
         paragraphs = page.paragraphs
         for paragraph in paragraphs:
