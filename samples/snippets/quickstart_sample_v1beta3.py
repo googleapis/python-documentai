@@ -48,7 +48,6 @@ def quickstart(project_id: str, location: str, processor_id: str, file_path: str
     }
 
     result = client.process_document(request=request)
-
     document = result.document
 
     def get_text(doc_element):
@@ -66,12 +65,13 @@ def quickstart(project_id: str, location: str, processor_id: str, file_path: str
             response += document.text[start_index:end_index]
         return response
 
-    page_1 = document.pages[0]
-    paragraphs = page_1.paragraphs
+    document_pages = document.pages
 
-    for paragraph in paragraphs:
-        print(paragraph)
-        paragraph_text = get_text(paragraph.layout)
-        print(f'Paragraph text: {paragraph_text}')
+    for page in document_pages:
+        paragraphs = page.paragraphs
+        for paragraph in paragraphs:
+            print(paragraph)
+            paragraph_text = get_text(paragraph.layout)
+            print(f'Paragraph text: {paragraph_text}')
 
 # [END documentai_quickstart]

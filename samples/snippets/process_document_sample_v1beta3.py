@@ -48,6 +48,7 @@ def process_document_sample(project_id: str, location: str, processor_id: str, f
     }
 
     result = client.process_document(request=request)
+    document = result.document
 
     def get_text(doc_element):
         """
@@ -66,13 +67,12 @@ def process_document_sample(project_id: str, location: str, processor_id: str, f
 
     print('Document processing complete.')
 
-    document = result.document
+    document_pages = document.pages
 
-    page_1 = document.pages[0]
-    paragraphs = page_1.paragraphs
-
-    for paragraph in paragraphs:
-        paragraph_text = get_text(paragraph.layout)
-        print(f'Paragraph text: {paragraph_text}')
+    for page in document_pages:
+        paragraphs = page.paragraphs
+        for paragraph in paragraphs:
+            paragraph_text = get_text(paragraph.layout)
+            print(f'Paragraph text: {paragraph_text}')
 
 # [END documentai_process_document]
