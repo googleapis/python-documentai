@@ -42,7 +42,7 @@ def test_bucket():
         for blob in blobs:
             blob.delete()
     except NotFound:
-        pass
+        print('Bucket already deleted.')
 
 
 def test_batch_process_documents(capsys, test_bucket):
