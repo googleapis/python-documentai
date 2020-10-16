@@ -52,7 +52,8 @@ def quickstart(project_id: str, location: str, processor_id: str, file_path: str
     document = result.document
 
     def get_text(doc_element):
-        """Document AI identifies form fields by their offsets
+        """
+        Document AI identifies form fields by their offsets
         in document text. This function converts offsets
         to text snippets.
         """

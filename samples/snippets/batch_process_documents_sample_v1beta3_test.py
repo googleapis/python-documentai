@@ -17,6 +17,7 @@ from uuid import uuid4
 import pytest
 import os
 from google.cloud import storage
+from google.cloud.exceptions import NotFound
 
 from samples.snippets import batch_process_documents_sample_v1beta3
 
@@ -39,7 +40,7 @@ def test_bucket():
         blobs = list(bucket.list_blobs())
         for blob in blobs:
             blob.delete()
-    except Exception:
+    except NotFound:
         pass
 
 

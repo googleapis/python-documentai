@@ -40,12 +40,12 @@ def batch_process_documents(
 
     destination_uri = f'{gcs_output_uri}/{gcs_output_uri_prefix}/'
 
-    # mime_type can be application/pdf, image/tiff,
-    # and image/gif, or application/json
+    # 'mime_type' can be 'application/pdf', 'image/tiff',
+    # and 'image/gif', or 'application/json'
     input_config = documentai.types.document_processor_service.BatchProcessRequest.BatchInputConfig(
         gcs_source=gcs_input_uri, mime_type='application/pdf')
 
-    # where to write results
+    # Where to write results
     output_config = documentai.types.document_processor_service.BatchProcessRequest.BatchOutputConfig(
         gcs_destination=destination_uri
     )
@@ -74,7 +74,8 @@ def batch_process_documents(
     print('Output files:')
 
     def get_text(doc_element):
-        """Document AI identifies form fields by their offsets
+        """
+        Document AI identifies form fields by their offsets
         in document text. This function converts offsets
         to text snippets.
         """

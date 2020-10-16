@@ -50,7 +50,8 @@ def process_document_sample(project_id: str, location: str, processor_id: str, f
     result = client.process_document(request=request)
 
     def get_text(doc_element):
-        """Document AI identifies form fields by their offsets
+        """
+        Document AI identifies form fields by their offsets
         in document text. This function converts offsets
         to text snippets.
         """
