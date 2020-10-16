@@ -49,7 +49,7 @@ def process_document_sample(project_id: str, location: str, processor_id: str, f
 
     result = client.process_document(request=request)
 
-    def get_text(el):
+    def get_text(doc_element):
         """Document AI identifies form fields by their offsets
         in document text. This function converts offsets
         to text snippets.
@@ -57,8 +57,8 @@ def process_document_sample(project_id: str, location: str, processor_id: str, f
         response = ''
         # If a text segment spans several lines, it will
         # be stored in different text segments.
-        for segment in el.text_anchor.text_segments:
-            start_index = int(segment.start_index) if segment.start_index in el.text_anchor.text_segments else 0
+        for segment in doc_element.text_anchor.text_segments:
+            start_index = int(segment.start_index) if segment.start_index in doc_element.text_anchor.text_segments else 0
             end_index = int(segment.end_index)
             response += document.text[start_index:end_index]
         return response

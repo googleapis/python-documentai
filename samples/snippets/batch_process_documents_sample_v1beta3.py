@@ -73,7 +73,7 @@ def batch_process_documents(
     blob_list = list(bucket.list_blobs(prefix=prefix))
     print('Output files:')
 
-    def get_text(el):
+    def get_text(doc_element):
         """Document AI identifies form fields by their offsets
         in document text. This function converts offsets
         to text snippets.
@@ -81,8 +81,8 @@ def batch_process_documents(
         response = ''
         # If a text segment spans several lines, it will
         # be stored in different text segments.
-        for segment in el['textAnchor']['textSegments']:
-            start_index = int(segment['startIndex']) if 'startIndex' in el['textAnchor'] else 0
+        for segment in doc_element['textAnchor']['textSegments']:
+            start_index = int(segment['startIndex']) if 'startIndex' in doc_element['textAnchor'] else 0
             end_index = int(segment['endIndex'])
             response += document['text'][start_index:end_index]
         return response
