@@ -26,7 +26,7 @@ bucket_name = 'python_docs_samples_test_%s' % uuid4()
 gcs_input_uri = 'gs://cloud-samples-data/documentai/invoice.pdf'
 gcs_output_uri_prefix = uuid4()
 file_name = 'samples/snippets/resources/invoice.pdf'
-file_path = os.path.join(os.getcwd(), file_name)
+file_path = file_name
 
 
 def test_quickstart(capsys):
