@@ -22,12 +22,12 @@ from google.cloud.exceptions import NotFound
 
 from samples.snippets import batch_process_documents_sample_v1beta3
 
-project_id = 'python-docs-samples-tests'
-location = 'us'
+project_id = "python-docs-samples-tests"
+location = "us"
 project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
-processor_id = '90484cfdedb024f6'
-gcs_input_uri = 'gs://cloud-samples-data/documentai/invoice.pdf'
-gcs_output_uri = 'gs://document-ai-python'
+processor_id = "90484cfdedb024f6"
+gcs_input_uri = "gs://cloud-samples-data/documentai/invoice.pdf"
+gcs_output_uri = "gs://document-ai-python"
 gcs_output_uri_prefix = uuid4()
 
 
@@ -42,11 +42,18 @@ def test_bucket():
         for blob in blobs:
             blob.delete()
     except NotFound:
-        print('Bucket already deleted.')
+        print("Bucket already deleted.")
 
 
 def test_batch_process_documents(capsys, test_bucket):
-    batch_process_documents_sample_v1beta3.batch_process_documents(project_id=project_id, location=location, processor_id=processor_id, gcs_input_uri=gcs_input_uri, gcs_output_uri=gcs_output_uri, gcs_output_uri_prefix=gcs_output_uri_prefix)
+    batch_process_documents_sample_v1beta3.batch_process_documents(
+        project_id=project_id,
+        location=location,
+        processor_id=processor_id,
+        gcs_input_uri=gcs_input_uri,
+        gcs_output_uri=gcs_output_uri,
+        gcs_output_uri_prefix=gcs_output_uri_prefix,
+    )
     out, _ = capsys.readouterr()
 
     assert "Extracted" in out

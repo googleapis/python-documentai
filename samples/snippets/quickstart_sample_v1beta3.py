@@ -30,22 +30,16 @@ def quickstart(project_id: str, location: str, processor_id: str, file_path: str
     # The full resource name of the processor, e.g.:
     # projects/project-id/locations/location/processor/processor-id
     # You must create new processors in the Cloud Console first
-    name = f'projects/{project_id}/locations/{location}/processors/{processor_id}'
+    name = f"projects/{project_id}/locations/{location}/processors/{processor_id}"
 
     # Read the file into memory
-    with open(file_path, 'rb') as image:
+    with open(file_path, "rb") as image:
         image_content = image.read()
 
-    document = {
-        'content': image_content,
-        'mime_type': 'application/pdf'
-    }
+    document = {"content": image_content, "mime_type": "application/pdf"}
 
     # Configure the process request
-    request = {
-        'name': name,
-        'document': document
-    }
+    request = {"name": name, "document": document}
 
     result = client.process_document(request=request)
     document = result.document
@@ -56,11 +50,15 @@ def quickstart(project_id: str, location: str, processor_id: str, file_path: str
         in document text. This function converts offsets
         to text snippets.
         """
-        response = ''
+        response = ""
         # If a text segment spans several lines, it will
         # be stored in different text segments.
         for segment in doc_element.text_anchor.text_segments:
-            start_index = int(segment.start_index) if segment.start_index in doc_element.text_anchor.text_segments else 0
+            start_index = (
+                int(segment.start_index)
+                if segment.start_index in doc_element.text_anchor.text_segments
+                else 0
+            )
             end_index = int(segment.end_index)
             response += document.text[start_index:end_index]
         return response
@@ -70,12 +68,13 @@ def quickstart(project_id: str, location: str, processor_id: str, file_path: str
     # For a full list of Document object attributes, please reference this page: https://googleapis.dev/python/documentai/latest/_modules/google/cloud/documentai_v1beta3/types/document.html#Document
 
     # Read the text recognition output from the processor
-    print('The document contains the following paragraphs:')
+    print("The document contains the following paragraphs:")
     for page in document_pages:
         paragraphs = page.paragraphs
         for paragraph in paragraphs:
             print(paragraph)
             paragraph_text = get_text(paragraph.layout)
-            print(f'Paragraph text: {paragraph_text}')
+            print(f"Paragraph text: {paragraph_text}")
+
 
 # [END documentai_quickstart]

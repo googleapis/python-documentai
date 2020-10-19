@@ -20,12 +20,17 @@ from samples.snippets import process_document_sample_v1beta3
 
 location = "us"
 project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
-processor_id = '90484cfdedb024f6'
-file_path = 'samples/snippets/resources/invoice.pdf'
+processor_id = "90484cfdedb024f6"
+file_path = "samples/snippets/resources/invoice.pdf"
 
 
 def test_process_documents(capsys):
-    process_document_sample_v1beta3.process_document_sample(project_id=project_id, location=location, processor_id=processor_id, file_path=file_path)
+    process_document_sample_v1beta3.process_document_sample(
+        project_id=project_id,
+        location=location,
+        processor_id=processor_id,
+        file_path=file_path,
+    )
     out, _ = capsys.readouterr()
 
     assert "Paragraph" in out

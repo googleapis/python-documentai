@@ -29,21 +29,23 @@ from google.cloud import storage
 
 
 def batch_process_documents(
-        project_id,
-        location,
-        processor_id,
-        gcs_input_uri,
-        gcs_output_uri,
-        gcs_output_uri_prefix):
+    project_id,
+    location,
+    processor_id,
+    gcs_input_uri,
+    gcs_output_uri,
+    gcs_output_uri_prefix,
+):
 
     client = documentai.DocumentProcessorServiceClient()
 
-    destination_uri = f'{gcs_output_uri}/{gcs_output_uri_prefix}/'
+    destination_uri = f"{gcs_output_uri}/{gcs_output_uri_prefix}/"
 
     # 'mime_type' can be 'application/pdf', 'image/tiff',
     # and 'image/gif', or 'application/json'
     input_config = documentai.types.document_processor_service.BatchProcessRequest.BatchInputConfig(
-        gcs_source=gcs_input_uri, mime_type='application/pdf')
+        gcs_source=gcs_input_uri, mime_type="application/pdf"
+    )
 
     # Where to write results
     output_config = documentai.types.document_processor_service.BatchProcessRequest.BatchOutputConfig(
@@ -51,11 +53,12 @@ def batch_process_documents(
     )
 
     # Location can be 'us' or 'eu'
-    name = f'projects/{project_id}/locations/{location}/processors/{processor_id}'
+    name = f"projects/{project_id}/locations/{location}/processors/{processor_id}"
     request = documentai.types.document_processor_service.BatchProcessRequest(
         name=name,
         input_configs=[input_config],
-        output_config=output_config,)
+        output_config=output_config,
+    )
 
     operation = client.batch_process_documents(request)
 
@@ -64,48 +67,54 @@ def batch_process_documents(
 
     # Results are written to GCS. Use a regex to find
     # output files
-    match = re.match(r'gs://([^/]+)/(.+)', destination_uri)
+    match = re.match(r"gs://([^/]+)/(.+)", destination_uri)
     output_bucket = match.group(1)
     prefix = match.group(2)
 
     storage_client = storage.client.Client()
     bucket = storage_client.get_bucket(output_bucket)
     blob_list = list(bucket.list_blobs(prefix=prefix))
-    print('Output files:')
-
-    # Extract shards from the text field
-    def get_text(doc_element):
-        """
-        Document AI identifies form fields by their offsets
-        in document text. This function converts offsets
-        to text snippets.
-        """
-        response = ''
-        # If a text segment spans several lines, it will
-        # be stored in different text segments.
-        for segment in doc_element['textAnchor']['textSegments']:
-            start_index = int(segment['startIndex']) if 'startIndex' in doc_element['textAnchor'] else 0
-            end_index = int(segment['endIndex'])
-            response += document['text'][start_index:end_index]
-        return response
+    print("Output files:")
 
     for i, blob in enumerate(blob_list):
         json_string = blob.download_as_bytes()
         document = json.loads(json_string)
 
-        print(f'Fetched file {i + 1}')
+        print(f"Fetched file {i + 1}")
 
         # For a full list of Document object attributes, please reference this page: https://googleapis.dev/python/documentai/latest/_modules/google/cloud/documentai_v1beta3/types/document.html#Document
 
         # Read the text recognition output from the processor
-        for page in document['pages']:
-            for form_field in page['formFields']:
-                field_name = get_text(form_field['fieldName'])
-                field_value = get_text(form_field['fieldValue'])
-                print('Extracted key value pair:')
-                print(f'\t{field_name}, {field_value}')
-            for paragraph in document['pages']:
-                paragraph_text = get_text(paragraph['layout'])
-                print(f'Paragraph text:\n{paragraph_text}')
+        for page in document["pages"]:
+            for form_field in page["formFields"]:
+                field_name = get_text(form_field["fieldName"], document)
+                field_value = get_text(form_field["fieldValue"], document)
+                print("Extracted key value pair:")
+                print(f"\t{field_name}, {field_value}")
+            for paragraph in document["pages"]:
+                paragraph_text = get_text(paragraph["layout"], document)
+                print(f"Paragraph text:\n{paragraph_text}")
+
+
+# Extract shards from the text field
+def get_text(doc_element: dict, document: dict):
+    """
+    Document AI identifies form fields by their offsets
+    in document text. This function converts offsets
+    to text snippets.
+    """
+    response = ""
+    # If a text segment spans several lines, it will
+    # be stored in different text segments.
+    for segment in doc_element["textAnchor"]["textSegments"]:
+        start_index = (
+            int(segment["startIndex"])
+            if "startIndex" in doc_element["textAnchor"]
+            else 0
+        )
+        end_index = int(segment["endIndex"])
+        response += document["text"][start_index:end_index]
+    return response
+
 
 # [END documentai_batch_process_document]
