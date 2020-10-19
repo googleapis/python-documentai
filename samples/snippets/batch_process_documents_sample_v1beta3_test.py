@@ -16,10 +16,10 @@
 import os
 from uuid import uuid4
 
-import pytest
-
 from google.cloud import storage
 from google.cloud.exceptions import NotFound
+
+import pytest
 
 from samples.snippets import batch_process_documents_sample_v1beta3
 

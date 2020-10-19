@@ -17,8 +17,8 @@
 import json
 import re
 
-from google.cloud import storage
 from google.cloud import documentai_v1beta3 as documentai
+from google.cloud import storage
 
 # TODO(developer): Uncomment these variables before running the sample.
 # project_id= 'YOUR_PROJECT_ID'
