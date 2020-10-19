@@ -13,9 +13,10 @@
 # limitations under the License.
 #
 
-from uuid import uuid4
-import pytest
 import os
+from uuid import uuid4
+
+import pytest
 
 from google.cloud import storage
 from google.cloud.exceptions import NotFound

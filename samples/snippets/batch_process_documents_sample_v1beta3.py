@@ -14,8 +14,9 @@
 
 
 # [START documentai_batch_process_document]
-import re
 import json
+import re
+
 from google.cloud import documentai_v1beta3 as documentai
 from google.cloud import storage
 
