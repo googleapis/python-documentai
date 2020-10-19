@@ -21,7 +21,7 @@ from samples.snippets import process_document_sample_v1beta3
 location = "us"
 project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
 processor_id = "90484cfdedb024f6"
-file_path = "samples/snippets/resources/invoice.pdf"
+file_path = "../../samples/snippets/resources/invoice.pdf"
 
 
 def test_process_documents(capsys):
