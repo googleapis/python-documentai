@@ -14,7 +14,6 @@
 
 
 # [START documentai_batch_process_document]
-import json
 import re
 
 from google.cloud import documentai_v1beta3 as documentai
@@ -78,22 +77,23 @@ def batch_process_documents(
     print("Output files:")
 
     for i, blob in enumerate(blob_list):
-        json_string = blob.download_as_bytes()
-        document = json.loads(json_string)
+        # Download the contents of this blob as a bytes object.
+        blob_as_bytes = blob.download_as_bytes()
+        document = documentai.types.Document.from_json(blob_as_bytes)
 
         print(f"Fetched file {i + 1}")
 
         # For a full list of Document object attributes, please reference this page: https://googleapis.dev/python/documentai/latest/_modules/google/cloud/documentai_v1beta3/types/document.html#Document
 
         # Read the text recognition output from the processor
-        for page in document["pages"]:
-            for form_field in page["formFields"]:
-                field_name = get_text(form_field["fieldName"], document)
-                field_value = get_text(form_field["fieldValue"], document)
+        for page in document.pages:
+            for form_field in page.form_fields:
+                field_name = get_text(form_field.field_name, document)
+                field_value = get_text(form_field.field_value, document)
                 print("Extracted key value pair:")
                 print(f"\t{field_name}, {field_value}")
-            for paragraph in document["pages"]:
-                paragraph_text = get_text(paragraph["layout"], document)
+            for paragraph in document.pages:
+                paragraph_text = get_text(paragraph.layout, document)
                 print(f"Paragraph text:\n{paragraph_text}")
 
 
@@ -107,14 +107,14 @@ def get_text(doc_element: dict, document: dict):
     response = ""
     # If a text segment spans several lines, it will
     # be stored in different text segments.
-    for segment in doc_element["textAnchor"]["textSegments"]:
+    for segment in doc_element.text_anchor.text_segments:
         start_index = (
-            int(segment["startIndex"])
-            if "startIndex" in doc_element["textAnchor"]
+            int(segment.start_index)
+            if "start_index" in doc_element.text_anchor.__dict__
             else 0
         )
-        end_index = int(segment["endIndex"])
-        response += document["text"][start_index:end_index]
+        end_index = int(segment.end_index)
+        response += document.text[start_index:end_index]
     return response
 
 
