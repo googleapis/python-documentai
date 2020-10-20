@@ -42,6 +42,7 @@ def test_bucket():
         blobs = list(bucket.list_blobs())
         for blob in blobs:
             blob.delete()
+        bucket.delete()
     except NotFound:
         print("Bucket already deleted.")
 
