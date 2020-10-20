@@ -44,25 +44,6 @@ def quickstart(project_id: str, location: str, processor_id: str, file_path: str
     result = client.process_document(request=request)
     document = result.document
 
-    def get_text(doc_element):
-        """
-        Document AI identifies form fields by their offsets
-        in document text. This function converts offsets
-        to text snippets.
-        """
-        response = ""
-        # If a text segment spans several lines, it will
-        # be stored in different text segments.
-        for segment in doc_element.text_anchor.text_segments:
-            start_index = (
-                int(segment.start_index)
-                if segment.start_index in doc_element.text_anchor.text_segments
-                else 0
-            )
-            end_index = int(segment.end_index)
-            response += document.text[start_index:end_index]
-        return response
-
     document_pages = document.pages
 
     # For a full list of Document object attributes, please reference this page: https://googleapis.dev/python/documentai/latest/_modules/google/cloud/documentai_v1beta3/types/document.html#Document
@@ -73,8 +54,28 @@ def quickstart(project_id: str, location: str, processor_id: str, file_path: str
         paragraphs = page.paragraphs
         for paragraph in paragraphs:
             print(paragraph)
-            paragraph_text = get_text(paragraph.layout)
+            paragraph_text = get_text(paragraph.layout, document)
             print(f"Paragraph text: {paragraph_text}")
+
+
+def get_text(doc_element: dict, document: dict):
+    """
+    Document AI identifies form fields by their offsets
+    in document text. This function converts offsets
+    to text snippets.
+    """
+    response = ""
+    # If a text segment spans several lines, it will
+    # be stored in different text segments.
+    for segment in doc_element.text_anchor.text_segments:
+        start_index = (
+            int(segment.start_index)
+            if segment.start_index in doc_element.text_anchor.text_segments
+            else 0
+        )
+        end_index = int(segment.end_index)
+        response += document.text[start_index:end_index]
+    return response
 
 
 # [END documentai_quickstart]

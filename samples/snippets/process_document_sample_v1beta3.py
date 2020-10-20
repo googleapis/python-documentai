@@ -49,26 +49,6 @@ def process_document_sample(
 
     document = result.document
 
-    # Extract shards from the text field
-    def get_text(doc_element):
-        """
-        Document AI identifies form fields by their offsets
-        in document text. This function converts offsets
-        to text snippets.
-        """
-        response = ""
-        # If a text segment spans several lines, it will
-        # be stored in different text segments.
-        for segment in doc_element.text_anchor.text_segments:
-            start_index = (
-                int(segment.start_index)
-                if segment.start_index in doc_element.text_anchor.text_segments
-                else 0
-            )
-            end_index = int(segment.end_index)
-            response += document.text[start_index:end_index]
-        return response
-
     print("Document processing complete.")
 
     # For a full list of Document object attributes, please reference this page: https://googleapis.dev/python/documentai/latest/_modules/google/cloud/documentai_v1beta3/types/document.html#Document
@@ -80,8 +60,29 @@ def process_document_sample(
     for page in document_pages:
         paragraphs = page.paragraphs
         for paragraph in paragraphs:
-            paragraph_text = get_text(paragraph.layout)
+            paragraph_text = get_text(paragraph.layout, document)
             print(f"Paragraph text: {paragraph_text}")
+
+
+# Extract shards from the text field
+def get_text(doc_element: dict, document: dict):
+    """
+    Document AI identifies form fields by their offsets
+    in document text. This function converts offsets
+    to text snippets.
+    """
+    response = ""
+    # If a text segment spans several lines, it will
+    # be stored in different text segments.
+    for segment in doc_element.text_anchor.text_segments:
+        start_index = (
+            int(segment.start_index)
+            if segment.start_index in doc_element.text_anchor.text_segments
+            else 0
+        )
+        end_index = int(segment.end_index)
+        response += document.text[start_index:end_index]
+    return response
 
 
 # [END documentai_process_document]
