@@ -33,3 +33,4 @@ def test_quickstart(capsys):
     out, _ = capsys.readouterr()
 
     assert "Paragraph" in out
+    assert "Invoice" in out
