@@ -29,8 +29,7 @@ project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
 processor_id = "90484cfdedb024f6"
 gcs_input_uri = "gs://cloud-samples-data/documentai/invoice.pdf"
 gcs_output_uri_prefix = uuid4()
-gcs_output_uri = f"gs://document-ai-python-{gcs_output_uri_prefix}"
-
+gcs_output_uri = f"document-ai-python-{gcs_output_uri_prefix}"
 
 
 @pytest.fixture(scope="module")
