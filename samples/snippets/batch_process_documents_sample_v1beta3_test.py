@@ -30,6 +30,7 @@ gcs_input_uri = "gs://cloud-samples-data/documentai/invoice.pdf"
 gcs_output_uri_prefix = uuid4()
 BUCKET_NAME = f"document-ai-python-{uuid4()}"
 
+
 @pytest.fixture(scope="module")
 def test_bucket():
     storage_client = storage.Client()
