@@ -61,3 +61,4 @@ def test_batch_process_documents(capsys, test_bucket):
 
     assert "Extracted" in out
     assert "Paragraph" in out
+    assert "Invoice" in out
