@@ -23,20 +23,18 @@ import pytest
 
 from samples.snippets import batch_process_documents_sample_v1beta3
 
-project_id = "python-docs-samples-tests"
 location = "us"
 project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
 processor_id = "90484cfdedb024f6"
 gcs_input_uri = "gs://cloud-samples-data/documentai/invoice.pdf"
 gcs_output_uri_prefix = uuid4()
-gcs_output_uri = f"document-ai-python-{gcs_output_uri_prefix}"
-
+BUCKET_NAME = f"document-ai-python-{uuid4()}"
 
 @pytest.fixture(scope="module")
 def test_bucket():
     storage_client = storage.Client()
-    bucket = storage_client.create_bucket(gcs_output_uri)
-    yield bucket
+    bucket = storage_client.create_bucket(BUCKET_NAME)
+    yield bucket.name
 
     try:
         blobs = list(bucket.list_blobs())
@@ -53,7 +51,7 @@ def test_batch_process_documents(capsys, test_bucket):
         location=location,
         processor_id=processor_id,
         gcs_input_uri=gcs_input_uri,
-        gcs_output_uri=gcs_output_uri,
+        gcs_output_uri=f"gs://{test_bucket}",
         gcs_output_uri_prefix=gcs_output_uri_prefix,
     )
     out, _ = capsys.readouterr()
