@@ -35,7 +35,7 @@ gcs_output_uri_prefix = uuid4()
 @pytest.fixture(scope="module")
 def test_bucket():
     storage_client = storage.Client()
-    bucket = storage_client.bucket(gcs_output_uri)
+    bucket = storage_client.create_bucket(gcs_output_uri)
     yield bucket
 
     try:
