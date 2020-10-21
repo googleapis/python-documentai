@@ -71,7 +71,7 @@ def batch_process_documents(
     output_bucket = match.group(1)
     prefix = match.group(2)
 
-    storage_client = storage.client.Client()
+    storage_client = storage.Client()
     bucket = storage_client.get_bucket(output_bucket)
     blob_list = list(bucket.list_blobs(prefix=prefix))
     print("Output files:")
