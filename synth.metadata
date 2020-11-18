@@ -3,30 +3,30 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/python-documentai.git",
-        "sha": "23223987206f190d0333a0b379827fa4253d0f97"
+        "remote": "git@github.com:googleapis/python-documentai",
+        "sha": "69e258f2aa09a485599259f3ceef3ad8c980b591"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "cb7fc620590382a4a2ea6ffdf6f51ae0e77bbbb5",
-        "internalRef": "334682521"
+        "sha": "e3e7e7ddb0fecd7bc61ca03b5a9ddb29cc9b48d8",
+        "internalRef": "342967619"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "9b0da5204ab90bcc36f8cd4e5689eff1a54cc3e4"
+        "sha": "7fcc405a579d5d53a726ff3da1b7c8c08f0f2d58"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "9b0da5204ab90bcc36f8cd4e5689eff1a54cc3e4"
+        "sha": "7fcc405a579d5d53a726ff3da1b7c8c08f0f2d58"
       }
     }
   ],
@@ -49,115 +49,5 @@
         "generator": "bazel"
       }
     }
-  ],
-  "generatedFiles": [
-    ".flake8",
-    ".github/CONTRIBUTING.md",
-    ".github/ISSUE_TEMPLATE/bug_report.md",
-    ".github/ISSUE_TEMPLATE/feature_request.md",
-    ".github/ISSUE_TEMPLATE/support_request.md",
-    ".github/PULL_REQUEST_TEMPLATE.md",
-    ".github/release-please.yml",
-    ".github/snippet-bot.yml",
-    ".gitignore",
-    ".kokoro/build.sh",
-    ".kokoro/continuous/common.cfg",
-    ".kokoro/continuous/continuous.cfg",
-    ".kokoro/docker/docs/Dockerfile",
-    ".kokoro/docker/docs/fetch_gpg_keys.sh",
-    ".kokoro/docs/common.cfg",
-    ".kokoro/docs/docs-presubmit.cfg",
-    ".kokoro/docs/docs.cfg",
-    ".kokoro/populate-secrets.sh",
-    ".kokoro/presubmit/common.cfg",
-    ".kokoro/presubmit/presubmit.cfg",
-    ".kokoro/publish-docs.sh",
-    ".kokoro/release.sh",
-    ".kokoro/release/common.cfg",
-    ".kokoro/release/release.cfg",
-    ".kokoro/samples/lint/common.cfg",
-    ".kokoro/samples/lint/continuous.cfg",
-    ".kokoro/samples/lint/periodic.cfg",
-    ".kokoro/samples/lint/presubmit.cfg",
-    ".kokoro/samples/python3.6/common.cfg",
-    ".kokoro/samples/python3.6/continuous.cfg",
-    ".kokoro/samples/python3.6/periodic.cfg",
-    ".kokoro/samples/python3.6/presubmit.cfg",
-    ".kokoro/samples/python3.7/common.cfg",
-    ".kokoro/samples/python3.7/continuous.cfg",
-    ".kokoro/samples/python3.7/periodic.cfg",
-    ".kokoro/samples/python3.7/presubmit.cfg",
-    ".kokoro/samples/python3.8/common.cfg",
-    ".kokoro/samples/python3.8/continuous.cfg",
-    ".kokoro/samples/python3.8/periodic.cfg",
-    ".kokoro/samples/python3.8/presubmit.cfg",
-    ".kokoro/test-samples.sh",
-    ".kokoro/trampoline.sh",
-    ".kokoro/trampoline_v2.sh",
-    ".trampolinerc",
-    "CODE_OF_CONDUCT.md",
-    "CONTRIBUTING.rst",
-    "LICENSE",
-    "MANIFEST.in",
-    "docs/_static/custom.css",
-    "docs/_templates/layout.html",
-    "docs/conf.py",
-    "docs/documentai_v1beta2/services.rst",
-    "docs/documentai_v1beta2/types.rst",
-    "docs/gapic/v1beta3/api.rst",
-    "docs/gapic/v1beta3/types.rst",
-    "docs/multiprocessing.rst",
-    "google/__init__.py",
-    "google/cloud/__init__.py",
-    "google/cloud/documentai/__init__.py",
-    "google/cloud/documentai/py.typed",
-    "google/cloud/documentai/v1beta3.py",
-    "google/cloud/documentai/v1beta3/__init__.py",
-    "google/cloud/documentai/v1beta3/gapic/__init__.py",
-    "google/cloud/documentai/v1beta3/gapic/document_processor_service_client.py",
-    "google/cloud/documentai/v1beta3/gapic/document_processor_service_client_config.py",
-    "google/cloud/documentai/v1beta3/gapic/enums.py",
-    "google/cloud/documentai/v1beta3/gapic/transports/__init__.py",
-    "google/cloud/documentai/v1beta3/gapic/transports/document_processor_service_grpc_transport.py",
-    "google/cloud/documentai/v1beta3/types.py",
-    "google/cloud/documentai_v1beta2/__init__.py",
-    "google/cloud/documentai_v1beta2/py.typed",
-    "google/cloud/documentai_v1beta2/services/__init__.py",
-    "google/cloud/documentai_v1beta2/services/document_understanding_service/__init__.py",
-    "google/cloud/documentai_v1beta2/services/document_understanding_service/async_client.py",
-    "google/cloud/documentai_v1beta2/services/document_understanding_service/client.py",
-    "google/cloud/documentai_v1beta2/services/document_understanding_service/transports/__init__.py",
-    "google/cloud/documentai_v1beta2/services/document_understanding_service/transports/base.py",
-    "google/cloud/documentai_v1beta2/services/document_understanding_service/transports/grpc.py",
-    "google/cloud/documentai_v1beta2/services/document_understanding_service/transports/grpc_asyncio.py",
-    "google/cloud/documentai_v1beta2/types/__init__.py",
-    "google/cloud/documentai_v1beta2/types/document.py",
-    "google/cloud/documentai_v1beta2/types/document_understanding.py",
-    "google/cloud/documentai_v1beta2/types/geometry.py",
-    "google/cloud/documentai_v1beta3/proto/__init__.py",
-    "google/cloud/documentai_v1beta3/proto/document_pb2.py",
-    "google/cloud/documentai_v1beta3/proto/document_pb2_grpc.py",
-    "google/cloud/documentai_v1beta3/proto/document_processor_service_pb2.py",
-    "google/cloud/documentai_v1beta3/proto/document_processor_service_pb2_grpc.py",
-    "google/cloud/documentai_v1beta3/proto/geometry_pb2.py",
-    "google/cloud/documentai_v1beta3/proto/geometry_pb2_grpc.py",
-    "mypy.ini",
-    "noxfile.py",
-    "renovate.json",
-    "samples/AUTHORING_GUIDE.md",
-    "samples/CONTRIBUTING.md",
-    "scripts/decrypt-secrets.sh",
-    "scripts/fixup_documentai_v1beta2_keywords.py",
-    "scripts/readme-gen/readme_gen.py",
-    "scripts/readme-gen/templates/README.tmpl.rst",
-    "scripts/readme-gen/templates/auth.tmpl.rst",
-    "scripts/readme-gen/templates/auth_api_key.tmpl.rst",
-    "scripts/readme-gen/templates/install_deps.tmpl.rst",
-    "scripts/readme-gen/templates/install_portaudio.tmpl.rst",
-    "setup.cfg",
-    "testing/.gitignore",
-    "tests/unit/gapic/documentai_v1beta2/__init__.py",
-    "tests/unit/gapic/documentai_v1beta2/test_document_understanding_service.py",
-    "tests/unit/gapic/v1beta3/test_document_processor_service_client_v1beta3.py"
   ]
 }
