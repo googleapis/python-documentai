@@ -78,9 +78,9 @@ def batch_process_documents(
 
     for i, blob in enumerate(blob_list):
         # Download the contents of this blob as a bytes object.
-        if '.json' in blob.name:
+        if ".json" in blob.name:
             blob_as_bytes = blob.download_as_bytes()
-            
+
             document = documentai.types.Document.from_json(blob_as_bytes)
             print(f"Fetched file {i + 1}")
 
