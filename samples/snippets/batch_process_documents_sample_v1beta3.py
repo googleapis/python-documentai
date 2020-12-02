@@ -80,6 +80,7 @@ def batch_process_documents(
         # Download the contents of this blob as a bytes object.
         if ".json" not in blob.name:
             return
+        # Only parses JSON files
         blob_as_bytes = blob.download_as_bytes()
 
         document = documentai.types.Document.from_json(blob_as_bytes)
