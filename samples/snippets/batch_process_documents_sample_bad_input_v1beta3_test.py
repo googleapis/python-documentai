@@ -16,11 +16,6 @@
 import os
 from uuid import uuid4
 
-from google.cloud import storage
-from google.cloud.exceptions import NotFound
-
-import pytest
-
 from samples.snippets import batch_process_documents_sample_v1beta3
 
 location = "us"
