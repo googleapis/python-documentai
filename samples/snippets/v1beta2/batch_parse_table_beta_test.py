@@ -16,9 +16,9 @@ import os
 import uuid
 
 from google.cloud import storage
-import pytest
 
 import batch_parse_table_beta
+import pytest
 
 
 BUCKET = "document-ai-{}".format(uuid.uuid4())
