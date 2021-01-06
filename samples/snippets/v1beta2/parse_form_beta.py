@@ -16,8 +16,10 @@
 from google.cloud import documentai_v1beta2 as documentai
 
 
-def parse_form(project_id='YOUR_PROJECT_ID',
-               input_uri='gs://cloud-samples-data/documentai/form.pdf'):
+def parse_form(
+    project_id="YOUR_PROJECT_ID",
+    input_uri="gs://cloud-samples-data/documentai/form.pdf",
+):
     """Parse a form"""
 
     client = documentai.DocumentUnderstandingServiceClient()
@@ -27,7 +29,8 @@ def parse_form(project_id='YOUR_PROJECT_ID',
     # mime_type can be application/pdf, image/tiff,
     # and image/gif, or application/json
     input_config = documentai.types.InputConfig(
-        gcs_source=gcs_source, mime_type='application/pdf')
+        gcs_source=gcs_source, mime_type="application/pdf"
+    )
 
     # Improve form parsing results by providing key-value pair hints.
     # For each key hint, key is text that is likely to appear in the
@@ -36,22 +39,24 @@ def parse_form(project_id='YOUR_PROJECT_ID',
     # ADDRESS, LOCATION, ORGANIZATION, PERSON, PHONE_NUMBER, ID,
     # NUMBER, EMAIL, PRICE, TERMS, DATE, NAME
     key_value_pair_hints = [
-        documentai.types.KeyValuePairHint(key='Emergency Contact',
-                                          value_types=['NAME']),
         documentai.types.KeyValuePairHint(
-            key='Referred By')
+            key="Emergency Contact", value_types=["NAME"]
+        ),
+        documentai.types.KeyValuePairHint(key="Referred By"),
     ]
 
     # Setting enabled=True enables form extraction
     form_extraction_params = documentai.types.FormExtractionParams(
-        enabled=True, key_value_pair_hints=key_value_pair_hints)
+        enabled=True, key_value_pair_hints=key_value_pair_hints
+    )
 
     # Location can be 'us' or 'eu'
-    parent = 'projects/{}/locations/us'.format(project_id)
+    parent = "projects/{}/locations/us".format(project_id)
     request = documentai.types.ProcessDocumentRequest(
         parent=parent,
         input_config=input_config,
-        form_extraction_params=form_extraction_params)
+        form_extraction_params=form_extraction_params,
+    )
 
     document = client.process_document(request=request)
 
@@ -60,7 +65,7 @@ def parse_form(project_id='YOUR_PROJECT_ID',
         in document text. This function converts offsets
         to text snippets.
         """
-        response = ''
+        response = ""
         # If a text segment spans several lines, it will
         # be stored in different text segments.
         for segment in el.text_anchor.text_segments:
@@ -70,13 +75,18 @@ def parse_form(project_id='YOUR_PROJECT_ID',
         return response
 
     for page in document.pages:
-        print('Page number: {}'.format(page.page_number))
+        print("Page number: {}".format(page.page_number))
         for form_field in page.form_fields:
-            print('Field Name: {}\tConfidence: {}'.format(
-                _get_text(form_field.field_name),
-                form_field.field_name.confidence))
-            print('Field Value: {}\tConfidence: {}'.format(
-                _get_text(form_field.field_value),
-                form_field.field_value.confidence))
+            print(
+                "Field Name: {}\tConfidence: {}".format(
+                    _get_text(form_field.field_name), form_field.field_name.confidence
+                )
+            )
+            print(
+                "Field Value: {}\tConfidence: {}".format(
+                    _get_text(form_field.field_value), form_field.field_value.confidence
+                )
+            )
+
 
 # [END documentai_parse_form_beta]

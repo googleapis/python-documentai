@@ -21,11 +21,11 @@ import pytest
 import batch_parse_table_beta
 
 
-BUCKET = 'document-ai-{}'.format(uuid.uuid4())
-OUTPUT_PREFIX = 'TEST_OUTPUT_{}'.format(uuid.uuid4())
-PROJECT_ID = os.environ['GOOGLE_CLOUD_PROJECT']
-INPUT_URI = 'gs://cloud-samples-data/documentai/invoice.pdf'
-BATCH_OUTPUT_URI = 'gs://{}/{}/'.format(BUCKET, OUTPUT_PREFIX)
+BUCKET = "document-ai-{}".format(uuid.uuid4())
+OUTPUT_PREFIX = "TEST_OUTPUT_{}".format(uuid.uuid4())
+PROJECT_ID = os.environ["GOOGLE_CLOUD_PROJECT"]
+INPUT_URI = "gs://cloud-samples-data/documentai/invoice.pdf"
+BATCH_OUTPUT_URI = "gs://{}/{}/".format(BUCKET, OUTPUT_PREFIX)
 
 
 @pytest.fixture(autouse=True)
@@ -42,4 +42,4 @@ def setup_teardown():
 def test_batch_parse_table(capsys):
     batch_parse_table_beta.batch_parse_table(PROJECT_ID, INPUT_URI, BATCH_OUTPUT_URI)
     out, _ = capsys.readouterr()
-    assert 'Output files:' in out
+    assert "Output files:" in out

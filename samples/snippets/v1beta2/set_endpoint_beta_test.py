@@ -17,11 +17,11 @@ import os
 import set_endpoint_beta
 
 
-PROJECT_ID = os.environ['GOOGLE_CLOUD_PROJECT']
-INPUT_URI = 'gs://cloud-samples-data/documentai/invoice.pdf'
+PROJECT_ID = os.environ["GOOGLE_CLOUD_PROJECT"]
+INPUT_URI = "gs://cloud-samples-data/documentai/invoice.pdf"
 
 
 def test_set_endpoint(capsys):
     set_endpoint_beta.set_endpoint(PROJECT_ID, INPUT_URI)
     out, _ = capsys.readouterr()
-    assert 'Document Text' in out
+    assert "Document Text" in out

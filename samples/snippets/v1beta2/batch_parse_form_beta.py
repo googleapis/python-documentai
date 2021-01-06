@@ -21,9 +21,10 @@ from google.cloud import storage
 
 
 def batch_parse_form(
-        project_id='YOUR_PROJECT_ID',
-        input_uri='gs://cloud-samples-data/documentai/form.pdf',
-        destination_uri='gs://your-bucket-id/path/to/save/results/'):
+    project_id="YOUR_PROJECT_ID",
+    input_uri="gs://cloud-samples-data/documentai/form.pdf",
+    destination_uri="gs://your-bucket-id/path/to/save/results/",
+):
     """Parse a form"""
 
     client = documentai.DocumentUnderstandingServiceClient()
@@ -33,13 +34,13 @@ def batch_parse_form(
     # mime_type can be application/pdf, image/tiff,
     # and image/gif, or application/json
     input_config = documentai.types.InputConfig(
-        gcs_source=gcs_source, mime_type='application/pdf')
+        gcs_source=gcs_source, mime_type="application/pdf"
+    )
 
     # where to write results
     output_config = documentai.types.OutputConfig(
-        gcs_destination=documentai.types.GcsDestination(
-            uri=destination_uri),
-        pages_per_shard=1  # Map one doc page to one output page
+        gcs_destination=documentai.types.GcsDestination(uri=destination_uri),
+        pages_per_shard=1,  # Map one doc page to one output page
     )
 
     # Improve form parsing results by providing key-value pair hints.
@@ -50,22 +51,23 @@ def batch_parse_form(
     # NUMBER, EMAIL, PRICE, TERMS, DATE, NAME
     key_value_pair_hints = [
         documentai.types.KeyValuePairHint(
-            key='Emergency Contact',
-            value_types=['NAME']),
-        documentai.types.KeyValuePairHint(
-            key='Referred By')
+            key="Emergency Contact", value_types=["NAME"]
+        ),
+        documentai.types.KeyValuePairHint(key="Referred By"),
     ]
 
     # Setting enabled=True enables form extraction
     form_extraction_params = documentai.types.FormExtractionParams(
-        enabled=True, key_value_pair_hints=key_value_pair_hints)
+        enabled=True, key_value_pair_hints=key_value_pair_hints
+    )
 
     # Location can be 'us' or 'eu'
-    parent = 'projects/{}/locations/us'.format(project_id)
+    parent = "projects/{}/locations/us".format(project_id)
     request = documentai.types.ProcessDocumentRequest(
         input_config=input_config,
         output_config=output_config,
-        form_extraction_params=form_extraction_params)
+        form_extraction_params=form_extraction_params,
+    )
 
     # Add each ProcessDocumentRequest to the batch request
     requests = []
@@ -82,14 +84,14 @@ def batch_parse_form(
 
     # Results are written to GCS. Use a regex to find
     # output files
-    match = re.match(r'gs://([^/]+)/(.+)', destination_uri)
+    match = re.match(r"gs://([^/]+)/(.+)", destination_uri)
     output_bucket = match.group(1)
     prefix = match.group(2)
 
     storage_client = storage.client.Client()
     bucket = storage_client.get_bucket(output_bucket)
     blob_list = list(bucket.list_blobs(prefix=prefix))
-    print('Output files:')
+    print("Output files:")
     for blob in blob_list:
         print(blob.name)
 

@@ -18,9 +18,10 @@ from google.cloud import documentai_v1beta2 as documentai
 
 
 def parse_with_model(
-        project_id='YOUR_PROJECT_ID',
-        input_uri='gs://cloud-samples-data/documentai/invoice.pdf',
-        automl_model_name='YOUR_AUTOML_MODEL_NAME'):
+    project_id="YOUR_PROJECT_ID",
+    input_uri="gs://cloud-samples-data/documentai/invoice.pdf",
+    automl_model_name="YOUR_AUTOML_MODEL_NAME",
+):
     """Process a single document with the Document AI API.
 
     Args:
@@ -38,22 +39,22 @@ def parse_with_model(
     # mime_type can be application/pdf, image/tiff,
     # and image/gif, or application/json
     input_config = documentai.types.InputConfig(
-        gcs_source=gcs_source, mime_type='application/pdf')
+        gcs_source=gcs_source, mime_type="application/pdf"
+    )
 
     automl_params = documentai.types.AutoMlParams(model=automl_model_name)
 
     # Location can be 'us' or 'eu'
-    parent = 'projects/{}/locations/us'.format(project_id)
+    parent = "projects/{}/locations/us".format(project_id)
     request = documentai.types.ProcessDocumentRequest(
-        parent=parent,
-        input_config=input_config,
-        automl_params=automl_params
-        )
+        parent=parent, input_config=input_config, automl_params=automl_params
+    )
 
     document = client.process_document(request=request)
 
     for label in document.labels:
-        print('Label detected: {}'.format(label.name))
-        print('Confidence: {}'.format(label.confidence))
+        print("Label detected: {}".format(label.name))
+        print("Confidence: {}".format(label.confidence))
+
 
 # [END documentai_parse_with_model_beta]

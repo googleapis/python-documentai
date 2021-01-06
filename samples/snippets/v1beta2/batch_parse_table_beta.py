@@ -21,9 +21,10 @@ from google.cloud import storage
 
 
 def batch_parse_table(
-        project_id='YOUR_PROJECT_ID',
-        input_uri='gs://cloud-samples-data/documentai/form.pdf',
-        destination_uri='gs://your-bucket-id/path/to/save/results/'):
+    project_id="YOUR_PROJECT_ID",
+    input_uri="gs://cloud-samples-data/documentai/form.pdf",
+    destination_uri="gs://your-bucket-id/path/to/save/results/",
+):
     """Parse a form"""
 
     client = documentai.DocumentUnderstandingServiceClient()
@@ -33,13 +34,13 @@ def batch_parse_table(
     # mime_type can be application/pdf, image/tiff,
     # and image/gif, or application/json
     input_config = documentai.types.InputConfig(
-        gcs_source=gcs_source, mime_type='application/pdf')
+        gcs_source=gcs_source, mime_type="application/pdf"
+    )
 
     # where to write results
     output_config = documentai.types.OutputConfig(
-        gcs_destination=documentai.types.GcsDestination(
-            uri=destination_uri),
-        pages_per_shard=1  # Map one doc page to one output page
+        gcs_destination=documentai.types.GcsDestination(uri=destination_uri),
+        pages_per_shard=1,  # Map one doc page to one output page
     )
 
     # Improve table parsing results by providing bounding boxes
@@ -52,40 +53,30 @@ def batch_parse_table(
                 # Each vertice coordinate must be a number between 0 and 1
                 normalized_vertices=[
                     # Top left
-                    documentai.types.geometry.NormalizedVertex(
-                        x=0,
-                        y=0
-                    ),
+                    documentai.types.geometry.NormalizedVertex(x=0, y=0),
                     # Top right
-                    documentai.types.geometry.NormalizedVertex(
-                        x=1,
-                        y=0
-                    ),
+                    documentai.types.geometry.NormalizedVertex(x=1, y=0),
                     # Bottom right
-                    documentai.types.geometry.NormalizedVertex(
-                        x=1,
-                        y=1
-                    ),
+                    documentai.types.geometry.NormalizedVertex(x=1, y=1),
                     # Bottom left
-                    documentai.types.geometry.NormalizedVertex(
-                        x=0,
-                        y=1
-                    )
+                    documentai.types.geometry.NormalizedVertex(x=0, y=1),
                 ]
-            )
+            ),
         )
     ]
 
     # Setting enabled=True enables form extraction
     table_extraction_params = documentai.types.TableExtractionParams(
-        enabled=True, table_bound_hints=table_bound_hints)
+        enabled=True, table_bound_hints=table_bound_hints
+    )
 
     # Location can be 'us' or 'eu'
-    parent = 'projects/{}/locations/us'.format(project_id)
+    parent = "projects/{}/locations/us".format(project_id)
     request = documentai.types.ProcessDocumentRequest(
         input_config=input_config,
         output_config=output_config,
-        table_extraction_params=table_extraction_params)
+        table_extraction_params=table_extraction_params,
+    )
 
     requests = []
     requests.append(request)
@@ -101,15 +92,16 @@ def batch_parse_table(
 
     # Results are written to GCS. Use a regex to find
     # output files
-    match = re.match(r'gs://([^/]+)/(.+)', destination_uri)
+    match = re.match(r"gs://([^/]+)/(.+)", destination_uri)
     output_bucket = match.group(1)
     prefix = match.group(2)
 
     storage_client = storage.client.Client()
     bucket = storage_client.get_bucket(output_bucket)
     blob_list = list(bucket.list_blobs(prefix=prefix))
-    print('Output files:')
+    print("Output files:")
     for blob in blob_list:
         print(blob.name)
+
 
 # [END documentai_batch_parse_table_beta]

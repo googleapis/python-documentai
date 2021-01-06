@@ -17,18 +17,20 @@ import os
 import parse_with_model_beta
 
 
-PROJECT_ID = os.environ['GOOGLE_CLOUD_PROJECT']
-INPUT_URI = 'gs://cloud-samples-data/documentai/invoice.pdf'
-AUTOML_NL_MODEL_ID = 'TCN3472481026502981088'
+PROJECT_ID = os.environ["GOOGLE_CLOUD_PROJECT"]
+INPUT_URI = "gs://cloud-samples-data/documentai/invoice.pdf"
+AUTOML_NL_MODEL_ID = "TCN3472481026502981088"
 
-if 'AUTOML_NL_MODEL_ID' in os.environ:
-    AUTOML_NL_MODEL_ID = os.environ['AUTOML_NL_MODEL_ID']
+if "AUTOML_NL_MODEL_ID" in os.environ:
+    AUTOML_NL_MODEL_ID = os.environ["AUTOML_NL_MODEL_ID"]
 
-MODEL_NAME = 'projects/{}/locations/us-central1/models/{}'.format(PROJECT_ID, AUTOML_NL_MODEL_ID)
+MODEL_NAME = "projects/{}/locations/us-central1/models/{}".format(
+    PROJECT_ID, AUTOML_NL_MODEL_ID
+)
 
 
 def test_parse_with_model(capsys):
     parse_with_model_beta.parse_with_model(PROJECT_ID, INPUT_URI, MODEL_NAME)
     out, _ = capsys.readouterr()
-    assert 'Label detected' in out
-    assert 'Confidence' in out
+    assert "Label detected" in out
+    assert "Confidence" in out

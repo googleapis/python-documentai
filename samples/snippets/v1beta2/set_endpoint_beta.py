@@ -13,8 +13,10 @@
 # limitations under the License.
 
 
-def set_endpoint(project_id='YOUR_PROJECT_ID',
-                 input_uri='gs://cloud-samples-data/documentai/invoice.pdf'):
+def set_endpoint(
+    project_id="YOUR_PROJECT_ID",
+    input_uri="gs://cloud-samples-data/documentai/invoice.pdf",
+):
     """Process a single document with the Document AI API, including
     text extraction and entity extraction."""
 
@@ -22,7 +24,8 @@ def set_endpoint(project_id='YOUR_PROJECT_ID',
     from google.cloud import documentai_v1beta2 as documentai
 
     client = documentai.DocumentUnderstandingServiceClient(
-        client_options={'api_endpoint': 'eu-documentai.googleapis.com'})
+        client_options={"api_endpoint": "eu-documentai.googleapis.com"}
+    )
     # [END documentai_set_endpoint_beta]
 
     gcs_source = documentai.types.GcsSource(uri=input_uri)
@@ -30,15 +33,16 @@ def set_endpoint(project_id='YOUR_PROJECT_ID',
     # mime_type can be application/pdf, image/tiff,
     # and image/gif, or application/json
     input_config = documentai.types.InputConfig(
-        gcs_source=gcs_source, mime_type='application/pdf')
+        gcs_source=gcs_source, mime_type="application/pdf"
+    )
 
     # Location can be 'us' or 'eu'
-    parent = 'projects/{}/locations/eu'.format(project_id)
+    parent = "projects/{}/locations/eu".format(project_id)
     request = documentai.types.ProcessDocumentRequest(
-        parent=parent,
-        input_config=input_config)
+        parent=parent, input_config=input_config
+    )
 
     document = client.process_document(request=request)
 
     # All text extracted from the document
-    print('Document Text: {}'.format(document.text))
+    print("Document Text: {}".format(document.text))
