@@ -17,8 +17,9 @@ import uuid
 
 from google.cloud import storage
 
-import batch_parse_form_beta
 import pytest
+
+import batch_parse_form_beta
 
 
 BUCKET = "document-ai-{}".format(uuid.uuid4())
