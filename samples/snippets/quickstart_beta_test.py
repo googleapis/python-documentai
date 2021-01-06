@@ -14,7 +14,7 @@
 
 import os
 
-import quickstart_beta
+from samples.snippets import quickstart_beta
 
 
 PROJECT_ID = os.environ["GOOGLE_CLOUD_PROJECT"]
