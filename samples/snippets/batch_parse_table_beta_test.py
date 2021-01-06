@@ -15,11 +15,11 @@
 import os
 import uuid
 
-import batch_parse_table_beta
-
 from google.cloud import storage
 
 import pytest
+
+import batch_parse_table_beta
 
 
 BUCKET = "document-ai-{}".format(uuid.uuid4())
