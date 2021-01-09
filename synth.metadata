@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/python-documentai.git",
-        "sha": "33dc25806d5afd147c7cfb4b5f9c5505683b7ec4"
+        "sha": "d6f183a696b211c6d29bc28e9bbd0a8537f65577"
       }
     },
     {
@@ -111,6 +111,7 @@
     "docs/documentai_v1beta3/services.rst",
     "docs/documentai_v1beta3/types.rst",
     "docs/multiprocessing.rst",
+    "documentai-v1beta3-py.tar.gz",
     "google/cloud/documentai/__init__.py",
     "google/cloud/documentai/py.typed",
     "google/cloud/documentai_v1beta2/__init__.py",
