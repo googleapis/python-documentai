@@ -30,7 +30,7 @@ MODEL_NAME = "projects/{}/locations/us-central1/models/{}".format(
 
 
 def test_parse_with_model(capsys):
-    parse_with_model_beta.parse_with_model(PROJECT_ID, INPUT_URI, MODEL_NAME)
+    parse_with_model_v1beta2.parse_with_model(PROJECT_ID, INPUT_URI, MODEL_NAME)
     out, _ = capsys.readouterr()
     assert "Label detected" in out
     assert "Confidence" in out

@@ -22,7 +22,7 @@ INPUT_URI = "gs://cloud-samples-data/documentai/invoice.pdf"
 
 
 def test_parse_table(capsys):
-    parse_table_beta.parse_table(PROJECT_ID, INPUT_URI)
+    parse_table_v1beta2.parse_table(PROJECT_ID, INPUT_URI)
     out, _ = capsys.readouterr()
     assert "Table" in out
     assert "Header Row" in out

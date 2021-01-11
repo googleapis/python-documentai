@@ -22,7 +22,7 @@ INPUT_URI = "gs://cloud-samples-data/documentai/form.pdf"
 
 
 def test_parse_form(capsys):
-    parse_form_beta.parse_form(PROJECT_ID, INPUT_URI)
+    parse_form_v1beta2.parse_form(PROJECT_ID, INPUT_URI)
     out, _ = capsys.readouterr()
     assert "Field Name" in out
     assert "Field Value" in out

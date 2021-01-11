@@ -22,6 +22,6 @@ INPUT_URI = "gs://cloud-samples-data/documentai/invoice.pdf"
 
 
 def test_set_endpoint(capsys):
-    set_endpoint_beta.set_endpoint(PROJECT_ID, INPUT_URI)
+    set_endpoint_v1beta2.set_endpoint(PROJECT_ID, INPUT_URI)
     out, _ = capsys.readouterr()
     assert "Document Text" in out
