@@ -14,7 +14,7 @@
 
 import os
 
-from samples.snippets import set_endpoint_beta
+from samples.snippets import set_endpoint_v1beta2
 
 
 PROJECT_ID = os.environ["GOOGLE_CLOUD_PROJECT"]

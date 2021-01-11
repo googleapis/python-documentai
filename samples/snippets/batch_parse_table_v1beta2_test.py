@@ -19,7 +19,7 @@ from google.cloud import storage
 
 import pytest
 
-from samples.snippets import batch_parse_table_beta
+from samples.snippets import batch_parse_table_v1beta2
 
 
 BUCKET = "document-ai-{}".format(uuid.uuid4())

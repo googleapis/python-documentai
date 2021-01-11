@@ -14,7 +14,7 @@
 
 import os
 
-from samples.snippets import parse_table_beta
+from samples.snippets import parse_table_v1beta2
 
 
 PROJECT_ID = os.environ["GOOGLE_CLOUD_PROJECT"]
