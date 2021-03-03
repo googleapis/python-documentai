@@ -23,7 +23,7 @@ from google.cloud import storage
 # project_id= 'YOUR_PROJECT_ID'
 # location = 'YOUR_PROJECT_LOCATION' # Format is 'us' or 'eu'
 # processor_id = 'YOUR_PROCESSOR_ID' # Create processor in Cloud Console
-# input_uri = "YOUR_INPUT_URI"
+# gcs_input_uri = "YOUR_INPUT_URI"
 # gcs_output_uri = "YOUR_OUTPUT_BUCKET_URI"
 # gcs_output_uri_prefix = "YOUR_OUTPUT_URI_PREFIX"
 
@@ -35,6 +35,7 @@ def batch_process_documents(
     gcs_input_uri,
     gcs_output_uri,
     gcs_output_uri_prefix,
+    timeout: int = 300,
 ):
 
     client = documentai.DocumentProcessorServiceClient()
@@ -63,7 +64,7 @@ def batch_process_documents(
     operation = client.batch_process_documents(request)
 
     # Wait for the operation to finish
-    operation.result()
+    operation.result(timeout=timeout)
 
     # Results are written to GCS. Use a regex to find
     # output files
@@ -78,9 +79,13 @@ def batch_process_documents(
 
     for i, blob in enumerate(blob_list):
         # Download the contents of this blob as a bytes object.
+        if ".json" not in blob.name:
+            print(f"skipping non-supported file type {blob.name}")
+            return
+        # Only parses JSON files
         blob_as_bytes = blob.download_as_bytes()
-        document = documentai.types.Document.from_json(blob_as_bytes)
 
+        document = documentai.types.Document.from_json(blob_as_bytes)
         print(f"Fetched file {i + 1}")
 
         # For a full list of Document object attributes, please reference this page: https://googleapis.dev/python/documentai/latest/_modules/google/cloud/documentai_v1beta3/types/document.html#Document
