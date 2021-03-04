@@ -81,7 +81,7 @@ def batch_process_documents(
         # Download the contents of this blob as a bytes object.
         if ".json" not in blob.name:
             print(f"skipping non-supported file type {blob.name}")
-            return
+            continue
         # Only parses JSON files
         blob_as_bytes = blob.download_as_bytes()
 
