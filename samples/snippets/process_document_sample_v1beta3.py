@@ -27,7 +27,10 @@ def process_document_sample(
 ):
     from google.cloud import documentai_v1beta3 as documentai
 
-    # Instantiates a client
+    # You must set the api_endpoint if you use a location other than 'us', e.g.:
+    # client = documentai.DocumentProcessorServiceClient(
+    #     {"api_endpoint": "eu-documentai.googleapis.com"}
+    # )
     client = documentai.DocumentProcessorServiceClient()
 
     # The full resource name of the processor, e.g.:
