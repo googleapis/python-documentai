@@ -39,10 +39,11 @@ def batch_process_documents(
 ):
 
     # You must set the api_endpoint if you use a location other than 'us', e.g.:
-    # client = documentai.DocumentProcessorServiceClient(
-    #     {"api_endpoint": "eu-documentai.googleapis.com"}
-    # )
-    client = documentai.DocumentProcessorServiceClient()
+    opts = {}
+    if location == 'eu':
+        opts = {"api_endpoint": "eu-documentai.googleapis.com"}
+
+    client = documentai.DocumentProcessorServiceClient(opts)
 
     destination_uri = f"{gcs_output_uri}/{gcs_output_uri_prefix}/"
 
