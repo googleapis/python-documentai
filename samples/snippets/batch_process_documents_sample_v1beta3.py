@@ -43,7 +43,7 @@ def batch_process_documents(
     if location == "eu":
         opts = {"api_endpoint": "eu-documentai.googleapis.com"}
 
-    client = documentai.DocumentProcessorServiceClient(opts)
+    client = documentai.DocumentProcessorServiceClient(client_options=opts)
 
     destination_uri = f"{gcs_output_uri}/{gcs_output_uri_prefix}/"
 

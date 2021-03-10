@@ -31,7 +31,7 @@ def quickstart(project_id: str, location: str, processor_id: str, file_path: str
     if location == "eu":
         opts = {"api_endpoint": "eu-documentai.googleapis.com"}
 
-    client = documentai.DocumentProcessorServiceClient(opts)
+    client = documentai.DocumentProcessorServiceClient(client_options=opts)
 
     # The full resource name of the processor, e.g.:
     # projects/project-id/locations/location/processor/processor-id
