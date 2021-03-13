@@ -713,8 +713,8 @@ class Document(proto.Message):
                 entity wrt. the location on the page where it
                 was found.
             id (str):
-                Canonical id. This will be a unique value in
-                the entity list for this document.
+                Optional. Canonical id. This will be a unique
+                value in the entity list for this document.
             normalized_value (google.cloud.documentai_v1beta3.types.Document.Entity.NormalizedValue):
                 Optional. Normalized entity value. Absent if
                 the extracted value could not be converted or
@@ -755,6 +755,9 @@ class Document(proto.Message):
 
                     https:
                     github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto
+                boolean_value (bool):
+                    Boolean value. Can be used for entities with
+                    binary values, or for checkboxes.
                 text (str):
                     Required. Normalized entity value stored as a string. This
                     field is populated for supported document type (e.g.
@@ -790,6 +793,8 @@ class Document(proto.Message):
                 oneof="structured_value",
                 message=postal_address.PostalAddress,
             )
+
+            boolean_value = proto.Field(proto.BOOL, number=6, oneof="structured_value")
 
             text = proto.Field(proto.STRING, number=1)
 
@@ -937,7 +942,8 @@ class Document(proto.Message):
                 page (int):
                     Required. Index into the
                     [Document.pages][google.cloud.documentai.v1beta3.Document.pages]
-                    element
+                    element, for example using [Document.pages][page_refs.page]
+                    to locate the related page element.
                 layout_type (google.cloud.documentai_v1beta3.types.Document.PageAnchor.PageRef.LayoutType):
                     Optional. The type of the layout element that
                     is being referenced if any.
