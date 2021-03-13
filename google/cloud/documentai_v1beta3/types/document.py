@@ -74,11 +74,6 @@ class Document(proto.Message):
         entity_relations (Sequence[google.cloud.documentai_v1beta3.types.Document.EntityRelation]):
             Relationship among
             [Document.entities][google.cloud.documentai.v1beta3.Document.entities].
-        translations (Sequence[google.cloud.documentai_v1beta3.types.Document.Translation]):
-            A list of translations on
-            [Document.text][google.cloud.documentai.v1beta3.Document.text].
-            For document shards, translations in this list may cross
-            shard boundaries.
         text_changes (Sequence[google.cloud.documentai_v1beta3.types.Document.TextChange]):
             A list of text corrections made to [Document.text]. This is
             usually used for annotating corrections to OCR mistakes.
@@ -849,38 +844,6 @@ class Document(proto.Message):
 
         relation = proto.Field(proto.STRING, number=3)
 
-    class Translation(proto.Message):
-        r"""A translation of the text segment.
-
-        Attributes:
-            text_anchor (google.cloud.documentai_v1beta3.types.Document.TextAnchor):
-                Provenance of the translation. Text anchor indexing into the
-                [Document.text][google.cloud.documentai.v1beta3.Document.text].
-                There can only be a single ``TextAnchor.text_segments``
-                element. If the start and end index of the text segment are
-                the same, the text change is inserted before that index.
-            language_code (str):
-                The BCP-47 language code, such as "en-US" or "sr-Latn". For
-                more information, see
-                http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
-            translated_text (str):
-                Text translated into the target language.
-            provenance (Sequence[google.cloud.documentai_v1beta3.types.Document.Provenance]):
-                The history of this annotation.
-        """
-
-        text_anchor = proto.Field(
-            proto.MESSAGE, number=1, message="Document.TextAnchor",
-        )
-
-        language_code = proto.Field(proto.STRING, number=2)
-
-        translated_text = proto.Field(proto.STRING, number=3)
-
-        provenance = proto.RepeatedField(
-            proto.MESSAGE, number=4, message="Document.Provenance",
-        )
-
     class TextAnchor(proto.Message):
         r"""Text reference indexing into the
         [Document.text][google.cloud.documentai.v1beta3.Document.text].
@@ -1139,8 +1102,6 @@ class Document(proto.Message):
     entity_relations = proto.RepeatedField(
         proto.MESSAGE, number=8, message=EntityRelation,
     )
-
-    translations = proto.RepeatedField(proto.MESSAGE, number=12, message=Translation,)
 
     text_changes = proto.RepeatedField(proto.MESSAGE, number=14, message=TextChange,)
 
