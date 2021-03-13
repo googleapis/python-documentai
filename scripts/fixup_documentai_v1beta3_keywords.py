@@ -41,9 +41,9 @@ def partition(
 class documentaiCallTransformer(cst.CSTTransformer):
     CTRL_PARAMS: Tuple[str] = ('retry', 'timeout', 'metadata')
     METHOD_TO_PARAMS: Dict[str, Tuple[str]] = {
-    'batch_process_documents': ('name', 'input_configs', 'output_config', ),
-    'process_document': ('name', 'document', 'skip_human_review', ),
-    'review_document': ('human_review_config', 'document', ),
+    'batch_process_documents': ('name', 'input_configs', 'output_config', 'input_documents', 'document_output_config', 'skip_human_review', ),
+    'process_document': ('name', 'inline_document', 'raw_document', 'document', 'skip_human_review', ),
+    'review_document': ('human_review_config', 'inline_document', 'document', ),
 
     }
 

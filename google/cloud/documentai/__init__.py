@@ -22,6 +22,12 @@ from google.cloud.documentai_v1beta3.services.document_processor_service.client 
     DocumentProcessorServiceClient,
 )
 from google.cloud.documentai_v1beta3.types.document import Document
+from google.cloud.documentai_v1beta3.types.document_io import BatchDocumentsInputConfig
+from google.cloud.documentai_v1beta3.types.document_io import DocumentOutputConfig
+from google.cloud.documentai_v1beta3.types.document_io import GcsDocument
+from google.cloud.documentai_v1beta3.types.document_io import GcsDocuments
+from google.cloud.documentai_v1beta3.types.document_io import GcsPrefix
+from google.cloud.documentai_v1beta3.types.document_io import RawDocument
 from google.cloud.documentai_v1beta3.types.document_processor_service import (
     BatchProcessMetadata,
 )
@@ -30,6 +36,12 @@ from google.cloud.documentai_v1beta3.types.document_processor_service import (
 )
 from google.cloud.documentai_v1beta3.types.document_processor_service import (
     BatchProcessResponse,
+)
+from google.cloud.documentai_v1beta3.types.document_processor_service import (
+    CommonOperationMetadata,
+)
+from google.cloud.documentai_v1beta3.types.document_processor_service import (
+    HumanReviewStatus,
 )
 from google.cloud.documentai_v1beta3.types.document_processor_service import (
     ProcessRequest,
@@ -51,16 +63,24 @@ from google.cloud.documentai_v1beta3.types.geometry import NormalizedVertex
 from google.cloud.documentai_v1beta3.types.geometry import Vertex
 
 __all__ = (
+    "BatchDocumentsInputConfig",
     "BatchProcessMetadata",
     "BatchProcessRequest",
     "BatchProcessResponse",
     "BoundingPoly",
+    "CommonOperationMetadata",
     "Document",
+    "DocumentOutputConfig",
     "DocumentProcessorServiceAsyncClient",
     "DocumentProcessorServiceClient",
+    "GcsDocument",
+    "GcsDocuments",
+    "GcsPrefix",
+    "HumanReviewStatus",
     "NormalizedVertex",
     "ProcessRequest",
     "ProcessResponse",
+    "RawDocument",
     "ReviewDocumentOperationMetadata",
     "ReviewDocumentRequest",
     "ReviewDocumentResponse",

@@ -17,9 +17,17 @@
 
 from .services.document_processor_service import DocumentProcessorServiceClient
 from .types.document import Document
+from .types.document_io import BatchDocumentsInputConfig
+from .types.document_io import DocumentOutputConfig
+from .types.document_io import GcsDocument
+from .types.document_io import GcsDocuments
+from .types.document_io import GcsPrefix
+from .types.document_io import RawDocument
 from .types.document_processor_service import BatchProcessMetadata
 from .types.document_processor_service import BatchProcessRequest
 from .types.document_processor_service import BatchProcessResponse
+from .types.document_processor_service import CommonOperationMetadata
+from .types.document_processor_service import HumanReviewStatus
 from .types.document_processor_service import ProcessRequest
 from .types.document_processor_service import ProcessResponse
 from .types.document_processor_service import ReviewDocumentOperationMetadata
@@ -31,14 +39,22 @@ from .types.geometry import Vertex
 
 
 __all__ = (
+    "BatchDocumentsInputConfig",
     "BatchProcessMetadata",
     "BatchProcessRequest",
     "BatchProcessResponse",
     "BoundingPoly",
+    "CommonOperationMetadata",
     "Document",
+    "DocumentOutputConfig",
+    "GcsDocument",
+    "GcsDocuments",
+    "GcsPrefix",
+    "HumanReviewStatus",
     "NormalizedVertex",
     "ProcessRequest",
     "ProcessResponse",
+    "RawDocument",
     "ReviewDocumentOperationMetadata",
     "ReviewDocumentRequest",
     "ReviewDocumentResponse",

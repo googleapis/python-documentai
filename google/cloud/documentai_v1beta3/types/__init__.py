@@ -21,8 +21,17 @@ from .geometry import (
     BoundingPoly,
 )
 from .document import Document
+from .document_io import (
+    RawDocument,
+    GcsDocument,
+    GcsDocuments,
+    GcsPrefix,
+    BatchDocumentsInputConfig,
+    DocumentOutputConfig,
+)
 from .document_processor_service import (
     ProcessRequest,
+    HumanReviewStatus,
     ProcessResponse,
     BatchProcessRequest,
     BatchProcessResponse,
@@ -30,6 +39,7 @@ from .document_processor_service import (
     ReviewDocumentRequest,
     ReviewDocumentResponse,
     ReviewDocumentOperationMetadata,
+    CommonOperationMetadata,
 )
 
 __all__ = (
@@ -37,7 +47,14 @@ __all__ = (
     "NormalizedVertex",
     "BoundingPoly",
     "Document",
+    "RawDocument",
+    "GcsDocument",
+    "GcsDocuments",
+    "GcsPrefix",
+    "BatchDocumentsInputConfig",
+    "DocumentOutputConfig",
     "ProcessRequest",
+    "HumanReviewStatus",
     "ProcessResponse",
     "BatchProcessRequest",
     "BatchProcessResponse",
@@ -45,4 +62,5 @@ __all__ = (
     "ReviewDocumentRequest",
     "ReviewDocumentResponse",
     "ReviewDocumentOperationMetadata",
+    "CommonOperationMetadata",
 )

@@ -45,6 +45,7 @@ from google.cloud.documentai_v1beta3.services.document_processor_service import 
     transports,
 )
 from google.cloud.documentai_v1beta3.types import document
+from google.cloud.documentai_v1beta3.types import document_io
 from google.cloud.documentai_v1beta3.types import document_processor_service
 from google.cloud.documentai_v1beta3.types import geometry
 from google.longrunning import operations_pb2

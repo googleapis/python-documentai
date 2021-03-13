@@ -11,8 +11,8 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "5e3dacee19405529b841b53797df799c2383536c",
-        "internalRef": "355923884"
+        "sha": "1f68cd0c02d6925e97aa5bbb153d70a70554dab0",
+        "internalRef": "357825340"
       }
     },
     {
@@ -139,6 +139,7 @@
     "google/cloud/documentai_v1beta3/services/document_processor_service/transports/grpc_asyncio.py",
     "google/cloud/documentai_v1beta3/types/__init__.py",
     "google/cloud/documentai_v1beta3/types/document.py",
+    "google/cloud/documentai_v1beta3/types/document_io.py",
     "google/cloud/documentai_v1beta3/types/document_processor_service.py",
     "google/cloud/documentai_v1beta3/types/geometry.py",
     "mypy.ini",

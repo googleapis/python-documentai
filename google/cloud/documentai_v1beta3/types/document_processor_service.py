@@ -19,6 +19,7 @@ import proto  # type: ignore
 
 
 from google.cloud.documentai_v1beta3.types import document as gcd_document
+from google.cloud.documentai_v1beta3.types import document_io
 from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 from google.rpc import status_pb2 as gr_status  # type: ignore
 
@@ -27,6 +28,7 @@ __protobuf__ = proto.module(
     package="google.cloud.documentai.v1beta3",
     manifest={
         "ProcessRequest",
+        "HumanReviewStatus",
         "ProcessResponse",
         "BatchProcessRequest",
         "BatchProcessResponse",
@@ -34,6 +36,7 @@ __protobuf__ = proto.module(
         "ReviewDocumentRequest",
         "ReviewDocumentResponse",
         "ReviewDocumentOperationMetadata",
+        "CommonOperationMetadata",
     },
 )
 
@@ -42,6 +45,10 @@ class ProcessRequest(proto.Message):
     r"""Request message for the process document method.
 
     Attributes:
+        inline_document (google.cloud.documentai_v1beta3.types.Document):
+            An inline document proto.
+        raw_document (google.cloud.documentai_v1beta3.types.RawDocument):
+            A raw document content (bytes).
         name (str):
             Required. The processor resource name.
         document (google.cloud.documentai_v1beta3.types.Document):
@@ -52,11 +59,52 @@ class ProcessRequest(proto.Message):
             skipped for this request. Default to false.
     """
 
+    inline_document = proto.Field(
+        proto.MESSAGE, number=4, oneof="source", message=gcd_document.Document,
+    )
+
+    raw_document = proto.Field(
+        proto.MESSAGE, number=5, oneof="source", message=document_io.RawDocument,
+    )
+
     name = proto.Field(proto.STRING, number=1)
 
     document = proto.Field(proto.MESSAGE, number=2, message=gcd_document.Document,)
 
     skip_human_review = proto.Field(proto.BOOL, number=3)
+
+
+class HumanReviewStatus(proto.Message):
+    r"""The status of human review on a processed document.
+
+    Attributes:
+        state (google.cloud.documentai_v1beta3.types.HumanReviewStatus.State):
+            The state of human review on the processing
+            request.
+        state_message (str):
+            A message providing more details about the
+            human review state.
+        human_review_operation (str):
+            The name of the operation triggered by the processed
+            document. This field is populated only when the [state] is
+            [HUMAN_REVIEW_IN_PROGRESS]. It has the same response type
+            and metadata as the long running operation returned by
+            [ReviewDocument] method.
+    """
+
+    class State(proto.Enum):
+        r"""The final state of human review on a processed document."""
+        STATE_UNSPECIFIED = 0
+        SKIPPED = 1
+        VALIDATION_PASSED = 2
+        IN_PROGRESS = 3
+        ERROR = 4
+
+    state = proto.Field(proto.ENUM, number=1, enum=State,)
+
+    state_message = proto.Field(proto.STRING, number=2)
+
+    human_review_operation = proto.Field(proto.STRING, number=3)
 
 
 class ProcessResponse(proto.Message):
@@ -73,11 +121,18 @@ class ProcessResponse(proto.Message):
             has the same response type and metadata as the
             long running operation returned by
             ReviewDocument method.
+        human_review_status (google.cloud.documentai_v1beta3.types.HumanReviewStatus):
+            The status of human review on the processed
+            document.
     """
 
     document = proto.Field(proto.MESSAGE, number=1, message=gcd_document.Document,)
 
     human_review_operation = proto.Field(proto.STRING, number=2)
+
+    human_review_status = proto.Field(
+        proto.MESSAGE, number=3, message="HumanReviewStatus",
+    )
 
 
 class BatchProcessRequest(proto.Message):
@@ -91,6 +146,13 @@ class BatchProcessRequest(proto.Message):
             the batch process.
         output_config (google.cloud.documentai_v1beta3.types.BatchProcessRequest.BatchOutputConfig):
             The overall output config for batch process.
+        input_documents (google.cloud.documentai_v1beta3.types.BatchDocumentsInputConfig):
+            The input documents for batch process.
+        document_output_config (google.cloud.documentai_v1beta3.types.DocumentOutputConfig):
+            The overall output config for batch process.
+        skip_human_review (bool):
+            Whether Human Review feature should be
+            skipped for this request. Default to false.
     """
 
     class BatchInputConfig(proto.Message):
@@ -129,6 +191,16 @@ class BatchProcessRequest(proto.Message):
     )
 
     output_config = proto.Field(proto.MESSAGE, number=3, message=BatchOutputConfig,)
+
+    input_documents = proto.Field(
+        proto.MESSAGE, number=5, message=document_io.BatchDocumentsInputConfig,
+    )
+
+    document_output_config = proto.Field(
+        proto.MESSAGE, number=6, message=document_io.DocumentOutputConfig,
+    )
+
+    skip_human_review = proto.Field(proto.BOOL, number=4)
 
 
 class BatchProcessResponse(proto.Message):
@@ -188,6 +260,9 @@ class BatchProcessMetadata(proto.Message):
                 has the same response type and metadata as the
                 long running operation returned by
                 ReviewDocument method.
+            human_review_status (google.cloud.documentai_v1beta3.types.HumanReviewStatus):
+                The status of human review on the processed
+                document.
         """
 
         input_gcs_source = proto.Field(proto.STRING, number=1)
@@ -197,6 +272,10 @@ class BatchProcessMetadata(proto.Message):
         output_gcs_destination = proto.Field(proto.STRING, number=3)
 
         human_review_operation = proto.Field(proto.STRING, number=4)
+
+        human_review_status = proto.Field(
+            proto.MESSAGE, number=5, message="HumanReviewStatus",
+        )
 
     state = proto.Field(proto.ENUM, number=1, enum=State,)
 
@@ -215,6 +294,8 @@ class ReviewDocumentRequest(proto.Message):
     r"""Request message for review document method.
 
     Attributes:
+        inline_document (google.cloud.documentai_v1beta3.types.Document):
+            An inline document proto.
         human_review_config (str):
             Required. The resource name of the
             HumanReviewConfig that the document will be
@@ -222,6 +303,10 @@ class ReviewDocumentRequest(proto.Message):
         document (google.cloud.documentai_v1beta3.types.Document):
             The document that needs human review.
     """
+
+    inline_document = proto.Field(
+        proto.MESSAGE, number=4, oneof="source", message=gcd_document.Document,
+    )
 
     human_review_config = proto.Field(proto.STRING, number=1)
 
@@ -251,6 +336,46 @@ class ReviewDocumentOperationMetadata(proto.Message):
             A message providing more details about the
             current state of processing. For example, the
             error message if the operation is failed.
+        create_time (google.protobuf.timestamp_pb2.Timestamp):
+            The creation time of the operation.
+        update_time (google.protobuf.timestamp_pb2.Timestamp):
+            The last update time of the operation.
+        common_metadata (google.cloud.documentai_v1beta3.types.CommonOperationMetadata):
+            The basic metadata of the long running
+            operation.
+    """
+
+    class State(proto.Enum):
+        r"""State of the longrunning operation."""
+        STATE_UNSPECIFIED = 0
+        RUNNING = 1
+        CANCELLING = 2
+        SUCCEEDED = 3
+        FAILED = 4
+        CANCELLED = 5
+
+    state = proto.Field(proto.ENUM, number=1, enum=State,)
+
+    state_message = proto.Field(proto.STRING, number=2)
+
+    create_time = proto.Field(proto.MESSAGE, number=3, message=timestamp.Timestamp,)
+
+    update_time = proto.Field(proto.MESSAGE, number=4, message=timestamp.Timestamp,)
+
+    common_metadata = proto.Field(
+        proto.MESSAGE, number=5, message="CommonOperationMetadata",
+    )
+
+
+class CommonOperationMetadata(proto.Message):
+    r"""The common metadata for long running operations.
+
+    Attributes:
+        state (google.cloud.documentai_v1beta3.types.CommonOperationMetadata.State):
+            The state of the operation.
+        state_message (str):
+            A message providing more details about the
+            current state of processing.
         create_time (google.protobuf.timestamp_pb2.Timestamp):
             The creation time of the operation.
         update_time (google.protobuf.timestamp_pb2.Timestamp):
