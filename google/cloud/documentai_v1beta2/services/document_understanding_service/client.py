@@ -398,8 +398,8 @@ class DocumentUnderstandingServiceClient(
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
 
-            if requests:
-                request.requests.extend(requests)
+            if requests is not None:
+                request.requests = requests
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
