@@ -29,7 +29,11 @@ common = gcp.CommonTemplates()
 # Generate document AI GAPIC layer
 # ----------------------------------------------------------------------------
 
-versions = ["v1beta2", "v1beta3"]
+versions = ["v1beta2",
+    "v1beta3",
+    "v1",
+
+] # add new versions at the end of the list
 
 for version in versions:
     library = gapic.py_library(
@@ -52,7 +56,7 @@ templated_files = common.py_library(
 s.move(
     templated_files,
     excludes=[".coveragerc"],  # microgenerator has a good .coveragerc file
-) 
+)
 
 python.py_samples(skip_readmes=True)
 
