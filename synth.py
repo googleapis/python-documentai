@@ -25,7 +25,7 @@ logging.basicConfig(level=logging.DEBUG)
 gapic = gcp.GAPICBazel()
 common = gcp.CommonTemplates()
 
-# add the highest stable vesrion to the end
+# add the highest stable version to the end
 versions = ["v1beta2", "v1beta3", "v1"]
 # ----------------------------------------------------------------------------
 # Generate document AI GAPIC layer
