@@ -15,7 +15,7 @@
 
 import os
 
-from samples.snippets import process_document_sample_v1beta3
+from samples.snippets import process_document_sample
 
 
 location = "us"
@@ -25,7 +25,7 @@ file_path = "resources/invoice.pdf"
 
 
 def test_process_documents(capsys):
-    process_document_sample_v1beta3.process_document_sample(
+    process_document_sample.process_document_sample(
         project_id=project_id,
         location=location,
         processor_id=processor_id,

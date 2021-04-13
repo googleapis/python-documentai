@@ -21,7 +21,7 @@ from google.cloud.exceptions import NotFound
 
 import pytest
 
-from samples.snippets import batch_process_documents_sample_v1beta3
+from samples.snippets import batch_process_documents_sample
 
 location = "us"
 project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
