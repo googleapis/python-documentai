@@ -47,7 +47,7 @@ def test_bucket():
 
 
 def test_batch_process_documents(capsys, test_bucket):
-    batch_process_documents_sample_v1beta3.batch_process_documents(
+    batch_process_documents_sample.batch_process_documents(
         project_id=project_id,
         location=location,
         processor_id=processor_id,
