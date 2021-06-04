@@ -19,17 +19,14 @@ from google.protobuf import timestamp_pb2  # type: ignore
 
 
 __protobuf__ = proto.module(
-    package='google.cloud.documentai.v1beta3',
-    manifest={
-        'CommonOperationMetadata',
-    },
+    package="google.cloud.documentai.v1", manifest={"CommonOperationMetadata",},
 )
 
 
 class CommonOperationMetadata(proto.Message):
     r"""The common metadata for long running operations.
     Attributes:
-        state (google.cloud.documentai_v1beta3.types.CommonOperationMetadata.State):
+        state (google.cloud.documentai_v1.types.CommonOperationMetadata.State):
             The state of the operation.
         state_message (str):
             A message providing more details about the
@@ -39,6 +36,7 @@ class CommonOperationMetadata(proto.Message):
         update_time (google.protobuf.timestamp_pb2.Timestamp):
             The last update time of the operation.
     """
+
     class State(proto.Enum):
         r"""State of the longrunning operation."""
         STATE_UNSPECIFIED = 0
@@ -48,25 +46,10 @@ class CommonOperationMetadata(proto.Message):
         FAILED = 4
         CANCELLED = 5
 
-    state = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=State,
-    )
-    state_message = proto.Field(
-        proto.STRING,
-        number=2,
-    )
-    create_time = proto.Field(
-        proto.MESSAGE,
-        number=3,
-        message=timestamp_pb2.Timestamp,
-    )
-    update_time = proto.Field(
-        proto.MESSAGE,
-        number=4,
-        message=timestamp_pb2.Timestamp,
-    )
+    state = proto.Field(proto.ENUM, number=1, enum=State,)
+    state_message = proto.Field(proto.STRING, number=2,)
+    create_time = proto.Field(proto.MESSAGE, number=3, message=timestamp_pb2.Timestamp,)
+    update_time = proto.Field(proto.MESSAGE, number=4, message=timestamp_pb2.Timestamp,)
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))
