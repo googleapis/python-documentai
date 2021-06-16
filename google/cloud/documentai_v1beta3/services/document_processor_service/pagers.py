@@ -13,7 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-from typing import Any, AsyncIterable, Awaitable, Callable, Iterable, Sequence, Tuple, Optional
+from typing import (
+    Any,
+    AsyncIterable,
+    Awaitable,
+    Callable,
+    Iterable,
+    Sequence,
+    Tuple,
+    Optional,
+)
 
 from google.cloud.documentai_v1beta3.types import document_processor_service
 from google.cloud.documentai_v1beta3.types import processor
@@ -36,12 +45,15 @@ class ListProcessorsPager:
     attributes are available on the pager. If multiple requests are made, only
     the most recent response is retained, and thus used for attribute lookup.
     """
-    def __init__(self,
-            method: Callable[..., document_processor_service.ListProcessorsResponse],
-            request: document_processor_service.ListProcessorsRequest,
-            response: document_processor_service.ListProcessorsResponse,
-            *,
-            metadata: Sequence[Tuple[str, str]] = ()):
+
+    def __init__(
+        self,
+        method: Callable[..., document_processor_service.ListProcessorsResponse],
+        request: document_processor_service.ListProcessorsRequest,
+        response: document_processor_service.ListProcessorsResponse,
+        *,
+        metadata: Sequence[Tuple[str, str]] = ()
+    ):
         """Instantiate the pager.
 
         Args:
@@ -75,7 +87,7 @@ class ListProcessorsPager:
             yield from page.processors
 
     def __repr__(self) -> str:
-        return '{0}<{1!r}>'.format(self.__class__.__name__, self._response)
+        return "{0}<{1!r}>".format(self.__class__.__name__, self._response)
 
 
 class ListProcessorsAsyncPager:
@@ -95,12 +107,17 @@ class ListProcessorsAsyncPager:
     attributes are available on the pager. If multiple requests are made, only
     the most recent response is retained, and thus used for attribute lookup.
     """
-    def __init__(self,
-            method: Callable[..., Awaitable[document_processor_service.ListProcessorsResponse]],
-            request: document_processor_service.ListProcessorsRequest,
-            response: document_processor_service.ListProcessorsResponse,
-            *,
-            metadata: Sequence[Tuple[str, str]] = ()):
+
+    def __init__(
+        self,
+        method: Callable[
+            ..., Awaitable[document_processor_service.ListProcessorsResponse]
+        ],
+        request: document_processor_service.ListProcessorsRequest,
+        response: document_processor_service.ListProcessorsResponse,
+        *,
+        metadata: Sequence[Tuple[str, str]] = ()
+    ):
         """Instantiates the pager.
 
         Args:
@@ -122,7 +139,9 @@ class ListProcessorsAsyncPager:
         return getattr(self._response, name)
 
     @property
-    async def pages(self) -> AsyncIterable[document_processor_service.ListProcessorsResponse]:
+    async def pages(
+        self,
+    ) -> AsyncIterable[document_processor_service.ListProcessorsResponse]:
         yield self._response
         while self._response.next_page_token:
             self._request.page_token = self._response.next_page_token
@@ -138,4 +157,4 @@ class ListProcessorsAsyncPager:
         return async_generator()
 
     def __repr__(self) -> str:
-        return '{0}<{1!r}>'.format(self.__class__.__name__, self._response)
+        return "{0}<{1!r}>".format(self.__class__.__name__, self._response)

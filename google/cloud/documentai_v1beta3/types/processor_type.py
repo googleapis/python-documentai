@@ -17,10 +17,7 @@ import proto  # type: ignore
 
 
 __protobuf__ = proto.module(
-    package='google.cloud.documentai.v1beta3',
-    manifest={
-        'ProcessorType',
-    },
+    package="google.cloud.documentai.v1beta3", manifest={"ProcessorType",},
 )
 
 
@@ -54,32 +51,15 @@ class ProcessorType(proto.Message):
                 The location id.
         """
 
-        location_id = proto.Field(
-            proto.STRING,
-            number=1,
-        )
+        location_id = proto.Field(proto.STRING, number=1,)
 
-    name = proto.Field(
-        proto.STRING,
-        number=1,
-    )
-    type_ = proto.Field(
-        proto.STRING,
-        number=2,
-    )
-    category = proto.Field(
-        proto.STRING,
-        number=3,
-    )
+    name = proto.Field(proto.STRING, number=1,)
+    type_ = proto.Field(proto.STRING, number=2,)
+    category = proto.Field(proto.STRING, number=3,)
     available_locations = proto.RepeatedField(
-        proto.MESSAGE,
-        number=4,
-        message=LocationInfo,
+        proto.MESSAGE, number=4, message=LocationInfo,
     )
-    allow_creation = proto.Field(
-        proto.BOOL,
-        number=6,
-    )
+    allow_creation = proto.Field(proto.BOOL, number=6,)
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))
