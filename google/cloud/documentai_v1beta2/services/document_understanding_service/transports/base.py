@@ -148,7 +148,14 @@ class DocumentUnderstandingServiceTransport(abc.ABC):
             packaging.version.parse(_GOOGLE_AUTH_VERSION)
             >= packaging.version.parse("1.25.0")
         ):
-            scopes_kwargs = {"scopes": scopes, "default_scopes": cls.AUTH_SCOPES}
+            # Documentai uses a regional host (us-documentai.googleapis.com) as the default
+            # so self-signed JWT cannot be used.
+            # Intentionally pass default scopes as user scopes so the auth library
+            # does not use the self-signed JWT flow.
+            scopes_kwargs = {
+                "scopes": scopes or cls.AUTH_SCOPES,
+                "default_scopes": cls.AUTH_SCOPES,
+            }
         else:
             scopes_kwargs = {"scopes": scopes or cls.AUTH_SCOPES}
 
