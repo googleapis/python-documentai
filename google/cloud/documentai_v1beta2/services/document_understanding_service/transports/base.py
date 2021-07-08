@@ -152,6 +152,7 @@ class DocumentUnderstandingServiceTransport(abc.ABC):
             # so self-signed JWT cannot be used.
             # Intentionally pass default scopes as user scopes so the auth library
             # does not use the self-signed JWT flow.
+            # https://github.com/googleapis/python-documentai/issues/174
             scopes_kwargs = {
                 "scopes": scopes or cls.AUTH_SCOPES,
                 "default_scopes": cls.AUTH_SCOPES,

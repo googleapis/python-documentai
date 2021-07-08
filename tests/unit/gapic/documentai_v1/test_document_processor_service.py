@@ -1315,7 +1315,7 @@ def test_document_processor_service_base_transport_with_credentials_file():
         )
         load_creds.assert_called_once_with(
             "credentials.json",
-            scopes=("https://www.googleapis.com/auth/cloud-platform",),
+            scopes=None,
             default_scopes=("https://www.googleapis.com/auth/cloud-platform",),
             quota_project_id="octopus",
         )
@@ -1359,7 +1359,7 @@ def test_document_processor_service_auth_adc():
         adc.return_value = (ga_credentials.AnonymousCredentials(), None)
         DocumentProcessorServiceClient()
         adc.assert_called_once_with(
-            scopes=("https://www.googleapis.com/auth/cloud-platform",),
+            scopes=None,
             default_scopes=("https://www.googleapis.com/auth/cloud-platform",),
             quota_project_id=None,
         )
