@@ -30,25 +30,11 @@ default_version = "v1"
 for library in s.get_staging_dirs(default_version):
     excludes = [
         "README.rst",
-        "nox.py",
         "docs/index.rst",
         "setup.py",
         "scripts/fixup_documentai_v*",  # this library was always generated with the microgenerator
     ]
 
-    s.replace(library / "tests/**/documentai_v1beta2/*.py",
-    """(@requires_google_auth_gte_1_25_0
-def test_document_.*?_service_base_transport_with_credentials_file.*?)scopes=None,""",
-    """\g<1>scopes=("https://www.googleapis.com/auth/cloud-platform",),""",
-        flags=re.MULTILINE | re.DOTALL,
-        )
-
-    s.replace(library / "tests/**/documentai_v1beta2/*.py",
-    """(@requires_google_auth_gte_1_25_0
-def test_document_.*?_service_auth_adc.*?)scopes=None,""",
-    """\g<1>scopes=("https://www.googleapis.com/auth/cloud-platform",),""",
-        flags=re.MULTILINE | re.DOTALL,
-        )
     s.move(library, excludes=excludes)
 
 s.remove_staging_dirs()
