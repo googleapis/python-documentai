@@ -2,6 +2,10 @@
 
 .. include:: multiprocessing.rst
 
+This package includes clients for multiple versions of Cloud Document Understanding API.
+By default, you will get version ``documentai_v1``.
+
+
 API Reference
 -------------
 .. toctree::
@@ -9,11 +13,22 @@ API Reference
 
     documentai_v1/services
     documentai_v1/types
-    documentai_v1beta3/services
-    documentai_v1beta3/types
+
+API Reference
+-------------
+.. toctree::
+    :maxdepth: 2
+
     documentai_v1beta2/services
     documentai_v1beta2/types
 
+API Reference
+-------------
+.. toctree::
+    :maxdepth: 2
+
+    documentai_v1beta3/services
+    documentai_v1beta3/types
 
 Changelog
 ---------
