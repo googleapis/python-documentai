@@ -15,23 +15,27 @@
 
 import os
 
-from samples.snippets import process_document_sample
+from samples.snippets import process_document_splitter_sample
 
 
 location = "us"
 project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
-processor_id = "90484cfdedb024f6"
-file_path = "resources/invoice.pdf"
+processor_id = "??????????"
+poor_quality_file_path = "resources/multi_document.pdf"
 
 
 def test_process_documents(capsys):
-    process_document_sample.process_document_sample(
+    process_document_splitter_sample.process_document_splitter_sample(
         project_id=project_id,
         location=location,
         processor_id=processor_id,
-        file_path=file_path,
+        file_path=poor_quality_file_path,
     )
     out, _ = capsys.readouterr()
 
-    assert "Paragraph" in out
-    assert "Invoice" in out
+    expected_strings = [
+        "Found 3 subdocuments",
+        "confident that pages 0 to 1 are a seperate document.",
+    ]
+    for expected_string in expected_strings:
+        assert expected_string in out

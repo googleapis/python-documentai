@@ -13,7 +13,7 @@
 # limitations under the License.
 #
 
-# [START documentai_process_document]
+# [START documentai_process_form_document]
 
 # TODO(developer): Uncomment these variables before running the sample.
 # project_id= 'YOUR_PROJECT_ID'
@@ -21,8 +21,7 @@
 # processor_id = 'YOUR_PROCESSOR_ID' # Create processor in Cloud Console
 # file_path = '/path/to/local/pdf'
 
-
-def process_document_sample(
+def process_document_splitter_sample(
     project_id: str, location: str, processor_id: str, file_path: str
 ):
     from google.cloud import documentai_v1 as documentai
@@ -51,42 +50,34 @@ def process_document_sample(
     # Recognizes text entities in the PDF document
     result = client.process_document(request=request)
 
+    print("Document processing complete.\n")
+
+    # Read the splitter output from the splitter processor.
     document = result.document
+    print(f'Found {len(document.entities)} subdocuments:')
+    for entity in document.entities:
+        start = entity.page_anchor.page_refs[0].page
+        end = entity.page_anchor.page_refs[1].page
+        conf_percent = '{:.1%}'.format(entity.confidence)
+        if entity.type:
+            doctype = entity.type
+            print(f'{conf_percent} confident that pages {start} to {end} are {doctype} subdocument.')
+        else:
+            print(f'{conf_percent} confident that pages {start} to {end} are a subdocument.')
 
-    print("Document processing complete.")
-
-    # For a full list of Document object attributes, please reference this page: https://googleapis.dev/python/documentai/latest/_modules/google/cloud/documentai_v1beta3/types/document.html#Document
-
-    document_pages = document.pages
-
-    # Read the text recognition output from the processor
-    print("The document contains the following paragraphs:")
-    for page in document_pages:
-        paragraphs = page.paragraphs
-        for paragraph in paragraphs:
-            paragraph_text = get_text(paragraph.layout, document)
-            print(f"Paragraph text: {paragraph_text}")
+# [END documentai_process_form_document]
 
 
-# Extract shards from the text field
-def get_text(doc_element: dict, document: dict):
-    """
-    Document AI identifies form fields by their offsets
-    in document text. This function converts offsets
-    to text snippets.
-    """
-    response = ""
-    # If a text segment spans several lines, it will
-    # be stored in different text segments.
-    for segment in doc_element.text_anchor.text_segments:
-        start_index = (
-            int(segment.start_index)
-            if segment in doc_element.text_anchor.text_segments
-            else 0
-        )
-        end_index = int(segment.end_index)
-        response += document.text[start_index:end_index]
-    return response
+if __name__ == "__main__":
+    import os
+    location = "us"
+    project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
+    processor_id = "??????????"
+    poor_quality_file_path = "resources/multi_document.pdf"
 
-
-# [END documentai_process_document]
+    process_document_splitter_sample(
+        project_id=project_id,
+        location=location,
+        processor_id=processor_id,
+        file_path=file_path,
+    )
