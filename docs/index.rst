@@ -30,12 +30,13 @@ API Reference
     documentai_v1beta3/services
     documentai_v1beta3/types
 
+
 Changelog
 ---------
 
 For a list of all ``google-cloud-documentai`` releases:
 
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 2
 
-   changelog
+    changelog
