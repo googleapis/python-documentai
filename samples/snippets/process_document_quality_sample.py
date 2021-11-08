@@ -55,40 +55,23 @@ def process_document_quality_sample(
     # Read the quality output from the processor.
     # For a full list of Document object attributes, please reference this page: https://googleapis.dev/python/documentai/latest/_modules/google/cloud/documentai_v1beta3/types/document.html#Document
     document = result.document
-    quality_entities = []
+    page_quality_score = []
+    category_quality_scores = []
     for entity in document.entities:
-        if entity.type == 'quality_score':
-            quality_entities.append(entity)
-    if not quality_entities:
-        raise ValueError("Cannot find quality entity. Please use a document quality processor for this sample.")
-
-    for quality_entity in quality_entities:
-        page_num = page_anchor_to_num(quality_entity.pageAnchor)
-        conf_percent = '{:.1%}'.format(quality_entity.confidence)
-        print(f'Overall quality score for page {page_num}: {conf_percent}')
-        for prop in quality_entity.properties:
+        conf_percent = '{:.1%}'.format(entity.confidence)
+        num = page_anchor_to_num(entity.page_anchor)
+        print(f'Page {num} has a quality score of {conf_percent}:')
+        for prop in entity.properties:
             conf_percent = '{:.1%}'.format(prop.confidence)
-            print(f'    * {prop.type}: {conf_percent}')
+            # remove prefix string "quality/"
+            category = prop.type_[len("quality/"):]
+            print(f'    * {category} score of {conf_percent}')
 
 
-def page_anchor_to_num(anchor: dict) -> int:
-    if len(anchor.page_refs) == 0:
-        return 1
-    else:
-        return int(anchor.page_refs[0].page) + 1
-
+def page_anchor_to_num(page_anchor: dict) -> str:
+    try:
+        return str(int(page_anchor.page_refs.page) + 1)
+    except AttributeError:
+        return "1"
 
 # [END documentai_process_form_document]
-if __name__ == "__main__":
-    import os
-    location = "us"
-    project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
-    processor_id = "90484cfdedb024f6"
-    file_path = "resources/document_quality_good.pdf"
-
-    process_document_quality_sample(
-        project_id=project_id,
-        location=location,
-        processor_id=processor_id,
-        file_path=file_path,
-    )

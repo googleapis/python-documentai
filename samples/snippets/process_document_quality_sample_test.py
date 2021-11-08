@@ -20,7 +20,7 @@ from samples.snippets import process_document_quality_sample
 
 location = "us"
 project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
-processor_id = "??????????"
+processor_id = "7fcb597c523721b3"
 poor_quality_file_path = "resources/document_quality_poor.pdf"
 
 
@@ -34,8 +34,9 @@ def test_process_documents(capsys):
     out, _ = capsys.readouterr()
 
     expected_strings = [
-        "Overall quality score for page 1",
-        "quality/defect_blurry",
+        "Page 1 has a quality score of",
+        "defect_blurry score of 9",
+        "defect_noisy"
     ]
     for expected_string in expected_strings:
         assert expected_string in out

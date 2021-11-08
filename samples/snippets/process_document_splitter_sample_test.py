@@ -20,8 +20,8 @@ from samples.snippets import process_document_splitter_sample
 
 location = "us"
 project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
-processor_id = "??????????"
-poor_quality_file_path = "resources/multi_document.pdf"
+processor_id = "ed55eeb2b276066f"
+file_path = "resources/multi_document.pdf"
 
 
 def test_process_documents(capsys):
@@ -29,13 +29,14 @@ def test_process_documents(capsys):
         project_id=project_id,
         location=location,
         processor_id=processor_id,
-        file_path=poor_quality_file_path,
+        file_path=file_path,
     )
     out, _ = capsys.readouterr()
 
     expected_strings = [
-        "Found 3 subdocuments",
-        "confident that pages 0 to 1 are a seperate document.",
+        "Found 8 subdocuments",
+        "confident that pages 1 to 2 are a subdocument",
+        "confident that page 10 is a subdocument",
     ]
     for expected_string in expected_strings:
         assert expected_string in out

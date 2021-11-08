@@ -22,8 +22,10 @@
 # file_path = '/path/to/local/pdf'
 
 def process_document_splitter_sample(
-    project_id: str, location: str, processor_id: str, file_path: str
-):
+        project_id: str,
+        location: str,
+        processor_id: str,
+        file_path: str):
     from google.cloud import documentai_v1 as documentai
 
     # You must set the api_endpoint if you use a location other than 'us', e.g.:
@@ -56,28 +58,35 @@ def process_document_splitter_sample(
     document = result.document
     print(f'Found {len(document.entities)} subdocuments:')
     for entity in document.entities:
-        start = entity.page_anchor.page_refs[0].page
-        end = entity.page_anchor.page_refs[1].page
         conf_percent = '{:.1%}'.format(entity.confidence)
-        if entity.type:
+        pages_range = page_refs_to_string(entity.page_anchor.page_refs)
+        # Print subdocument type information, if available
+        try:
             doctype = entity.type
-            print(f'{conf_percent} confident that pages {start} to {end} are {doctype} subdocument.')
-        else:
-            print(f'{conf_percent} confident that pages {start} to {end} are a subdocument.')
+            print(f'{conf_percent} confident that {pages_range} a "{doctype}" subdocument.')
+        except AttributeError:
+            print(f'{conf_percent} confident that {pages_range} a subdocument.')
+
+
+def page_refs_to_string(page_refs: dict) -> str:
+    ''' Converts a page ref to a string describing the page or page range.'''
+    if len(page_refs) == 1:
+        num = page_refs[0].page
+        if not num:
+            num = "0"
+        # Increase page number by one to account for 0-indexing
+        # e.g. the first page should be "page 1" not "page 0"
+        num = str(int(num) + 1)
+        return f'page {num} is'
+    else:
+        start = page_refs[0].page
+        if not start:
+            start = "0"
+        end = page_refs[1].page
+        # Increase page number by one to account for 0-indexing
+        # e.g. the first page should be "page 1" not "page 0"
+        start = str(int(start) + 1)
+        end = str(int(end) + 1)
+        return f'pages {start} to {end} are'
 
 # [END documentai_process_form_document]
-
-
-if __name__ == "__main__":
-    import os
-    location = "us"
-    project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
-    processor_id = "??????????"
-    poor_quality_file_path = "resources/multi_document.pdf"
-
-    process_document_splitter_sample(
-        project_id=project_id,
-        location=location,
-        processor_id=processor_id,
-        file_path=file_path,
-    )

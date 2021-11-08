@@ -56,24 +56,14 @@ def process_document_specialized_sample(
     document = result.document
     print(f'Found {len(document.entities)} entities:')
     for entity in document.entities:
-        key = entity.type
-        value = entity.mentionText
+        # Fields detected. For a full list of fields for each processor see
+        # the processor documentation:
+        # https://cloud.google.com/document-ai/docs/processors-list
+        key = entity.type_
+        # some other value formats in addition to text are availible
+        # e.g. dates: `entity.normalized_value.date_value.year`
+        text_value = entity.text_anchor.content
         conf_percent = '{:.1%}'.format(entity.confidence)
-        print(f'    * {repr(key)}: {repr(value)}({conf_percent} confident)')
+        print(f'    * {repr(key)}: {repr(text_value)}({conf_percent} confident)')
 
 # [END documentai_process_form_document]
-
-
-if __name__ == "__main__":
-    import os
-    location = "us"
-    project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
-    processor_id = "?????????"
-    file_path = "resources/us_driver_license.pdf"
-
-    process_document_specialized_sample(
-        project_id=project_id,
-        location=location,
-        processor_id=processor_id,
-        file_path=file_path,
-    )
