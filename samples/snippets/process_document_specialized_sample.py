@@ -52,7 +52,15 @@ def process_document_specialized_sample(
 
     print("Document processing complete.\n")
 
-    # Read custom entities from the specalized US drivers license processor.
+    # Read fields specificly from the specalized US drivers license processor:
+    # https://cloud.google.com/document-ai/docs/processors-list#processor_us-driver-license-parser
+    # retriving data from other specalized processors follow a similar pattern.
+    # For a complete list of processors see:
+    # https://cloud.google.com/document-ai/docs/processors-list
+    #
+    # OCR and other data is also present in the quality processor's response.
+    # Please see the OCR and other samples for how to parse other data in the
+    # response.
     document = result.document
     print(f'Found {len(document.entities)} entities:')
     for entity in document.entities:

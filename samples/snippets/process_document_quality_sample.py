@@ -52,26 +52,25 @@ def process_document_quality_sample(
 
     print("Document processing complete.\n")
 
-    # Read the quality output from the processor.
-    # For a full list of Document object attributes, please reference this page: https://googleapis.dev/python/documentai/latest/_modules/google/cloud/documentai_v1beta3/types/document.html#Document
+    # Read the quality-specific information from the output from the
+    # Intelligent Document Quality Processor:
+    # https://cloud.google.com/document-ai/docs/processors-list#processor_doc-quality-processor
+    # OCR and other data is also present in the quality processor's response.
+    # Please see the OCR and other samples for how to parse other data in the
+    # response.
     document = result.document
-    page_quality_score = []
-    category_quality_scores = []
     for entity in document.entities:
         conf_percent = '{:.1%}'.format(entity.confidence)
-        num = page_anchor_to_num(entity.page_anchor)
-        print(f'Page {num} has a quality score of {conf_percent}:')
+        page_num = ''
+        try:
+            page_num = str(int(entity.page_anchor.page_refs.page) + 1)
+        except AttributeError:
+            page_num = "1"
+
+        print(f'Page {page_num} has a quality score of {conf_percent}:')
+
         for prop in entity.properties:
             conf_percent = '{:.1%}'.format(prop.confidence)
-            # remove prefix string "quality/"
-            category = prop.type_[len("quality/"):]
-            print(f'    * {category} score of {conf_percent}')
-
-
-def page_anchor_to_num(page_anchor: dict) -> str:
-    try:
-        return str(int(page_anchor.page_refs.page) + 1)
-    except AttributeError:
-        return "1"
+            print(f'    * {prop.type_} score of {conf_percent}')
 
 # [END documentai_process_form_document]

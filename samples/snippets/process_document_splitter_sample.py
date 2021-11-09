@@ -54,7 +54,12 @@ def process_document_splitter_sample(
 
     print("Document processing complete.\n")
 
-    # Read the splitter output from the splitter processor.
+    # Read the splitter output from the document splitter processor:
+    # https://cloud.google.com/document-ai/docs/processors-list#processor_doc-splitter
+    # This processor only provides text for the document and information on how
+    # to split the document on logical boundaries. To identify and extract text,
+    # form elements, and entities please see other processors like the OCR, form,
+    # and specalized processors.
     document = result.document
     print(f'Found {len(document.entities)} subdocuments:')
     for entity in document.entities:
@@ -71,22 +76,11 @@ def process_document_splitter_sample(
 def page_refs_to_string(page_refs: dict) -> str:
     ''' Converts a page ref to a string describing the page or page range.'''
     if len(page_refs) == 1:
-        num = page_refs[0].page
-        if not num:
-            num = "0"
-        # Increase page number by one to account for 0-indexing
-        # e.g. the first page should be "page 1" not "page 0"
-        num = str(int(num) + 1)
+        num = str(int(page_refs[0].page) + 1)
         return f'page {num} is'
     else:
-        start = page_refs[0].page
-        if not start:
-            start = "0"
-        end = page_refs[1].page
-        # Increase page number by one to account for 0-indexing
-        # e.g. the first page should be "page 1" not "page 0"
-        start = str(int(start) + 1)
-        end = str(int(end) + 1)
+        start = str(int(page_refs[0].page) + 1)
+        end = str(int(page_refs[1].page) + 1)
         return f'pages {start} to {end} are'
 
 # [END documentai_process_form_document]

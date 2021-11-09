@@ -60,41 +60,53 @@ def process_document_ocr_sample(
     print(f"There are {len(document.pages)} page(s) in this document.\n")
 
     for page in document.pages:
-        print_page_info(page, text)
+        print(f"Page {page.page_number}:")
+        print_page_dimensions(page.dimension)
+        print_detected_langauges(page.detected_languages)
+        print_paragraphs(page.paragraphs, text)
+        print_blocks(page.blocks, text)
+        print_lines(page.lines, text)
+        print_tokens(page.tokens, text)
 
 
-def print_page_info(page: dict, text: str) -> None:
-    print(f"Page {page.page_number}:")
-    print(f"    Width: {str(page.dimension.width)}")
-    print(f"    Height: {str(page.dimension.height)}")
-    print(f"    Width: {page.dimension.width}")
+def print_page_dimensions(dimension: dict) -> None:
+    print(f"    Width: {str(dimension.width)}")
+    print(f"    Height: {str(dimension.height)}")
 
-    print(f"    Detected languages:")
-    for lang in page.detected_languages:
+
+def print_detected_langauges(detected_languages: dict) -> None:
+    print("    Detected languages:")
+    for lang in detected_languages:
         code = lang.language_code
         conf_percent = '{:.1%}'.format(lang.confidence)
         print(f"        {code} ({conf_percent} confidence)")
 
-    print(f"    {len(page.paragraphs)} paragraphs detected:")
-    first_paragraph_text = layout_to_text(page.paragraphs[0].layout, text)
+
+def print_paragraphs(paragraphs: dict, text: str) -> None:
+    print(f"    {len(paragraphs)} paragraphs detected:")
+    first_paragraph_text = layout_to_text(paragraphs[0].layout, text)
     print(f"        First paragraph text: {repr(first_paragraph_text)}")
-    last_paragraph_text = layout_to_text(page.paragraphs[-1].layout, text)
+    last_paragraph_text = layout_to_text(paragraphs[-1].layout, text)
     print(f"        Last paragraph text: {repr(last_paragraph_text)}")
 
-    print(f"    {len(page.blocks)} blocks detected:")
-    first_block_text = layout_to_text(page.blocks[0].layout, text)
+
+def print_blocks(blocks: dict, text: str) -> None:
+    print(f"    {len(blocks)} blocks detected:")
+    first_block_text = layout_to_text(blocks[0].layout, text)
     print(f"        First text block: {repr(first_block_text)}")
-    last_block_text = layout_to_text(page.blocks[-1].layout, text)
+    last_block_text = layout_to_text(blocks[-1].layout, text)
     print(f"        Last text block: {repr(last_block_text)}")
 
-    lines = page.lines
+
+def print_lines(lines: dict, text: str) -> None:
     print(f"    {len(lines)} lines detected:")
     first_line_text = layout_to_text(lines[0].layout, text)
     print(f"        First line text: {repr(first_line_text)}")
     last_line_text = layout_to_text(lines[-1].layout, text)
     print(f"        Last line text: {repr(last_line_text)}")
 
-    tokens = page.tokens
+
+def print_tokens(tokens: dict, text: str) -> None:
     print(f"    {len(tokens)} tokens detected:")
     first_token_text = layout_to_text(tokens[0].layout, text)
     first_token_break_type = tokens[0].detected_break.type_.name
@@ -106,11 +118,11 @@ def print_page_info(page: dict, text: str) -> None:
     print(f"        Last token break type: {repr(last_token_break_type)}")
 
 
-# Extract text from a document layout
 def layout_to_text(layout: dict, text: str) -> str:
     """
-    Document AI identifies form fields by their offsets in the entirity of the
-    document's text. This function converts offsets to a string.
+    Document AI identifies text in different parts of the document by their
+    offsets in the entirity of the document's text. This function converts
+    offsets to a string.
     """
     response = ""
     # If a text segment spans several lines, it will

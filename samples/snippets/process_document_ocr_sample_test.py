@@ -16,7 +16,6 @@
 import os
 
 from samples.snippets import process_document_ocr_sample
-from collections import namedtuple
 
 location = "us"
 project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
