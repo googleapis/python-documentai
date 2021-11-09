@@ -13,7 +13,7 @@
 # limitations under the License.
 #
 
-# [START documentai_process_form_document]
+# [START documentai_process_specialized_document]
 
 # TODO(developer): Uncomment these variables before running the sample.
 # project_id= 'YOUR_PROJECT_ID'
@@ -74,4 +74,4 @@ def process_document_specialized_sample(
         conf_percent = '{:.1%}'.format(entity.confidence)
         print(f'    * {repr(key)}: {repr(text_value)}({conf_percent} confident)')
 
-# [END documentai_process_form_document]
+# [END documentai_process_specialized_document]

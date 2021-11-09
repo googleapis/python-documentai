@@ -13,7 +13,7 @@
 # limitations under the License.
 #
 
-# [START documentai_process_form_document]
+# [START documentai_process_splitter_document]
 
 # TODO(developer): Uncomment these variables before running the sample.
 # project_id= 'YOUR_PROJECT_ID'
@@ -83,4 +83,4 @@ def page_refs_to_string(page_refs: dict) -> str:
         end = str(int(page_refs[1].page) + 1)
         return f'pages {start} to {end} are'
 
-# [END documentai_process_form_document]
+# [END documentai_process_splitter_document]

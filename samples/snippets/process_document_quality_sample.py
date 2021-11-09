@@ -13,7 +13,7 @@
 # limitations under the License.
 #
 
-# [START documentai_process_form_document]
+# [START documentai_process_quality_document]
 
 # TODO(developer): Uncomment these variables before running the sample.
 # project_id= 'YOUR_PROJECT_ID'
@@ -73,4 +73,4 @@ def process_document_quality_sample(
             conf_percent = '{:.1%}'.format(prop.confidence)
             print(f'    * {prop.type_} score of {conf_percent}')
 
-# [END documentai_process_form_document]
+# [END documentai_process_quality_document]
