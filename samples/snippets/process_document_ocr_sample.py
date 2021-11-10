@@ -13,7 +13,7 @@
 # limitations under the License.
 #
 
-# [START documentai_process_document]
+# [START documentai_process_ocr_document]
 
 # TODO(developer): Uncomment these variables before running the sample.
 # project_id= 'YOUR_PROJECT_ID'
@@ -138,4 +138,4 @@ def layout_to_text(layout: dict, text: str) -> str:
     return response
 
 
-# [END documentai_process_document]
+# [END documentai_process_ocr_document]
