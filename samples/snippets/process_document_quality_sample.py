@@ -24,7 +24,7 @@
 def process_document_quality_sample(
     project_id: str, location: str, processor_id: str, file_path: str
 ):
-    from google.cloud import documentai_v1 as documentai
+    from google.cloud import documentai_v1beta3 as documentai
 
     # You must set the api_endpoint if you use a location other than 'us', e.g.:
     opts = {}
