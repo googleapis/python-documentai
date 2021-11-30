@@ -71,7 +71,7 @@ def batch_process_documents(
     operation = client.batch_process_documents(request)
 
     # Wait for the operation to finish
-    operation.result(timeout=timeout)
+    operation.result()
 
     # Results are written to GCS. Use a regex to find
     # output files
