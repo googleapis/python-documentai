@@ -38,7 +38,6 @@ def test_batch_process_documents_with_bad_input(capsys):
             gcs_output_uri_prefix="test",
             timeout=450,
         )
-        out, _ = capsys.readouterr()
-        assert out == ""
+    
     except Exception as e:
         assert e == ""
