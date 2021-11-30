@@ -39,7 +39,7 @@ def test_batch_process_documents_with_bad_input(capsys):
             timeout=450,
         )
 
-        assert response == ""
+        assert response.result(timeout=450) == ""
     
     except Exception as e:
         assert e == ""
