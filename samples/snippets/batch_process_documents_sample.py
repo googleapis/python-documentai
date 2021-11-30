@@ -68,7 +68,7 @@ def batch_process_documents(
         document_output_config=output_config,
     )
 
-    operation = await client.batch_process_documents(request)
+    operation = client.batch_process_documents(request)
 
     return operation
 
