@@ -108,6 +108,9 @@ def batch_process_documents(
         else:
             print(f"Skipping non-supported file type {blob.name}")
 
+    return operation.result(timeout=timeout)
+    
+
 
 # Extract shards from the text field
 def get_text(doc_element: dict, document: dict):

@@ -29,7 +29,7 @@ BUCKET_NAME = f"document-ai-python-{uuid4()}"
 
 def test_batch_process_documents_with_bad_input(capsys):
     try:
-        batch_process_documents_sample.batch_process_documents(
+        response = batch_process_documents_sample.batch_process_documents(
             project_id=project_id,
             location=location,
             processor_id=processor_id,
@@ -38,6 +38,8 @@ def test_batch_process_documents_with_bad_input(capsys):
             gcs_output_uri_prefix="test",
             timeout=450,
         )
+
+        assert response == ""
     
     except Exception as e:
         assert e == ""
