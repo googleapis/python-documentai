@@ -70,7 +70,7 @@ def batch_process_documents(
 
     operation = client.batch_process_documents(request)
 
-    return operation
+    return operation.name
 
     # # Wait for the operation to finish
     # operation.result()

@@ -38,7 +38,7 @@ def test_batch_process_documents_with_bad_input(capsys):
             gcs_output_uri_prefix="test",
         )
 
-        assert response.name == ""
+        assert response
     
     except Exception as e:
         assert e == ""
