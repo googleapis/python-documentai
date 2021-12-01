@@ -36,6 +36,7 @@ def test_batch_process_documents_with_bad_input(capsys):
             gcs_input_uri=gcs_input_uri,
             gcs_output_uri=gcs_output_full_uri_with_wrong_type,
             gcs_output_uri_prefix="test",
+            timeout=450,
         )
 
         assert response
