@@ -70,10 +70,8 @@ def batch_process_documents(
 
     operation = client.batch_process_documents(request)
 
-    raise Exception(operation.operation.name)
-
     # Wait for the operation to finish
-    operation.result()
+    operation.result(timeout=timeout)
 
     # Results are written to GCS. Use a regex to find
     # output files
