@@ -107,7 +107,7 @@ def batch_process_documents(
                     print(f"Paragraph text:\n{paragraph_text}")
         else:
             print(f"Skipping non-supported file type {blob.name}")
-            
+       
 
 # Extract shards from the text field
 def get_text(doc_element: dict, document: dict):
