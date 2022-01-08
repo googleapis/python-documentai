@@ -1,5 +1,19 @@
 # Changelog
 
+### [1.2.1](https://www.github.com/googleapis/python-documentai/compare/v1.2.0...v1.2.1) (2022-01-08)
+
+
+### Bug Fixes
+
+* **deps:** drop packaging dependency ([038a736](https://www.github.com/googleapis/python-documentai/commit/038a7364fe0d2341a3bda1e40bfe23d864427ab7))
+* **deps:** require google-api-core >= 1.28.0 ([038a736](https://www.github.com/googleapis/python-documentai/commit/038a7364fe0d2341a3bda1e40bfe23d864427ab7))
+
+
+### Documentation
+
+* list oneofs in docstring ([038a736](https://www.github.com/googleapis/python-documentai/commit/038a7364fe0d2341a3bda1e40bfe23d864427ab7))
+* **samples:** add OCR, form, quality, splitter and specialized processing samples ([#239](https://www.github.com/googleapis/python-documentai/issues/239)) ([d8bac55](https://www.github.com/googleapis/python-documentai/commit/d8bac5555755853621e4ade321752c7c207555fb))
+
 ## [1.2.0](https://www.github.com/googleapis/python-documentai/compare/v1.1.0...v1.2.0) (2021-10-14)
 
 
