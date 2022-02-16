@@ -257,20 +257,15 @@ class DocumentProcessorServiceAsyncClient:
                 inline_document = documentai_v1beta3.Document()
                 inline_document.uri = "uri_value"
 
-                project = "my-project-id"
-                location = "us-central1"
-                processor = "processor_value"
-                name = f"projects/{project}/locations/{location}/processors/{processor}"
-
                 request = documentai_v1beta3.ProcessRequest(
                     inline_document=inline_document,
-                    name=name,
+                    name="name_value",
                 )
 
                 # Make the request
                 response = client.process_document(request=request)
 
-                # Handle response
+                # Handle the response
                 print(response)
 
         Args:
@@ -297,7 +292,7 @@ class DocumentProcessorServiceAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name])
         if request is not None and has_flattened_params:
@@ -365,13 +360,8 @@ class DocumentProcessorServiceAsyncClient:
                 client = documentai_v1beta3.DocumentProcessorServiceClient()
 
                 # Initialize request argument(s)
-                project = "my-project-id"
-                location = "us-central1"
-                processor = "processor_value"
-                name = f"projects/{project}/locations/{location}/processors/{processor}"
-
                 request = documentai_v1beta3.BatchProcessRequest(
-                    name=name,
+                    name="name_value",
                 )
 
                 # Make the request
@@ -380,6 +370,8 @@ class DocumentProcessorServiceAsyncClient:
                 print("Waiting for operation to complete...")
 
                 response = operation.result()
+
+                # Handle the response
                 print(response)
 
         Args:
@@ -409,7 +401,7 @@ class DocumentProcessorServiceAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name])
         if request is not None and has_flattened_params:
@@ -485,19 +477,14 @@ class DocumentProcessorServiceAsyncClient:
                 client = documentai_v1beta3.DocumentProcessorServiceClient()
 
                 # Initialize request argument(s)
-                project = "my-project-id"
-                location = "us-central1"
-                processor_type = "processor_type_value"
-                parent = f"projects/{project}/locations/{location}/processorTypes/{processor_type}"
-
                 request = documentai_v1beta3.FetchProcessorTypesRequest(
-                    parent=parent,
+                    parent="parent_value",
                 )
 
                 # Make the request
                 response = client.fetch_processor_types(request=request)
 
-                # Handle response
+                # Handle the response
                 print(response)
 
         Args:
@@ -525,7 +512,7 @@ class DocumentProcessorServiceAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([parent])
         if request is not None and has_flattened_params:
@@ -581,17 +568,14 @@ class DocumentProcessorServiceAsyncClient:
                 client = documentai_v1beta3.DocumentProcessorServiceClient()
 
                 # Initialize request argument(s)
-                project = "my-project-id"
-                location = "us-central1"
-                processor = "processor_value"
-                parent = f"projects/{project}/locations/{location}/processors/{processor}"
-
                 request = documentai_v1beta3.ListProcessorsRequest(
-                    parent=parent,
+                    parent="parent_value",
                 )
 
                 # Make the request
                 page_result = client.list_processors(request=request)
+
+                # Handle the response
                 for response in page_result:
                     print(response)
 
@@ -623,7 +607,7 @@ class DocumentProcessorServiceAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([parent])
         if request is not None and has_flattened_params:
@@ -689,19 +673,14 @@ class DocumentProcessorServiceAsyncClient:
                 client = documentai_v1beta3.DocumentProcessorServiceClient()
 
                 # Initialize request argument(s)
-                project = "my-project-id"
-                location = "us-central1"
-                processor = "processor_value"
-                parent = f"projects/{project}/locations/{location}/processors/{processor}"
-
                 request = documentai_v1beta3.CreateProcessorRequest(
-                    parent=parent,
+                    parent="parent_value",
                 )
 
                 # Make the request
                 response = client.create_processor(request=request)
 
-                # Handle response
+                # Handle the response
                 print(response)
 
         Args:
@@ -742,7 +721,7 @@ class DocumentProcessorServiceAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([parent, processor])
         if request is not None and has_flattened_params:
@@ -803,13 +782,8 @@ class DocumentProcessorServiceAsyncClient:
                 client = documentai_v1beta3.DocumentProcessorServiceClient()
 
                 # Initialize request argument(s)
-                project = "my-project-id"
-                location = "us-central1"
-                processor = "processor_value"
-                name = f"projects/{project}/locations/{location}/processors/{processor}"
-
                 request = documentai_v1beta3.DeleteProcessorRequest(
-                    name=name,
+                    name="name_value",
                 )
 
                 # Make the request
@@ -818,6 +792,8 @@ class DocumentProcessorServiceAsyncClient:
                 print("Waiting for operation to complete...")
 
                 response = operation.result()
+
+                # Handle the response
                 print(response)
 
         Args:
@@ -857,7 +833,7 @@ class DocumentProcessorServiceAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name])
         if request is not None and has_flattened_params:
@@ -920,13 +896,8 @@ class DocumentProcessorServiceAsyncClient:
                 client = documentai_v1beta3.DocumentProcessorServiceClient()
 
                 # Initialize request argument(s)
-                project = "my-project-id"
-                location = "us-central1"
-                processor = "processor_value"
-                name = f"projects/{project}/locations/{location}/processors/{processor}"
-
                 request = documentai_v1beta3.EnableProcessorRequest(
-                    name=name,
+                    name="name_value",
                 )
 
                 # Make the request
@@ -935,6 +906,8 @@ class DocumentProcessorServiceAsyncClient:
                 print("Waiting for operation to complete...")
 
                 response = operation.result()
+
+                # Handle the response
                 print(response)
 
         Args:
@@ -1006,13 +979,8 @@ class DocumentProcessorServiceAsyncClient:
                 client = documentai_v1beta3.DocumentProcessorServiceClient()
 
                 # Initialize request argument(s)
-                project = "my-project-id"
-                location = "us-central1"
-                processor = "processor_value"
-                name = f"projects/{project}/locations/{location}/processors/{processor}"
-
                 request = documentai_v1beta3.DisableProcessorRequest(
-                    name=name,
+                    name="name_value",
                 )
 
                 # Make the request
@@ -1021,6 +989,8 @@ class DocumentProcessorServiceAsyncClient:
                 print("Waiting for operation to complete...")
 
                 response = operation.result()
+
+                # Handle the response
                 print(response)
 
         Args:
@@ -1098,14 +1068,9 @@ class DocumentProcessorServiceAsyncClient:
                 inline_document = documentai_v1beta3.Document()
                 inline_document.uri = "uri_value"
 
-                project = "my-project-id"
-                location = "us-central1"
-                processor = "processor_value"
-                human_review_config = f"projects/{project}/locations/{location}/processors/{processor}/humanReviewConfig"
-
                 request = documentai_v1beta3.ReviewDocumentRequest(
                     inline_document=inline_document,
-                    human_review_config=human_review_config,
+                    human_review_config="human_review_config_value",
                 )
 
                 # Make the request
@@ -1114,6 +1079,8 @@ class DocumentProcessorServiceAsyncClient:
                 print("Waiting for operation to complete...")
 
                 response = operation.result()
+
+                # Handle the response
                 print(response)
 
         Args:
@@ -1144,7 +1111,7 @@ class DocumentProcessorServiceAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([human_review_config])
         if request is not None and has_flattened_params:

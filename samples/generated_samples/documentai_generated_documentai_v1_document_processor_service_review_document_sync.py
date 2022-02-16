@@ -35,14 +35,9 @@ def sample_review_document():
     inline_document = documentai_v1.Document()
     inline_document.uri = "uri_value"
 
-    project = "my-project-id"
-    location = "us-central1"
-    processor = "processor_value"
-    human_review_config = f"projects/{project}/locations/{location}/processors/{processor}/humanReviewConfig"
-
     request = documentai_v1.ReviewDocumentRequest(
         inline_document=inline_document,
-        human_review_config=human_review_config,
+        human_review_config="human_review_config_value",
     )
 
     # Make the request
@@ -51,6 +46,8 @@ def sample_review_document():
     print("Waiting for operation to complete...")
 
     response = operation.result()
+
+    # Handle the response
     print(response)
 
 # [END documentai_generated_documentai_v1_DocumentProcessorService_ReviewDocument_sync]

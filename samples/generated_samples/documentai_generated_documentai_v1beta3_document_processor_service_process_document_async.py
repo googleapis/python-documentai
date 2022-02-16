@@ -35,20 +35,15 @@ async def sample_process_document():
     inline_document = documentai_v1beta3.Document()
     inline_document.uri = "uri_value"
 
-    project = "my-project-id"
-    location = "us-central1"
-    processor = "processor_value"
-    name = f"projects/{project}/locations/{location}/processors/{processor}"
-
     request = documentai_v1beta3.ProcessRequest(
         inline_document=inline_document,
-        name=name,
+        name="name_value",
     )
 
     # Make the request
     response = await client.process_document(request=request)
 
-    # Handle response
+    # Handle the response
     print(response)
 
 # [END documentai_generated_documentai_v1beta3_DocumentProcessorService_ProcessDocument_async]

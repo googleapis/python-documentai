@@ -32,17 +32,14 @@ async def sample_list_processors():
     client = documentai_v1beta3.DocumentProcessorServiceAsyncClient()
 
     # Initialize request argument(s)
-    project = "my-project-id"
-    location = "us-central1"
-    processor = "processor_value"
-    parent = f"projects/{project}/locations/{location}/processors/{processor}"
-
     request = documentai_v1beta3.ListProcessorsRequest(
-        parent=parent,
+        parent="parent_value",
     )
 
     # Make the request
     page_result = client.list_processors(request=request)
+
+    # Handle the response
     async for response in page_result:
         print(response)
 

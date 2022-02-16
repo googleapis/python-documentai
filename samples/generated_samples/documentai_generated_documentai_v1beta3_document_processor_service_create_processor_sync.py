@@ -32,19 +32,14 @@ def sample_create_processor():
     client = documentai_v1beta3.DocumentProcessorServiceClient()
 
     # Initialize request argument(s)
-    project = "my-project-id"
-    location = "us-central1"
-    processor = "processor_value"
-    parent = f"projects/{project}/locations/{location}/processors/{processor}"
-
     request = documentai_v1beta3.CreateProcessorRequest(
-        parent=parent,
+        parent="parent_value",
     )
 
     # Make the request
     response = client.create_processor(request=request)
 
-    # Handle response
+    # Handle the response
     print(response)
 
 # [END documentai_generated_documentai_v1beta3_DocumentProcessorService_CreateProcessor_sync]

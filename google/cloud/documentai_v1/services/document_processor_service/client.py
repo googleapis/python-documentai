@@ -448,20 +448,15 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
                 inline_document = documentai_v1.Document()
                 inline_document.uri = "uri_value"
 
-                project = "my-project-id"
-                location = "us-central1"
-                processor = "processor_value"
-                name = f"projects/{project}/locations/{location}/processors/{processor}"
-
                 request = documentai_v1.ProcessRequest(
                     inline_document=inline_document,
-                    name=name,
+                    name="name_value",
                 )
 
                 # Make the request
                 response = client.process_document(request=request)
 
-                # Handle response
+                # Handle the response
                 print(response)
 
         Args:
@@ -488,7 +483,7 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name])
         if request is not None and has_flattened_params:
@@ -547,13 +542,8 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
                 client = documentai_v1.DocumentProcessorServiceClient()
 
                 # Initialize request argument(s)
-                project = "my-project-id"
-                location = "us-central1"
-                processor = "processor_value"
-                name = f"projects/{project}/locations/{location}/processors/{processor}"
-
                 request = documentai_v1.BatchProcessRequest(
-                    name=name,
+                    name="name_value",
                 )
 
                 # Make the request
@@ -562,6 +552,8 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
                 print("Waiting for operation to complete...")
 
                 response = operation.result()
+
+                # Handle the response
                 print(response)
 
         Args:
@@ -591,7 +583,7 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([name])
         if request is not None and has_flattened_params:
@@ -661,14 +653,9 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
                 inline_document = documentai_v1.Document()
                 inline_document.uri = "uri_value"
 
-                project = "my-project-id"
-                location = "us-central1"
-                processor = "processor_value"
-                human_review_config = f"projects/{project}/locations/{location}/processors/{processor}/humanReviewConfig"
-
                 request = documentai_v1.ReviewDocumentRequest(
                     inline_document=inline_document,
-                    human_review_config=human_review_config,
+                    human_review_config="human_review_config_value",
                 )
 
                 # Make the request
@@ -677,6 +664,8 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
                 print("Waiting for operation to complete...")
 
                 response = operation.result()
+
+                # Handle the response
                 print(response)
 
         Args:
@@ -707,7 +696,7 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([human_review_config])
         if request is not None and has_flattened_params:

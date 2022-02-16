@@ -32,13 +32,8 @@ async def sample_delete_processor():
     client = documentai_v1beta3.DocumentProcessorServiceAsyncClient()
 
     # Initialize request argument(s)
-    project = "my-project-id"
-    location = "us-central1"
-    processor = "processor_value"
-    name = f"projects/{project}/locations/{location}/processors/{processor}"
-
     request = documentai_v1beta3.DeleteProcessorRequest(
-        name=name,
+        name="name_value",
     )
 
     # Make the request
@@ -47,6 +42,8 @@ async def sample_delete_processor():
     print("Waiting for operation to complete...")
 
     response = await operation.result()
+
+    # Handle the response
     print(response)
 
 # [END documentai_generated_documentai_v1beta3_DocumentProcessorService_DeleteProcessor_async]
