@@ -13,6 +13,7 @@
 # limitations under the License.
 #
 
+import re
 import os
 
 from samples.snippets import process_document_splitter_sample
@@ -32,6 +33,9 @@ def test_process_documents(capsys):
         file_path=file_path,
     )
     out, _ = capsys.readouterr()
+
+    # Remove newlines and quotes from output for easier comparison
+    out = out.replace(' "" ', " ").replace("\n", "")
 
     expected_strings = [
         "Found 8 subdocuments",
