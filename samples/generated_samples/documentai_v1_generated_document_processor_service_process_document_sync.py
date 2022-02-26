@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,13 +23,13 @@
 #   python3 -m pip install google-cloud-documentai
 
 
-# [START documentai_generated_documentai_v1_DocumentProcessorService_ProcessDocument_async]
+# [START documentai_v1_generated_DocumentProcessorService_ProcessDocument_sync]
 from google.cloud import documentai_v1
 
 
-async def sample_process_document():
+def sample_process_document():
     # Create a client
-    client = documentai_v1.DocumentProcessorServiceAsyncClient()
+    client = documentai_v1.DocumentProcessorServiceClient()
 
     # Initialize request argument(s)
     inline_document = documentai_v1.Document()
@@ -41,9 +41,9 @@ async def sample_process_document():
     )
 
     # Make the request
-    response = await client.process_document(request=request)
+    response = client.process_document(request=request)
 
     # Handle the response
     print(response)
 
-# [END documentai_generated_documentai_v1_DocumentProcessorService_ProcessDocument_async]
+# [END documentai_v1_generated_DocumentProcessorService_ProcessDocument_sync]

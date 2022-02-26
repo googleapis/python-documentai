@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 #
 # Generated code. DO NOT EDIT!
 #
-# Snippet for EnableProcessor
+# Snippet for CreateProcessor
 # NOTE: This snippet has been automatically generated for illustrative purposes only.
 # It may require modifications to work in your environment.
 
@@ -23,27 +23,23 @@
 #   python3 -m pip install google-cloud-documentai
 
 
-# [START documentai_generated_documentai_v1beta3_DocumentProcessorService_EnableProcessor_sync]
+# [START documentai_v1beta3_generated_DocumentProcessorService_CreateProcessor_sync]
 from google.cloud import documentai_v1beta3
 
 
-def sample_enable_processor():
+def sample_create_processor():
     # Create a client
     client = documentai_v1beta3.DocumentProcessorServiceClient()
 
     # Initialize request argument(s)
-    request = documentai_v1beta3.EnableProcessorRequest(
-        name="name_value",
+    request = documentai_v1beta3.CreateProcessorRequest(
+        parent="parent_value",
     )
 
     # Make the request
-    operation = client.enable_processor(request=request)
-
-    print("Waiting for operation to complete...")
-
-    response = operation.result()
+    response = client.create_processor(request=request)
 
     # Handle the response
     print(response)
 
-# [END documentai_generated_documentai_v1beta3_DocumentProcessorService_EnableProcessor_sync]
+# [END documentai_v1beta3_generated_DocumentProcessorService_CreateProcessor_sync]

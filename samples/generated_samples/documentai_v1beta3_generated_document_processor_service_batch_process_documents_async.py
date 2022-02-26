@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 #
 # Generated code. DO NOT EDIT!
 #
-# Snippet for EnableProcessor
+# Snippet for BatchProcessDocuments
 # NOTE: This snippet has been automatically generated for illustrative purposes only.
 # It may require modifications to work in your environment.
 
@@ -23,21 +23,21 @@
 #   python3 -m pip install google-cloud-documentai
 
 
-# [START documentai_generated_documentai_v1beta3_DocumentProcessorService_EnableProcessor_async]
+# [START documentai_v1beta3_generated_DocumentProcessorService_BatchProcessDocuments_async]
 from google.cloud import documentai_v1beta3
 
 
-async def sample_enable_processor():
+async def sample_batch_process_documents():
     # Create a client
     client = documentai_v1beta3.DocumentProcessorServiceAsyncClient()
 
     # Initialize request argument(s)
-    request = documentai_v1beta3.EnableProcessorRequest(
+    request = documentai_v1beta3.BatchProcessRequest(
         name="name_value",
     )
 
     # Make the request
-    operation = client.enable_processor(request=request)
+    operation = client.batch_process_documents(request=request)
 
     print("Waiting for operation to complete...")
 
@@ -46,4 +46,4 @@ async def sample_enable_processor():
     # Handle the response
     print(response)
 
-# [END documentai_generated_documentai_v1beta3_DocumentProcessorService_EnableProcessor_async]
+# [END documentai_v1beta3_generated_DocumentProcessorService_BatchProcessDocuments_async]

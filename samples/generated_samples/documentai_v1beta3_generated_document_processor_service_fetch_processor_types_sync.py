@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 #
 # Generated code. DO NOT EDIT!
 #
-# Snippet for DisableProcessor
+# Snippet for FetchProcessorTypes
 # NOTE: This snippet has been automatically generated for illustrative purposes only.
 # It may require modifications to work in your environment.
 
@@ -23,27 +23,23 @@
 #   python3 -m pip install google-cloud-documentai
 
 
-# [START documentai_generated_documentai_v1beta3_DocumentProcessorService_DisableProcessor_async]
+# [START documentai_v1beta3_generated_DocumentProcessorService_FetchProcessorTypes_sync]
 from google.cloud import documentai_v1beta3
 
 
-async def sample_disable_processor():
+def sample_fetch_processor_types():
     # Create a client
-    client = documentai_v1beta3.DocumentProcessorServiceAsyncClient()
+    client = documentai_v1beta3.DocumentProcessorServiceClient()
 
     # Initialize request argument(s)
-    request = documentai_v1beta3.DisableProcessorRequest(
-        name="name_value",
+    request = documentai_v1beta3.FetchProcessorTypesRequest(
+        parent="parent_value",
     )
 
     # Make the request
-    operation = client.disable_processor(request=request)
-
-    print("Waiting for operation to complete...")
-
-    response = await operation.result()
+    response = client.fetch_processor_types(request=request)
 
     # Handle the response
     print(response)
 
-# [END documentai_generated_documentai_v1beta3_DocumentProcessorService_DisableProcessor_async]
+# [END documentai_v1beta3_generated_DocumentProcessorService_FetchProcessorTypes_sync]

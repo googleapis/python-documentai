@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 #
 # Generated code. DO NOT EDIT!
 #
-# Snippet for DisableProcessor
+# Snippet for EnableProcessor
 # NOTE: This snippet has been automatically generated for illustrative purposes only.
 # It may require modifications to work in your environment.
 
@@ -23,27 +23,27 @@
 #   python3 -m pip install google-cloud-documentai
 
 
-# [START documentai_generated_documentai_v1beta3_DocumentProcessorService_DisableProcessor_sync]
+# [START documentai_v1beta3_generated_DocumentProcessorService_EnableProcessor_async]
 from google.cloud import documentai_v1beta3
 
 
-def sample_disable_processor():
+async def sample_enable_processor():
     # Create a client
-    client = documentai_v1beta3.DocumentProcessorServiceClient()
+    client = documentai_v1beta3.DocumentProcessorServiceAsyncClient()
 
     # Initialize request argument(s)
-    request = documentai_v1beta3.DisableProcessorRequest(
+    request = documentai_v1beta3.EnableProcessorRequest(
         name="name_value",
     )
 
     # Make the request
-    operation = client.disable_processor(request=request)
+    operation = client.enable_processor(request=request)
 
     print("Waiting for operation to complete...")
 
-    response = operation.result()
+    response = await operation.result()
 
     # Handle the response
     print(response)
 
-# [END documentai_generated_documentai_v1beta3_DocumentProcessorService_DisableProcessor_sync]
+# [END documentai_v1beta3_generated_DocumentProcessorService_EnableProcessor_async]

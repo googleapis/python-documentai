@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 #
 # Generated code. DO NOT EDIT!
 #
-# Snippet for ReviewDocument
+# Snippet for BatchProcessDocuments
 # NOTE: This snippet has been automatically generated for illustrative purposes only.
 # It may require modifications to work in your environment.
 
@@ -23,25 +23,25 @@
 #   python3 -m pip install google-cloud-documentai
 
 
-# [START documentai_generated_documentai_v1_DocumentProcessorService_ReviewDocument_async]
-from google.cloud import documentai_v1
+# [START documentai_v1beta2_generated_DocumentUnderstandingService_BatchProcessDocuments_async]
+from google.cloud import documentai_v1beta2
 
 
-async def sample_review_document():
+async def sample_batch_process_documents():
     # Create a client
-    client = documentai_v1.DocumentProcessorServiceAsyncClient()
+    client = documentai_v1beta2.DocumentUnderstandingServiceAsyncClient()
 
     # Initialize request argument(s)
-    inline_document = documentai_v1.Document()
-    inline_document.uri = "uri_value"
+    requests = documentai_v1beta2.ProcessDocumentRequest()
+    requests.input_config.gcs_source.uri = "uri_value"
+    requests.input_config.mime_type = "mime_type_value"
 
-    request = documentai_v1.ReviewDocumentRequest(
-        inline_document=inline_document,
-        human_review_config="human_review_config_value",
+    request = documentai_v1beta2.BatchProcessDocumentsRequest(
+        requests=requests,
     )
 
     # Make the request
-    operation = client.review_document(request=request)
+    operation = client.batch_process_documents(request=request)
 
     print("Waiting for operation to complete...")
 
@@ -50,4 +50,4 @@ async def sample_review_document():
     # Handle the response
     print(response)
 
-# [END documentai_generated_documentai_v1_DocumentProcessorService_ReviewDocument_async]
+# [END documentai_v1beta2_generated_DocumentUnderstandingService_BatchProcessDocuments_async]

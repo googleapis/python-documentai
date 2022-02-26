@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 #
 # Generated code. DO NOT EDIT!
 #
-# Snippet for BatchProcessDocuments
+# Snippet for DisableProcessor
 # NOTE: This snippet has been automatically generated for illustrative purposes only.
 # It may require modifications to work in your environment.
 
@@ -23,25 +23,21 @@
 #   python3 -m pip install google-cloud-documentai
 
 
-# [START documentai_generated_documentai_v1beta2_DocumentUnderstandingService_BatchProcessDocuments_async]
-from google.cloud import documentai_v1beta2
+# [START documentai_v1beta3_generated_DocumentProcessorService_DisableProcessor_async]
+from google.cloud import documentai_v1beta3
 
 
-async def sample_batch_process_documents():
+async def sample_disable_processor():
     # Create a client
-    client = documentai_v1beta2.DocumentUnderstandingServiceAsyncClient()
+    client = documentai_v1beta3.DocumentProcessorServiceAsyncClient()
 
     # Initialize request argument(s)
-    requests = documentai_v1beta2.ProcessDocumentRequest()
-    requests.input_config.gcs_source.uri = "uri_value"
-    requests.input_config.mime_type = "mime_type_value"
-
-    request = documentai_v1beta2.BatchProcessDocumentsRequest(
-        requests=requests,
+    request = documentai_v1beta3.DisableProcessorRequest(
+        name="name_value",
     )
 
     # Make the request
-    operation = client.batch_process_documents(request=request)
+    operation = client.disable_processor(request=request)
 
     print("Waiting for operation to complete...")
 
@@ -50,4 +46,4 @@ async def sample_batch_process_documents():
     # Handle the response
     print(response)
 
-# [END documentai_generated_documentai_v1beta2_DocumentUnderstandingService_BatchProcessDocuments_async]
+# [END documentai_v1beta3_generated_DocumentProcessorService_DisableProcessor_async]

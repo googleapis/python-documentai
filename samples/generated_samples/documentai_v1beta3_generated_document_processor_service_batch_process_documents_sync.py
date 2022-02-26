@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,13 +23,13 @@
 #   python3 -m pip install google-cloud-documentai
 
 
-# [START documentai_generated_documentai_v1beta3_DocumentProcessorService_BatchProcessDocuments_async]
+# [START documentai_v1beta3_generated_DocumentProcessorService_BatchProcessDocuments_sync]
 from google.cloud import documentai_v1beta3
 
 
-async def sample_batch_process_documents():
+def sample_batch_process_documents():
     # Create a client
-    client = documentai_v1beta3.DocumentProcessorServiceAsyncClient()
+    client = documentai_v1beta3.DocumentProcessorServiceClient()
 
     # Initialize request argument(s)
     request = documentai_v1beta3.BatchProcessRequest(
@@ -41,9 +41,9 @@ async def sample_batch_process_documents():
 
     print("Waiting for operation to complete...")
 
-    response = await operation.result()
+    response = operation.result()
 
     # Handle the response
     print(response)
 
-# [END documentai_generated_documentai_v1beta3_DocumentProcessorService_BatchProcessDocuments_async]
+# [END documentai_v1beta3_generated_DocumentProcessorService_BatchProcessDocuments_sync]

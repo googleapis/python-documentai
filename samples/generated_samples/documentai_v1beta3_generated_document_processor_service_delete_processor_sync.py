@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 #
 # Generated code. DO NOT EDIT!
 #
-# Snippet for ListProcessors
+# Snippet for DeleteProcessor
 # NOTE: This snippet has been automatically generated for illustrative purposes only.
 # It may require modifications to work in your environment.
 
@@ -23,24 +23,27 @@
 #   python3 -m pip install google-cloud-documentai
 
 
-# [START documentai_generated_documentai_v1beta3_DocumentProcessorService_ListProcessors_async]
+# [START documentai_v1beta3_generated_DocumentProcessorService_DeleteProcessor_sync]
 from google.cloud import documentai_v1beta3
 
 
-async def sample_list_processors():
+def sample_delete_processor():
     # Create a client
-    client = documentai_v1beta3.DocumentProcessorServiceAsyncClient()
+    client = documentai_v1beta3.DocumentProcessorServiceClient()
 
     # Initialize request argument(s)
-    request = documentai_v1beta3.ListProcessorsRequest(
-        parent="parent_value",
+    request = documentai_v1beta3.DeleteProcessorRequest(
+        name="name_value",
     )
 
     # Make the request
-    page_result = client.list_processors(request=request)
+    operation = client.delete_processor(request=request)
+
+    print("Waiting for operation to complete...")
+
+    response = operation.result()
 
     # Handle the response
-    async for response in page_result:
-        print(response)
+    print(response)
 
-# [END documentai_generated_documentai_v1beta3_DocumentProcessorService_ListProcessors_async]
+# [END documentai_v1beta3_generated_DocumentProcessorService_DeleteProcessor_sync]

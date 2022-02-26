@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 #
 # Generated code. DO NOT EDIT!
 #
-# Snippet for FetchProcessorTypes
+# Snippet for ReviewDocument
 # NOTE: This snippet has been automatically generated for illustrative purposes only.
 # It may require modifications to work in your environment.
 
@@ -23,23 +23,31 @@
 #   python3 -m pip install google-cloud-documentai
 
 
-# [START documentai_generated_documentai_v1beta3_DocumentProcessorService_FetchProcessorTypes_sync]
-from google.cloud import documentai_v1beta3
+# [START documentai_v1_generated_DocumentProcessorService_ReviewDocument_async]
+from google.cloud import documentai_v1
 
 
-def sample_fetch_processor_types():
+async def sample_review_document():
     # Create a client
-    client = documentai_v1beta3.DocumentProcessorServiceClient()
+    client = documentai_v1.DocumentProcessorServiceAsyncClient()
 
     # Initialize request argument(s)
-    request = documentai_v1beta3.FetchProcessorTypesRequest(
-        parent="parent_value",
+    inline_document = documentai_v1.Document()
+    inline_document.uri = "uri_value"
+
+    request = documentai_v1.ReviewDocumentRequest(
+        inline_document=inline_document,
+        human_review_config="human_review_config_value",
     )
 
     # Make the request
-    response = client.fetch_processor_types(request=request)
+    operation = client.review_document(request=request)
+
+    print("Waiting for operation to complete...")
+
+    response = await operation.result()
 
     # Handle the response
     print(response)
 
-# [END documentai_generated_documentai_v1beta3_DocumentProcessorService_FetchProcessorTypes_sync]
+# [END documentai_v1_generated_DocumentProcessorService_ReviewDocument_async]
