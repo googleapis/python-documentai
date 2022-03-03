@@ -27,17 +27,17 @@
 from google.cloud import documentai_v1
 
 
-def sample_process_document():
+def sample_process_document(name, uri):
     # Create a client
     client = documentai_v1.DocumentProcessorServiceClient()
 
     # Initialize request argument(s)
     inline_document = documentai_v1.Document()
-    inline_document.uri = "uri_value"
+    inline_document.uri = uri
 
     request = documentai_v1.ProcessRequest(
         inline_document=inline_document,
-        name="name_value",
+        name=name,
     )
 
     # Make the request
@@ -47,3 +47,4 @@ def sample_process_document():
     print(response)
 
 # [END documentai_v1_generated_DocumentProcessorService_ProcessDocument_sync]
+sample_process_document("projects/182397877917/locations/us/processors/4e4c13fea46df893", "gs://akitsch-content/invoice.pdf")
