@@ -13,7 +13,7 @@ language, computer vision, translation, and AutoML.
 .. |GA| image:: https://img.shields.io/badge/support-ga-gold.svg
    :target: https://github.com/googleapis/google-cloud-python/blob/main/README.rst#general-availability
 .. |pypi| image:: https://img.shields.io/pypi/v/google-cloud-service-directory.svg
-   :target: https://pypi.org/project/google-cloud-service-directory/
+   :target: https://pypi.org/project/google-cloud-documentai/
 .. |versions| image:: https://img.shields.io/pypi/pyversions/google-cloud-documentai.svg
    :target: https://pypi.org/project/google-cloud-documentai/
 .. _Cloud Document AI API: https://cloud.google.com/document-understanding/docs/
