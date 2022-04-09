@@ -16,7 +16,7 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -496,7 +496,7 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
 
         .. code-block:: python
 
-            from google.cloud import documentai_v1beta3
+                    from google.cloud import documentai_v1beta3
 
             def sample_process_document():
                 # Create a client
@@ -597,7 +597,7 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
 
         .. code-block:: python
 
-            from google.cloud import documentai_v1beta3
+                    from google.cloud import documentai_v1beta3
 
             def sample_batch_process_documents():
                 # Create a client
@@ -709,7 +709,7 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
 
         .. code-block:: python
 
-            from google.cloud import documentai_v1beta3
+                    from google.cloud import documentai_v1beta3
 
             def sample_fetch_processor_types():
                 # Create a client
@@ -807,7 +807,7 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
 
         .. code-block:: python
 
-            from google.cloud import documentai_v1beta3
+                    from google.cloud import documentai_v1beta3
 
             def sample_list_processors():
                 # Create a client
@@ -920,7 +920,7 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
 
         .. code-block:: python
 
-            from google.cloud import documentai_v1beta3
+                    from google.cloud import documentai_v1beta3
 
             def sample_create_processor():
                 # Create a client
@@ -1034,7 +1034,7 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
 
         .. code-block:: python
 
-            from google.cloud import documentai_v1beta3
+                    from google.cloud import documentai_v1beta3
 
             def sample_delete_processor():
                 # Create a client
@@ -1153,7 +1153,7 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
 
         .. code-block:: python
 
-            from google.cloud import documentai_v1beta3
+                    from google.cloud import documentai_v1beta3
 
             def sample_enable_processor():
                 # Create a client
@@ -1242,7 +1242,7 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
 
         .. code-block:: python
 
-            from google.cloud import documentai_v1beta3
+                    from google.cloud import documentai_v1beta3
 
             def sample_disable_processor():
                 # Create a client
@@ -1334,7 +1334,7 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
 
         .. code-block:: python
 
-            from google.cloud import documentai_v1beta3
+                    from google.cloud import documentai_v1beta3
 
             def sample_review_document():
                 # Create a client
