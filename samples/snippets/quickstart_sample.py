@@ -37,7 +37,7 @@ def quickstart(
     client = documentai.DocumentProcessorServiceClient(client_options=opts)
 
     # The full resource name of the processor, e.g.:
-    # projects/project-id/locations/location/processor/processor-id
+    # projects/project_id/locations/location/processor/processor_id
     # You must create new processors in the Cloud Console first
     name = client.processor_path(project_id, location, processor_id)
 
@@ -53,7 +53,8 @@ def quickstart(
 
     result = client.process_document(request=request)
 
-    # For a full list of Document object attributes, please reference this page: https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1.types.Document
+    # For a full list of Document object attributes, please reference this page:
+    # https://cloud.google.com/python/docs/reference/documentai/latest/google.cloud.documentai_v1.types.Document
     document = result.document
 
     # Read the text recognition output from the processor
