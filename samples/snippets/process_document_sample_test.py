@@ -32,5 +32,5 @@ def test_process_documents(capsys):
     )
     out, _ = capsys.readouterr()
 
-    assert "Paragraph" in out
+    assert "text:" in out
     assert "Invoice" in out

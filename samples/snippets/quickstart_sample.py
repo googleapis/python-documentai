@@ -17,6 +17,9 @@
 # [START documentai_quickstart]
 
 
+from google.api_core.client_options import ClientOptions
+from google.cloud import documentai_v1 as documentai
+
 # TODO(developer): Uncomment these variables before running the sample.
 # project_id = 'YOUR_PROJECT_ID'
 # location = 'YOUR_PROCESSOR_LOCATION' # Format is 'us' or 'eu'
@@ -28,10 +31,6 @@
 def quickstart(
     project_id: str, location: str, processor_id: str, file_path: str, mime_type: str
 ):
-
-    from google.api_core.client_options import ClientOptions
-    from google.cloud import documentai_v1 as documentai
-
     # You must set the api_endpoint if you use a location other than 'us', e.g.:
     opts = ClientOptions(api_endpoint=f"{location}-documentai.googleapis.com")
 
