@@ -55,7 +55,7 @@ def lint(session):
     Returns a failure if the linters find linting errors or sufficiently
     serious code quality issues.
     """
-    session.install("flake8", BLACK_VERSION)
+    session.install("flake8", BLACK_VERSION, "click<8.1.0")
     session.run(
         "black", "--check", *BLACK_PATHS,
     )
@@ -65,7 +65,7 @@ def lint(session):
 @nox.session(python=DEFAULT_PYTHON_VERSION)
 def blacken(session):
     """Run black. Format code to uniform standard."""
-    session.install(BLACK_VERSION)
+    session.install(BLACK_VERSION, "click<8.1.0")
     session.run(
         "black", *BLACK_PATHS,
     )
@@ -169,7 +169,7 @@ def cover(session):
     test runs (not system test runs), and then erases coverage data.
     """
     session.install("coverage", "pytest-cov")
-    session.run("coverage", "report", "--show-missing", "--fail-under=99")
+    session.run("coverage", "report", "--show-missing", "--fail-under=98")
 
     session.run("coverage", "erase")
 
