@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.5.1](https://github.com/googleapis/python-documentai/compare/v0.5.0...v0.5.1) (2022-05-19)
+
+
+### Bug Fixes
+
+* **deps:** require google-api-core >= 1.31.5, >= 2.3.2 on v0 release ([#300](https://github.com/googleapis/python-documentai/issues/300)) ([cac6dee](https://github.com/googleapis/python-documentai/commit/cac6dee0d0f4fe7a50547758a46c330b0f177c66))
+
 ## [0.5.0](https://www.github.com/googleapis/python-documentai/compare/v0.4.0...v0.5.0) (2021-05-28)
 
 
