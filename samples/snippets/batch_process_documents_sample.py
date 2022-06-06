@@ -57,7 +57,7 @@ def batch_process_documents(
     # NOTE: Alternatively, specify a GCS URI Prefix to process an entire directory
     #
     # gcs_input_uri = "gs://bucket/directory/"
-    # gcs_prefix = documentai.GcsPrefix(gcs_uri_prefix=GCS_INPUT_PREFIX)
+    # gcs_prefix = documentai.GcsPrefix(gcs_uri_prefix=gcs_input_uri)
     # input_config = documentai.BatchDocumentsInputConfig(gcs_prefix=gcs_prefix)
     #
 
