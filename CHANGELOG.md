@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.2](https://github.com/googleapis/python-documentai/compare/v0.5.1...v0.5.2) (2022-06-07)
+
+
+### Bug Fixes
+
+* **deps:** require protobuf<4.0.0 on v0 branch ([#339](https://github.com/googleapis/python-documentai/issues/339)) ([7d1caea](https://github.com/googleapis/python-documentai/commit/7d1caeab47ca004fee0916f285317c2831d06ae3))
+
 ### [0.5.1](https://github.com/googleapis/python-documentai/compare/v0.5.0...v0.5.1) (2022-05-19)
 
 
