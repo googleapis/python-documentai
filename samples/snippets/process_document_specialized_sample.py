@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -48,8 +48,8 @@ def process_document_specialized_sample(
     for entity in document.entities:
         print_entity(entity)
         # Print Nested Entities (if any)
-        for property in entity.properties:
-            print_entity(property)
+        for prop in entity.properties:
+            print_entity(prop)
 
 
 def print_entity(entity: documentai.Document.Entity) -> None:
