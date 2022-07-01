@@ -380,9 +380,10 @@ def prerelease_deps(session):
     # by the version ranges in setup.py.
 
     if deps:
-        session.install(*deps)
-
-    session.install("--no-deps", "-e", ".[all]")
+        for dep in deps:
+            session.install(dep)
+        
+        session.install("--no-deps", "-e", ".[all]")
 
     # Print out prerelease package versions
     session.run(
