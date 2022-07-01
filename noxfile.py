@@ -382,7 +382,6 @@ def prerelease_deps(session):
     if deps:
         for dep in deps:
             session.install(dep)
-        
         session.install("--no-deps", "-e", ".[all]")
 
     # Print out prerelease package versions
