@@ -32,7 +32,7 @@ LINT_PATHS = ["docs", "google", "tests", "noxfile.py", "setup.py"]
 
 DEFAULT_PYTHON_VERSION = "3.8"
 
-UNIT_TEST_PYTHON_VERSIONS = ["3.7", "3.8", "3.9", "3.10"]
+UNIT_TEST_PYTHON_VERSIONS = ["3.6", "3.7", "3.8", "3.9", "3.10"]
 UNIT_TEST_STANDARD_DEPENDENCIES = [
     "mock",
     "asyncmock",
@@ -378,10 +378,8 @@ def prerelease_deps(session):
     deps = [dep for dep in deps if dep not in prerel_deps]
     # We use --no-deps to ensure that pre-release versions aren't overwritten
     # by the version ranges in setup.py.
-
-    if deps:
-        session.install(dep)
-        session.install("--no-deps", "-e", ".[all]")
+    session.install(*deps)
+    session.install("--no-deps", "-e", ".[all]")
 
     # Print out prerelease package versions
     session.run(
