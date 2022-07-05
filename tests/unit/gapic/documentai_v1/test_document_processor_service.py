@@ -1659,7 +1659,6 @@ def test_document_processor_service_transport_auth_adc(transport_class):
     [
         transports.DocumentProcessorServiceGrpcTransport,
         transports.DocumentProcessorServiceGrpcAsyncIOTransport,
-        transports.DocumentProcessorServiceRestTransport,
     ],
 )
 def test_document_processor_service_transport_auth_gdch_credentials(transport_class):

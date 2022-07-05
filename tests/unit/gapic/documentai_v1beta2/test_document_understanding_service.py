@@ -1362,7 +1362,6 @@ def test_document_understanding_service_transport_auth_adc(transport_class):
     [
         transports.DocumentUnderstandingServiceGrpcTransport,
         transports.DocumentUnderstandingServiceGrpcAsyncIOTransport,
-        transports.DocumentUnderstandingServiceRestTransport,
     ],
 )
 def test_document_understanding_service_transport_auth_gdch_credentials(
