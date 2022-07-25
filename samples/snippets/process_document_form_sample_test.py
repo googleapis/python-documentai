@@ -37,7 +37,7 @@ def test_process_documents(capsys):
     expected_strings = [
         "There are 1 page(s) in this document.",
         "Table with 4 columns and 6 rows",
-        "Found 13 form fields",
+        "Found 13 form field(s)",
         "'BALANCE DUE': '$2140.00'",
     ]
     for expected_string in expected_strings:

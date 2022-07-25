@@ -15,8 +15,6 @@
 
 # [START documentai_process_quality_document]
 
-from typing import Sequence
-
 from google.api_core.client_options import ClientOptions
 from google.cloud import documentai_v1 as documentai
 
@@ -44,8 +42,8 @@ def process_document_quality_sample(
     # response.
     for entity in document.entities:
         conf_percent = f"{entity.confidence:.1%}"
-        page_num = page_refs_to_string(entity.page_anchor.page_refs)
-        print(f"\n{page_num} has a quality score of {conf_percent}")
+        page_num = str(int(entity.page_anchor.page_refs[0].page) + 1)
+        print(f"\nPage {page_num} has a quality score of {conf_percent}")
 
         for prop in entity.properties:
             conf_percent = f"{prop.confidence:.1%}"
@@ -78,20 +76,6 @@ def process_document(
     result = client.process_document(request=request)
 
     return result.document
-
-
-def page_refs_to_string(
-    page_refs: Sequence[documentai.Document.PageAnchor.PageRef],
-) -> str:
-    """Converts a page ref to a string describing the page or page range."""
-    if len(page_refs) == 1:
-        num = str(int(page_refs[0].page) + 1)
-        return f"Page {num} is"
-
-    nums = ""
-    for page_ref in page_refs:
-        nums += f"{int(page_ref.page) + 1}, "
-    return f"Pages {nums[:-2]} are"
 
 
 # [END documentai_process_quality_document]

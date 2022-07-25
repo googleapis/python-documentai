@@ -39,8 +39,8 @@ def test_process_documents(capsys):
 
     expected_strings = [
         "Found 8 subdocuments",
-        "confident that pages 1, 2 are a '1040sc_2020' subdocument",
-        "confident that page 10 is a '1099int_2020' subdocument",
+        "confident that pages 1, 2 are a subdocument",
+        "confident that page 10 is a subdocument",
     ]
     for expected_string in expected_strings:
         assert expected_string in out
