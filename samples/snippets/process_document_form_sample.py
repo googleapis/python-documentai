@@ -113,7 +113,7 @@ def print_table_rows(
 def layout_to_text(layout: documentai.Document.Page.Layout, text: str) -> str:
     """
     Document AI identifies text in different parts of the document by their
-    offsets in the entirity of the document's text. This function converts
+    offsets in the entirety of the document's text. This function converts
     offsets to a string.
     """
     response = ""
