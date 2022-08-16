@@ -15,11 +15,10 @@
 #
 import proto  # type: ignore
 
-
 __protobuf__ = proto.module(
-    package='google.cloud.documentai.v1',
+    package="google.cloud.documentai.v1beta3",
     manifest={
-        'DocumentSchema',
+        "DocumentSchema",
     },
 )
 
@@ -33,9 +32,9 @@ class DocumentSchema(proto.Message):
             Display name to show to users.
         description (str):
             Description of the schema.
-        entity_types (Sequence[google.cloud.documentai_v1.types.DocumentSchema.EntityType]):
+        entity_types (Sequence[google.cloud.documentai_v1beta3.types.DocumentSchema.EntityType]):
             Entity types of the schema.
-        metadata (google.cloud.documentai_v1.types.DocumentSchema.Metadata):
+        metadata (google.cloud.documentai_v1beta3.types.DocumentSchema.Metadata):
             Metadata of the schema.
     """
 
@@ -49,7 +48,7 @@ class DocumentSchema(proto.Message):
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
-            enum_values (google.cloud.documentai_v1.types.DocumentSchema.EntityType.EnumValues):
+            enum_values (google.cloud.documentai_v1beta3.types.DocumentSchema.EntityType.EnumValues):
                 If specified, lists all the possible values for this entity.
                 This should not be more than a handful of values. If the
                 number of values is >10 or could change frequently use the
@@ -78,7 +77,7 @@ class DocumentSchema(proto.Message):
             base_types (Sequence[str]):
                 The entity type that this type is derived
                 from.  For now, one and only one should be set.
-            properties (Sequence[google.cloud.documentai_v1.types.DocumentSchema.EntityType.Property]):
+            properties (Sequence[google.cloud.documentai_v1beta3.types.DocumentSchema.EntityType.Property]):
                 Describing the nested structure, or
                 composition of an entity.
         """
@@ -108,11 +107,12 @@ class DocumentSchema(proto.Message):
                     A reference to the value type of the property. This type is
                     subject to the same conventions as the ``Entity.base_types``
                     field.
-                occurrence_type (google.cloud.documentai_v1.types.DocumentSchema.EntityType.Property.OccurrenceType):
+                occurrence_type (google.cloud.documentai_v1beta3.types.DocumentSchema.EntityType.Property.OccurrenceType):
                     Occurrence type limits the number of
                     instances an entity type appears in the
                     document.
             """
+
             class OccurrenceType(proto.Enum):
                 r"""Types of occurrences of the entity type in the document.
                 Note: this represents the number of instances of an entity
@@ -135,14 +135,14 @@ class DocumentSchema(proto.Message):
             occurrence_type = proto.Field(
                 proto.ENUM,
                 number=3,
-                enum='DocumentSchema.EntityType.Property.OccurrenceType',
+                enum="DocumentSchema.EntityType.Property.OccurrenceType",
             )
 
         enum_values = proto.Field(
             proto.MESSAGE,
             number=14,
-            oneof='value_source',
-            message='DocumentSchema.EntityType.EnumValues',
+            oneof="value_source",
+            message="DocumentSchema.EntityType.EnumValues",
         )
         display_name = proto.Field(
             proto.STRING,
@@ -159,7 +159,7 @@ class DocumentSchema(proto.Message):
         properties = proto.RepeatedField(
             proto.MESSAGE,
             number=6,
-            message='DocumentSchema.EntityType.Property',
+            message="DocumentSchema.EntityType.Property",
         )
 
     class Metadata(proto.Message):

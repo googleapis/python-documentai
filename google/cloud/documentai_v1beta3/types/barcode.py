@@ -15,11 +15,10 @@
 #
 import proto  # type: ignore
 
-
 __protobuf__ = proto.module(
-    package='google.cloud.documentai.v1',
+    package="google.cloud.documentai.v1beta3",
     manifest={
-        'Barcode',
+        "Barcode",
     },
 )
 
