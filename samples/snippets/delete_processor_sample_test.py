@@ -13,8 +13,9 @@
 # limitations under the License.
 #
 
-import mock
 import os
+
+import mock
 
 from samples.snippets import delete_processor_sample
 

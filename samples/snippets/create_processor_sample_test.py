@@ -13,9 +13,10 @@
 # limitations under the License.
 #
 
-import mock
 import os
 from uuid import uuid4
+
+import mock
 
 from samples.snippets import create_processor_sample
 
