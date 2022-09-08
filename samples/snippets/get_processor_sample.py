@@ -13,10 +13,9 @@
 # limitations under the License.
 #
 
-# [START documentai_delete_processor]
+# [START documentai_get_processor]
 
 from google.api_core.client_options import ClientOptions
-from google.api_core.exceptions import NotFound
 from google.cloud import documentai
 
 # TODO(developer): Uncomment these variables before running the sample.
@@ -25,25 +24,23 @@ from google.cloud import documentai
 # processor_id = 'YOUR_PROCESSOR_ID'
 
 
-def delete_processor_sample(project_id: str, location: str, processor_id: str):
+def get_processor_sample(project_id: str, location: str, processor_id: str):
     # You must set the api_endpoint if you use a location other than 'us', e.g.:
     opts = ClientOptions(api_endpoint=f"{location}-documentai.googleapis.com")
 
     client = documentai.DocumentProcessorServiceClient(client_options=opts)
 
-    # The full resource name of the processor
-    # e.g.: projects/project_id/locations/location/processors/processor_id
-    processor_name = client.processor_path(project_id, location, processor_id)
+    # The full resource name of the processor, e.g.:
+    # projects/project_id/locations/location/processor/processor_id
+    name = client.processor_path(project_id, location, processor_id)
 
-    # Delete a processor
-    try:
-        operation = client.delete_processor(name=processor_name)
-        # Print operation details
-        print(operation.operation.name)
-        # Wait for operation to complete
-        operation.result()
-    except NotFound as e:
-        print(e.message)
+    # Make GetProcessor request
+    processor = client.get_processor(name=name)
+
+    # Print the processor information
+    print(f"Processor Name: {processor.name}")
+    print(f"Processor Display Name: {processor.display_name}")
+    print(f"Processor Type: {processor.type_}")
 
 
-# [END documentai_delete_processor]
+# [END documentai_get_processor]
