@@ -18,8 +18,8 @@
 from time import sleep
 
 from google.api_core.client_options import ClientOptions
-from google.longrunning.operations_pb2 import GetOperationRequest
 from google.cloud import documentai
+from google.longrunning.operations_pb2 import GetOperationRequest
 
 # TODO(developer): Uncomment these variables before running the sample.
 # location = 'YOUR_PROCESSOR_LOCATION' # Format is 'us' or 'eu'

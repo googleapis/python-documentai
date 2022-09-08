@@ -17,8 +17,7 @@
 import re
 
 from google.api_core.client_options import ClientOptions
-from google.cloud import documentai
-from google.cloud import storage
+from google.cloud import documentai, storage
 
 # TODO(developer): Uncomment these variables before running the sample.
 # project_id = 'YOUR_PROJECT_ID'
