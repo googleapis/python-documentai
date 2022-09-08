@@ -13,12 +13,10 @@
 # limitations under the License.
 #
 
+import mock
 import os
 from uuid import uuid4
 
-from google.cloud import documentai
-from google.cloud.exceptions import NotFound
-import pytest
 from samples.snippets import create_processor_sample
 
 location = "us"
@@ -27,33 +25,22 @@ processor_display_name = f"test-processor-{uuid4()}"
 processor_type = "OCR_PROCESSOR"
 
 
-@pytest.fixture(scope="module")
-def test_processor():
-    client = documentai.DocumentProcessorServiceClient()
-    parent = client.common_location_path(project_id, location)
-    processor = client.create_processor(
-        parent=parent,
-        processor=documentai.Processor(
-            display_name=processor_display_name, type_=processor_type
-        ),
-    )
-    yield processor
+@mock.patch("google.cloud.documentai.DocumentProcessorServiceClient.create_processor")
+@mock.patch("google.cloud.documentai.Processor")
+def test_create_processor(create_processor_mock, processor_mock, capsys):
+    create_processor_mock.return_value = processor_mock
 
-    try:
-        client.delete_processor(processor.name)
-    except NotFound as e:
-        print(e.message)
-
-
-def test_create_processor(capsys, test_processor):
     create_processor_sample.create_processor_sample(
         project_id=project_id,
         location=location,
-        processor_display_name=test_processor.display_name,
-        processor_type=test_processor.type_,
+        processor_display_name=processor_display_name,
+        processor_type=processor_type,
     )
+
+    create_processor_mock.assert_called_once()
+
     out, _ = capsys.readouterr()
 
     assert "Processor Name:" in out
     assert "Processor Display Name:" in out
-    assert "Processor Type: OCR_PROCESSOR" in out
+    assert "Processor Type:" in out

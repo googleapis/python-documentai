@@ -30,4 +30,3 @@ def test_list_operations(capsys):
 
     assert "operations" in out
     assert "BatchProcessMetadata" in out
-    assert "state: DONE" in out

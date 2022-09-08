@@ -13,42 +13,28 @@
 # limitations under the License.
 #
 
+import mock
 import os
-from uuid import uuid4
 
-from google.cloud import documentai
-from google.cloud.exceptions import NotFound
-import pytest
 from samples.snippets import delete_processor_sample
 
 location = "us"
 project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
-processor_display_name = f"test-processor-{uuid4()}"
-processor_type = "OCR_PROCESSOR"
+processor_id = "aaaaaaaaa"
+parent = f"projects/{project_id}/locations/{location}/processors/{processor_id}"
 
 
-@pytest.fixture(scope="module")
-def test_processor():
-    client = documentai.DocumentProcessorServiceClient()
-    parent = client.common_location_path(project_id, location)
-    processor = client.create_processor(
-        parent=parent,
-        processor=documentai.Processor(
-            display_name=processor_display_name, type_=processor_type
-        ),
-    )
-    yield processor
-
-
-def test_delete_processor(capsys, test_processor):
-    client = documentai.DocumentProcessorServiceClient()
-    processor_id = client.parse_processor_path(test_processor.name)["processor"]
+@mock.patch("google.cloud.documentai.DocumentProcessorServiceClient.delete_processor")
+@mock.patch("google.api_core.operation.Operation")
+def test_delete_processor(operation_mock, delete_processor_mock, capsys):
+    delete_processor_mock.return_value = operation_mock
 
     delete_processor_sample.delete_processor_sample(
         project_id=project_id, location=location, processor_id=processor_id
     )
+
+    delete_processor_mock.assert_called_once()
+
     out, _ = capsys.readouterr()
 
-    assert "projects" in out
-    assert "locations" in out
-    assert "operations" in out
+    assert "operation" in out
