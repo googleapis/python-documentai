@@ -21,7 +21,7 @@ from google.cloud import documentai
 # TODO(developer): Uncomment these variables before running the sample.
 # project_id = 'YOUR_PROJECT_ID'
 # location = 'YOUR_PROCESSOR_LOCATION' # Format is 'us' or 'eu'
-# processor_id = 'YOUR_PROCESSOR_ID'
+# processor_id = 'YOUR_PROCESSOR_ID' # Create processor before running sample
 
 
 def list_processor_versions_sample(project_id: str, location: str, processor_id: str):

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-# [START documentai_batch_process_document]
+# [START documentai_batch_process_documents_processor_version]
 import re
 
 from google.api_core.client_options import ClientOptions
@@ -23,16 +23,18 @@ from google.cloud import documentai, storage
 # project_id = 'YOUR_PROJECT_ID'
 # location = 'YOUR_PROCESSOR_LOCATION' # Format is 'us' or 'eu'
 # processor_id = 'YOUR_PROCESSOR_ID' # Create processor before running sample
+# processor_version_id = "YOUR_PROCESSOR_VERSION_ID" # Processor version to use
 # gcs_input_uri = "YOUR_INPUT_URI" # Format: gs://bucket/directory/file.pdf
 # input_mime_type = "application/pdf"
 # gcs_output_bucket = "YOUR_OUTPUT_BUCKET_NAME" # Format: gs://bucket
 # gcs_output_uri_prefix = "YOUR_OUTPUT_URI_PREFIX" # Format: directory/subdirectory/
 
 
-def batch_process_documents(
+def batch_process_documents_processor_version(
     project_id: str,
     location: str,
     processor_id: str,
+    processor_version_id: str,
     gcs_input_uri: str,
     input_mime_type: str,
     gcs_output_bucket: str,
@@ -70,9 +72,11 @@ def batch_process_documents(
     # Where to write results
     output_config = documentai.DocumentOutputConfig(gcs_output_config=gcs_output_config)
 
-    # The full resource name of the processor, e.g.:
-    # projects/project_id/locations/location/processor/processor_id
-    name = client.processor_path(project_id, location, processor_id)
+    # The full resource name of the processor version
+    # e.g. projects/{project_id}/locations/{location}/processors/{processor_id}/processorVersions/{processor_version_id}
+    name = client.processor_version_path(
+        project_id, location, processor_id, processor_version_id
+    )
 
     request = documentai.BatchProcessRequest(
         name=name,
@@ -146,4 +150,4 @@ def batch_process_documents(
             print(document.text)
 
 
-# [END documentai_batch_process_document]
+# [END documentai_batch_process_documents_processor_version]
