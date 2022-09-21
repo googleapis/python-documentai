@@ -13,7 +13,7 @@
 # limitations under the License.
 #
 
-# [START documentai_undeploy_processor_version]
+# [START documentai_delete_processor_version]
 
 from google.api_core.client_options import ClientOptions
 from google.api_core.exceptions import FailedPrecondition, InvalidArgument
@@ -26,7 +26,7 @@ from google.cloud import documentai
 # processor_version_id = 'YOUR_PROCESSOR_VERSION_ID'
 
 
-def undeploy_processor_version_sample(
+def delete_processor_version_sample(
     project_id: str, location: str, processor_id: str, processor_version_id: str
 ):
     # You must set the api_endpoint if you use a location other than 'us', e.g.:
@@ -40,18 +40,19 @@ def undeploy_processor_version_sample(
         project_id, location, processor_id, processor_version_id
     )
 
-    # Make UndeployProcessorVersion request
+    # Make DeleteProcessorVersion request
     try:
-        operation = client.undeploy_processor_version(name=name)
+        operation = client.delete_processor_version(name=name)
         # Print operation details
         print(operation.operation.name)
         # Wait for operation to complete
         operation.result()
-    # Undeploy request will fail if the
-    # processor version is already undeployed
+    # Delete request will fail if the
+    # processor version doesn't exist
     # or if a request is made on a pretrained processor version
+    # or the default processor version
     except (FailedPrecondition, InvalidArgument) as e:
         print(e.message)
 
 
-# [END documentai_undeploy_processor_version]
+# [END documentai_delete_processor_version]
