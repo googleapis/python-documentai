@@ -20,9 +20,10 @@ from samples.snippets import process_document_processor_version_sample
 location = "us"
 project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
 processor_id = "90484cfdedb024f6"
-processor_version_id = "pretrained-form-parser-v1.0-2020-09-23"
+processor_version_id = "stable"
 file_path = "resources/invoice.pdf"
 mime_type = "application/pdf"
+field_mask = "text,pages.pageNumber"
 
 
 def test_process_document_processor_versions(capsys):
@@ -33,6 +34,7 @@ def test_process_document_processor_versions(capsys):
         processor_version_id=processor_version_id,
         file_path=file_path,
         mime_type=mime_type,
+        field_mask=field_mask,
     )
     out, _ = capsys.readouterr()
 

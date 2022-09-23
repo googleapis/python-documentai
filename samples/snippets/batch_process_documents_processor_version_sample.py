@@ -22,8 +22,8 @@ from google.cloud import documentai, storage
 # TODO(developer): Uncomment these variables before running the sample.
 # project_id = 'YOUR_PROJECT_ID'
 # location = 'YOUR_PROCESSOR_LOCATION' # Format is 'us' or 'eu'
-# processor_id = 'YOUR_PROCESSOR_ID' # Create processor before running sample
-# processor_version_id = "YOUR_PROCESSOR_VERSION_ID" # Processor version to use
+# processor_id = 'YOUR_PROCESSOR_ID' # Example: aeb8cea219b7c272
+# processor_version_id = "YOUR_PROCESSOR_VERSION_ID" # Example: pretrained-ocr-v1.0-2020-09-23
 # gcs_input_uri = "YOUR_INPUT_URI" # Format: gs://bucket/directory/file.pdf
 # input_mime_type = "application/pdf"
 # gcs_output_bucket = "YOUR_OUTPUT_BUCKET_NAME" # Format: gs://bucket

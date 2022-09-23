@@ -15,21 +15,33 @@
 
 import os
 
+import mock
 from samples.snippets import delete_processor_version_sample
 
 location = "us"
 project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
-processor_id = "91e072f8626a76b7"
-processor_version_id = "pretrained-ocr-v1.0-2020-09-23"
+processor_id = "aaaaaaaaa"
+processor_version_id = "xxxxxxxxxx"
 
 
-def test_delete_processor_version(capsys):
+@mock.patch(
+    "google.cloud.documentai.DocumentProcessorServiceClient.delete_processor_version"
+)
+@mock.patch("google.api_core.operation.Operation")
+def test_delete_processor_version(
+    operation_mock, delete_processor_version_mock, capsys
+):
+    delete_processor_version_mock.return_value = operation_mock
+
     delete_processor_version_sample.delete_processor_version_sample(
         project_id=project_id,
         location=location,
         processor_id=processor_id,
         processor_version_id=processor_version_id,
     )
+
+    delete_processor_version_mock.assert_called_once()
+
     out, _ = capsys.readouterr()
 
-    assert "DELETE" in out or "pretrained" in out or "operation" in out
+    assert "operation" in out
