@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.4](https://github.com/googleapis/python-documentai/compare/v2.0.3...v2.0.4) (2022-11-02)
+
+
+### Documentation
+
+* **samples:** Added extra exception handling to operation samples ([#393](https://github.com/googleapis/python-documentai/issues/393)) ([fa0f715](https://github.com/googleapis/python-documentai/commit/fa0f7153e650e3c4f7adb383089d095510752867))
+
 ## [2.0.3](https://github.com/googleapis/python-documentai/compare/v2.0.2...v2.0.3) (2022-10-10)
 
 
