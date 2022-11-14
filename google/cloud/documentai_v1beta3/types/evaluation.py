@@ -15,15 +15,13 @@
 #
 from typing import MutableMapping, MutableSequence
 
+from google.protobuf import timestamp_pb2  # type: ignore
 import proto  # type: ignore
 
-from google.protobuf import timestamp_pb2  # type: ignore
-
-
 __protobuf__ = proto.module(
-    package='google.cloud.documentai.v1beta3',
+    package="google.cloud.documentai.v1beta3",
     manifest={
-        'Evaluation',
+        "Evaluation",
     },
 )
 
@@ -180,10 +178,10 @@ class Evaluation(proto.Message):
             proto.FLOAT,
             number=1,
         )
-        metrics: 'Evaluation.Metrics' = proto.Field(
+        metrics: "Evaluation.Metrics" = proto.Field(
             proto.MESSAGE,
             number=2,
-            message='Evaluation.Metrics',
+            message="Evaluation.Metrics",
         )
 
     class MultiConfidenceMetrics(proto.Message):
@@ -212,20 +210,25 @@ class Evaluation(proto.Message):
             metrics_type (google.cloud.documentai_v1beta3.types.Evaluation.MultiConfidenceMetrics.MetricsType):
                 The metrics type for the label.
         """
+
         class MetricsType(proto.Enum):
             r"""A type that determines how metrics should be interpreted."""
             METRICS_TYPE_UNSPECIFIED = 0
             AGGREGATE = 1
 
-        confidence_level_metrics: MutableSequence['Evaluation.ConfidenceLevelMetrics'] = proto.RepeatedField(
+        confidence_level_metrics: MutableSequence[
+            "Evaluation.ConfidenceLevelMetrics"
+        ] = proto.RepeatedField(
             proto.MESSAGE,
             number=1,
-            message='Evaluation.ConfidenceLevelMetrics',
+            message="Evaluation.ConfidenceLevelMetrics",
         )
-        confidence_level_metrics_exact: MutableSequence['Evaluation.ConfidenceLevelMetrics'] = proto.RepeatedField(
+        confidence_level_metrics_exact: MutableSequence[
+            "Evaluation.ConfidenceLevelMetrics"
+        ] = proto.RepeatedField(
             proto.MESSAGE,
             number=4,
-            message='Evaluation.ConfidenceLevelMetrics',
+            message="Evaluation.ConfidenceLevelMetrics",
         )
         auprc: float = proto.Field(
             proto.FLOAT,
@@ -243,10 +246,10 @@ class Evaluation(proto.Message):
             proto.FLOAT,
             number=6,
         )
-        metrics_type: 'Evaluation.MultiConfidenceMetrics.MetricsType' = proto.Field(
+        metrics_type: "Evaluation.MultiConfidenceMetrics.MetricsType" = proto.Field(
             proto.ENUM,
             number=7,
-            enum='Evaluation.MultiConfidenceMetrics.MetricsType',
+            enum="Evaluation.MultiConfidenceMetrics.MetricsType",
         )
 
     name: str = proto.Field(
