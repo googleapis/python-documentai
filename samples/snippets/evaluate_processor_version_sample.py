@@ -17,7 +17,6 @@
 
 from google.api_core.client_options import ClientOptions
 from google.api_core.exceptions import NotFound
-
 from google.cloud import documentai_v1beta3 as documentai
 
 # TODO(developer): Uncomment these variables before running the sample.
