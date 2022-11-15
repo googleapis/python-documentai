@@ -13,10 +13,11 @@
 # limitations under the License.
 #
 
-# [START documentai_get_processor_version]
+# [START documentai_list_evaluations]
 
 from google.api_core.client_options import ClientOptions
-from google.cloud import documentai
+
+from google.cloud import documentai_v1beta3 as documentai
 
 # TODO(developer): Uncomment these variables before running the sample.
 # project_id = 'YOUR_PROJECT_ID'
@@ -25,7 +26,7 @@ from google.cloud import documentai
 # processor_version_id = 'YOUR_PROCESSOR_VERSION_ID'
 
 
-def get_processor_version_sample(
+def list_evaluations_sample(
     project_id: str, location: str, processor_id: str, processor_version_id: str
 ):
     # You must set the api_endpoint if you use a location other than 'us', e.g.:
@@ -35,17 +36,21 @@ def get_processor_version_sample(
 
     # The full resource name of the processor version
     # e.g.: projects/project_id/locations/location/processors/processor_id/processorVersions/processor_version_id
-    name = client.processor_version_path(
+    parent = client.processor_version_path(
         project_id, location, processor_id, processor_version_id
     )
 
-    # Make GetProcessorVersion request
-    processor_version = client.get_processor_version(name=name)
+    # Make ListEvaluations request
+    evaluations = client.list_evaluations(parent=parent)
 
-    # Print the processor version information
-    print(f"Processor Version: {processor_version_id}")
-    print(f"Display Name: {processor_version.display_name}")
-    print(processor_version.state.name)
+    # Print the Evaluation Information
+    print(f"Evaluations for Processor Version {parent}")
+
+    for evaluation in evaluations:
+        print(f"Name: {evaluation.name}")
+        print(f"\tCreate Time: {evaluation.create_time}\n")
+
+    # Refer to https://cloud.google.com/document-ai/docs/reference/rest/v1beta3/projects.locations.processors.processorVersions.evaluations for more information on the available evaluation data
 
 
-# [END documentai_get_processor_version]
+# [END documentai_list_evaluations]
