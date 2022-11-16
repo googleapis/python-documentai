@@ -16,6 +16,7 @@
 import os
 
 import mock
+
 from samples.snippets import evaluate_processor_version_sample
 
 location = "us"
@@ -29,10 +30,15 @@ gcs_input_uri = "gs://bucket/directory/"
 @mock.patch(
     "google.cloud.documentai_v1beta3.DocumentProcessorServiceClient.evaluate_processor_version"
 )
+@mock.patch("google.cloud.documentai_v1beta3.EvaluateProcessorVersionResponse")
 @mock.patch("google.api_core.operation.Operation")
 def test_evaluate_processor_version(
-    operation_mock, evaluate_processor_version_mock, capsys
+    operation_mock,
+    evaluate_processor_version_response_mock,
+    evaluate_processor_version_mock,
+    capsys,
 ):
+    operation_mock.result.return_value = evaluate_processor_version_response_mock
     evaluate_processor_version_mock.return_value = operation_mock
 
     evaluate_processor_version_sample.evaluate_processor_version_sample(

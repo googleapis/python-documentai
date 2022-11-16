@@ -23,7 +23,7 @@ from google.cloud import documentai_v1beta3 as documentai
 # project_id = 'YOUR_PROJECT_ID'
 # location = 'YOUR_PROCESSOR_LOCATION' # Format is 'us' or 'eu'
 # processor_id = 'YOUR_PROCESSOR_ID'
-# processor_version_display_name = 'My New Processor Version'
+# processor_version_display_name = 'new-processor-version'
 # train_data_uri = 'gs://bucket/directory/' # (Optional)
 # test_data_uri = 'gs://bucket/directory/' # (Optional)
 
@@ -51,10 +51,10 @@ def train_processor_version_sample(
 
     # If Train/Test data is not supplied, the default sets in the Cloud Console will be used
     input_data = documentai.TrainProcessorVersionRequest.InputData(
-        train_data=documentai.BatchDocumentsInputConfig(
+        training_documents=documentai.BatchDocumentsInputConfig(
             gcs_prefix=documentai.GcsPrefix(gcs_uri_prefix=train_data_uri)
         ),
-        test_data=documentai.BatchDocumentsInputConfig(
+        test_documents=documentai.BatchDocumentsInputConfig(
             gcs_prefix=documentai.GcsPrefix(gcs_uri_prefix=test_data_uri)
         ),
     )
