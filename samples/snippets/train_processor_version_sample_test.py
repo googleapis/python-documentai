@@ -21,7 +21,7 @@ from samples.snippets import train_processor_version_sample
 location = "us"
 project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
 processor_id = "aaaaaaaaa"
-processor_version_display_name = "My New Processor Version"
+processor_version_display_name = "new-processor-version"
 train_data_uri = "gs://bucket/directory/"
 test_data_uri = "gs://bucket/directory/"
 

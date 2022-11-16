@@ -16,6 +16,7 @@
 import os
 
 import mock
+
 from samples.snippets import get_evaluation_sample
 
 location = "us"
