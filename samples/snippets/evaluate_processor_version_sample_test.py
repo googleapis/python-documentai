@@ -16,7 +16,6 @@
 import os
 
 import mock
-
 from samples.snippets import evaluate_processor_version_sample
 
 location = "us"
