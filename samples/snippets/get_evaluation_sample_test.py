@@ -16,7 +16,6 @@
 import os
 
 import mock
-
 from samples.snippets import get_evaluation_sample
 
 location = "us"
@@ -24,6 +23,7 @@ project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
 processor_id = "a35310a144a6e4f8"
 processor_version_id = "2af620b2fd4d1fcf"
 evaluation_id = "55cdab6206095055"
+
 
 # Mocking request
 @mock.patch(

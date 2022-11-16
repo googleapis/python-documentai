@@ -25,6 +25,7 @@ processor_version_display_name = "new-processor-version"
 train_data_uri = "gs://bucket/directory/"
 test_data_uri = "gs://bucket/directory/"
 
+
 # Mocking request as training can take a long time
 @mock.patch(
     "google.cloud.documentai_v1beta3.DocumentProcessorServiceClient.train_processor_version"
