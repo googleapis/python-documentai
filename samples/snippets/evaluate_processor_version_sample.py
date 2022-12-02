@@ -16,7 +16,6 @@
 # [START documentai_evaluate_processor_version]
 
 from google.api_core.client_options import ClientOptions
-from google.api_core.exceptions import NotFound
 from google.cloud import documentai_v1beta3 as documentai
 
 # TODO(developer): Uncomment these variables before running the sample.
@@ -40,7 +39,7 @@ def evaluate_processor_version_sample(
     client = documentai.DocumentProcessorServiceClient(client_options=opts)
 
     # The full resource name of the processor version
-    # e.g.: projects/project_id/locations/location/processors/processor_id/processorVersions/processor_version_id
+    # e.g. `projects/{project_id}/locations/{location}/processors/{processor_id}/processorVersions/{processor_version_id}`
     name = client.processor_version_path(
         project_id, location, processor_id, processor_version_id
     )
@@ -71,17 +70,12 @@ def evaluate_processor_version_sample(
     # Make EvaluateProcessorVersion request
     # Continually polls the operation until it is complete.
     # This could take some time for larger files
+    operation = client.evaluate_processor_version(request=request)
+    # Print operation details
     # Format: projects/PROJECT_NUMBER/locations/LOCATION/operations/OPERATION_ID
-    try:
-        operation = client.evaluate_processor_version(request=request)
-        # Print operation details
-        print(f"Waiting for operation {operation.operation.name} to complete...")
-        # Wait for operation to complete
-        response = documentai.EvaluateProcessorVersionResponse(operation.result())
-    # Evaluate request will fail if the
-    # processor version doesn't exist
-    except NotFound as e:
-        print(e.message)
+    print(f"Waiting for operation {operation.operation.name} to complete...")
+    # Wait for operation to complete
+    response = documentai.EvaluateProcessorVersionResponse(operation.result())
 
     # Once the operation is complete,
     # Print evaluation ID from operation response

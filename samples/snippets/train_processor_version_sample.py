@@ -42,14 +42,14 @@ def train_processor_version_sample(
     client = documentai.DocumentProcessorServiceClient(client_options=opts)
 
     # The full resource name of the processor
-    # e.g.: projects/project_id/locations/location/processors/processor_id
+    # e.g. `projects/{project_id}/locations/{location}/processors/{processor_id}
     parent = client.processor_path(project_id, location, processor_id)
 
     processor_version = documentai.ProcessorVersion(
         display_name=processor_version_display_name
     )
 
-    # If Train/Test data is not supplied, the default sets in the Cloud Console will be used
+    # If train/test data is not supplied, the default sets in the Cloud Console will be used
     input_data = documentai.TrainProcessorVersionRequest.InputData(
         training_documents=documentai.BatchDocumentsInputConfig(
             gcs_prefix=documentai.GcsPrefix(gcs_uri_prefix=train_data_uri)
@@ -63,15 +63,11 @@ def train_processor_version_sample(
         parent=parent, processor_version=processor_version, input_data=input_data
     )
 
-    # Make TrainProcessorVersion request
-    try:
-        operation = client.train_processor_version(request=request)
-        # Print operation details
-        print(operation.operation.name)
-        # Wait for operation to complete
-        response = documentai.TrainProcessorVersionResponse(operation.result())
-    except (NotFound, FailedPrecondition) as e:
-        print(e.message)
+    operation = client.train_processor_version(request=request)
+    # Print operation details
+    print(operation.operation.name)
+    # Wait for operation to complete
+    response = documentai.TrainProcessorVersionResponse(operation.result())
 
     metadata = documentai.TrainProcessorVersionMetadata(operation.metadata)
 

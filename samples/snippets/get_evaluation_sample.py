@@ -16,7 +16,6 @@
 # [START documentai_get_evaluation]
 
 from google.api_core.client_options import ClientOptions
-from google.api_core.exceptions import NotFound
 from google.cloud import documentai_v1beta3 as documentai
 
 # TODO(developer): Uncomment these variables before running the sample.
@@ -40,27 +39,24 @@ def get_evaluation_sample(
     client = documentai.DocumentProcessorServiceClient(client_options=opts)
 
     # The full resource name of the evaluation
-    # e.g. 'projects/project_id/locations/location/processors/processor_id/processorVersions/processor_version_id/evaluations/evaluation_id'
+    # e.g. `projects/{project_id}/locations/{location}/processors/{processor_id}/processorVersions/{processor_version_id}`
     evaluation_name = client.evaluation_path(
         project_id, location, processor_id, processor_version_id, evaluation_id
     )
     # Make GetEvaluation request
-    try:
-        evaluation = client.get_evaluation(name=evaluation_name)
-    except (NotFound) as e:
-        print(e.message)
+    evaluation = client.get_evaluation(name=evaluation_name)
 
     create_time = evaluation.create_time
     document_counters = evaluation.document_counters
 
     # Print the Evaluation Information
+    # Refer to https://cloud.google.com/document-ai/docs/reference/rest/v1beta3/projects.locations.processors.processorVersions.evaluations
+    # for more information on the available evaluation data
     print(f"Create Time: {create_time}")
     print(f"Input Documents: {document_counters.input_documents_count}")
     print(f"\tInvalid Documents: {document_counters.invalid_documents_count}")
     print(f"\tFailed Documents: {document_counters.failed_documents_count}")
     print(f"\tEvaluated Documents: {document_counters.evaluated_documents_count}")
-
-    # Refer to https://cloud.google.com/document-ai/docs/reference/rest/v1beta3/projects.locations.processors.processorVersions.evaluations for more information on the available evaluation data
 
 
 # [END documentai_get_evaluation]

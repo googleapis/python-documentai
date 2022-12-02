@@ -34,22 +34,21 @@ def list_evaluations_sample(
     client = documentai.DocumentProcessorServiceClient(client_options=opts)
 
     # The full resource name of the processor version
-    # e.g.: projects/project_id/locations/location/processors/processor_id/processorVersions/processor_version_id
+    # e.g. `projects/{project_id}/locations/{location}/processors/{processor_id}/processorVersions/{processor_version_id}`
     parent = client.processor_version_path(
         project_id, location, processor_id, processor_version_id
     )
 
-    # Make ListEvaluations request
     evaluations = client.list_evaluations(parent=parent)
 
     # Print the Evaluation Information
+    # Refer to https://cloud.google.com/document-ai/docs/reference/rest/v1beta3/projects.locations.processors.processorVersions.evaluations
+    # for more information on the available evaluation data
     print(f"Evaluations for Processor Version {parent}")
 
     for evaluation in evaluations:
         print(f"Name: {evaluation.name}")
         print(f"\tCreate Time: {evaluation.create_time}\n")
-
-    # Refer to https://cloud.google.com/document-ai/docs/reference/rest/v1beta3/projects.locations.processors.processorVersions.evaluations for more information on the available evaluation data
 
 
 # [END documentai_list_evaluations]
