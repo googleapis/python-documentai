@@ -15,6 +15,8 @@
 
 import os
 
+from google.api_core.exceptions import FailedPrecondition, NotFound
+
 from samples.snippets import cancel_operation_sample
 
 location = "us"
@@ -24,9 +26,13 @@ operation_name = f"projects/{project_id}/locations/{location}/operations/{operat
 
 
 def test_cancel_operation(capsys):
-    cancel_operation_sample.cancel_operation_sample(
-        location=location, operation_name=operation_name
-    )
+    try:
+        cancel_operation_sample.cancel_operation_sample(
+            location=location, operation_name=operation_name
+        )
+    except (FailedPrecondition, NotFound) as e:
+        print(e.message)
+
     out, _ = capsys.readouterr()
 
     assert "Operation" in out
