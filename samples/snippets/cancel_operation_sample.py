@@ -16,7 +16,6 @@
 # [START documentai_cancel_operation]
 
 from google.api_core.client_options import ClientOptions
-from google.api_core.exceptions import FailedPrecondition, NotFound
 from google.cloud import documentai
 from google.longrunning.operations_pb2 import CancelOperationRequest
 
@@ -34,11 +33,8 @@ def cancel_operation_sample(location: str, operation_name: str):
     request = CancelOperationRequest(name=operation_name)
 
     # Make CancelOperation request
-    try:
-        client.cancel_operation(request=request)
-        print(f"Operation {operation_name} cancelled")
-    except (FailedPrecondition, NotFound) as e:
-        print(e.message)
+    client.cancel_operation(request=request)
+    print(f"Operation {operation_name} cancelled")
 
 
 # [END documentai_cancel_operation]

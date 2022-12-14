@@ -16,7 +16,6 @@
 # [START documentai_disable_processor]
 
 from google.api_core.client_options import ClientOptions
-from google.api_core.exceptions import FailedPrecondition
 from google.cloud import documentai
 
 # TODO(developer): Uncomment these variables before running the sample.
@@ -37,16 +36,12 @@ def disable_processor_sample(project_id: str, location: str, processor_id: str):
     request = documentai.DisableProcessorRequest(name=processor_name)
 
     # Make DisableProcessor request
-    try:
-        operation = client.disable_processor(request=request)
+    operation = client.disable_processor(request=request)
 
-        # Print operation name
-        print(operation.operation.name)
-        # Wait for operation to complete
-        operation.result()
-    # Cannot disable a processor that is already disabled
-    except FailedPrecondition as e:
-        print(e.message)
+    # Print operation name
+    print(operation.operation.name)
+    # Wait for operation to complete
+    operation.result()
 
 
 # [END documentai_disable_processor]

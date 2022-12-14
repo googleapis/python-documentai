@@ -16,7 +16,6 @@
 # [START documentai_deploy_processor_version]
 
 from google.api_core.client_options import ClientOptions
-from google.api_core.exceptions import FailedPrecondition
 from google.cloud import documentai
 
 # TODO(developer): Uncomment these variables before running the sample.
@@ -41,16 +40,11 @@ def deploy_processor_version_sample(
     )
 
     # Make DeployProcessorVersion request
-    try:
-        operation = client.deploy_processor_version(name=name)
-        # Print operation details
-        print(operation.operation.name)
-        # Wait for operation to complete
-        operation.result()
-    # Deploy request will fail if the
-    # processor version is already deployed
-    except FailedPrecondition as e:
-        print(e.message)
+    operation = client.deploy_processor_version(name=name)
+    # Print operation details
+    print(operation.operation.name)
+    # Wait for operation to complete
+    operation.result()
 
 
 # [END documentai_deploy_processor_version]
