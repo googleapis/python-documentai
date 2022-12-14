@@ -16,7 +16,6 @@
 import os
 
 from google.api_core.exceptions import FailedPrecondition, NotFound
-
 from samples.snippets import cancel_operation_sample
 
 location = "us"
