@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.1](https://github.com/googleapis/python-documentai/compare/v2.7.0...v2.7.1) (2023-01-13)
+
+
+### Documentation
+
+* **samples:** Removed Samples after Migration to Mono Repo ([#438](https://github.com/googleapis/python-documentai/issues/438)) ([8c7f52b](https://github.com/googleapis/python-documentai/commit/8c7f52bce317b6b54bcfc71cb193dc7e372b2812))
+
 ## [2.7.0](https://github.com/googleapis/python-documentai/compare/v2.6.0...v2.7.0) (2023-01-10)
 
 
