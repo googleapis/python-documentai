@@ -14,27 +14,29 @@
 # limitations under the License.
 #
 
-from google.auth.transport.requests import AuthorizedSession  # type: ignore
-import json  # type: ignore
-import grpc  # type: ignore
-from google.auth.transport.grpc import SslCredentials  # type: ignore
-from google.auth import credentials as ga_credentials  # type: ignore
-from google.api_core import exceptions as core_exceptions
-from google.api_core import retry as retries
-from google.api_core import rest_helpers
-from google.api_core import rest_streaming
-from google.api_core import path_template
-from google.api_core import gapic_v1
-
-from google.protobuf import json_format
-from google.api_core import operations_v1
-from google.cloud.location import locations_pb2 # type: ignore
-from google.longrunning import operations_pb2
-from requests import __version__ as requests_version
 import dataclasses
+import json  # type: ignore
 import re
 from typing import Callable, Dict, List, Optional, Sequence, Tuple, Union
 import warnings
+
+from google.api_core import (
+    gapic_v1,
+    operations_v1,
+    path_template,
+    rest_helpers,
+    rest_streaming,
+)
+from google.api_core import exceptions as core_exceptions
+from google.api_core import retry as retries
+from google.auth import credentials as ga_credentials  # type: ignore
+from google.auth.transport.grpc import SslCredentials  # type: ignore
+from google.auth.transport.requests import AuthorizedSession  # type: ignore
+from google.cloud.location import locations_pb2  # type: ignore
+from google.longrunning import operations_pb2
+from google.protobuf import json_format
+import grpc  # type: ignore
+from requests import __version__ as requests_version
 
 try:
     OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
@@ -42,14 +44,15 @@ except AttributeError:  # pragma: NO COVER
     OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 
+from google.longrunning import operations_pb2  # type: ignore
+
 from google.cloud.documentai_v1.types import document_processor_service
 from google.cloud.documentai_v1.types import processor
 from google.cloud.documentai_v1.types import processor as gcd_processor
 from google.cloud.documentai_v1.types import processor_type
-from google.longrunning import operations_pb2  # type: ignore
 
-from .base import DocumentProcessorServiceTransport, DEFAULT_CLIENT_INFO as BASE_DEFAULT_CLIENT_INFO
-
+from .base import DEFAULT_CLIENT_INFO as BASE_DEFAULT_CLIENT_INFO
+from .base import DocumentProcessorServiceTransport
 
 DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
     gapic_version=BASE_DEFAULT_CLIENT_INFO.gapic_version,
@@ -222,7 +225,14 @@ class DocumentProcessorServiceRestInterceptor:
 
 
     """
-    def pre_batch_process_documents(self, request: document_processor_service.BatchProcessRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[document_processor_service.BatchProcessRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_batch_process_documents(
+        self,
+        request: document_processor_service.BatchProcessRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        document_processor_service.BatchProcessRequest, Sequence[Tuple[str, str]]
+    ]:
         """Pre-rpc interceptor for batch_process_documents
 
         Override in a subclass to manipulate the request or metadata
@@ -230,7 +240,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_batch_process_documents(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_batch_process_documents(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for batch_process_documents
 
         Override in a subclass to manipulate the response
@@ -238,7 +250,14 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_create_processor(self, request: document_processor_service.CreateProcessorRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[document_processor_service.CreateProcessorRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_create_processor(
+        self,
+        request: document_processor_service.CreateProcessorRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        document_processor_service.CreateProcessorRequest, Sequence[Tuple[str, str]]
+    ]:
         """Pre-rpc interceptor for create_processor
 
         Override in a subclass to manipulate the request or metadata
@@ -246,7 +265,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_create_processor(self, response: gcd_processor.Processor) -> gcd_processor.Processor:
+    def post_create_processor(
+        self, response: gcd_processor.Processor
+    ) -> gcd_processor.Processor:
         """Post-rpc interceptor for create_processor
 
         Override in a subclass to manipulate the response
@@ -254,7 +275,14 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_delete_processor(self, request: document_processor_service.DeleteProcessorRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[document_processor_service.DeleteProcessorRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_delete_processor(
+        self,
+        request: document_processor_service.DeleteProcessorRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        document_processor_service.DeleteProcessorRequest, Sequence[Tuple[str, str]]
+    ]:
         """Pre-rpc interceptor for delete_processor
 
         Override in a subclass to manipulate the request or metadata
@@ -262,7 +290,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_delete_processor(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_delete_processor(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for delete_processor
 
         Override in a subclass to manipulate the response
@@ -270,7 +300,15 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_delete_processor_version(self, request: document_processor_service.DeleteProcessorVersionRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[document_processor_service.DeleteProcessorVersionRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_delete_processor_version(
+        self,
+        request: document_processor_service.DeleteProcessorVersionRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        document_processor_service.DeleteProcessorVersionRequest,
+        Sequence[Tuple[str, str]],
+    ]:
         """Pre-rpc interceptor for delete_processor_version
 
         Override in a subclass to manipulate the request or metadata
@@ -278,7 +316,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_delete_processor_version(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_delete_processor_version(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for delete_processor_version
 
         Override in a subclass to manipulate the response
@@ -286,7 +326,15 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_deploy_processor_version(self, request: document_processor_service.DeployProcessorVersionRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[document_processor_service.DeployProcessorVersionRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_deploy_processor_version(
+        self,
+        request: document_processor_service.DeployProcessorVersionRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        document_processor_service.DeployProcessorVersionRequest,
+        Sequence[Tuple[str, str]],
+    ]:
         """Pre-rpc interceptor for deploy_processor_version
 
         Override in a subclass to manipulate the request or metadata
@@ -294,7 +342,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_deploy_processor_version(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_deploy_processor_version(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for deploy_processor_version
 
         Override in a subclass to manipulate the response
@@ -302,7 +352,14 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_disable_processor(self, request: document_processor_service.DisableProcessorRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[document_processor_service.DisableProcessorRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_disable_processor(
+        self,
+        request: document_processor_service.DisableProcessorRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        document_processor_service.DisableProcessorRequest, Sequence[Tuple[str, str]]
+    ]:
         """Pre-rpc interceptor for disable_processor
 
         Override in a subclass to manipulate the request or metadata
@@ -310,7 +367,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_disable_processor(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_disable_processor(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for disable_processor
 
         Override in a subclass to manipulate the response
@@ -318,7 +377,14 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_enable_processor(self, request: document_processor_service.EnableProcessorRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[document_processor_service.EnableProcessorRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_enable_processor(
+        self,
+        request: document_processor_service.EnableProcessorRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        document_processor_service.EnableProcessorRequest, Sequence[Tuple[str, str]]
+    ]:
         """Pre-rpc interceptor for enable_processor
 
         Override in a subclass to manipulate the request or metadata
@@ -326,7 +392,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_enable_processor(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_enable_processor(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for enable_processor
 
         Override in a subclass to manipulate the response
@@ -334,7 +402,14 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_fetch_processor_types(self, request: document_processor_service.FetchProcessorTypesRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[document_processor_service.FetchProcessorTypesRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_fetch_processor_types(
+        self,
+        request: document_processor_service.FetchProcessorTypesRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        document_processor_service.FetchProcessorTypesRequest, Sequence[Tuple[str, str]]
+    ]:
         """Pre-rpc interceptor for fetch_processor_types
 
         Override in a subclass to manipulate the request or metadata
@@ -342,7 +417,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_fetch_processor_types(self, response: document_processor_service.FetchProcessorTypesResponse) -> document_processor_service.FetchProcessorTypesResponse:
+    def post_fetch_processor_types(
+        self, response: document_processor_service.FetchProcessorTypesResponse
+    ) -> document_processor_service.FetchProcessorTypesResponse:
         """Post-rpc interceptor for fetch_processor_types
 
         Override in a subclass to manipulate the response
@@ -350,7 +427,14 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_get_processor(self, request: document_processor_service.GetProcessorRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[document_processor_service.GetProcessorRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_get_processor(
+        self,
+        request: document_processor_service.GetProcessorRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        document_processor_service.GetProcessorRequest, Sequence[Tuple[str, str]]
+    ]:
         """Pre-rpc interceptor for get_processor
 
         Override in a subclass to manipulate the request or metadata
@@ -366,7 +450,14 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_get_processor_type(self, request: document_processor_service.GetProcessorTypeRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[document_processor_service.GetProcessorTypeRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_get_processor_type(
+        self,
+        request: document_processor_service.GetProcessorTypeRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        document_processor_service.GetProcessorTypeRequest, Sequence[Tuple[str, str]]
+    ]:
         """Pre-rpc interceptor for get_processor_type
 
         Override in a subclass to manipulate the request or metadata
@@ -374,7 +465,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_get_processor_type(self, response: processor_type.ProcessorType) -> processor_type.ProcessorType:
+    def post_get_processor_type(
+        self, response: processor_type.ProcessorType
+    ) -> processor_type.ProcessorType:
         """Post-rpc interceptor for get_processor_type
 
         Override in a subclass to manipulate the response
@@ -382,7 +475,14 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_get_processor_version(self, request: document_processor_service.GetProcessorVersionRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[document_processor_service.GetProcessorVersionRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_get_processor_version(
+        self,
+        request: document_processor_service.GetProcessorVersionRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        document_processor_service.GetProcessorVersionRequest, Sequence[Tuple[str, str]]
+    ]:
         """Pre-rpc interceptor for get_processor_version
 
         Override in a subclass to manipulate the request or metadata
@@ -390,7 +490,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_get_processor_version(self, response: processor.ProcessorVersion) -> processor.ProcessorVersion:
+    def post_get_processor_version(
+        self, response: processor.ProcessorVersion
+    ) -> processor.ProcessorVersion:
         """Post-rpc interceptor for get_processor_version
 
         Override in a subclass to manipulate the response
@@ -398,7 +500,14 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_list_processors(self, request: document_processor_service.ListProcessorsRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[document_processor_service.ListProcessorsRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_list_processors(
+        self,
+        request: document_processor_service.ListProcessorsRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        document_processor_service.ListProcessorsRequest, Sequence[Tuple[str, str]]
+    ]:
         """Pre-rpc interceptor for list_processors
 
         Override in a subclass to manipulate the request or metadata
@@ -406,7 +515,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_list_processors(self, response: document_processor_service.ListProcessorsResponse) -> document_processor_service.ListProcessorsResponse:
+    def post_list_processors(
+        self, response: document_processor_service.ListProcessorsResponse
+    ) -> document_processor_service.ListProcessorsResponse:
         """Post-rpc interceptor for list_processors
 
         Override in a subclass to manipulate the response
@@ -414,7 +525,14 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_list_processor_types(self, request: document_processor_service.ListProcessorTypesRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[document_processor_service.ListProcessorTypesRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_list_processor_types(
+        self,
+        request: document_processor_service.ListProcessorTypesRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        document_processor_service.ListProcessorTypesRequest, Sequence[Tuple[str, str]]
+    ]:
         """Pre-rpc interceptor for list_processor_types
 
         Override in a subclass to manipulate the request or metadata
@@ -422,7 +540,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_list_processor_types(self, response: document_processor_service.ListProcessorTypesResponse) -> document_processor_service.ListProcessorTypesResponse:
+    def post_list_processor_types(
+        self, response: document_processor_service.ListProcessorTypesResponse
+    ) -> document_processor_service.ListProcessorTypesResponse:
         """Post-rpc interceptor for list_processor_types
 
         Override in a subclass to manipulate the response
@@ -430,7 +550,15 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_list_processor_versions(self, request: document_processor_service.ListProcessorVersionsRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[document_processor_service.ListProcessorVersionsRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_list_processor_versions(
+        self,
+        request: document_processor_service.ListProcessorVersionsRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        document_processor_service.ListProcessorVersionsRequest,
+        Sequence[Tuple[str, str]],
+    ]:
         """Pre-rpc interceptor for list_processor_versions
 
         Override in a subclass to manipulate the request or metadata
@@ -438,7 +566,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_list_processor_versions(self, response: document_processor_service.ListProcessorVersionsResponse) -> document_processor_service.ListProcessorVersionsResponse:
+    def post_list_processor_versions(
+        self, response: document_processor_service.ListProcessorVersionsResponse
+    ) -> document_processor_service.ListProcessorVersionsResponse:
         """Post-rpc interceptor for list_processor_versions
 
         Override in a subclass to manipulate the response
@@ -446,7 +576,12 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_process_document(self, request: document_processor_service.ProcessRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[document_processor_service.ProcessRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_process_document(
+        self,
+        request: document_processor_service.ProcessRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[document_processor_service.ProcessRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for process_document
 
         Override in a subclass to manipulate the request or metadata
@@ -454,7 +589,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_process_document(self, response: document_processor_service.ProcessResponse) -> document_processor_service.ProcessResponse:
+    def post_process_document(
+        self, response: document_processor_service.ProcessResponse
+    ) -> document_processor_service.ProcessResponse:
         """Post-rpc interceptor for process_document
 
         Override in a subclass to manipulate the response
@@ -462,7 +599,14 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_review_document(self, request: document_processor_service.ReviewDocumentRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[document_processor_service.ReviewDocumentRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_review_document(
+        self,
+        request: document_processor_service.ReviewDocumentRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        document_processor_service.ReviewDocumentRequest, Sequence[Tuple[str, str]]
+    ]:
         """Pre-rpc interceptor for review_document
 
         Override in a subclass to manipulate the request or metadata
@@ -470,7 +614,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_review_document(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_review_document(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for review_document
 
         Override in a subclass to manipulate the response
@@ -478,7 +624,15 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_set_default_processor_version(self, request: document_processor_service.SetDefaultProcessorVersionRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[document_processor_service.SetDefaultProcessorVersionRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_set_default_processor_version(
+        self,
+        request: document_processor_service.SetDefaultProcessorVersionRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        document_processor_service.SetDefaultProcessorVersionRequest,
+        Sequence[Tuple[str, str]],
+    ]:
         """Pre-rpc interceptor for set_default_processor_version
 
         Override in a subclass to manipulate the request or metadata
@@ -486,7 +640,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_set_default_processor_version(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_set_default_processor_version(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for set_default_processor_version
 
         Override in a subclass to manipulate the response
@@ -494,7 +650,15 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_undeploy_processor_version(self, request: document_processor_service.UndeployProcessorVersionRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[document_processor_service.UndeployProcessorVersionRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_undeploy_processor_version(
+        self,
+        request: document_processor_service.UndeployProcessorVersionRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        document_processor_service.UndeployProcessorVersionRequest,
+        Sequence[Tuple[str, str]],
+    ]:
         """Pre-rpc interceptor for undeploy_processor_version
 
         Override in a subclass to manipulate the request or metadata
@@ -502,7 +666,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_undeploy_processor_version(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_undeploy_processor_version(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for undeploy_processor_version
 
         Override in a subclass to manipulate the response
@@ -511,7 +677,11 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return response
 
-    def pre_get_location(self, request: locations_pb2.GetLocationRequest, metadata: Sequence[Tuple[str, str]]) -> locations_pb2.Location:
+    def pre_get_location(
+        self,
+        request: locations_pb2.GetLocationRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> locations_pb2.Location:
         """Pre-rpc interceptor for get_location
 
         Override in a subclass to manipulate the request or metadata
@@ -519,7 +689,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_get_location(self, response: locations_pb2.GetLocationRequest) -> locations_pb2.Location:
+    def post_get_location(
+        self, response: locations_pb2.GetLocationRequest
+    ) -> locations_pb2.Location:
         """Post-rpc interceptor for get_location
 
         Override in a subclass to manipulate the response
@@ -527,7 +699,12 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_list_locations(self, request: locations_pb2.ListLocationsRequest, metadata: Sequence[Tuple[str, str]]) -> locations_pb2.ListLocationsResponse:
+
+    def pre_list_locations(
+        self,
+        request: locations_pb2.ListLocationsRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> locations_pb2.ListLocationsResponse:
         """Pre-rpc interceptor for list_locations
 
         Override in a subclass to manipulate the request or metadata
@@ -535,7 +712,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_list_locations(self, response: locations_pb2.ListLocationsRequest) -> locations_pb2.ListLocationsResponse:
+    def post_list_locations(
+        self, response: locations_pb2.ListLocationsRequest
+    ) -> locations_pb2.ListLocationsResponse:
         """Post-rpc interceptor for list_locations
 
         Override in a subclass to manipulate the response
@@ -543,7 +722,12 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_cancel_operation(self, request: operations_pb2.CancelOperationRequest, metadata: Sequence[Tuple[str, str]]) -> None:
+
+    def pre_cancel_operation(
+        self,
+        request: operations_pb2.CancelOperationRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> None:
         """Pre-rpc interceptor for cancel_operation
 
         Override in a subclass to manipulate the request or metadata
@@ -551,7 +735,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_cancel_operation(self, response: operations_pb2.CancelOperationRequest) -> None:
+    def post_cancel_operation(
+        self, response: operations_pb2.CancelOperationRequest
+    ) -> None:
         """Post-rpc interceptor for cancel_operation
 
         Override in a subclass to manipulate the response
@@ -559,7 +745,12 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_get_operation(self, request: operations_pb2.GetOperationRequest, metadata: Sequence[Tuple[str, str]]) -> operations_pb2.Operation:
+
+    def pre_get_operation(
+        self,
+        request: operations_pb2.GetOperationRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> operations_pb2.Operation:
         """Pre-rpc interceptor for get_operation
 
         Override in a subclass to manipulate the request or metadata
@@ -567,7 +758,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_get_operation(self, response: operations_pb2.GetOperationRequest) -> operations_pb2.Operation:
+    def post_get_operation(
+        self, response: operations_pb2.GetOperationRequest
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for get_operation
 
         Override in a subclass to manipulate the response
@@ -575,7 +768,12 @@ class DocumentProcessorServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_list_operations(self, request: operations_pb2.ListOperationsRequest, metadata: Sequence[Tuple[str, str]]) -> operations_pb2.ListOperationsResponse:
+
+    def pre_list_operations(
+        self,
+        request: operations_pb2.ListOperationsRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> operations_pb2.ListOperationsResponse:
         """Pre-rpc interceptor for list_operations
 
         Override in a subclass to manipulate the request or metadata
@@ -583,7 +781,9 @@ class DocumentProcessorServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_list_operations(self, response: operations_pb2.ListOperationsRequest) -> operations_pb2.ListOperationsResponse:
+    def post_list_operations(
+        self, response: operations_pb2.ListOperationsRequest
+    ) -> operations_pb2.ListOperationsResponse:
         """Post-rpc interceptor for list_operations
 
         Override in a subclass to manipulate the response
@@ -617,20 +817,21 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
 
     """
 
-    def __init__(self, *,
-            host: str = 'documentai.googleapis.com',
-            credentials: Optional[ga_credentials.Credentials] = None,
-            credentials_file: Optional[str] = None,
-            scopes: Optional[Sequence[str]] = None,
-            client_cert_source_for_mtls: Optional[Callable[[
-                ], Tuple[bytes, bytes]]] = None,
-            quota_project_id: Optional[str] = None,
-            client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
-            always_use_jwt_access: Optional[bool] = False,
-            url_scheme: str = 'https',
-            interceptor: Optional[DocumentProcessorServiceRestInterceptor] = None,
-            api_audience: Optional[str] = None,
-            ) -> None:
+    def __init__(
+        self,
+        *,
+        host: str = "documentai.googleapis.com",
+        credentials: Optional[ga_credentials.Credentials] = None,
+        credentials_file: Optional[str] = None,
+        scopes: Optional[Sequence[str]] = None,
+        client_cert_source_for_mtls: Optional[Callable[[], Tuple[bytes, bytes]]] = None,
+        quota_project_id: Optional[str] = None,
+        client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
+        always_use_jwt_access: Optional[bool] = False,
+        url_scheme: str = "https",
+        interceptor: Optional[DocumentProcessorServiceRestInterceptor] = None,
+        api_audience: Optional[str] = None,
+    ) -> None:
         """Instantiate the transport.
 
         Args:
@@ -669,7 +870,9 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         # credentials object
         maybe_url_match = re.match("^(?P<scheme>http(?:s)?://)?(?P<host>.*)$", host)
         if maybe_url_match is None:
-            raise ValueError(f"Unexpected hostname structure: {host}")  # pragma: NO COVER
+            raise ValueError(
+                f"Unexpected hostname structure: {host}"
+            )  # pragma: NO COVER
 
         url_match_items = maybe_url_match.groupdict()
 
@@ -680,10 +883,11 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
             credentials=credentials,
             client_info=client_info,
             always_use_jwt_access=always_use_jwt_access,
-            api_audience=api_audience
+            api_audience=api_audience,
         )
         self._session = AuthorizedSession(
-            self._credentials, default_host=self.DEFAULT_HOST)
+            self._credentials, default_host=self.DEFAULT_HOST
+        )
         self._operations_client: Optional[operations_v1.AbstractOperationsClient] = None
         if client_cert_source_for_mtls:
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
@@ -700,51 +904,54 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         # Only create a new client if we do not already have one.
         if self._operations_client is None:
             http_options: Dict[str, List[Dict[str, str]]] = {
-                'google.longrunning.Operations.CancelOperation': [
+                "google.longrunning.Operations.CancelOperation": [
                     {
-                        'method': 'post',
-                        'uri': '/v1/{name=projects/*/locations/*/operations/*}:cancel',
+                        "method": "post",
+                        "uri": "/v1/{name=projects/*/locations/*/operations/*}:cancel",
                     },
                     {
-                        'method': 'post',
-                        'uri': '/uiv1beta3/{name=projects/*/locations/*/operations/*}:cancel',
-                    },
-                ],
-                'google.longrunning.Operations.GetOperation': [
-                    {
-                        'method': 'get',
-                        'uri': '/v1/{name=projects/*/operations/*}',
-                    },
-                    {
-                        'method': 'get',
-                        'uri': '/v1/{name=projects/*/locations/*/operations/*}',
-                    },
-                    {
-                        'method': 'get',
-                        'uri': '/uiv1beta3/{name=projects/*/locations/*/operations/*}',
+                        "method": "post",
+                        "uri": "/uiv1beta3/{name=projects/*/locations/*/operations/*}:cancel",
                     },
                 ],
-                'google.longrunning.Operations.ListOperations': [
+                "google.longrunning.Operations.GetOperation": [
                     {
-                        'method': 'get',
-                        'uri': '/v1/{name=projects/*/locations/*/operations}',
+                        "method": "get",
+                        "uri": "/v1/{name=projects/*/operations/*}",
                     },
                     {
-                        'method': 'get',
-                        'uri': '/uiv1beta3/{name=projects/*/locations/*/operations}',
+                        "method": "get",
+                        "uri": "/v1/{name=projects/*/locations/*/operations/*}",
+                    },
+                    {
+                        "method": "get",
+                        "uri": "/uiv1beta3/{name=projects/*/locations/*/operations/*}",
+                    },
+                ],
+                "google.longrunning.Operations.ListOperations": [
+                    {
+                        "method": "get",
+                        "uri": "/v1/{name=projects/*/locations/*/operations}",
+                    },
+                    {
+                        "method": "get",
+                        "uri": "/uiv1beta3/{name=projects/*/locations/*/operations}",
                     },
                 ],
             }
 
             rest_transport = operations_v1.OperationsRestTransport(
-                    host=self._host,
-                    # use the credentials which are saved
-                    credentials=self._credentials,
-                    scopes=self._scopes,
-                    http_options=http_options,
-                    path_prefix="v1")
+                host=self._host,
+                # use the credentials which are saved
+                credentials=self._credentials,
+                scopes=self._scopes,
+                http_options=http_options,
+                path_prefix="v1",
+            )
 
-            self._operations_client = operations_v1.AbstractOperationsClient(transport=rest_transport)
+            self._operations_client = operations_v1.AbstractOperationsClient(
+                transport=rest_transport
+            )
 
         # Return the client from cache.
         return self._operations_client
@@ -753,19 +960,24 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         def __hash__(self):
             return hash("BatchProcessDocuments")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: document_processor_service.BatchProcessRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: document_processor_service.BatchProcessRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the batch process documents method over HTTP.
 
             Args:
@@ -787,51 +999,56 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{name=projects/*/locations/*/processors/*}:batchProcess',
-                'body': '*',
-            },
-{
-                'method': 'post',
-                'uri': '/v1/{name=projects/*/locations/*/processors/*/processorVersions/*}:batchProcess',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{name=projects/*/locations/*/processors/*}:batchProcess",
+                    "body": "*",
+                },
+                {
+                    "method": "post",
+                    "uri": "/v1/{name=projects/*/locations/*/processors/*/processorVersions/*}:batchProcess",
+                    "body": "*",
+                },
             ]
-            request, metadata = self._interceptor.pre_batch_process_documents(request, metadata)
+            request, metadata = self._interceptor.pre_batch_process_documents(
+                request, metadata
+            )
             pb_request = document_processor_service.BatchProcessRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -848,19 +1065,24 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         def __hash__(self):
             return hash("CreateProcessor")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: document_processor_service.CreateProcessorRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> gcd_processor.Processor:
+        def __call__(
+            self,
+            request: document_processor_service.CreateProcessorRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> gcd_processor.Processor:
             r"""Call the create processor method over HTTP.
 
             Args:
@@ -886,46 +1108,51 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{parent=projects/*/locations/*}/processors',
-                'body': 'processor',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{parent=projects/*/locations/*}/processors",
+                    "body": "processor",
+                },
             ]
-            request, metadata = self._interceptor.pre_create_processor(request, metadata)
+            request, metadata = self._interceptor.pre_create_processor(
+                request, metadata
+            )
             pb_request = document_processor_service.CreateProcessorRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -944,19 +1171,24 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         def __hash__(self):
             return hash("DeleteProcessor")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: document_processor_service.DeleteProcessorRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: document_processor_service.DeleteProcessorRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the delete processor method over HTTP.
 
             Args:
@@ -978,37 +1210,42 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'delete',
-                'uri': '/v1/{name=projects/*/locations/*/processors/*}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "delete",
+                    "uri": "/v1/{name=projects/*/locations/*/processors/*}",
+                },
             ]
-            request, metadata = self._interceptor.pre_delete_processor(request, metadata)
+            request, metadata = self._interceptor.pre_delete_processor(
+                request, metadata
+            )
             pb_request = document_processor_service.DeleteProcessorRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1025,19 +1262,24 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         def __hash__(self):
             return hash("DeleteProcessorVersion")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: document_processor_service.DeleteProcessorVersionRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: document_processor_service.DeleteProcessorVersionRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the delete processor version method over HTTP.
 
             Args:
@@ -1059,37 +1301,44 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'delete',
-                'uri': '/v1/{name=projects/*/locations/*/processors/*/processorVersions/*}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "delete",
+                    "uri": "/v1/{name=projects/*/locations/*/processors/*/processorVersions/*}",
+                },
             ]
-            request, metadata = self._interceptor.pre_delete_processor_version(request, metadata)
-            pb_request = document_processor_service.DeleteProcessorVersionRequest.pb(request)
+            request, metadata = self._interceptor.pre_delete_processor_version(
+                request, metadata
+            )
+            pb_request = document_processor_service.DeleteProcessorVersionRequest.pb(
+                request
+            )
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1106,19 +1355,24 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         def __hash__(self):
             return hash("DeployProcessorVersion")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: document_processor_service.DeployProcessorVersionRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: document_processor_service.DeployProcessorVersionRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the deploy processor version method over HTTP.
 
             Args:
@@ -1140,46 +1394,53 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{name=projects/*/locations/*/processors/*/processorVersions/*}:deploy',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{name=projects/*/locations/*/processors/*/processorVersions/*}:deploy",
+                    "body": "*",
+                },
             ]
-            request, metadata = self._interceptor.pre_deploy_processor_version(request, metadata)
-            pb_request = document_processor_service.DeployProcessorVersionRequest.pb(request)
+            request, metadata = self._interceptor.pre_deploy_processor_version(
+                request, metadata
+            )
+            pb_request = document_processor_service.DeployProcessorVersionRequest.pb(
+                request
+            )
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1196,19 +1457,24 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         def __hash__(self):
             return hash("DisableProcessor")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: document_processor_service.DisableProcessorRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: document_processor_service.DisableProcessorRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the disable processor method over HTTP.
 
             Args:
@@ -1230,46 +1496,51 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{name=projects/*/locations/*/processors/*}:disable',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{name=projects/*/locations/*/processors/*}:disable",
+                    "body": "*",
+                },
             ]
-            request, metadata = self._interceptor.pre_disable_processor(request, metadata)
+            request, metadata = self._interceptor.pre_disable_processor(
+                request, metadata
+            )
             pb_request = document_processor_service.DisableProcessorRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1286,19 +1557,24 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         def __hash__(self):
             return hash("EnableProcessor")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: document_processor_service.EnableProcessorRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: document_processor_service.EnableProcessorRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the enable processor method over HTTP.
 
             Args:
@@ -1320,46 +1596,51 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{name=projects/*/locations/*/processors/*}:enable',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{name=projects/*/locations/*/processors/*}:enable",
+                    "body": "*",
+                },
             ]
-            request, metadata = self._interceptor.pre_enable_processor(request, metadata)
+            request, metadata = self._interceptor.pre_enable_processor(
+                request, metadata
+            )
             pb_request = document_processor_service.EnableProcessorRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1376,19 +1657,24 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         def __hash__(self):
             return hash("FetchProcessorTypes")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: document_processor_service.FetchProcessorTypesRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> document_processor_service.FetchProcessorTypesResponse:
+        def __call__(
+            self,
+            request: document_processor_service.FetchProcessorTypesRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> document_processor_service.FetchProcessorTypesResponse:
             r"""Call the fetch processor types method over HTTP.
 
             Args:
@@ -1409,37 +1695,44 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{parent=projects/*/locations/*}:fetchProcessorTypes',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{parent=projects/*/locations/*}:fetchProcessorTypes",
+                },
             ]
-            request, metadata = self._interceptor.pre_fetch_processor_types(request, metadata)
-            pb_request = document_processor_service.FetchProcessorTypesRequest.pb(request)
+            request, metadata = self._interceptor.pre_fetch_processor_types(
+                request, metadata
+            )
+            pb_request = document_processor_service.FetchProcessorTypesRequest.pb(
+                request
+            )
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1458,19 +1751,24 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         def __hash__(self):
             return hash("GetProcessor")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: document_processor_service.GetProcessorRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> processor.Processor:
+        def __call__(
+            self,
+            request: document_processor_service.GetProcessorRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> processor.Processor:
             r"""Call the get processor method over HTTP.
 
             Args:
@@ -1491,37 +1789,40 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{name=projects/*/locations/*/processors/*}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{name=projects/*/locations/*/processors/*}",
+                },
             ]
             request, metadata = self._interceptor.pre_get_processor(request, metadata)
             pb_request = document_processor_service.GetProcessorRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1540,19 +1841,24 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         def __hash__(self):
             return hash("GetProcessorType")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: document_processor_service.GetProcessorTypeRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> processor_type.ProcessorType:
+        def __call__(
+            self,
+            request: document_processor_service.GetProcessorTypeRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> processor_type.ProcessorType:
             r"""Call the get processor type method over HTTP.
 
             Args:
@@ -1573,37 +1879,42 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{name=projects/*/locations/*/processorTypes/*}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{name=projects/*/locations/*/processorTypes/*}",
+                },
             ]
-            request, metadata = self._interceptor.pre_get_processor_type(request, metadata)
+            request, metadata = self._interceptor.pre_get_processor_type(
+                request, metadata
+            )
             pb_request = document_processor_service.GetProcessorTypeRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1622,19 +1933,24 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         def __hash__(self):
             return hash("GetProcessorVersion")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: document_processor_service.GetProcessorVersionRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> processor.ProcessorVersion:
+        def __call__(
+            self,
+            request: document_processor_service.GetProcessorVersionRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> processor.ProcessorVersion:
             r"""Call the get processor version method over HTTP.
 
             Args:
@@ -1662,37 +1978,44 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{name=projects/*/locations/*/processors/*/processorVersions/*}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{name=projects/*/locations/*/processors/*/processorVersions/*}",
+                },
             ]
-            request, metadata = self._interceptor.pre_get_processor_version(request, metadata)
-            pb_request = document_processor_service.GetProcessorVersionRequest.pb(request)
+            request, metadata = self._interceptor.pre_get_processor_version(
+                request, metadata
+            )
+            pb_request = document_processor_service.GetProcessorVersionRequest.pb(
+                request
+            )
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1711,19 +2034,24 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         def __hash__(self):
             return hash("ListProcessors")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: document_processor_service.ListProcessorsRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> document_processor_service.ListProcessorsResponse:
+        def __call__(
+            self,
+            request: document_processor_service.ListProcessorsRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> document_processor_service.ListProcessorsResponse:
             r"""Call the list processors method over HTTP.
 
             Args:
@@ -1742,37 +2070,40 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
                     Response message for list processors.
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{parent=projects/*/locations/*}/processors',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{parent=projects/*/locations/*}/processors",
+                },
             ]
             request, metadata = self._interceptor.pre_list_processors(request, metadata)
             pb_request = document_processor_service.ListProcessorsRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1791,19 +2122,24 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         def __hash__(self):
             return hash("ListProcessorTypes")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: document_processor_service.ListProcessorTypesRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> document_processor_service.ListProcessorTypesResponse:
+        def __call__(
+            self,
+            request: document_processor_service.ListProcessorTypesRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> document_processor_service.ListProcessorTypesResponse:
             r"""Call the list processor types method over HTTP.
 
             Args:
@@ -1824,37 +2160,44 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{parent=projects/*/locations/*}/processorTypes',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{parent=projects/*/locations/*}/processorTypes",
+                },
             ]
-            request, metadata = self._interceptor.pre_list_processor_types(request, metadata)
-            pb_request = document_processor_service.ListProcessorTypesRequest.pb(request)
+            request, metadata = self._interceptor.pre_list_processor_types(
+                request, metadata
+            )
+            pb_request = document_processor_service.ListProcessorTypesRequest.pb(
+                request
+            )
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1873,19 +2216,24 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         def __hash__(self):
             return hash("ListProcessorVersions")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: document_processor_service.ListProcessorVersionsRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> document_processor_service.ListProcessorVersionsResponse:
+        def __call__(
+            self,
+            request: document_processor_service.ListProcessorVersionsRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> document_processor_service.ListProcessorVersionsResponse:
             r"""Call the list processor versions method over HTTP.
 
             Args:
@@ -1905,37 +2253,44 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
                     Response message for list processors.
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{parent=projects/*/locations/*/processors/*}/processorVersions',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{parent=projects/*/locations/*/processors/*}/processorVersions",
+                },
             ]
-            request, metadata = self._interceptor.pre_list_processor_versions(request, metadata)
-            pb_request = document_processor_service.ListProcessorVersionsRequest.pb(request)
+            request, metadata = self._interceptor.pre_list_processor_versions(
+                request, metadata
+            )
+            pb_request = document_processor_service.ListProcessorVersionsRequest.pb(
+                request
+            )
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1954,19 +2309,24 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         def __hash__(self):
             return hash("ProcessDocument")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: document_processor_service.ProcessRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> document_processor_service.ProcessResponse:
+        def __call__(
+            self,
+            request: document_processor_service.ProcessRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> document_processor_service.ProcessResponse:
             r"""Call the process document method over HTTP.
 
             Args:
@@ -1987,51 +2347,56 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{name=projects/*/locations/*/processors/*}:process',
-                'body': '*',
-            },
-{
-                'method': 'post',
-                'uri': '/v1/{name=projects/*/locations/*/processors/*/processorVersions/*}:process',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{name=projects/*/locations/*/processors/*}:process",
+                    "body": "*",
+                },
+                {
+                    "method": "post",
+                    "uri": "/v1/{name=projects/*/locations/*/processors/*/processorVersions/*}:process",
+                    "body": "*",
+                },
             ]
-            request, metadata = self._interceptor.pre_process_document(request, metadata)
+            request, metadata = self._interceptor.pre_process_document(
+                request, metadata
+            )
             pb_request = document_processor_service.ProcessRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -2050,19 +2415,24 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         def __hash__(self):
             return hash("ReviewDocument")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: document_processor_service.ReviewDocumentRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: document_processor_service.ReviewDocumentRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the review document method over HTTP.
 
             Args:
@@ -2084,11 +2454,12 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{human_review_config=projects/*/locations/*/processors/*/humanReviewConfig}:reviewDocument',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{human_review_config=projects/*/locations/*/processors/*/humanReviewConfig}:reviewDocument",
+                    "body": "*",
+                },
             ]
             request, metadata = self._interceptor.pre_review_document(request, metadata)
             pb_request = document_processor_service.ReviewDocumentRequest.pb(request)
@@ -2097,33 +2468,35 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -2140,81 +2513,93 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         def __hash__(self):
             return hash("SetDefaultProcessorVersion")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: document_processor_service.SetDefaultProcessorVersionRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: document_processor_service.SetDefaultProcessorVersionRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the set default processor
-        version method over HTTP.
+            version method over HTTP.
 
-            Args:
-                request (~.document_processor_service.SetDefaultProcessorVersionRequest):
-                    The request object. Request message for the set default
-                processor version method.
+                Args:
+                    request (~.document_processor_service.SetDefaultProcessorVersionRequest):
+                        The request object. Request message for the set default
+                    processor version method.
 
-                retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                    should be retried.
-                timeout (float): The timeout for this request.
-                metadata (Sequence[Tuple[str, str]]): Strings which should be
-                    sent along with the request as metadata.
+                    retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                        should be retried.
+                    timeout (float): The timeout for this request.
+                    metadata (Sequence[Tuple[str, str]]): Strings which should be
+                        sent along with the request as metadata.
 
-            Returns:
-                ~.operations_pb2.Operation:
-                    This resource represents a
-                long-running operation that is the
-                result of a network API call.
+                Returns:
+                    ~.operations_pb2.Operation:
+                        This resource represents a
+                    long-running operation that is the
+                    result of a network API call.
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{processor=projects/*/locations/*/processors/*}:setDefaultProcessorVersion',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{processor=projects/*/locations/*/processors/*}:setDefaultProcessorVersion",
+                    "body": "*",
+                },
             ]
-            request, metadata = self._interceptor.pre_set_default_processor_version(request, metadata)
-            pb_request = document_processor_service.SetDefaultProcessorVersionRequest.pb(request)
+            request, metadata = self._interceptor.pre_set_default_processor_version(
+                request, metadata
+            )
+            pb_request = (
+                document_processor_service.SetDefaultProcessorVersionRequest.pb(request)
+            )
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -2231,81 +2616,93 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         def __hash__(self):
             return hash("UndeployProcessorVersion")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: document_processor_service.UndeployProcessorVersionRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: document_processor_service.UndeployProcessorVersionRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the undeploy processor
-        version method over HTTP.
+            version method over HTTP.
 
-            Args:
-                request (~.document_processor_service.UndeployProcessorVersionRequest):
-                    The request object. Request message for the undeploy
-                processor version method.
+                Args:
+                    request (~.document_processor_service.UndeployProcessorVersionRequest):
+                        The request object. Request message for the undeploy
+                    processor version method.
 
-                retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                    should be retried.
-                timeout (float): The timeout for this request.
-                metadata (Sequence[Tuple[str, str]]): Strings which should be
-                    sent along with the request as metadata.
+                    retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                        should be retried.
+                    timeout (float): The timeout for this request.
+                    metadata (Sequence[Tuple[str, str]]): Strings which should be
+                        sent along with the request as metadata.
 
-            Returns:
-                ~.operations_pb2.Operation:
-                    This resource represents a
-                long-running operation that is the
-                result of a network API call.
+                Returns:
+                    ~.operations_pb2.Operation:
+                        This resource represents a
+                    long-running operation that is the
+                    result of a network API call.
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{name=projects/*/locations/*/processors/*/processorVersions/*}:undeploy',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{name=projects/*/locations/*/processors/*/processorVersions/*}:undeploy",
+                    "body": "*",
+                },
             ]
-            request, metadata = self._interceptor.pre_undeploy_processor_version(request, metadata)
-            pb_request = document_processor_service.UndeployProcessorVersionRequest.pb(request)
+            request, metadata = self._interceptor.pre_undeploy_processor_version(
+                request, metadata
+            )
+            pb_request = document_processor_service.UndeployProcessorVersionRequest.pb(
+                request
+            )
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -2319,160 +2716,209 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
             return resp
 
     @property
-    def batch_process_documents(self) -> Callable[
-            [document_processor_service.BatchProcessRequest],
-            operations_pb2.Operation]:
+    def batch_process_documents(
+        self,
+    ) -> Callable[
+        [document_processor_service.BatchProcessRequest], operations_pb2.Operation
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._BatchProcessDocuments(self._session, self._host, self._interceptor) # type: ignore
+        return self._BatchProcessDocuments(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def create_processor(self) -> Callable[
-            [document_processor_service.CreateProcessorRequest],
-            gcd_processor.Processor]:
+    def create_processor(
+        self,
+    ) -> Callable[
+        [document_processor_service.CreateProcessorRequest], gcd_processor.Processor
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._CreateProcessor(self._session, self._host, self._interceptor) # type: ignore
+        return self._CreateProcessor(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def delete_processor(self) -> Callable[
-            [document_processor_service.DeleteProcessorRequest],
-            operations_pb2.Operation]:
+    def delete_processor(
+        self,
+    ) -> Callable[
+        [document_processor_service.DeleteProcessorRequest], operations_pb2.Operation
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._DeleteProcessor(self._session, self._host, self._interceptor) # type: ignore
+        return self._DeleteProcessor(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def delete_processor_version(self) -> Callable[
-            [document_processor_service.DeleteProcessorVersionRequest],
-            operations_pb2.Operation]:
+    def delete_processor_version(
+        self,
+    ) -> Callable[
+        [document_processor_service.DeleteProcessorVersionRequest],
+        operations_pb2.Operation,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._DeleteProcessorVersion(self._session, self._host, self._interceptor) # type: ignore
+        return self._DeleteProcessorVersion(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def deploy_processor_version(self) -> Callable[
-            [document_processor_service.DeployProcessorVersionRequest],
-            operations_pb2.Operation]:
+    def deploy_processor_version(
+        self,
+    ) -> Callable[
+        [document_processor_service.DeployProcessorVersionRequest],
+        operations_pb2.Operation,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._DeployProcessorVersion(self._session, self._host, self._interceptor) # type: ignore
+        return self._DeployProcessorVersion(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def disable_processor(self) -> Callable[
-            [document_processor_service.DisableProcessorRequest],
-            operations_pb2.Operation]:
+    def disable_processor(
+        self,
+    ) -> Callable[
+        [document_processor_service.DisableProcessorRequest], operations_pb2.Operation
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._DisableProcessor(self._session, self._host, self._interceptor) # type: ignore
+        return self._DisableProcessor(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def enable_processor(self) -> Callable[
-            [document_processor_service.EnableProcessorRequest],
-            operations_pb2.Operation]:
+    def enable_processor(
+        self,
+    ) -> Callable[
+        [document_processor_service.EnableProcessorRequest], operations_pb2.Operation
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._EnableProcessor(self._session, self._host, self._interceptor) # type: ignore
+        return self._EnableProcessor(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def fetch_processor_types(self) -> Callable[
-            [document_processor_service.FetchProcessorTypesRequest],
-            document_processor_service.FetchProcessorTypesResponse]:
+    def fetch_processor_types(
+        self,
+    ) -> Callable[
+        [document_processor_service.FetchProcessorTypesRequest],
+        document_processor_service.FetchProcessorTypesResponse,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._FetchProcessorTypes(self._session, self._host, self._interceptor) # type: ignore
+        return self._FetchProcessorTypes(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def get_processor(self) -> Callable[
-            [document_processor_service.GetProcessorRequest],
-            processor.Processor]:
+    def get_processor(
+        self,
+    ) -> Callable[
+        [document_processor_service.GetProcessorRequest], processor.Processor
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._GetProcessor(self._session, self._host, self._interceptor) # type: ignore
+        return self._GetProcessor(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def get_processor_type(self) -> Callable[
-            [document_processor_service.GetProcessorTypeRequest],
-            processor_type.ProcessorType]:
+    def get_processor_type(
+        self,
+    ) -> Callable[
+        [document_processor_service.GetProcessorTypeRequest],
+        processor_type.ProcessorType,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._GetProcessorType(self._session, self._host, self._interceptor) # type: ignore
+        return self._GetProcessorType(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def get_processor_version(self) -> Callable[
-            [document_processor_service.GetProcessorVersionRequest],
-            processor.ProcessorVersion]:
+    def get_processor_version(
+        self,
+    ) -> Callable[
+        [document_processor_service.GetProcessorVersionRequest],
+        processor.ProcessorVersion,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._GetProcessorVersion(self._session, self._host, self._interceptor) # type: ignore
+        return self._GetProcessorVersion(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def list_processors(self) -> Callable[
-            [document_processor_service.ListProcessorsRequest],
-            document_processor_service.ListProcessorsResponse]:
+    def list_processors(
+        self,
+    ) -> Callable[
+        [document_processor_service.ListProcessorsRequest],
+        document_processor_service.ListProcessorsResponse,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._ListProcessors(self._session, self._host, self._interceptor) # type: ignore
+        return self._ListProcessors(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def list_processor_types(self) -> Callable[
-            [document_processor_service.ListProcessorTypesRequest],
-            document_processor_service.ListProcessorTypesResponse]:
+    def list_processor_types(
+        self,
+    ) -> Callable[
+        [document_processor_service.ListProcessorTypesRequest],
+        document_processor_service.ListProcessorTypesResponse,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._ListProcessorTypes(self._session, self._host, self._interceptor) # type: ignore
+        return self._ListProcessorTypes(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def list_processor_versions(self) -> Callable[
-            [document_processor_service.ListProcessorVersionsRequest],
-            document_processor_service.ListProcessorVersionsResponse]:
+    def list_processor_versions(
+        self,
+    ) -> Callable[
+        [document_processor_service.ListProcessorVersionsRequest],
+        document_processor_service.ListProcessorVersionsResponse,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._ListProcessorVersions(self._session, self._host, self._interceptor) # type: ignore
+        return self._ListProcessorVersions(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def process_document(self) -> Callable[
-            [document_processor_service.ProcessRequest],
-            document_processor_service.ProcessResponse]:
+    def process_document(
+        self,
+    ) -> Callable[
+        [document_processor_service.ProcessRequest],
+        document_processor_service.ProcessResponse,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._ProcessDocument(self._session, self._host, self._interceptor) # type: ignore
+        return self._ProcessDocument(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def review_document(self) -> Callable[
-            [document_processor_service.ReviewDocumentRequest],
-            operations_pb2.Operation]:
+    def review_document(
+        self,
+    ) -> Callable[
+        [document_processor_service.ReviewDocumentRequest], operations_pb2.Operation
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._ReviewDocument(self._session, self._host, self._interceptor) # type: ignore
+        return self._ReviewDocument(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def set_default_processor_version(self) -> Callable[
-            [document_processor_service.SetDefaultProcessorVersionRequest],
-            operations_pb2.Operation]:
+    def set_default_processor_version(
+        self,
+    ) -> Callable[
+        [document_processor_service.SetDefaultProcessorVersionRequest],
+        operations_pb2.Operation,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._SetDefaultProcessorVersion(self._session, self._host, self._interceptor) # type: ignore
+        return self._SetDefaultProcessorVersion(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def undeploy_processor_version(self) -> Callable[
-            [document_processor_service.UndeployProcessorVersionRequest],
-            operations_pb2.Operation]:
+    def undeploy_processor_version(
+        self,
+    ) -> Callable[
+        [document_processor_service.UndeployProcessorVersionRequest],
+        operations_pb2.Operation,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._UndeployProcessorVersion(self._session, self._host, self._interceptor) # type: ignore
+        return self._UndeployProcessorVersion(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
     def get_location(self):
-        return self._GetLocation(self._session, self._host, self._interceptor) # type: ignore
+        return self._GetLocation(self._session, self._host, self._interceptor)  # type: ignore
 
     class _GetLocation(DocumentProcessorServiceRestStub):
-        def __call__(self,
-            request: locations_pb2.GetLocationRequest, *,
-            retry: OptionalRetry=gapic_v1.method.DEFAULT,
-            timeout: Optional[float]=None,
-            metadata: Sequence[Tuple[str, str]]=(),
-            ) -> locations_pb2.Location:
+        def __call__(
+            self,
+            request: locations_pb2.GetLocationRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> locations_pb2.Location:
 
             r"""Call the get location method over HTTP.
 
@@ -2489,30 +2935,30 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
                 locations_pb2.Location: Response from GetLocation method.
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{name=projects/*/locations/*}',
-            },
-{
-                'method': 'get',
-                'uri': '/uiv1beta3/{name=projects/*/locations/*}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{name=projects/*/locations/*}",
+                },
+                {
+                    "method": "get",
+                    "uri": "/uiv1beta3/{name=projects/*/locations/*}",
+                },
             ]
 
             request, metadata = self._interceptor.pre_get_location(request, metadata)
             request_kwargs = json_format.MessageToDict(request)
-            transcoded_request = path_template.transcode(
-                http_options, **request_kwargs)
+            transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json.dumps(transcoded_request['query_params']))
+            query_params = json.loads(json.dumps(transcoded_request["query_params"]))
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
 
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
@@ -2533,15 +2979,17 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
 
     @property
     def list_locations(self):
-        return self._ListLocations(self._session, self._host, self._interceptor) # type: ignore
+        return self._ListLocations(self._session, self._host, self._interceptor)  # type: ignore
 
     class _ListLocations(DocumentProcessorServiceRestStub):
-        def __call__(self,
-            request: locations_pb2.ListLocationsRequest, *,
-            retry: OptionalRetry=gapic_v1.method.DEFAULT,
-            timeout: Optional[float]=None,
-            metadata: Sequence[Tuple[str, str]]=(),
-            ) -> locations_pb2.ListLocationsResponse:
+        def __call__(
+            self,
+            request: locations_pb2.ListLocationsRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> locations_pb2.ListLocationsResponse:
 
             r"""Call the list locations method over HTTP.
 
@@ -2558,30 +3006,30 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
                 locations_pb2.ListLocationsResponse: Response from ListLocations method.
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{name=projects/*}/locations',
-            },
-{
-                'method': 'get',
-                'uri': '/uiv1beta3/{name=projects/*}/locations',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{name=projects/*}/locations",
+                },
+                {
+                    "method": "get",
+                    "uri": "/uiv1beta3/{name=projects/*}/locations",
+                },
             ]
 
             request, metadata = self._interceptor.pre_list_locations(request, metadata)
             request_kwargs = json_format.MessageToDict(request)
-            transcoded_request = path_template.transcode(
-                http_options, **request_kwargs)
+            transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json.dumps(transcoded_request['query_params']))
+            query_params = json.loads(json.dumps(transcoded_request["query_params"]))
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
 
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
@@ -2602,15 +3050,17 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
 
     @property
     def cancel_operation(self):
-        return self._CancelOperation(self._session, self._host, self._interceptor) # type: ignore
+        return self._CancelOperation(self._session, self._host, self._interceptor)  # type: ignore
 
     class _CancelOperation(DocumentProcessorServiceRestStub):
-        def __call__(self,
-            request: operations_pb2.CancelOperationRequest, *,
-            retry: OptionalRetry=gapic_v1.method.DEFAULT,
-            timeout: Optional[float]=None,
-            metadata: Sequence[Tuple[str, str]]=(),
-            ) -> None:
+        def __call__(
+            self,
+            request: operations_pb2.CancelOperationRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> None:
 
             r"""Call the cancel operation method over HTTP.
 
@@ -2624,30 +3074,32 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
                     sent along with the request as metadata.
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-            },
-{
-                'method': 'post',
-                'uri': '/uiv1beta3/{name=projects/*/locations/*/operations/*}:cancel',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{name=projects/*/locations/*/operations/*}:cancel",
+                },
+                {
+                    "method": "post",
+                    "uri": "/uiv1beta3/{name=projects/*/locations/*/operations/*}:cancel",
+                },
             ]
 
-            request, metadata = self._interceptor.pre_cancel_operation(request, metadata)
+            request, metadata = self._interceptor.pre_cancel_operation(
+                request, metadata
+            )
             request_kwargs = json_format.MessageToDict(request)
-            transcoded_request = path_template.transcode(
-                http_options, **request_kwargs)
+            transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json.dumps(transcoded_request['query_params']))
+            query_params = json.loads(json.dumps(transcoded_request["query_params"]))
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
 
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
@@ -2665,15 +3117,17 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
 
     @property
     def get_operation(self):
-        return self._GetOperation(self._session, self._host, self._interceptor) # type: ignore
+        return self._GetOperation(self._session, self._host, self._interceptor)  # type: ignore
 
     class _GetOperation(DocumentProcessorServiceRestStub):
-        def __call__(self,
-            request: operations_pb2.GetOperationRequest, *,
-            retry: OptionalRetry=gapic_v1.method.DEFAULT,
-            timeout: Optional[float]=None,
-            metadata: Sequence[Tuple[str, str]]=(),
-            ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: operations_pb2.GetOperationRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
 
             r"""Call the get operation method over HTTP.
 
@@ -2690,34 +3144,34 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
                 operations_pb2.Operation: Response from GetOperation method.
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{name=projects/*/operations/*}',
-            },
-{
-                'method': 'get',
-                'uri': '/v1/{name=projects/*/locations/*/operations/*}',
-            },
-{
-                'method': 'get',
-                'uri': '/uiv1beta3/{name=projects/*/locations/*/operations/*}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{name=projects/*/operations/*}",
+                },
+                {
+                    "method": "get",
+                    "uri": "/v1/{name=projects/*/locations/*/operations/*}",
+                },
+                {
+                    "method": "get",
+                    "uri": "/uiv1beta3/{name=projects/*/locations/*/operations/*}",
+                },
             ]
 
             request, metadata = self._interceptor.pre_get_operation(request, metadata)
             request_kwargs = json_format.MessageToDict(request)
-            transcoded_request = path_template.transcode(
-                http_options, **request_kwargs)
+            transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json.dumps(transcoded_request['query_params']))
+            query_params = json.loads(json.dumps(transcoded_request["query_params"]))
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
 
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
@@ -2738,15 +3192,17 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
 
     @property
     def list_operations(self):
-        return self._ListOperations(self._session, self._host, self._interceptor) # type: ignore
+        return self._ListOperations(self._session, self._host, self._interceptor)  # type: ignore
 
     class _ListOperations(DocumentProcessorServiceRestStub):
-        def __call__(self,
-            request: operations_pb2.ListOperationsRequest, *,
-            retry: OptionalRetry=gapic_v1.method.DEFAULT,
-            timeout: Optional[float]=None,
-            metadata: Sequence[Tuple[str, str]]=(),
-            ) -> operations_pb2.ListOperationsResponse:
+        def __call__(
+            self,
+            request: operations_pb2.ListOperationsRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.ListOperationsResponse:
 
             r"""Call the list operations method over HTTP.
 
@@ -2763,30 +3219,30 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
                 operations_pb2.ListOperationsResponse: Response from ListOperations method.
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{name=projects/*/locations/*/operations}',
-            },
-{
-                'method': 'get',
-                'uri': '/uiv1beta3/{name=projects/*/locations/*/operations}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{name=projects/*/locations/*/operations}",
+                },
+                {
+                    "method": "get",
+                    "uri": "/uiv1beta3/{name=projects/*/locations/*/operations}",
+                },
             ]
 
             request, metadata = self._interceptor.pre_list_operations(request, metadata)
             request_kwargs = json_format.MessageToDict(request)
-            transcoded_request = path_template.transcode(
-                http_options, **request_kwargs)
+            transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json.dumps(transcoded_request['query_params']))
+            query_params = json.loads(json.dumps(transcoded_request["query_params"]))
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
 
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
@@ -2813,6 +3269,4 @@ class DocumentProcessorServiceRestTransport(DocumentProcessorServiceTransport):
         self._session.close()
 
 
-__all__=(
-    'DocumentProcessorServiceRestTransport',
-)
+__all__ = ("DocumentProcessorServiceRestTransport",)
