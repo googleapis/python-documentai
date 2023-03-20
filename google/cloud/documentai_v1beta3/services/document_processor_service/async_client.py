@@ -2842,6 +2842,137 @@ class DocumentProcessorServiceAsyncClient:
         # Done; return the response.
         return response
 
+    async def import_processor_version(
+        self,
+        request: Optional[
+            Union[document_processor_service.ImportProcessorVersionRequest, dict]
+        ] = None,
+        *,
+        parent: Optional[str] = None,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> operation_async.AsyncOperation:
+        r"""Imports a processor version from source processor
+        version.
+
+        .. code-block:: python
+
+            # This snippet has been automatically generated and should be regarded as a
+            # code template only.
+            # It will require modifications to work:
+            # - It may require correct/in-range values for request initialization.
+            # - It may require specifying regional endpoints when creating the service
+            #   client as shown in:
+            #   https://googleapis.dev/python/google-api-core/latest/client_options.html
+            from google.cloud import documentai_v1beta3
+
+            async def sample_import_processor_version():
+                # Create a client
+                client = documentai_v1beta3.DocumentProcessorServiceAsyncClient()
+
+                # Initialize request argument(s)
+                request = documentai_v1beta3.ImportProcessorVersionRequest(
+                    processor_version_source="processor_version_source_value",
+                    parent="parent_value",
+                )
+
+                # Make the request
+                operation = client.import_processor_version(request=request)
+
+                print("Waiting for operation to complete...")
+
+                response = (await operation).result()
+
+                # Handle the response
+                print(response)
+
+        Args:
+            request (Optional[Union[google.cloud.documentai_v1beta3.types.ImportProcessorVersionRequest, dict]]):
+                The request object. The request message for the
+                ImportProcessorVersion method. This method requires
+                Document AI Service Agent of the destination project in
+                the source project's IAM with [Document AI Editor
+                role](https://cloud.google.com/document-ai/docs/access-control/iam-roles).
+                The destination project is specified as part of the
+                `parent` field. The source project is specified as part
+                of `source` field.
+                The Service Agent for Document AI can be found in
+                https://cloud.google.com/iam/docs/service-agents.
+            parent (:class:`str`):
+                Required. The destination processor name to create the
+                processor version in. Format:
+                ``projects/{project}/locations/{location}/processors/{processor}``
+
+                This corresponds to the ``parent`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            google.api_core.operation_async.AsyncOperation:
+                An object representing a long-running operation.
+
+                The result type for the operation will be
+                :class:`google.cloud.documentai_v1beta3.types.ImportProcessorVersionResponse`
+                The response message for the ImportProcessorVersion
+                method.
+
+        """
+        # Create or coerce a protobuf request object.
+        # Quick check: If we got a request object, we should *not* have
+        # gotten any keyword arguments that map to the request.
+        has_flattened_params = any([parent])
+        if request is not None and has_flattened_params:
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
+
+        request = document_processor_service.ImportProcessorVersionRequest(request)
+
+        # If we have keyword arguments corresponding to fields on the
+        # request, apply these.
+        if parent is not None:
+            request.parent = parent
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = gapic_v1.method_async.wrap_method(
+            self._client._transport.import_processor_version,
+            default_timeout=None,
+            client_info=DEFAULT_CLIENT_INFO,
+        )
+
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata((("parent", request.parent),)),
+        )
+
+        # Send the request.
+        response = await rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
+
+        # Wrap the response in an operation future.
+        response = operation_async.from_gapic(
+            response,
+            self._client._transport.operations_client,
+            document_processor_service.ImportProcessorVersionResponse,
+            metadata_type=document_processor_service.ImportProcessorVersionMetadata,
+        )
+
+        # Done; return the response.
+        return response
+
     async def list_operations(
         self,
         request: Optional[operations_pb2.ListOperationsRequest] = None,
