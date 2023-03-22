@@ -1648,7 +1648,8 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
         Args:
             request (Union[google.cloud.documentai_v1beta3.types.ListProcessorVersionsRequest, dict]):
                 The request object. Request message for list all
-                processor versions belongs to a processor.
+                processor versions belongs to a
+                processor.
             parent (str):
                 Required. The parent (project, location and processor)
                 to list all versions. Format:
@@ -2146,9 +2147,10 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
         Args:
             request (Union[google.cloud.documentai_v1beta3.types.CreateProcessorRequest, dict]):
                 The request object. Request message for create a
-                processor. Notice this request is sent to a regionalized
-                backend service, and if the processor type is not
-                available on that region, the creation will fail.
+                processor. Notice this request is sent
+                to a regionalized backend service, and
+                if the processor type is not available
+                on that region, the creation will fail.
             parent (str):
                 Required. The parent (project and location) under which
                 to create the processor. Format:
@@ -3065,8 +3067,8 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
 
         Args:
             request (Union[google.cloud.documentai_v1beta3.types.ListEvaluationsRequest, dict]):
-                The request object. Retrieves a list of evaluations for
-                a given ProcessorVersion.
+                The request object. Retrieves a list of evaluations for a
+                given ProcessorVersion.
             parent (str):
                 Required. The resource name of the
                 [ProcessorVersion][google.cloud.documentai.v1beta3.ProcessorVersion]
@@ -3188,14 +3190,16 @@ class DocumentProcessorServiceClient(metaclass=DocumentProcessorServiceClientMet
 
         Args:
             request (Union[google.cloud.documentai_v1beta3.types.ImportProcessorVersionRequest, dict]):
-                The request object. The request message for the
-                ImportProcessorVersion method. This method requires
-                Document AI Service Agent of the destination project in
-                the source project's IAM with [Document AI Editor
-                role](https://cloud.google.com/document-ai/docs/access-control/iam-roles).
+                The request object. The request message for the ImportProcessorVersion
+                method. This method requires Document AI Service Agent
+                of the destination project in the source project's IAM
+                with `Document AI Editor
+                role <https://cloud.google.com/document-ai/docs/access-control/iam-roles>`__.
+
                 The destination project is specified as part of the
-                `parent` field. The source project is specified as part
-                of `source` field.
+                ``parent`` field. The source project is specified as
+                part of ``source`` field.
+
                 The Service Agent for Document AI can be found in
                 https://cloud.google.com/iam/docs/service-agents.
             parent (str):
